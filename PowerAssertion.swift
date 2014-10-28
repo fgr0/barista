@@ -124,6 +124,7 @@ class PowerAssertion {
         }
     }
     
+    
     init?(name: String, type: PowerAssertionType, level: PowerAssertionLevel) {
         
         let ret: IOReturn = IOPMAssertionCreateWithName(
@@ -132,29 +133,17 @@ class PowerAssertion {
             name,
             &assertionID)
         
+        // Because for some reason, 
+        // AssertionCreateWithName does not honor IOPMAssertionLevel
+        if level == .Off {
+            self.level = .Off
+        }
+                
         if ret != kIOReturnSuccess {
             return nil
         }
     }
     
-    init?(name: String, type: PowerAssertionType, level: PowerAssertionLevel, details: String?, humanReadableReason: String?, localizationBundlePath: String?, withTimeoutInSeconds: Double) {
-        
-        let ret: IOReturn = IOPMAssertionCreateWithDescription(
-            type.rawValue,
-            name,
-            details,
-            humanReadableReason,
-            localizationBundlePath,
-            withTimeoutInSeconds,
-            "TimeoutActionTurnOff",
-            &assertionID
-        )
-        
-        if ret != kIOReturnSuccess {
-            return nil
-        }
-    }
-
     
     private func setAssertionProperty(theProperty: PowerAssertionDictionaryKey, theValue: AnyObject?) -> IOReturn {
         return IOPMAssertionSetProperty(assertionID, theProperty.rawValue, theValue)
