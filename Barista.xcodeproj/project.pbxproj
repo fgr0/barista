@@ -34,6 +34,7 @@
 		9DE472FC19FF9E4C0089B49F /* BaristaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaristaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DE4730119FF9E4C0089B49F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DE4730219FF9E4C0089B49F /* BaristaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaristaTests.swift; sourceTree = "<group>"; };
+		9DE4730C19FF9E5B0089B49F /* Barista.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Barista.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +76,7 @@
 		9DE472EC19FF9E4C0089B49F /* Barista */ = {
 			isa = PBXGroup;
 			children = (
+				9DE4730C19FF9E5B0089B49F /* Barista.entitlements */,
 				9DE472EF19FF9E4C0089B49F /* AppDelegate.swift */,
 				9DE472F119FF9E4C0089B49F /* ViewController.swift */,
 				9DE472F319FF9E4C0089B49F /* Images.xcassets */,
@@ -158,6 +160,11 @@
 				TargetAttributes = {
 					9DE472E919FF9E4C0089B49F = {
 						CreatedOnToolsVersion = 6.1;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 					9DE472FB19FF9E4C0089B49F = {
 						CreatedOnToolsVersion = 6.1;
@@ -324,6 +331,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Barista/Barista.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Barista/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -335,6 +343,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Barista/Barista.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Barista/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
