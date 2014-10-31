@@ -36,7 +36,7 @@
 		9DE4730119FF9E4C0089B49F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DE4730219FF9E4C0089B49F /* BaristaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaristaTests.swift; sourceTree = "<group>"; };
 		9DE4730C19FF9E5B0089B49F /* Barista.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Barista.entitlements; sourceTree = "<group>"; };
-		9DE4730D19FF9EA00089B49F /* PowerAssertion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PowerAssertion.swift; path = ../PowerAssertion.swift; sourceTree = "<group>"; };
+		9DE4730D19FF9EA00089B49F /* PowerAssertion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PowerAssertion.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -410,6 +410,7 @@
 				9DE4730819FF9E4C0089B49F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9DE4730919FF9E4C0089B49F /* Build configuration list for PBXNativeTarget "BaristaTests" */ = {
 			isa = XCConfigurationList;
@@ -418,6 +419,7 @@
 				9DE4730B19FF9E4C0089B49F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
