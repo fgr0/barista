@@ -18,64 +18,74 @@ class PowerAssertionController: NSObject, NSMenuDelegate {
      */
     var menu: NSMenu
     
-    var mItemStatus: NSMenuItem
-    var mItemToggle: NSMenuItem
-    var mItemAbout: NSMenuItem
-    var mItemStartAtLogin: NSMenuItem
-    var mItemActivateOnLaunch: NSMenuItem
-    var mItemQuit:  NSMenuItem
+    var mItemStatus =               NSMenuItem(title: "Barista: Off", action: nil, keyEquivalent: "")
+    var mItemToggle =               NSMenuItem(title: "Turn Barista On", action: "toggleMode:", keyEquivalent: "")
+    //---
+    var mItemAbout =                NSMenuItem(title: "About", action: "orderFrontStandardAboutPanel:", keyEquivalent: "")
+    //---
+    var mItemStartAtLogin =         NSMenuItem(title: "Launch on Start", action: "toggleStartAtLogin:", keyEquivalent: "")
+    var mItemActivateOnLaunch =     NSMenuItem(title: "Activate on Launch", action: "toggleActivateOnLaunch:", keyEquivalent: "")
+    var mItemAllowDisplaySleep =    NSMenuItem(title: "Allow Display Sleep", action: nil, keyEquivalent: "")
+        var mSubitemDisplaySleepNever =     NSMenuItem(title: "Never", action: "setDisplaySleep:", keyEquivalent: "")
+        var mSubitemDisplaySleepBattery =   NSMenuItem(title: "On Battery Power", action: "setDisplaySleep:", keyEquivalent: "")
+        var mSubitemDisplaySleepAlways =    NSMenuItem(title: "Always", action: "setDisplaySleep:", keyEquivalent: "")
+    //---
+    var mItemQuit =                 NSMenuItem(title: "Quit", action: "terminate:", keyEquivalent: "")
     
     override init() {
-        // Setup Assertion
+        // Setup 1st Assertion
         assertion = PowerAssertion(name: "Barista Prevent Sleep", type: .PreventUserIdleDisplaySleep, level: .Off)
         if assertion == nil {
             fatalError("Could not create assertion, abort!")
         }
         
-        
         // Setup Default Menu
         menu = NSMenu(title: "Barista")
-        
-        mItemStatus = NSMenuItem(title: "Barista: Off", action: nil, keyEquivalent: "")
-        menu.addItem(mItemStatus)
-        
-        mItemToggle = NSMenuItem(title: "Turn Barista On", action: "toggleMode:", keyEquivalent: "")
-        menu.addItem(mItemToggle)
-        
-        menu.addItem(NSMenuItem.separatorItem())
-        
-        mItemAbout = NSMenuItem(title: "About", action: "orderFrontStandardAboutPanel:", keyEquivalent: "")
-        menu.addItem(mItemAbout)
-        
-        menu.addItem(NSMenuItem.separatorItem())
-        
-        mItemStartAtLogin = NSMenuItem(title: "Launch on Start", action: "toggleStartAtLogin:", keyEquivalent: "")
-        mItemStartAtLogin.state = NSOffState
-        menu.addItem(mItemStartAtLogin)
-        
-        mItemActivateOnLaunch = NSMenuItem(title: "Activate on Launch", action: "toggleActivateOnLaunch:", keyEquivalent: "")
-        mItemActivateOnLaunch.state = NSOffState
-        menu.addItem(mItemActivateOnLaunch)
-        
-        menu.addItem(NSMenuItem.separatorItem())
-        
-        mItemQuit = NSMenuItem(title: "Quit", action: "terminate:", keyEquivalent: "")
-        menu.addItem(mItemQuit)
         
         // Setup StatusBar Item
         statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
         statusItem.button?.title = "Barista"
         statusItem.button?.appearsDisabled = true
         statusItem.menu = menu
-
+        
         super.init()
         
-        // Set targets
         menu.delegate = self
+        
+        menu.addItem(mItemStatus)
+        menu.addItem(mItemToggle)
         mItemToggle.target = self
+        
+        menu.addItem(NSMenuItem.separatorItem())
+        menu.addItem(mItemAbout)
+        menu.addItem(NSMenuItem.separatorItem())
+        menu.addItem(mItemStartAtLogin)
+        mItemStartAtLogin.state = NSOffState
         mItemStartAtLogin.target = self
-        mItemActivateOnLaunch.target = self
 
+        menu.addItem(mItemActivateOnLaunch)
+        mItemActivateOnLaunch.state = NSOffState
+        mItemActivateOnLaunch.target = self
+        
+        let displaySleepMenu = NSMenu(title: "Display Sleep Menu")
+        mItemAllowDisplaySleep.submenu = displaySleepMenu
+
+            mSubitemDisplaySleepNever.state = NSOnState
+            mSubitemDisplaySleepNever.target = self
+            displaySleepMenu.addItem(mSubitemDisplaySleepNever)
+            
+            mSubitemDisplaySleepBattery.state = NSOffState
+            mSubitemDisplaySleepBattery.target = self
+            mSubitemDisplaySleepBattery.action = nil
+            displaySleepMenu.addItem(mSubitemDisplaySleepBattery)
+            
+            mSubitemDisplaySleepAlways.state = NSOffState
+            mSubitemDisplaySleepAlways.target = self
+            displaySleepMenu.addItem(mSubitemDisplaySleepAlways)
+
+        menu.addItem(mItemAllowDisplaySleep)
+        menu.addItem(NSMenuItem.separatorItem())
+        menu.addItem(mItemQuit)
     }
     
     /*
@@ -108,5 +118,27 @@ class PowerAssertionController: NSObject, NSMenuDelegate {
     
     func toggleActivateOnLaunch(sender: AnyObject?) {
         mItemActivateOnLaunch.state = (mItemActivateOnLaunch.state == NSOnState) ? NSOffState : NSOnState
+    }
+    
+    func setDisplaySleep(sender: AnyObject?) {
+        if sender as NSMenuItem == mSubitemDisplaySleepNever {
+            mSubitemDisplaySleepNever.state = NSOnState
+            mSubitemDisplaySleepBattery.state = NSOffState
+            mSubitemDisplaySleepAlways.state = NSOffState
+            if assertion?.type != PowerAssertionType.PreventUserIdleDisplaySleep {
+                assertion = PowerAssertion(name: "Barista Prevent Sleep", type: .PreventUserIdleDisplaySleep, level: (assertion?.level)!)
+            }
+        } else if sender as NSMenuItem == mSubitemDisplaySleepBattery {
+            mSubitemDisplaySleepNever.state = NSOffState
+            mSubitemDisplaySleepBattery.state = NSOnState
+            mSubitemDisplaySleepAlways.state = NSOffState
+        } else if sender as NSMenuItem == mSubitemDisplaySleepAlways {
+            mSubitemDisplaySleepNever.state = NSOffState
+            mSubitemDisplaySleepBattery.state = NSOffState
+            mSubitemDisplaySleepAlways.state = NSOnState
+            if assertion?.type != PowerAssertionType.PreventUserIdleSystemSleep {
+                assertion = PowerAssertion(name: "Barista Prevent Sleep", type: .PreventUserIdleSystemSleep, level: (assertion?.level)!)
+            }
+        }
     }
 }
