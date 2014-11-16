@@ -127,6 +127,7 @@
 				9DE472E619FF9E4C0089B49F /* Sources */,
 				9DE472E719FF9E4C0089B49F /* Frameworks */,
 				9DE472E819FF9E4C0089B49F /* Resources */,
+				9DEA58DB1A191C0B00451610 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -215,6 +216,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9DEA58DB1A191C0B00451610 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh -e\n\n# This script automatically sets the version and short version string of\n# an Xcode project from the Git repository containing the project.\n#\n# To use this script in Xcode, add the script's path to a \"Run Script\" build\n# phase for your application target.\n\nGIT_COMMITS_MASTER=$(git rev-list master | wc -l | tr -d ' ')\nINFO_PLIST=\"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n\n# For Release Build: Add Full Version Information to Xcode\nif [ ${CONFIGURATION} == \"Release\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $GIT_COMMITS_MASTER\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $GIT_COMMITS_MASTER\" \"$INFO_PLIST\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9DE472E619FF9E4C0089B49F /* Sources */ = {
