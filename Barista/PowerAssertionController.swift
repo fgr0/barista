@@ -13,9 +13,11 @@ class PowerAssertionController: NSObject, NSMenuDelegate {
     
     var statusItem: NSStatusItem
     
+    
     /*
      * Basic Menu Structure
      */
+    
     var menu: NSMenu
     
     var mItemStatus =               NSMenuItem(title: "Barista: Off", action: nil, keyEquivalent: "")
@@ -23,13 +25,16 @@ class PowerAssertionController: NSObject, NSMenuDelegate {
     //---
     var mItemAbout =                NSMenuItem(title: "About", action: "orderFrontStandardAboutPanel:", keyEquivalent: "")
     //---
-    var mItemStartAtLogin =         NSMenuItem(title: "Launch on Start", action: nil, keyEquivalent: "")
+    var mItemStartAtLogin =         NSMenuItem(title: "Launch on Login", action: nil, keyEquivalent: "")
     var mItemActivateOnLaunch =     NSMenuItem(title: "Activate on Launch", action: nil, keyEquivalent: "")
     //---
     var mItemAllowDisplaySleep =    NSMenuItem(title: "Allow Display Sleep", action: "toggleDisplaySleep:", keyEquivalent: "")
     //---
     var mItemQuit =                 NSMenuItem(title: "Quit", action: "terminate:", keyEquivalent: "")
     
+    /*
+     * Init
+     */
     override init() {
         // Setup 1st Assertion
         assertion = PowerAssertion(name: "Barista Prevent Sleep", type: .PreventUserIdleSystemSleep, level: .Off)
@@ -58,7 +63,7 @@ class PowerAssertionController: NSObject, NSMenuDelegate {
         menu.addItem(mItemAbout)
         menu.addItem(NSMenuItem.separatorItem())
         menu.addItem(mItemStartAtLogin)
-        mItemStartAtLogin.hidden = true
+        mItemStartAtLogin.hidden = true                 // TODO: Implement 'Launch on Login'
         menu.addItem(mItemActivateOnLaunch)
         
         let options = [ "NSContinuouslyUpdatesValue" : NSNumber(bool: true) ]
@@ -82,15 +87,18 @@ class PowerAssertionController: NSObject, NSMenuDelegate {
         menu.addItem(NSMenuItem.separatorItem())
         menu.addItem(mItemQuit)
         
-        
+        // TODO: Find a nicer way to controll the Titles for the MenuItems
+        // Maybe possible with Bindings/Transformations?
         if NSUserDefaults.standardUserDefaults().valueForKey("activateOnLaunch") as Bool {
             toggleMode(self)
         }
     }
 
+    
     /*
      *  Event Handlers
      */
+    
     func toggleMode(sender: AnyObject?) {
         if assertion?.level == PowerAssertionLevel.On {
             assertion?.level = PowerAssertionLevel.Off
