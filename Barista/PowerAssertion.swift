@@ -63,6 +63,20 @@ class PowerAssertion {
         get {
             return PowerAssertionType(rawValue: getAssertionProperty(.AssertionTypeKey)! as String)!
         }
+        set(type) {
+            // Type cannto be set by chaning the Dictionary,
+            // so we must create a new Assertion with identical settings.
+            var _p = PowerAssertion.assertionCopyProperties(self.assertionID)
+            if var p = _p {
+                p[PowerAssertionDictionaryKey.AssertionTypeKey.rawValue] = type.rawValue
+
+                let aid = PowerAssertion.createAssertionWithProperties(p)
+                if let id = aid {
+                    PowerAssertion.assertionRelease(assertionID)
+                    assertionID = id
+                }
+            }
+        }
     }
     
     var level: PowerAssertionLevel {
@@ -117,29 +131,17 @@ class PowerAssertion {
     *  Init
     */
     init?(name: String, type: PowerAssertionType, level: PowerAssertionLevel) {
-        let ret: IOReturn = IOPMAssertionCreateWithName(
-            type.rawValue,
-            level.rawValue,
-            name,
-            &assertionID)
+        let aid = PowerAssertion.createAssertionWithName(name, type: type, level: level)
         
-        // Because for some reason,
-        // AssertionCreateWithName does not honor IOPMAssertionLevel
-        if level == .Off {
-            self.level = .Off
-        }
-        
-        if ret != kIOReturnSuccess {
+        if let id = aid {
+            assertionID = id
+        } else {
             return nil
         }
     }
     
     deinit {
-        let ret: IOReturn = IOPMAssertionRelease(assertionID)
-        
-        if ret != kIOReturnSuccess {
-            fatalError("Unable to release Assertion!")
-        }
+        PowerAssertion.assertionRelease(assertionID)
     }
     
     /*
@@ -158,6 +160,53 @@ class PowerAssertion {
     /*
     *  Class Functions
     */
+    class func createAssertionWithName(name: String, type: PowerAssertionType, level: PowerAssertionLevel) -> IOPMAssertionID? {
+        var aid: IOPMAssertionID = UInt32(kIOPMNullAssertionID)
+        
+        let ret: IOReturn = IOPMAssertionCreateWithName(
+            type.rawValue,
+            level.rawValue,
+            name,
+            &aid)
+        
+        if ret != kIOReturnSuccess {
+            return nil
+        }
+        
+        // Because for some reason,
+        // AssertionCreateWithName does not honor IOPMAssertionLevel
+        if level == .Off {
+            IOPMAssertionSetProperty(aid, PowerAssertionDictionaryKey.AssertionLevelKey.rawValue, NSNumber(unsignedInt: level.rawValue))
+        }
+        
+        return aid
+    }
+    
+    class func createAssertionWithProperties(properties: Dictionary<String,AnyObject>) -> IOPMAssertionID? {
+        var aid: IOPMAssertionID = UInt32(kIOPMNullAssertionID)
+        
+        let ret = IOPMAssertionCreateWithProperties(properties, &aid)
+        
+        if ret != kIOReturnSuccess {
+            return nil
+        }
+        
+        return aid
+    }
+    
+    class func assertionCopyProperties(aid: IOPMAssertionID) -> Dictionary<String,AnyObject>? {
+        let cfdict: NSDictionary = IOPMAssertionCopyProperties(aid)!.takeRetainedValue()
+        return cfdict as? Dictionary<String,AnyObject>
+    }
+    
+    class func assertionRelease(aid: IOPMAssertionID) {
+        let ret: IOReturn = IOPMAssertionRelease(aid)
+        
+        if ret != kIOReturnSuccess {
+            fatalError("Unable to release Assertion!")
+        }
+    }
+
     class func getAssertionStatus() -> Dictionary<String,Int>? {
         var _assertionsStatus: Unmanaged<CFDictionaryRef>?
         
