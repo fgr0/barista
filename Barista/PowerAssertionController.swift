@@ -23,8 +23,8 @@ class PowerAssertionController: NSObject, NSMenuDelegate {
     //---
     var mItemAbout =                NSMenuItem(title: "About", action: "orderFrontStandardAboutPanel:", keyEquivalent: "")
     //---
-    var mItemStartAtLogin =         NSMenuItem(title: "Launch on Start", action: "toggleStartAtLogin:", keyEquivalent: "")
-    var mItemActivateOnLaunch =     NSMenuItem(title: "Activate on Launch", action: "toggleActivateOnLaunch:", keyEquivalent: "")
+    var mItemStartAtLogin =         NSMenuItem(title: "Launch on Start", action: nil, keyEquivalent: "")
+    var mItemActivateOnLaunch =     NSMenuItem(title: "Activate on Launch", action: nil, keyEquivalent: "")
     //---
     var mItemAllowDisplaySleep =    NSMenuItem(title: "Allow Display Sleep", action: "toggleDisplaySleep:", keyEquivalent: "")
     //---
@@ -58,27 +58,34 @@ class PowerAssertionController: NSObject, NSMenuDelegate {
         menu.addItem(mItemAbout)
         menu.addItem(NSMenuItem.separatorItem())
         menu.addItem(mItemStartAtLogin)
-        mItemStartAtLogin.state = NSOffState
-        mItemStartAtLogin.target = self
-
+        mItemStartAtLogin.hidden = true
         menu.addItem(mItemActivateOnLaunch)
-        mItemActivateOnLaunch.state = NSOffState
-        mItemActivateOnLaunch.target = self
+        
+        let options = [ "NSContinuouslyUpdatesValue" : NSNumber(bool: true) ]
+        mItemStartAtLogin.bind(
+            "value", toObject: NSUserDefaultsController.sharedUserDefaultsController(),
+            withKeyPath: "values.launchOnStart", options: options
+        )
+        mItemActivateOnLaunch.bind(
+            "value", toObject: NSUserDefaultsController.sharedUserDefaultsController(),
+            withKeyPath: "values.activateOnLaunch", options: options
+        )
 
         menu.addItem(NSMenuItem.separatorItem())
         menu.addItem(mItemAllowDisplaySleep)
         mItemAllowDisplaySleep.target = self
-        mItemAllowDisplaySleep.state = NSOnState
+        mItemAllowDisplaySleep.bind(
+            "value", toObject: NSUserDefaultsController.sharedUserDefaultsController(),
+            withKeyPath: "values.allowDisplaySleep", options: options
+        )
 
         menu.addItem(NSMenuItem.separatorItem())
         menu.addItem(mItemQuit)
-    }
-    
-    /*
-     *  Menu Delegate Methods
-     */
-    func menuNeedsUpdate(menu: NSMenu) {
         
+        
+        if NSUserDefaults.standardUserDefaults().valueForKey("activateOnLaunch") as Bool {
+            toggleMode(self)
+        }
     }
 
     /*
@@ -107,11 +114,9 @@ class PowerAssertionController: NSObject, NSMenuDelegate {
     }
     
     func toggleDisplaySleep(sender: AnyObject?) {
-        if mItemAllowDisplaySleep.state == NSOnState {
-            mItemAllowDisplaySleep.state = NSOffState
+        if NSUserDefaults.standardUserDefaults().valueForKey("allowDisplaySleep") as Bool {
             assertion?.type = PowerAssertionType.PreventUserIdleDisplaySleep
         } else {
-            mItemAllowDisplaySleep.state = NSOnState
             assertion?.type = PowerAssertionType.PreventUserIdleSystemSleep
         }
     }

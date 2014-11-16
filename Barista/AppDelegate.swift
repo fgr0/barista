@@ -16,6 +16,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
         
+        // register User Defaults
+        let defaults: Dictionary<NSString,AnyObject> = [
+            "activateOnLaunch" : NSNumber(bool: false),
+            "launchOnStart" : NSNumber(bool: false),
+            "allowDisplaySleep" : NSNumber(bool: true)
+        ]
+        NSUserDefaults.standardUserDefaults().registerDefaults(defaults)
+        
+        // load Controller
         controller = PowerAssertionController()
     }
 
