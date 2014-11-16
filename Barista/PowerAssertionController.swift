@@ -46,8 +46,8 @@ class PowerAssertionController: NSObject, NSMenuDelegate {
         menu = NSMenu(title: "Barista")
         
         // Setup StatusBar Item
-        statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
-        statusItem.button?.title = "Barista"
+        statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-2)
+        statusItem.button?.title = "zZ"
         statusItem.button?.appearsDisabled = true
         statusItem.menu = menu
         
