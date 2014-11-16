@@ -104,15 +104,7 @@ class PowerAssertionController: NSObject, NSMenuDelegate {
             statusItem.button?.appearsDisabled = false
         }
     }
-    
-    func toggleStartAtLogin(sender: AnyObject?) {
-        mItemStartAtLogin.state = (mItemStartAtLogin.state == NSOnState) ? NSOffState : NSOnState
-    }
-    
-    func toggleActivateOnLaunch(sender: AnyObject?) {
-        mItemActivateOnLaunch.state = (mItemActivateOnLaunch.state == NSOnState) ? NSOffState : NSOnState
-    }
-    
+
     func toggleDisplaySleep(sender: AnyObject?) {
         if NSUserDefaults.standardUserDefaults().valueForKey("allowDisplaySleep") as Bool {
             assertion?.type = PowerAssertionType.PreventUserIdleDisplaySleep
