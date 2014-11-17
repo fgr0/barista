@@ -23,7 +23,7 @@ class PowerAssertionController: NSObject, NSMenuDelegate {
     let mItemStatus =               NSMenuItem(title: "Barista: Off", action: nil, keyEquivalent: "")
     let mItemToggle =               NSMenuItem(title: "Turn Barista On", action: "toggleMode:", keyEquivalent: "")
     //---
-    let mItemAbout =                NSMenuItem(title: "About", action: "orderFrontStandardAboutPanel:", keyEquivalent: "")
+    let mItemAbout =                NSMenuItem(title: "About Barista", action: "showAbout:", keyEquivalent: "")
     //---
     let mItemStartAtLogin =         NSMenuItem(title: "Launch on Login", action: nil, keyEquivalent: "")
     let mItemActivateOnLaunch =     NSMenuItem(title: "Activate on Launch", action: nil, keyEquivalent: "")
