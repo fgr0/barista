@@ -60,8 +60,6 @@ class PowerAssertionController: NSObject, NSMenuDelegate {
         mItemToggle.target = self
         
         menu.addItem(NSMenuItem.separatorItem())
-        menu.addItem(mItemAbout)
-        menu.addItem(NSMenuItem.separatorItem())
         menu.addItem(mItemStartAtLogin)
         mItemStartAtLogin.hidden = true                 // TODO: Implement 'Launch on Login'
         menu.addItem(mItemActivateOnLaunch)
@@ -76,7 +74,7 @@ class PowerAssertionController: NSObject, NSMenuDelegate {
             withKeyPath: "values.activateOnLaunch", options: options
         )
 
-        menu.addItem(NSMenuItem.separatorItem())
+        //menu.addItem(NSMenuItem.separatorItem())
         menu.addItem(mItemAllowDisplaySleep)
         mItemAllowDisplaySleep.target = self
         mItemAllowDisplaySleep.bind(
@@ -85,6 +83,7 @@ class PowerAssertionController: NSObject, NSMenuDelegate {
         )
 
         menu.addItem(NSMenuItem.separatorItem())
+        menu.addItem(mItemAbout)
         menu.addItem(mItemQuit)
         
         // TODO: Find a nicer way to controll the Titles for the MenuItems
