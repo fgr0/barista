@@ -11,26 +11,26 @@ import Cocoa
 class PowerAssertionController: NSObject, NSMenuDelegate {
     var assertion: PowerAssertion?
     
-    var statusItem: NSStatusItem
+    let statusItem: NSStatusItem
     
     
     /*
      * Basic Menu Structure
      */
     
-    var menu: NSMenu
+    let menu: NSMenu
     
-    var mItemStatus =               NSMenuItem(title: "Barista: Off", action: nil, keyEquivalent: "")
-    var mItemToggle =               NSMenuItem(title: "Turn Barista On", action: "toggleMode:", keyEquivalent: "")
+    let mItemStatus =               NSMenuItem(title: "Barista: Off", action: nil, keyEquivalent: "")
+    let mItemToggle =               NSMenuItem(title: "Turn Barista On", action: "toggleMode:", keyEquivalent: "")
     //---
-    var mItemAbout =                NSMenuItem(title: "About", action: "orderFrontStandardAboutPanel:", keyEquivalent: "")
+    let mItemAbout =                NSMenuItem(title: "About", action: "orderFrontStandardAboutPanel:", keyEquivalent: "")
     //---
-    var mItemStartAtLogin =         NSMenuItem(title: "Launch on Login", action: nil, keyEquivalent: "")
-    var mItemActivateOnLaunch =     NSMenuItem(title: "Activate on Launch", action: nil, keyEquivalent: "")
+    let mItemStartAtLogin =         NSMenuItem(title: "Launch on Login", action: nil, keyEquivalent: "")
+    let mItemActivateOnLaunch =     NSMenuItem(title: "Activate on Launch", action: nil, keyEquivalent: "")
     //---
-    var mItemAllowDisplaySleep =    NSMenuItem(title: "Allow Display Sleep", action: "toggleDisplaySleep:", keyEquivalent: "")
+    let mItemAllowDisplaySleep =    NSMenuItem(title: "Allow Display Sleep", action: "toggleDisplaySleep:", keyEquivalent: "")
     //---
-    var mItemQuit =                 NSMenuItem(title: "Quit", action: "terminate:", keyEquivalent: "")
+    let mItemQuit =                 NSMenuItem(title: "Quit", action: "terminate:", keyEquivalent: "")
     
     /*
      * Init
