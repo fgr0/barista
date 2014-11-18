@@ -13,8 +13,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
 
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
-        // Insert code here to initialize your application
+    func applicationWillFinishLaunching(aNotification: NSNotification) {
+        // Since Helper must reside in Bundle/Contents/Library/LoginItems
+        // remove unnessesary path elements
+        let appPath = NSBundle.mainBundle().bundlePath.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent
+        
+        NSWorkspace.sharedWorkspace().launchApplication(appPath)
+        
+        NSApplication.sharedApplication().terminate(nil)
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {
