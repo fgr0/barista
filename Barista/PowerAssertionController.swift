@@ -11,26 +11,26 @@ import Cocoa
 class PowerAssertionController: NSObject, NSMenuDelegate {
     var assertion: PowerAssertion?
     
-    var statusItem: NSStatusItem
+    let statusItem: NSStatusItem
     
     
     /*
      * Basic Menu Structure
      */
     
-    var menu: NSMenu
+    let menu: NSMenu
     
-    var mItemStatus =               NSMenuItem(title: "Barista: Off", action: nil, keyEquivalent: "")
-    var mItemToggle =               NSMenuItem(title: "Turn Barista On", action: "toggleMode:", keyEquivalent: "")
+    let mItemStatus =               NSMenuItem(title: "Barista: Off", action: nil, keyEquivalent: "")
+    let mItemToggle =               NSMenuItem(title: "Turn Barista On", action: "toggleMode:", keyEquivalent: "")
     //---
-    var mItemAbout =                NSMenuItem(title: "About", action: "orderFrontStandardAboutPanel:", keyEquivalent: "")
+    let mItemAbout =                NSMenuItem(title: "About Barista", action: "showAbout:", keyEquivalent: "")
     //---
-    var mItemStartAtLogin =         NSMenuItem(title: "Launch on Login", action: nil, keyEquivalent: "")
-    var mItemActivateOnLaunch =     NSMenuItem(title: "Activate on Launch", action: nil, keyEquivalent: "")
+    let mItemStartAtLogin =         NSMenuItem(title: "Launch on Login", action: nil, keyEquivalent: "")
+    let mItemActivateOnLaunch =     NSMenuItem(title: "Activate on Launch", action: nil, keyEquivalent: "")
     //---
-    var mItemAllowDisplaySleep =    NSMenuItem(title: "Allow Display Sleep", action: "toggleDisplaySleep:", keyEquivalent: "")
+    let mItemAllowDisplaySleep =    NSMenuItem(title: "Allow Display Sleep", action: "toggleDisplaySleep:", keyEquivalent: "")
     //---
-    var mItemQuit =                 NSMenuItem(title: "Quit", action: "terminate:", keyEquivalent: "")
+    let mItemQuit =                 NSMenuItem(title: "Quit", action: "terminate:", keyEquivalent: "")
     
     /*
      * Init
@@ -63,8 +63,6 @@ class PowerAssertionController: NSObject, NSMenuDelegate {
         mItemToggle.target = self
         
         menu.addItem(NSMenuItem.separatorItem())
-        menu.addItem(mItemAbout)
-        menu.addItem(NSMenuItem.separatorItem())
         menu.addItem(mItemStartAtLogin)
         mItemStartAtLogin.hidden = true                 // TODO: Implement 'Launch on Login'
         menu.addItem(mItemActivateOnLaunch)
@@ -79,7 +77,7 @@ class PowerAssertionController: NSObject, NSMenuDelegate {
             withKeyPath: "values.activateOnLaunch", options: options
         )
 
-        menu.addItem(NSMenuItem.separatorItem())
+        //menu.addItem(NSMenuItem.separatorItem())
         menu.addItem(mItemAllowDisplaySleep)
         mItemAllowDisplaySleep.target = self
         mItemAllowDisplaySleep.bind(
@@ -88,7 +86,14 @@ class PowerAssertionController: NSObject, NSMenuDelegate {
         )
 
         menu.addItem(NSMenuItem.separatorItem())
+        menu.addItem(mItemAbout)
         menu.addItem(mItemQuit)
+        
+        // TODO: Find a nicer way to controll the Titles for the MenuItems
+        // Maybe possible with Bindings/Transformations?
+        if NSUserDefaults.standardUserDefaults().valueForKey("activateOnLaunch") as Bool {
+            toggleMode(self)
+        }
     }
 
     

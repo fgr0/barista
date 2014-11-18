@@ -31,6 +31,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(aNotification: NSNotification) {
         // Insert code here to tear down your application
     }
+    
+    func showAbout(sender: AnyObject) {
+        NSApplication.sharedApplication().activateIgnoringOtherApps(true)
+        NSApplication.sharedApplication().orderFrontStandardAboutPanel(sender)
+    }
 
 }
 
