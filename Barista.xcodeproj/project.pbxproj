@@ -10,6 +10,7 @@
 		9D1EA6A31A1B61540030C40F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1EA6A21A1B61540030C40F /* AppDelegate.swift */; };
 		9D1EA6A71A1B61540030C40F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D1EA6A61A1B61540030C40F /* Images.xcassets */; };
 		9D1EA6AA1A1B61540030C40F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D1EA6A81A1B61540030C40F /* Main.storyboard */; };
+		9D1EA6C01A1B62C80030C40F /* BaristaHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D1EA69E1A1B61540030C40F /* BaristaHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9DE472F019FF9E4C0089B49F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE472EF19FF9E4C0089B49F /* AppDelegate.swift */; };
 		9DE472F219FF9E4C0089B49F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE472F119FF9E4C0089B49F /* ViewController.swift */; };
 		9DE472F419FF9E4C0089B49F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DE472F319FF9E4C0089B49F /* Images.xcassets */; };
@@ -20,6 +21,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		9D1EA6BD1A1B62A80030C40F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9DE472E219FF9E4C0089B49F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9D1EA69D1A1B61540030C40F;
+			remoteInfo = BaristaHelper;
+		};
 		9DE472FD19FF9E4C0089B49F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9DE472E219FF9E4C0089B49F /* Project object */;
@@ -28,6 +36,19 @@
 			remoteInfo = Barista;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9D1EA6BF1A1B62AD0030C40F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
+			files = (
+				9D1EA6C01A1B62C80030C40F /* BaristaHelper.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		9D1EA69E1A1B61540030C40F /* BaristaHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaristaHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -181,10 +202,12 @@
 				9DE472E719FF9E4C0089B49F /* Frameworks */,
 				9DE472E819FF9E4C0089B49F /* Resources */,
 				9DEA58DB1A191C0B00451610 /* ShellScript */,
+				9D1EA6BF1A1B62AD0030C40F /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9D1EA6BE1A1B62A80030C40F /* PBXTargetDependency */,
 			);
 			name = Barista;
 			productName = Barista;
@@ -330,6 +353,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		9D1EA6BE1A1B62A80030C40F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9D1EA69D1A1B61540030C40F /* BaristaHelper */;
+			targetProxy = 9D1EA6BD1A1B62A80030C40F /* PBXContainerItemProxy */;
+		};
 		9DE472FE19FF9E4C0089B49F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9DE472E919FF9E4C0089B49F /* Barista */;
