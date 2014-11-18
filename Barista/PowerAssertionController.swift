@@ -88,6 +88,12 @@ class PowerAssertionController: NSObject, NSMenuDelegate {
         menu.addItem(NSMenuItem.separatorItem())
         menu.addItem(mItemAbout)
         menu.addItem(mItemQuit)
+        
+        // TODO: Find a nicer way to controll the Titles for the MenuItems
+        // Maybe possible with Bindings/Transformations?
+        if NSUserDefaults.standardUserDefaults().valueForKey("activateOnLaunch") as Bool {
+            toggleMode(self)
+        }
     }
 
     
