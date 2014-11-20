@@ -10,8 +10,8 @@ import Foundation
 import ServiceManagement
 
 class LoginItemController: NSObject {
-    var mainBundle: NSBundle
-    var helperBundle: NSBundle
+    let mainBundle: NSBundle
+    let helperBundle: NSBundle
     
     var enabled: Bool {
         didSet {
