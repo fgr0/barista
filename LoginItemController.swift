@@ -15,7 +15,10 @@ class LoginItemController: NSObject {
     
     var enabled: Bool {
         didSet {
-            self.launchAtLogin(self.enabled)
+            let flag = (self.enabled ? 1 : 0) as Boolean
+            if SMLoginItemSetEnabled(helperBundle.bundleIdentifier, flag) == 0  {
+                NSLog("SMLoginItemSetEnabled failed")
+            }
             NSUserDefaults.standardUserDefaults().setBool(self.enabled, forKey: "launchOnStart")
         }
     }
@@ -31,19 +34,12 @@ class LoginItemController: NSObject {
     override init() {
         self.mainBundle = NSBundle.mainBundle()
         
-        let path = mainBundle.bundlePath.stringByAppendingPathComponent("Contents/Library/LoginItems/BaristaHelper.app")
+        let path = mainBundle.bundlePath.stringByAppendingPathComponent(
+            "Contents/Library/LoginItems/BaristaHelper.app")
         self.helperBundle = NSBundle(path: path)!
         
         self.enabled = NSUserDefaults.standardUserDefaults().boolForKey("launchOnStart")
         
         super.init()
-    }
-    
-    func launchAtLogin(enabled: Bool) {
-        // Try to set LoginItem
-        let flag = (enabled ? 1 : 0) as Boolean
-        if SMLoginItemSetEnabled(helperBundle.bundleIdentifier, flag) == 0  {
-            NSLog("SMLoginItemSetEnabled failed")
-        }
     }
 }
