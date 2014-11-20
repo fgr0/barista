@@ -13,7 +13,12 @@ class LoginItemController: NSObject {
     var mainBundle: NSBundle
     var helperBundle: NSBundle
     
-    var enabled = false
+    var enabled: Bool {
+        didSet {
+            self.launchAtLogin(self.enabled)
+            NSUserDefaults.standardUserDefaults().setBool(self.enabled, forKey: "launchOnStart")
+        }
+    }
     
     // Singleton Implementation
     class var sharedController: LoginItemController {
@@ -28,6 +33,8 @@ class LoginItemController: NSObject {
         
         let path = mainBundle.bundlePath.stringByAppendingPathComponent("Contents/Library/LoginItems/BaristaHelper.app")
         self.helperBundle = NSBundle(path: path)!
+        
+        self.enabled = NSUserDefaults.standardUserDefaults().boolForKey("launchOnStart")
         
         super.init()
     }

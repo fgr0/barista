@@ -64,13 +64,13 @@ class PowerAssertionController: NSObject, NSMenuDelegate {
         
         menu.addItem(NSMenuItem.separatorItem())
         menu.addItem(mItemStartAtLogin)
-        mItemStartAtLogin.hidden = true                 // TODO: Implement 'Launch on Login'
+        mItemStartAtLogin.hidden = false                 // TODO: Implement 'Launch on Login'
         menu.addItem(mItemActivateOnLaunch)
         
         let options = [ "NSContinuouslyUpdatesValue" : NSNumber(bool: true) ]
         mItemStartAtLogin.bind(
-            "value", toObject: NSUserDefaultsController.sharedUserDefaultsController(),
-            withKeyPath: "values.launchOnStart", options: options
+            "value", toObject: LoginItemController.sharedController,
+            withKeyPath: "enabled", options: options
         )
         mItemActivateOnLaunch.bind(
             "value", toObject: NSUserDefaultsController.sharedUserDefaultsController(),
