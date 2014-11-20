@@ -10,15 +10,17 @@ import Foundation
 import ServiceManagement
 
 class LoginItemController: NSObject {
-    let mainBundle: NSBundle
-    let helperBundle: NSBundle
+    let mainBundle:     NSBundle
+    let helperBundle:   NSBundle
     
+    // Controlls the login iteam and UserDefaults
     var enabled: Bool {
         didSet {
             let flag = (self.enabled ? 1 : 0) as Boolean
             if SMLoginItemSetEnabled(helperBundle.bundleIdentifier, flag) == 0  {
                 NSLog("SMLoginItemSetEnabled failed")
             }
+            
             NSUserDefaults.standardUserDefaults().setBool(self.enabled, forKey: "launchOnStart")
         }
     }
