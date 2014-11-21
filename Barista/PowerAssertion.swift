@@ -66,15 +66,13 @@ class PowerAssertion {
         set(type) {
             // Type cannto be set by chaning the Dictionary,
             // so we must create a new Assertion with identical settings.
-            var _p = PowerAssertion.assertionCopyProperties(self.assertionID)
-            if var p = _p {
-                p[PowerAssertionDictionaryKey.AssertionTypeKey.rawValue] = type.rawValue
+            var p = PowerAssertion.assertionCopyProperties(self.assertionID)
+            p[PowerAssertionDictionaryKey.AssertionTypeKey.rawValue] = type.rawValue
 
-                let aid = PowerAssertion.createAssertionWithProperties(p)
-                if let id = aid {
-                    PowerAssertion.assertionRelease(assertionID)
-                    assertionID = id
-                }
+            let aid = PowerAssertion.createAssertionWithProperties(p)
+            if let id = aid {
+                PowerAssertion.assertionRelease(assertionID)
+                assertionID = id
             }
         }
     }
@@ -182,7 +180,7 @@ class PowerAssertion {
         return aid
     }
     
-    class func createAssertionWithProperties(properties: Dictionary<String,AnyObject>) -> IOPMAssertionID? {
+    class func createAssertionWithProperties(properties: Dictionary<NSObject,AnyObject>) -> IOPMAssertionID? {
         var aid: IOPMAssertionID = UInt32(kIOPMNullAssertionID)
         
         let ret = IOPMAssertionCreateWithProperties(properties, &aid)
@@ -194,9 +192,9 @@ class PowerAssertion {
         return aid
     }
     
-    class func assertionCopyProperties(aid: IOPMAssertionID) -> Dictionary<String,AnyObject>? {
+    class func assertionCopyProperties(aid: IOPMAssertionID) -> Dictionary<NSObject,AnyObject> {
         let cfdict: NSDictionary = IOPMAssertionCopyProperties(aid)!.takeRetainedValue()
-        return cfdict as? Dictionary<String,AnyObject>
+        return cfdict as Dictionary<NSObject,AnyObject>
     }
     
     class func assertionRelease(aid: IOPMAssertionID) {
