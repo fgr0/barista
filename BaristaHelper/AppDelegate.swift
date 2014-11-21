@@ -17,8 +17,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Since Helper must reside in Bundle/Contents/Library/LoginItems
         // remove unnessesary path elements
         let appPath = NSBundle.mainBundle().bundlePath.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent
+        let appBundle = NSBundle(path: appPath)
+        var isRunning = false
         
-        NSWorkspace.sharedWorkspace().launchApplication(appPath)
+        for app in NSWorkspace.sharedWorkspace().runningApplications {
+            if app.bundleIdentifier == appBundle?.bundleIdentifier {
+                isRunning = true
+                break
+            }
+        }
+        
+        if !isRunning {
+            NSWorkspace.sharedWorkspace().launchApplication(appPath)
+        }
         
         NSApplication.sharedApplication().terminate(nil)
     }
