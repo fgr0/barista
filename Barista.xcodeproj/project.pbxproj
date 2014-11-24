@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D1EA6A31A1B61540030C40F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1EA6A21A1B61540030C40F /* AppDelegate.swift */; };
+		9D1EA6A71A1B61540030C40F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D1EA6A61A1B61540030C40F /* Images.xcassets */; };
+		9D1EA6AA1A1B61540030C40F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D1EA6A81A1B61540030C40F /* Main.storyboard */; };
+		9D1EA6C01A1B62C80030C40F /* BaristaHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D1EA69E1A1B61540030C40F /* BaristaHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9DE472F019FF9E4C0089B49F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE472EF19FF9E4C0089B49F /* AppDelegate.swift */; };
 		9DE472F219FF9E4C0089B49F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE472F119FF9E4C0089B49F /* ViewController.swift */; };
 		9DE472F419FF9E4C0089B49F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DE472F319FF9E4C0089B49F /* Images.xcassets */; };
@@ -14,9 +18,17 @@
 		9DE4730319FF9E4C0089B49F /* BaristaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4730219FF9E4C0089B49F /* BaristaTests.swift */; };
 		9DE4730E19FF9EA00089B49F /* PowerAssertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4730D19FF9EA00089B49F /* PowerAssertion.swift */; };
 		9E37CF3E1A03B2DD00B2CC90 /* PowerAssertionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E37CF3D1A03B2DD00B2CC90 /* PowerAssertionController.swift */; };
+		9EBFC6D01A1CB30900D1B158 /* LoginItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBFC6CF1A1CB30900D1B158 /* LoginItemController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		9D1EA6BD1A1B62A80030C40F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9DE472E219FF9E4C0089B49F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9D1EA69D1A1B61540030C40F;
+			remoteInfo = BaristaHelper;
+		};
 		9DE472FD19FF9E4C0089B49F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9DE472E219FF9E4C0089B49F /* Project object */;
@@ -26,7 +38,26 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		9D1EA6BF1A1B62AD0030C40F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
+			files = (
+				9D1EA6C01A1B62C80030C40F /* BaristaHelper.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		9D1EA69E1A1B61540030C40F /* BaristaHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaristaHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D1EA6A11A1B61540030C40F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9D1EA6A21A1B61540030C40F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9D1EA6A61A1B61540030C40F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		9D1EA6A91A1B61540030C40F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9D1EA6C11A1B63110030C40F /* BaristaHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BaristaHelper.entitlements; sourceTree = "<group>"; };
 		9DE472EA19FF9E4C0089B49F /* Barista.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Barista.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DE472EE19FF9E4C0089B49F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DE472EF19FF9E4C0089B49F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -39,9 +70,17 @@
 		9DE4730C19FF9E5B0089B49F /* Barista.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Barista.entitlements; sourceTree = "<group>"; };
 		9DE4730D19FF9EA00089B49F /* PowerAssertion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PowerAssertion.swift; sourceTree = "<group>"; };
 		9E37CF3D1A03B2DD00B2CC90 /* PowerAssertionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PowerAssertionController.swift; sourceTree = "<group>"; };
+		9EBFC6CF1A1CB30900D1B158 /* LoginItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginItemController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9D1EA69B1A1B61540030C40F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9DE472E719FF9E4C0089B49F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -59,11 +98,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9D1EA69F1A1B61540030C40F /* BaristaHelper */ = {
+			isa = PBXGroup;
+			children = (
+				9D1EA6C11A1B63110030C40F /* BaristaHelper.entitlements */,
+				9D1EA6A21A1B61540030C40F /* AppDelegate.swift */,
+				9D1EA6A61A1B61540030C40F /* Images.xcassets */,
+				9D1EA6A81A1B61540030C40F /* Main.storyboard */,
+				9D1EA6A01A1B61540030C40F /* Supporting Files */,
+			);
+			path = BaristaHelper;
+			sourceTree = "<group>";
+		};
+		9D1EA6A01A1B61540030C40F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9D1EA6A11A1B61540030C40F /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		9DE472E119FF9E4C0089B49F = {
 			isa = PBXGroup;
 			children = (
 				9DE472EC19FF9E4C0089B49F /* Barista */,
 				9DE472FF19FF9E4C0089B49F /* BaristaTests */,
+				9D1EA69F1A1B61540030C40F /* BaristaHelper */,
 				9DE472EB19FF9E4C0089B49F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -73,6 +133,7 @@
 			children = (
 				9DE472EA19FF9E4C0089B49F /* Barista.app */,
 				9DE472FC19FF9E4C0089B49F /* BaristaTests.xctest */,
+				9D1EA69E1A1B61540030C40F /* BaristaHelper.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -82,6 +143,7 @@
 			children = (
 				9DE4730C19FF9E5B0089B49F /* Barista.entitlements */,
 				9DE472EF19FF9E4C0089B49F /* AppDelegate.swift */,
+				9EBFC6CF1A1CB30900D1B158 /* LoginItemController.swift */,
 				9E37CF3D1A03B2DD00B2CC90 /* PowerAssertionController.swift */,
 				9DE4730D19FF9EA00089B49F /* PowerAssertion.swift */,
 				9DE472F119FF9E4C0089B49F /* ViewController.swift */,
@@ -120,6 +182,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		9D1EA69D1A1B61540030C40F /* BaristaHelper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9D1EA6BB1A1B61550030C40F /* Build configuration list for PBXNativeTarget "BaristaHelper" */;
+			buildPhases = (
+				9D1EA69A1A1B61540030C40F /* Sources */,
+				9D1EA69B1A1B61540030C40F /* Frameworks */,
+				9D1EA69C1A1B61540030C40F /* Resources */,
+				9EF1BAA91A1F5BDA00EF14CC /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BaristaHelper;
+			productName = BaristaHelper;
+			productReference = 9D1EA69E1A1B61540030C40F /* BaristaHelper.app */;
+			productType = "com.apple.product-type.application";
+		};
 		9DE472E919FF9E4C0089B49F /* Barista */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9DE4730619FF9E4C0089B49F /* Build configuration list for PBXNativeTarget "Barista" */;
@@ -128,10 +208,12 @@
 				9DE472E719FF9E4C0089B49F /* Frameworks */,
 				9DE472E819FF9E4C0089B49F /* Resources */,
 				9DEA58DB1A191C0B00451610 /* ShellScript */,
+				9D1EA6BF1A1B62AD0030C40F /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9D1EA6BE1A1B62A80030C40F /* PBXTargetDependency */,
 			);
 			name = Barista;
 			productName = Barista;
@@ -165,11 +247,19 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Franz Greiling";
 				TargetAttributes = {
+					9D1EA69D1A1B61540030C40F = {
+						CreatedOnToolsVersion = 6.1;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
+					};
 					9DE472E919FF9E4C0089B49F = {
 						CreatedOnToolsVersion = 6.1;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -194,11 +284,21 @@
 			targets = (
 				9DE472E919FF9E4C0089B49F /* Barista */,
 				9DE472FB19FF9E4C0089B49F /* BaristaTests */,
+				9D1EA69D1A1B61540030C40F /* BaristaHelper */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		9D1EA69C1A1B61540030C40F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9D1EA6A71A1B61540030C40F /* Images.xcassets in Resources */,
+				9D1EA6AA1A1B61540030C40F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9DE472E819FF9E4C0089B49F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -229,17 +329,39 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh -e\n\n# This script automatically sets the version and short version string of\n# an Xcode project from the Git repository containing the project.\n#\n# To use this script in Xcode, add the script's path to a \"Run Script\" build\n# phase for your application target.\n\nGIT_COMMITS_MASTER=$(git rev-list master | wc -l | tr -d ' ')\nGIT_TAG_MASTER=$(git describe master --tags | sed 's/.*\\([0-9][0-9]*\\.[0-9][0-9]*\\.[0-9][0-9]*\\)/\\1/')\nINFO_PLIST=\"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n\n# For Release Build: Add Full Version Information to Xcode\nif [ ${CONFIGURATION} == \"Release\" ]; then\n// /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $GIT_COMMITS_MASTER\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString $GIT_TAG_MASTER\" \"$INFO_PLIST\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $GIT_COMMITS_MASTER\" \"$INFO_PLIST\"\nfi\n";
+			shellScript = "#!/bin/sh -e\n\n# This script automatically sets the version and short version string of\n# an Xcode project from the Git repository containing the project.\n#\n# To use this script in Xcode, add the script's path to a \"Run Script\" build\n# phase for your application target.\n\nGIT_COMMITS_BRANCH=$(git rev-list HEAD | wc -l | tr -d ' ')\nGIT_TAG_MASTER=$(git describe master --tags | sed 's/.*\\([0-9][0-9]*\\.[0-9][0-9]*\\.[0-9][0-9]*\\).*/\\1/')\nINFO_PLIST=\"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n\n# For Release Build: Add Full Version Information to Xcode\nif [ ${CONFIGURATION} == \"Release\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString $GIT_TAG_MASTER\" \"$INFO_PLIST\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $GIT_COMMITS_BRANCH\" \"$INFO_PLIST\"\nfi";
+		};
+		9EF1BAA91A1F5BDA00EF14CC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh -e\n\n# This script automatically sets the version and short version string of\n# an Xcode project from the Git repository containing the project.\n#\n# To use this script in Xcode, add the script's path to a \"Run Script\" build\n# phase for your application target.\n\nGIT_COMMITS_BRANCH=$(git rev-list HEAD | wc -l | tr -d ' ')\nGIT_TAG_MASTER=$(git describe master --tags | sed 's/.*\\([0-9][0-9]*\\.[0-9][0-9]*\\.[0-9][0-9]*\\).*/\\1/')\nINFO_PLIST=\"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n\n# For Release Build: Add Full Version Information to Xcode\nif [ ${CONFIGURATION} == \"Release\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString $GIT_TAG_MASTER\" \"$INFO_PLIST\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $GIT_COMMITS_BRANCH\" \"$INFO_PLIST\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9D1EA69A1A1B61540030C40F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9D1EA6A31A1B61540030C40F /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9DE472E619FF9E4C0089B49F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				9DE4730E19FF9EA00089B49F /* PowerAssertion.swift in Sources */,
 				9DE472F219FF9E4C0089B49F /* ViewController.swift in Sources */,
+				9EBFC6D01A1CB30900D1B158 /* LoginItemController.swift in Sources */,
 				9E37CF3E1A03B2DD00B2CC90 /* PowerAssertionController.swift in Sources */,
 				9DE472F019FF9E4C0089B49F /* AppDelegate.swift in Sources */,
 			);
@@ -256,6 +378,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		9D1EA6BE1A1B62A80030C40F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9D1EA69D1A1B61540030C40F /* BaristaHelper */;
+			targetProxy = 9D1EA6BD1A1B62A80030C40F /* PBXContainerItemProxy */;
+		};
 		9DE472FE19FF9E4C0089B49F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9DE472E919FF9E4C0089B49F /* Barista */;
@@ -264,6 +391,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		9D1EA6A81A1B61540030C40F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9D1EA6A91A1B61540030C40F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		9DE472F519FF9E4C0089B49F /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -275,6 +410,34 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		9D1EA6B71A1B61550030C40F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = BaristaHelper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		9D1EA6B81A1B61550030C40F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = BaristaHelper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		9DE4730419FF9E4C0089B49F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -356,7 +519,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Barista/Barista.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Barista/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -368,8 +530,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Barista/Barista.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = Barista/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -415,6 +577,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9D1EA6BB1A1B61550030C40F /* Build configuration list for PBXNativeTarget "BaristaHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9D1EA6B71A1B61550030C40F /* Debug */,
+				9D1EA6B81A1B61550030C40F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9DE472E519FF9E4C0089B49F /* Build configuration list for PBXProject "Barista" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

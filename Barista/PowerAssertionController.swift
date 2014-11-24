@@ -32,9 +32,12 @@ class PowerAssertionController: NSObject, NSMenuDelegate {
     //---
     let mItemQuit =                 NSMenuItem(title: "Quit", action: "terminate:", keyEquivalent: "")
     
+    
+    
     /*
      * Init
      */
+    
     override init() {
         // Setup 1st Assertion
         let starttype = NSUserDefaults.standardUserDefaults().valueForKey("allowDisplaySleep") as Bool ?
@@ -64,20 +67,18 @@ class PowerAssertionController: NSObject, NSMenuDelegate {
         
         menu.addItem(NSMenuItem.separatorItem())
         menu.addItem(mItemStartAtLogin)
-        mItemStartAtLogin.hidden = true                 // TODO: Implement 'Launch on Login'
         menu.addItem(mItemActivateOnLaunch)
         
         let options = [ "NSContinuouslyUpdatesValue" : NSNumber(bool: true) ]
         mItemStartAtLogin.bind(
-            "value", toObject: NSUserDefaultsController.sharedUserDefaultsController(),
-            withKeyPath: "values.launchOnStart", options: options
+            "value", toObject: LoginItemController.sharedController,
+            withKeyPath: "enabled", options: options
         )
         mItemActivateOnLaunch.bind(
             "value", toObject: NSUserDefaultsController.sharedUserDefaultsController(),
             withKeyPath: "values.activateOnLaunch", options: options
         )
 
-        //menu.addItem(NSMenuItem.separatorItem())
         menu.addItem(mItemAllowDisplaySleep)
         mItemAllowDisplaySleep.target = self
         mItemAllowDisplaySleep.bind(
@@ -96,6 +97,7 @@ class PowerAssertionController: NSObject, NSMenuDelegate {
         }
     }
 
+    
     
     /*
      *  Event Handlers
