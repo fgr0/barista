@@ -17,7 +17,7 @@ class LoginItemController: NSObject {
     var enabled: Bool {
         didSet {
             let flag = (self.enabled ? 1 : 0) as Boolean
-            if SMLoginItemSetEnabled(helperBundle.bundleIdentifier, flag) == 0  {
+            if SMLoginItemSetEnabled(helperBundle.bundleIdentifier!, flag) == 0  {
                 NSLog("SMLoginItemSetEnabled failed")
             }
             
