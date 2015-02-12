@@ -69,8 +69,7 @@ class PowerAssertion {
             var p = PowerAssertion.assertionCopyProperties(self.assertionID)
             p[PowerAssertionDictionaryKey.AssertionTypeKey.rawValue] = type.rawValue
 
-            let aid = PowerAssertion.createAssertionWithProperties(p)
-            if let id = aid {
+            if let id = PowerAssertion.createAssertionWithProperties(p) {
                 PowerAssertion.assertionRelease(assertionID)
                 assertionID = id
             }
@@ -129,9 +128,7 @@ class PowerAssertion {
     *  Init
     */
     init?(name: String, type: PowerAssertionType, level: PowerAssertionLevel) {
-        let aid = PowerAssertion.createAssertionWithName(name, type: type, level: level)
-        
-        if let id = aid {
+        if let id = PowerAssertion.createAssertionWithName(name, type: type, level: level) {
             assertionID = id
         } else {
             return nil
@@ -183,9 +180,7 @@ class PowerAssertion {
     class func createAssertionWithProperties(properties: Dictionary<NSObject,AnyObject>) -> IOPMAssertionID? {
         var aid: IOPMAssertionID = UInt32(kIOPMNullAssertionID)
         
-        let ret = IOPMAssertionCreateWithProperties(properties, &aid)
-        
-        if ret != kIOReturnSuccess {
+        if IOPMAssertionCreateWithProperties(properties, &aid) != kIOReturnSuccess {
             return nil
         }
         
@@ -198,9 +193,7 @@ class PowerAssertion {
     }
     
     class func assertionRelease(aid: IOPMAssertionID) {
-        let ret: IOReturn = IOPMAssertionRelease(aid)
-        
-        if ret != kIOReturnSuccess {
+        if (IOPMAssertionRelease(aid) as IOReturn) != kIOReturnSuccess {
             fatalError("Unable to release Assertion!")
         }
     }
@@ -208,8 +201,7 @@ class PowerAssertion {
     class func getAssertionStatus() -> Dictionary<String,Int>? {
         var _assertionsStatus: Unmanaged<CFDictionaryRef>?
         
-        let ret: IOReturn = IOPMCopyAssertionsStatus(&_assertionsStatus)
-        if ret == kIOReturnSuccess {
+        if (IOPMCopyAssertionsStatus(&_assertionsStatus) as IOReturn) == kIOReturnSuccess {
             let assertionStatus: NSDictionary = _assertionsStatus!.takeRetainedValue()
             return assertionStatus as? Dictionary<String,Int>
         }
