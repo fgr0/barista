@@ -40,7 +40,7 @@ class PowerAssertionController: NSObject, NSMenuDelegate {
     
     override init() {
         // Setup 1st Assertion
-        let starttype = NSUserDefaults.standardUserDefaults().valueForKey("allowDisplaySleep") as Bool ?
+        let starttype = NSUserDefaults.standardUserDefaults().valueForKey("allowDisplaySleep") as! Bool ?
             PowerAssertionType.PreventUserIdleSystemSleep : PowerAssertionType.PreventUserIdleDisplaySleep
         
         assertion = PowerAssertion(name: "Barista Prevent Sleep", type: starttype, level: .Off)
@@ -92,7 +92,7 @@ class PowerAssertionController: NSObject, NSMenuDelegate {
         
         // TODO: Find a nicer way to controll the Titles for the MenuItems
         // Maybe possible with Bindings/Transformations?
-        if NSUserDefaults.standardUserDefaults().valueForKey("activateOnLaunch") as Bool {
+        if NSUserDefaults.standardUserDefaults().valueForKey("activateOnLaunch") as! Bool {
             toggleMode(self)
         }
     }

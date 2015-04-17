@@ -52,7 +52,7 @@ class PowerAssertion {
     */
     var name: String {
         get {
-            return getAssertionProperty(.AssertionNameKey)! as String
+            return getAssertionProperty(.AssertionNameKey)! as! String
         }
         set(name) {
             setAssertionProperty(.AssertionNameKey, theValue: name)
@@ -61,7 +61,7 @@ class PowerAssertion {
     
     var type: PowerAssertionType {
         get {
-            return PowerAssertionType(rawValue: getAssertionProperty(.AssertionTypeKey)! as String)!
+            return PowerAssertionType(rawValue: getAssertionProperty(.AssertionTypeKey)! as! String)!
         }
         set(type) {
             // Type cannto be set by chaning the Dictionary,
@@ -78,7 +78,7 @@ class PowerAssertion {
     
     var level: PowerAssertionLevel {
         get {
-            return PowerAssertionLevel(rawValue: UInt32(getAssertionProperty(.AssertionLevelKey)! as Int))!
+            return PowerAssertionLevel(rawValue: UInt32(getAssertionProperty(.AssertionLevelKey)! as! Int))!
         }
         set(level) {
             setAssertionProperty(.AssertionLevelKey, theValue: NSNumber(unsignedInt: level.rawValue))
@@ -87,7 +87,7 @@ class PowerAssertion {
     
     var details: String? {
         get {
-            return getAssertionProperty(.AssertionDetailsKey) as String?
+            return getAssertionProperty(.AssertionDetailsKey) as! String?
         }
         set(details) {
             setAssertionProperty(.AssertionDetailsKey, theValue: details)
@@ -96,7 +96,7 @@ class PowerAssertion {
     
     var humanReadableReason: String? {
         get {
-            return getAssertionProperty(.AssertionHumanReadableReasonKey) as String?
+            return getAssertionProperty(.AssertionHumanReadableReasonKey) as! String?
         }
         set(hRString) {
             setAssertionProperty(.AssertionHumanReadableReasonKey, theValue: hRString)
@@ -105,7 +105,7 @@ class PowerAssertion {
     
     var localizationBundlePath: String? {
         get {
-            return getAssertionProperty(.AssertionLocalizationBundlePathKey) as String?
+            return getAssertionProperty(.AssertionLocalizationBundlePathKey) as! String?
         }
         set(lBPath) {
             setAssertionProperty(.AssertionLocalizationBundlePathKey, theValue: lBPath)
@@ -114,7 +114,7 @@ class PowerAssertion {
     
     var timeoutInSeconds: Double? {
         get {
-            return getAssertionProperty(.AssertionTimeoutKey) as Double?
+            return getAssertionProperty(.AssertionTimeoutKey) as! Double?
         }
         set(timeout) {
             // TODO: Setting the Timeout AND a default value for TimeoutAction
@@ -212,7 +212,7 @@ class PowerAssertion {
     private class func getAssertionCount(dict: Dictionary<String,Int>?) -> Int? {
         var count = 0
         
-        if let dict = dict? {
+        if let dict = dict {
             for (_, value) in dict {
                 count += value
             }
