@@ -9,18 +9,19 @@
 import Foundation
 import ServiceManagement
 
+let launchOnStart = "launchOnStart"
+
 class LoginItemController: NSObject {
-    let mainBundle:     NSBundle
-    let helperBundle:   NSBundle
+    private let helper:   NSBundle
     
     // Controlls the login iteam and UserDefaults
     var enabled: Bool {
         didSet {
-            if SMLoginItemSetEnabled(helperBundle.bundleIdentifier!, self.enabled) {
-                NSLog("SMLoginItemSetEnabled \(helperBundle.bundlePath) failed")
+            if !SMLoginItemSetEnabled(helper.bundleIdentifier!, self.enabled) {
+                NSLog("SMLoginItemSetEnabled \(helper.bundleIdentifier!) failed")
+            } else {
+                NSUserDefaults.standardUserDefaults().setBool(self.enabled, forKey: launchOnStart)
             }
-            
-            NSUserDefaults.standardUserDefaults().setBool(self.enabled, forKey: "launchOnStart")
         }
     }
     
@@ -32,14 +33,18 @@ class LoginItemController: NSObject {
         return Static.instance
     }
     
-    override init() {
-        self.mainBundle = NSBundle.mainBundle()
+    private override init() {
+        let url = NSURL(fileURLWithPath: NSBundle.mainBundle().bundlePath)
+            .URLByAppendingPathComponent("Contents/Library/LoginItems/BaristaHelper.app")!
         
-        let path: String = (NSURL(fileURLWithPath: mainBundle.bundlePath).URLByAppendingPathComponent(
-            "Contents/Library/LoginItems/BaristaHelper.app")?.path)!
-        self.helperBundle = NSBundle(path: path)!
-        self.enabled = NSUserDefaults.standardUserDefaults().boolForKey("launchOnStart")
+        self.helper = NSBundle(path: url.path!)!
+        self.enabled = NSUserDefaults.standardUserDefaults().boolForKey(launchOnStart)
         
+        // Register URL with Launch Services
+        if LSRegisterURL(url, true) != 0 {
+            NSLog("LSRegisterURL failed")
+        }
+
         super.init()
     }
 }
