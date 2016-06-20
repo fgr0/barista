@@ -234,7 +234,7 @@ class PowerAssertion {
         
         if dict != nil {
             for (key, value) in dict! {
-                if contains(options, key) {
+                if options.contains(key) {
                     newDict[key] = value
                 }
             }

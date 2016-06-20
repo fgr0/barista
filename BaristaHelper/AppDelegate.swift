@@ -11,12 +11,12 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-
-
     func applicationWillFinishLaunching(aNotification: NSNotification) {
         // Since Helper must reside in Bundle/Contents/Library/LoginItems
         // remove unnessesary path elements
-        let appPath = NSBundle.mainBundle().bundlePath.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent.stringByDeletingLastPathComponent
+        let appPath = (NSURL(fileURLWithPath: NSBundle.mainBundle().bundlePath)
+            .URLByDeletingLastPathComponent?.URLByDeletingLastPathComponent?
+            .URLByDeletingLastPathComponent?.URLByDeletingLastPathComponent!.path)!
         let appBundle = NSBundle(path: appPath)
         var isRunning = false
         
@@ -26,7 +26,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 break
             }
         }
-        
+
         if !isRunning {
             NSWorkspace.sharedWorkspace().launchApplication(appPath)
         }

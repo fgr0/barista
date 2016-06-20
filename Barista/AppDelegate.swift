@@ -17,7 +17,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to initialize your application
         
         // register User Defaults
-        let defaults: Dictionary<NSString,AnyObject> = [
+        let defaults: Dictionary<String,AnyObject> = [
             "activateOnLaunch" : NSNumber(bool: false),
             "launchOnStart" : NSNumber(bool: false),
             "allowDisplaySleep" : NSNumber(bool: true)
