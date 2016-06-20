@@ -9,10 +9,8 @@
 import Foundation
 import ServiceManagement
 
-let launchOnStart = "launchOnStart"
-
 class LoginItemController: NSObject {
-    private let helper:   NSBundle
+    private let helper: NSBundle
     
     // Controlls the login iteam and UserDefaults
     var enabled: Bool {
@@ -20,13 +18,13 @@ class LoginItemController: NSObject {
             if !SMLoginItemSetEnabled(helper.bundleIdentifier!, self.enabled) {
                 NSLog("SMLoginItemSetEnabled \(helper.bundleIdentifier!) failed")
             } else {
-                NSUserDefaults.standardUserDefaults().setBool(self.enabled, forKey: launchOnStart)
+                NSUserDefaults.standardUserDefaults().setBool(self.enabled, forKey: Settings.launchOnStart.rawValue)
             }
         }
     }
     
     // Singleton Implementation
-    class var sharedController: LoginItemController {
+    class func sharedController() -> LoginItemController {
         struct Static {
             static let instance: LoginItemController = LoginItemController()
         }
@@ -38,7 +36,7 @@ class LoginItemController: NSObject {
             .URLByAppendingPathComponent("Contents/Library/LoginItems/BaristaHelper.app")!
         
         self.helper = NSBundle(path: url.path!)!
-        self.enabled = NSUserDefaults.standardUserDefaults().boolForKey(launchOnStart)
+        self.enabled = NSUserDefaults.standardUserDefaults().boolForKey(Settings.launchOnStart.rawValue)
         
         // Register URL with Launch Services
         if LSRegisterURL(url, true) != 0 {

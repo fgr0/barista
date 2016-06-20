@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B23" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11129.15" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11129.15"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -14,12 +14,6 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Barista" systemMenu="apple" id="uQy-DD-JDr">
                                     <items>
-                                        <menuItem title="About Barista" id="5kV-Vb-QxS">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
-                                            </connections>
-                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
                                         <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
@@ -46,11 +40,6 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
-                                        <menuItem title="Quit Barista" keyEquivalent="q" id="4sb-4s-VLi">
-                                            <connections>
-                                                <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
-                                            </connections>
-                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -641,8 +630,53 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Barista" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Barista" customModuleProvider="target">
+                    <connections>
+                        <outlet property="activeItem" destination="A81-OZ-lqX" id="Fui-Sg-ZW2"/>
+                        <outlet property="displaySleepItem" destination="WY5-Pe-3M4" id="Vk9-nh-T0d"/>
+                        <outlet property="loginItem" destination="D8P-hQ-w91" id="8lU-Sa-Xbp"/>
+                        <outlet property="menu" destination="57F-e1-8oq" id="b9B-8q-ZvW"/>
+                        <outlet property="toggleItem" destination="LEH-5o-EpL" id="Nak-0a-5rc"/>
+                    </connections>
+                </customObject>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <menu id="57F-e1-8oq">
+                    <items>
+                        <menuItem title="Barista Off" enabled="NO" id="A81-OZ-lqX">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Turn Barista On" id="LEH-5o-EpL">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="NS1-e9-6v1"/>
+                        <menuItem title="Launch on Login" id="D8P-hQ-w91">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Activate on Startup" id="1ct-fp-fU9">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <binding destination="u6f-Ox-hdE" name="value" keyPath="values.activateOnLaunch" id="Pz5-V9-pcv"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Allow Display Sleep" id="WY5-Pe-3M4">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="web-qz-Tjw"/>
+                        <menuItem title="About Barista" id="5kV-Vb-QxS">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Quit Barista" id="4sb-4s-VLi">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                </menu>
+                <userDefaultsController representsSharedInstance="YES" id="u6f-Ox-hdE"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
