@@ -17,7 +17,6 @@
 		9DE472F719FF9E4C0089B49F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DE472F519FF9E4C0089B49F /* Main.storyboard */; };
 		9DE4730319FF9E4C0089B49F /* BaristaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4730219FF9E4C0089B49F /* BaristaTests.swift */; };
 		9DE4730E19FF9EA00089B49F /* PowerAssertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE4730D19FF9EA00089B49F /* PowerAssertion.swift */; };
-		9E37CF3E1A03B2DD00B2CC90 /* PowerAssertionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E37CF3D1A03B2DD00B2CC90 /* PowerAssertionController.swift */; };
 		9EBFC6D01A1CB30900D1B158 /* LoginItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBFC6CF1A1CB30900D1B158 /* LoginItemController.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,7 +68,6 @@
 		9DE4730219FF9E4C0089B49F /* BaristaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaristaTests.swift; sourceTree = "<group>"; };
 		9DE4730C19FF9E5B0089B49F /* Barista.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Barista.entitlements; sourceTree = "<group>"; };
 		9DE4730D19FF9EA00089B49F /* PowerAssertion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PowerAssertion.swift; sourceTree = "<group>"; };
-		9E37CF3D1A03B2DD00B2CC90 /* PowerAssertionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PowerAssertionController.swift; sourceTree = "<group>"; };
 		9EBFC6CF1A1CB30900D1B158 /* LoginItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginItemController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,7 +142,6 @@
 				9DE4730C19FF9E5B0089B49F /* Barista.entitlements */,
 				9DE472EF19FF9E4C0089B49F /* AppDelegate.swift */,
 				9EBFC6CF1A1CB30900D1B158 /* LoginItemController.swift */,
-				9E37CF3D1A03B2DD00B2CC90 /* PowerAssertionController.swift */,
 				9DE4730D19FF9EA00089B49F /* PowerAssertion.swift */,
 				9DE472F119FF9E4C0089B49F /* ViewController.swift */,
 				9DE472F319FF9E4C0089B49F /* Images.xcassets */,
@@ -244,11 +241,12 @@
 		9DE472E219FF9E4C0089B49F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Franz Greiling";
 				TargetAttributes = {
 					9D1EA69D1A1B61540030C40F = {
 						CreatedOnToolsVersion = 6.1;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 0;
@@ -257,6 +255,7 @@
 					};
 					9DE472E919FF9E4C0089B49F = {
 						CreatedOnToolsVersion = 6.1;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 0;
@@ -265,6 +264,7 @@
 					};
 					9DE472FB19FF9E4C0089B49F = {
 						CreatedOnToolsVersion = 6.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 9DE472E919FF9E4C0089B49F;
 					};
 				};
@@ -362,7 +362,6 @@
 				9DE4730E19FF9EA00089B49F /* PowerAssertion.swift in Sources */,
 				9DE472F219FF9E4C0089B49F /* ViewController.swift in Sources */,
 				9EBFC6D01A1CB30900D1B158 /* LoginItemController.swift in Sources */,
-				9E37CF3E1A03B2DD00B2CC90 /* PowerAssertionController.swift in Sources */,
 				9DE472F019FF9E4C0089B49F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -421,8 +420,10 @@
 				);
 				INFOPLIST_FILE = BaristaHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = de.sadmac.Barista.BaristaHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -433,8 +434,11 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = BaristaHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = de.sadmac.Barista.BaristaHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -458,8 +462,10 @@
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -472,7 +478,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -503,13 +509,14 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 			};
@@ -522,7 +529,9 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Barista/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = de.sadmac.Barista;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -534,7 +543,10 @@
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = Barista/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = de.sadmac.Barista;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -553,7 +565,9 @@
 				);
 				INFOPLIST_FILE = BaristaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = de.sadmac.BaristaHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Barista.app/Contents/MacOS/Barista";
 			};
 			name = Debug;
@@ -569,7 +583,10 @@
 				);
 				INFOPLIST_FILE = BaristaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = de.sadmac.BaristaHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Barista.app/Contents/MacOS/Barista";
 			};
 			name = Release;

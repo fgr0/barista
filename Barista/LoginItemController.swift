@@ -10,38 +10,39 @@ import Foundation
 import ServiceManagement
 
 class LoginItemController: NSObject {
-    let mainBundle:     NSBundle
-    let helperBundle:   NSBundle
+    private let helper: NSBundle
     
     // Controlls the login iteam and UserDefaults
     var enabled: Bool {
         didSet {
-            let flag = (self.enabled ? 1 : 0) as Boolean
-            if SMLoginItemSetEnabled(helperBundle.bundleIdentifier!, flag) == 0  {
-                NSLog("SMLoginItemSetEnabled failed")
+            if !SMLoginItemSetEnabled(helper.bundleIdentifier!, self.enabled) {
+                NSLog("SMLoginItemSetEnabled \(helper.bundleIdentifier!) failed")
+            } else {
+                NSUserDefaults.standardUserDefaults().setBool(self.enabled, forKey: Settings.launchOnStart.rawValue)
             }
-            
-            NSUserDefaults.standardUserDefaults().setBool(self.enabled, forKey: "launchOnStart")
         }
     }
     
     // Singleton Implementation
-    class var sharedController: LoginItemController {
+    class func sharedController() -> LoginItemController {
         struct Static {
             static let instance: LoginItemController = LoginItemController()
         }
         return Static.instance
     }
     
-    override init() {
-        self.mainBundle = NSBundle.mainBundle()
+    private override init() {
+        let url = NSURL(fileURLWithPath: NSBundle.mainBundle().bundlePath)
+            .URLByAppendingPathComponent("Contents/Library/LoginItems/BaristaHelper.app")!
         
-        let path = mainBundle.bundlePath.stringByAppendingPathComponent(
-            "Contents/Library/LoginItems/BaristaHelper.app")
-        self.helperBundle = NSBundle(path: path)!
+        self.helper = NSBundle(path: url.path!)!
+        self.enabled = NSUserDefaults.standardUserDefaults().boolForKey(Settings.launchOnStart.rawValue)
         
-        self.enabled = NSUserDefaults.standardUserDefaults().boolForKey("launchOnStart")
-        
+        // Register URL with Launch Services
+        if LSRegisterURL(url, true) != 0 {
+            NSLog("LSRegisterURL failed")
+        }
+
         super.init()
     }
 }
