@@ -420,7 +420,7 @@
 				);
 				INFOPLIST_FILE = BaristaHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = de.sadmac.BaristaHelper;
+				PRODUCT_BUNDLE_IDENTIFIER = de.sadmac.Barista.BaristaHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 2.3;
@@ -434,7 +434,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = BaristaHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = de.sadmac.BaristaHelper;
+				PRODUCT_BUNDLE_IDENTIFIER = de.sadmac.Barista.BaristaHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
