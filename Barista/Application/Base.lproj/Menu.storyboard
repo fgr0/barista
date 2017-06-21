@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13122.17"/>
     </dependencies>
     <scenes>
@@ -28,18 +29,6 @@
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" hidden="YES" id="snS-Ju-TtF"/>
-                        <menuItem title="Launch at Login" id="D8P-hQ-w91">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                            <connections>
-                                <binding destination="aU9-ww-G5R" name="value" keyPath="enabled" id="1hL-zj-2sx"/>
-                            </connections>
-                        </menuItem>
-                        <menuItem title="Activate on Launch" id="1ct-fp-fU9">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                            <connections>
-                                <binding destination="u6f-Ox-hdE" name="value" keyPath="values.shouldActivateOnLaunch" id="VDe-bM-ZdG"/>
-                            </connections>
-                        </menuItem>
                         <menuItem title="Allow Display Sleep" id="WY5-Pe-3M4">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
@@ -47,6 +36,12 @@
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="web-qz-Tjw"/>
+                        <menuItem title="Preferences…" id="BOF-NM-1cW">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="showPreferencesWindow:" target="Voe-Tx-rLC" id="COQ-nn-ioe"/>
+                            </connections>
+                        </menuItem>
                         <menuItem title="About Barista" id="5kV-Vb-QxS">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
@@ -66,7 +61,7 @@
                 </menu>
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Barista" customModuleProvider="target">
                     <connections>
-                        <outlet property="loginItemController" destination="aU9-ww-G5R" id="ZnI-fR-KaE"/>
+                        <outlet property="loginItemController" destination="aU9-ww-G5R" id="p4A-PF-80F"/>
                         <outlet property="menuController" destination="3Zv-yd-aJX" id="lQ9-ew-a2M"/>
                     </connections>
                 </customObject>
@@ -90,7 +85,6 @@
                                 <menu key="submenu" title="Barista" systemMenu="apple" id="uQy-DD-JDr">
                                     <items>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>

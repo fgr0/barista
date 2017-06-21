@@ -9,13 +9,17 @@
 /* Begin PBXBuildFile section */
 		811D15A61EE7548000B14631 /* PowerAssertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D15A51EE7548000B14631 /* PowerAssertion.swift */; };
 		8129093C1EDC750900072FC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE472EF19FF9E4C0089B49F /* AppDelegate.swift */; };
+		81CFBBEB1EFADC23008DFA81 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFBBEA1EFADC23008DFA81 /* PreferencesViewController.swift */; };
+		81E06BA21EE828D5002D1651 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E06BA01EE828D5002D1651 /* PreferencesWindowController.swift */; };
+		81E06BA51EE829C7002D1651 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81E06BA41EE829C7002D1651 /* Preferences.storyboard */; };
+		81E06BA71EE82AF3002D1651 /* PreferenceDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 81E06BA61EE82AF3002D1651 /* PreferenceDefaults.plist */; };
 		81E76B771EDCCD0600610950 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E76B761EDCCD0600610950 /* MenuController.swift */; };
 		9D1EA6A31A1B61540030C40F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1EA6A21A1B61540030C40F /* AppDelegate.swift */; };
 		9D1EA6A71A1B61540030C40F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D1EA6A61A1B61540030C40F /* Images.xcassets */; };
 		9D1EA6AA1A1B61540030C40F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D1EA6A81A1B61540030C40F /* Main.storyboard */; };
 		9D1EA6C01A1B62C80030C40F /* BaristaHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D1EA69E1A1B61540030C40F /* BaristaHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9DE472F419FF9E4C0089B49F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DE472F319FF9E4C0089B49F /* Images.xcassets */; };
-		9DE472F719FF9E4C0089B49F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DE472F519FF9E4C0089B49F /* Main.storyboard */; };
+		9DE472F719FF9E4C0089B49F /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DE472F519FF9E4C0089B49F /* Menu.storyboard */; };
 		9EBFC6D01A1CB30900D1B158 /* LoginItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBFC6CF1A1CB30900D1B158 /* LoginItemController.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +48,10 @@
 
 /* Begin PBXFileReference section */
 		811D15A51EE7548000B14631 /* PowerAssertion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PowerAssertion.swift; path = Barista/Application/PowerAssertion.swift; sourceTree = SOURCE_ROOT; };
+		81CFBBEA1EFADC23008DFA81 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		81E06BA01EE828D5002D1651 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PreferencesWindowController.swift; path = Barista/Preferences/PreferencesWindowController.swift; sourceTree = SOURCE_ROOT; };
+		81E06BA41EE829C7002D1651 /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
+		81E06BA61EE82AF3002D1651 /* PreferenceDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PreferenceDefaults.plist; sourceTree = "<group>"; };
 		81E76B761EDCCD0600610950 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		9D1EA69E1A1B61540030C40F /* BaristaHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaristaHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D1EA6A11A1B61540030C40F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -55,7 +63,7 @@
 		9DE472EE19FF9E4C0089B49F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DE472EF19FF9E4C0089B49F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9DE472F319FF9E4C0089B49F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		9DE472F619FF9E4C0089B49F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9DE472F619FF9E4C0089B49F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Menu.storyboard; sourceTree = "<group>"; };
 		9DE4730C19FF9E5B0089B49F /* Barista.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Barista.entitlements; sourceTree = "<group>"; };
 		9EBFC6CF1A1CB30900D1B158 /* LoginItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginItemController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,12 +89,22 @@
 		81E06B9D1EE825C1002D1651 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				9DE472F519FF9E4C0089B49F /* Main.storyboard */,
+				9DE472F519FF9E4C0089B49F /* Menu.storyboard */,
 				81E76B761EDCCD0600610950 /* MenuController.swift */,
 				9EBFC6CF1A1CB30900D1B158 /* LoginItemController.swift */,
 				811D15A51EE7548000B14631 /* PowerAssertion.swift */,
 			);
 			path = Application;
+			sourceTree = "<group>";
+		};
+		81E06B9F1EE8288B002D1651 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				81E06BA41EE829C7002D1651 /* Preferences.storyboard */,
+				81E06BA01EE828D5002D1651 /* PreferencesWindowController.swift */,
+				81CFBBEA1EFADC23008DFA81 /* PreferencesViewController.swift */,
+			);
+			path = Preferences;
 			sourceTree = "<group>";
 		};
 		9D1EA69F1A1B61540030C40F /* BaristaHelper */ = {
@@ -132,6 +150,7 @@
 			children = (
 				9DE472EF19FF9E4C0089B49F /* AppDelegate.swift */,
 				81E06B9D1EE825C1002D1651 /* Application */,
+				81E06B9F1EE8288B002D1651 /* Preferences */,
 				9DE472F319FF9E4C0089B49F /* Images.xcassets */,
 				9DE472ED19FF9E4C0089B49F /* Supporting Files */,
 			);
@@ -143,6 +162,7 @@
 			children = (
 				9DE4730C19FF9E5B0089B49F /* Barista.entitlements */,
 				9DE472EE19FF9E4C0089B49F /* Info.plist */,
+				81E06BA61EE82AF3002D1651 /* PreferenceDefaults.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -250,8 +270,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81E06BA51EE829C7002D1651 /* Preferences.storyboard in Resources */,
+				81E06BA71EE82AF3002D1651 /* PreferenceDefaults.plist in Resources */,
 				9DE472F419FF9E4C0089B49F /* Images.xcassets in Resources */,
-				9DE472F719FF9E4C0089B49F /* Main.storyboard in Resources */,
+				9DE472F719FF9E4C0089B49F /* Menu.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,8 +323,10 @@
 			files = (
 				81E76B771EDCCD0600610950 /* MenuController.swift in Sources */,
 				8129093C1EDC750900072FC3 /* AppDelegate.swift in Sources */,
+				81E06BA21EE828D5002D1651 /* PreferencesWindowController.swift in Sources */,
 				9EBFC6D01A1CB30900D1B158 /* LoginItemController.swift in Sources */,
 				811D15A61EE7548000B14631 /* PowerAssertion.swift in Sources */,
+				81CFBBEB1EFADC23008DFA81 /* PreferencesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,12 +349,12 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		9DE472F519FF9E4C0089B49F /* Main.storyboard */ = {
+		9DE472F519FF9E4C0089B49F /* Menu.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				9DE472F619FF9E4C0089B49F /* Base */,
 			);
-			name = Main.storyboard;
+			name = Menu.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

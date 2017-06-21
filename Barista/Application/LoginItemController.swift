@@ -10,9 +10,12 @@ import Cocoa
 import ServiceManagement
 
 class LoginItemController: NSObject {
-    private let helper: Bundle
+    private var helper: Bundle {
+        return Bundle(
+            url: Bundle.main.bundleURL.appendingPathComponent("Contents/Library/LoginItems/BaristaHelper.app"))!
+    }
     
-    @objc dynamic var enabled: Bool = false {
+    @objc var enabled: Bool = false {
         didSet {
             if !SMLoginItemSetEnabled(helper.bundleIdentifier! as CFString, enabled) {
                 NSLog("SMLoginItemSetEnabled to \(enabled) for \(helper.bundleIdentifier!) failed")
@@ -21,15 +24,10 @@ class LoginItemController: NSObject {
     }
     
     override init() {
-        let url = URL(fileURLWithPath: Bundle.main.bundlePath)
-            .appendingPathComponent("Contents/Library/LoginItems/BaristaHelper.app")
-        
-        self.helper = Bundle(path: url.path)!
-        
         super.init()
         
         // Register URL with Launch Services
-        if LSRegisterURL(url as CFURL, true) != 0 {
+        if LSRegisterURL(self.helper.bundleURL as CFURL, true) != 0 {
             NSLog("LSRegisterURL failed")
         }
     }

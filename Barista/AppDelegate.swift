@@ -16,32 +16,61 @@ struct Constants {
     
 }
 
-let prefDefaults: [String: AnyObject] = [
-    Constants.shouldActivateOnLaunch :  NSNumber(value: true),
-    Constants.shouldLaunchAtLogin :     NSNumber(value: true),
-    Constants.allowDisplaySleep :       NSNumber(value: false)
-]
-
-
 // MARK: -
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet var menuController: MenuController!
     @IBOutlet var loginItemController: LoginItemController!
     
-    // MARK: - Init
+    var preferenceWindowController: PreferencesWindowController?
+    
+    // MARK: - Initalization
     override init() {
-        // Setup default values for preferences
-        UserDefaults.standard.register(defaults: prefDefaults)
-        UserDefaults.standard.synchronize()
+        super.init()
+        
+        registerDefaults()
     }
     
-    // MARK: - NSApplicationDelegate Protocol
+    // MARK: - Launch
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
     }
     
+    // MARK: - Termination
     func applicationWillTerminate(_ aNotification: Notification) {
         
+    }
+    
+    // MARK: - Register UserDefaults
+    /// Load preference defaults from disk and register them with UserDefaults
+    func registerDefaults() {
+        guard let plist = Bundle.main.url(forResource: "PreferenceDefaults", withExtension: "plist"),
+            let defaults = NSDictionary(contentsOf: plist) as? [String: AnyObject]
+            else { NSLog("Unable to load Preference Defaults from Disk!"); return}
+        
+        UserDefaults.standard.register(defaults: defaults)
+        UserDefaults.standard.synchronize()
+    }
+    
+    // MARK: - Preference Window
+    @IBAction func showPreferencesWindow(_ sender: NSMenuItem) {
+        if self.preferenceWindowController == nil {
+            self.preferenceWindowController = PreferencesWindowController.defaultController()
+        }
+        
+        guard let prefWindow = self.preferenceWindowController?.window else { return }
+        
+        prefWindow.delegate = self
+        prefWindow.center()
+        prefWindow.makeKeyAndOrderFront(sender)
+        NSApp.activate(ignoringOtherApps: true)
+    }
+}
+
+// MARK: - Window Delegate Protocol
+extension AppDelegate: NSWindowDelegate {
+    func windowWillClose(_ notification: Notification) {
+        guard notification.object as? NSWindow == preferenceWindowController?.window else { return }
+        self.preferenceWindowController = nil
     }
 }

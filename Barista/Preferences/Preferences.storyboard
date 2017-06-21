@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Osj-oP-ZFM">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13122.17"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Window Controller-->
+        <scene sceneID="9uK-mZ-PNE">
+            <objects>
+                <windowController id="Osj-oP-ZFM" customClass="PreferencesWindowController" customModule="Barista" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="Zz6-Mg-kdM">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="425" y="461" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
+                    </window>
+                    <connections>
+                        <segue destination="uDs-vL-GiI" kind="relationship" relationship="window.shadowedContentViewController" id="Avh-sR-hdK"/>
+                    </connections>
+                </windowController>
+                <customObject id="AgH-hV-9D1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-175" y="-77"/>
+        </scene>
+        <!--Preferences View Controller-->
+        <scene sceneID="Fhp-7y-Weu">
+            <objects>
+                <viewController id="uDs-vL-GiI" customClass="PreferencesViewController" customModule="Barista" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="hgr-VC-Qd4">
+                        <rect key="frame" x="0.0" y="0.0" width="426" height="208"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="71j-oy-6n2">
+                                <rect key="frame" x="45" y="152" width="119" height="18"/>
+                                <buttonCell key="cell" type="check" title="Launch at Login" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="OzJ-0m-hm0">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PzZ-I2-rbP">
+                                <rect key="frame" x="45" y="129" width="336" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Automatically open Barista when you log into your Mac" id="8x4-ba-PVT">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="bUK-a9-8oR">
+                                <rect key="frame" x="45" y="63" width="138" height="18"/>
+                                <buttonCell key="cell" type="check" title="Activate on Launch" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="G5V-Lz-fHY">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <connections>
+                                        <binding destination="Pc3-cm-zhn" name="value" keyPath="values.shouldActivateOnLaunch" id="LRD-Hp-bZ2"/>
+                                    </connections>
+                                </buttonCell>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="11V-20-5rz">
+                                <rect key="frame" x="45" y="40" width="266" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Immediatly turn Barista on when launched  " id="O9D-Ul-JZQ">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="bUK-a9-8oR" firstAttribute="leading" secondItem="71j-oy-6n2" secondAttribute="leading" id="2zF-99-88D"/>
+                            <constraint firstItem="PzZ-I2-rbP" firstAttribute="top" secondItem="71j-oy-6n2" secondAttribute="bottom" constant="8" id="7aH-Xw-Sn7"/>
+                            <constraint firstItem="11V-20-5rz" firstAttribute="leading" secondItem="bUK-a9-8oR" secondAttribute="leading" id="Bzb-R2-qC3"/>
+                            <constraint firstAttribute="bottom" secondItem="11V-20-5rz" secondAttribute="bottom" constant="40" id="QFY-P4-gSL"/>
+                            <constraint firstItem="11V-20-5rz" firstAttribute="top" secondItem="bUK-a9-8oR" secondAttribute="bottom" constant="8" id="fXE-Bp-00K"/>
+                            <constraint firstItem="PzZ-I2-rbP" firstAttribute="centerX" secondItem="hgr-VC-Qd4" secondAttribute="centerX" id="itU-aX-5aH"/>
+                            <constraint firstItem="71j-oy-6n2" firstAttribute="top" secondItem="hgr-VC-Qd4" secondAttribute="top" constant="40" id="jNu-iJ-U4Y"/>
+                            <constraint firstItem="bUK-a9-8oR" firstAttribute="top" secondItem="PzZ-I2-rbP" secondAttribute="bottom" constant="50" id="mAz-08-jIZ"/>
+                            <constraint firstItem="71j-oy-6n2" firstAttribute="leading" secondItem="PzZ-I2-rbP" secondAttribute="leading" id="rEg-ld-0kZ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="launchAtLoginButton" destination="71j-oy-6n2" id="ctD-1J-z2p"/>
+                    </connections>
+                </viewController>
+                <customObject id="384-qe-RZm" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController representsSharedInstance="YES" id="Pc3-cm-zhn"/>
+            </objects>
+            <point key="canvasLocation" x="-175" y="286"/>
+        </scene>
+    </scenes>
+</document>
