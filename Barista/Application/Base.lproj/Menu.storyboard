@@ -31,9 +31,6 @@
                         <menuItem isSeparatorItem="YES" hidden="YES" id="snS-Ju-TtF"/>
                         <menuItem title="Allow Display Sleep" id="WY5-Pe-3M4">
                             <modifierMask key="keyEquivalentModifierMask"/>
-                            <connections>
-                                <binding destination="3Zv-yd-aJX" name="value" keyPath="assertion.allowDisplaySleep" id="s8X-4X-YJw"/>
-                            </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="web-qz-Tjw"/>
                         <menuItem title="Preferences…" id="BOF-NM-1cW">
@@ -71,6 +68,7 @@
                         <outlet property="appListItem" destination="3fV-VH-7G0" id="0VA-X7-tau"/>
                         <outlet property="appListSeparator" destination="snS-Ju-TtF" id="OM1-Pd-wZC"/>
                         <outlet property="appListSystem" destination="4mv-ji-RN2" id="mX2-vT-BQp"/>
+                        <outlet property="displaySleepItem" destination="WY5-Pe-3M4" id="XV4-uq-lZu"/>
                         <outlet property="menu" destination="57F-e1-8oq" id="Ksd-Mv-IRz"/>
                         <outlet property="stateItem" destination="A81-OZ-lqX" id="pIz-sg-rIv"/>
                     </connections>

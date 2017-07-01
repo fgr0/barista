@@ -20,6 +20,7 @@ class MenuController: NSObject {
     
     @IBOutlet weak var stateItem: NSMenuItem!
     @IBOutlet weak var activateItem: NSMenuItem!
+    @IBOutlet weak var displaySleepItem: NSMenuItem!
     
     @IBOutlet weak var appListItem: NSMenuItem!
     @IBOutlet weak var appListSystem: NSMenuItem!
@@ -41,6 +42,15 @@ class MenuController: NSObject {
             to: self,
             withKeyPath: "assertion.allowDisplaySleep",
             options: nil)
+        
+        displaySleepItem.bind(
+            NSBindingName.value,
+            to: self,
+            withKeyPath: "assertion.allowDisplaySleep",
+            options: [
+                NSBindingOption.conditionallySetsEnabled: true,
+                NSBindingOption.raisesForNotApplicableKeys: true
+            ])
         
         // Setup Status Bar
         self.statusBarItem.button!.title = "zZ"
