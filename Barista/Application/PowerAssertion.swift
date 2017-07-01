@@ -18,17 +18,20 @@ private struct AssertionDictionaryKey {
     static let ProcessName = "Process Name"
 }
 
+
 // MARK: -
 class PowerAssertion: NSObject {
     private var id: IOPMAssertionID
     
-    // MARK: -
+    // MARK: - Properties
     @objc dynamic var allowDisplaySleep: Bool {
         get {
-            let type = getAssertionProperty(kIOPMAssertionTypeKey) as! String
-            return type == kIOPMAssertionTypePreventUserIdleSystemSleep
+            return getAssertionProperty(kIOPMAssertionTypeKey) as! String == kIOPMAssertionTypePreventUserIdleSystemSleep
         }
         set(allow) {
+            // Update Details
+            self.details = PowerAssertion.makeDetailsString(displaySleep: allow, time: self.timeout)
+            
             // Type cannot be changed by just setting the property (bug?)
             // Workaround is to create a new Assertion with identical settings
             var props = IOPMAssertionCopyProperties(self.id).takeRetainedValue() as! Dictionary<String, CFTypeRef>
@@ -47,8 +50,7 @@ class PowerAssertion: NSObject {
     
     @objc dynamic var enabled: Bool {
         get {
-            let val = getAssertionProperty(kIOPMAssertionLevelKey) as! Int
-            return val == kIOPMAssertionLevelOn
+            return getAssertionProperty(kIOPMAssertionLevelKey) as! Int == kIOPMAssertionLevelOn
         }
         set(enabled) {
             let level = (enabled ? kIOPMAssertionLevelOn : kIOPMAssertionLevelOff) as CFNumber
@@ -56,20 +58,49 @@ class PowerAssertion: NSObject {
         }
     }
     
-    // MARK: - Initalizers
-    init(name: String, enabled: Bool, allowDisplaySleep: Bool) {
+    @objc dynamic var timeout: Int {
+        get {
+            return getAssertionProperty(kIOPMAssertionTimeoutKey) as! Int
+        }
+        set(timeout) {
+            self.details = PowerAssertion.makeDetailsString(displaySleep: self.allowDisplaySleep, time: timeout)
+            guard timeout >= 0 else { return }
+            setProperty(kIOPMAssertionTimeoutKey, value: timeout as CFNumber)
+        }
+    }
+    
+    private var details: String {
+        get {
+            return getAssertionProperty(kIOPMAssertionDetailsKey) as! String
+        }
+        set(details) {
+            setProperty(kIOPMAssertionDetailsKey, value: details as CFString)
+        }
+    }
+    
+    // MARK: - Life Cycle
+    convenience override init() {
+        self.init(enabled: false, allowDisplaySleep: false, timeout: 0)
+    }
+    
+    init(enabled: Bool, allowDisplaySleep: Bool, timeout: Int) {
         var aid = UInt32(kIOPMNullAssertionID)
         
-        let level = enabled ?
-            kIOPMAssertionLevelOn : kIOPMAssertionLevelOff
-        let type = allowDisplaySleep ?
-            kIOPMAssertionTypePreventUserIdleSystemSleep : kIOPMAssertionTypePreventUserIdleDisplaySleep
+        let name = "\(Bundle.main.object(forInfoDictionaryKey: "CFBundleName")!) Menubar Application" as CFString
+        let level = (enabled ? kIOPMAssertionLevelOn : kIOPMAssertionLevelOff) as CFNumber
+        let type = (allowDisplaySleep ?
+            kIOPMAssertionTypePreventUserIdleSystemSleep : kIOPMAssertionTypePreventUserIdleDisplaySleep) as CFString
         
-        if IOPMAssertionCreateWithName(
-            type as CFString,
-            UInt32(level),
-            name as CFString,
-            &aid) != kIOReturnSuccess {
+        var props = Dictionary<String, CFTypeRef>()
+        props[kIOPMAssertionNameKey] = name
+        props[kIOPMAssertionLevelKey] = level
+        props[kIOPMAssertionTypeKey] = type
+        props[kIOPMAssertionTimeoutActionKey] = kIOPMAssertionTimeoutActionTurnOff as CFTypeRef
+        props[kIOPMAssertionTimeoutKey] = timeout as CFNumber
+        props[kIOPMAssertionDetailsKey] = PowerAssertion.makeDetailsString(
+            displaySleep: allowDisplaySleep, time: timeout) as CFString
+        
+        if IOPMAssertionCreateWithProperties(props as CFDictionary, &aid) != kIOReturnSuccess {
             fatalError("didn't expect this not to work")
         }
         
@@ -80,7 +111,7 @@ class PowerAssertion: NSObject {
         IOPMAssertionRelease(self.id)
     }
     
-    // MARK: - Instance Methods
+    // MARK: - Helper
     fileprivate func getAssertionProperty(_ property: String) -> CFTypeRef? {
         let props = IOPMAssertionCopyProperties(self.id).takeRetainedValue() as! Dictionary<String, CFTypeRef>
         return props[property]
@@ -91,9 +122,13 @@ class PowerAssertion: NSObject {
         IOPMAssertionSetProperty(self.id, property as CFString, value)
     }
     
-}
-
-extension PowerAssertion {
-    // MARK: - System Wide Assertion Status
-    
+    fileprivate class func makeDetailsString(displaySleep: Bool, time: Int) -> String {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .abbreviated
+        
+        let s = displaySleep ? "Preventing sleep" : "Preventing display sleep"
+        let t = (time == 0) ? "forever" : "for \(formatter.string(from: Double(time))!)"
+        
+        return "\(s) \(t)"
+    }
 }

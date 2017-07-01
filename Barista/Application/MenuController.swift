@@ -32,8 +32,9 @@ class MenuController: NSObject {
         // Configure Assertion
         let enabled = UserDefaults.standard.bool(forKey: Constants.shouldActivateOnLaunch)
         let allowDisplaySleep = UserDefaults.standard.bool(forKey: Constants.allowDisplaySleep)
+        let timeout = 0
         
-        self.assertion = PowerAssertion(name: appName, enabled: enabled, allowDisplaySleep: allowDisplaySleep)
+        self.assertion = PowerAssertion(enabled: enabled, allowDisplaySleep: allowDisplaySleep, timeout: timeout)
         
         UserDefaults.standard.bind(
             NSBindingName(rawValue: Constants.allowDisplaySleep),
