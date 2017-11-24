@@ -11,16 +11,17 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    func applicationWillFinishLaunching(aNotification: NSNotification) {
+    // MARK: - NSApplicationDelegate Protocol
+    func applicationWillFinishLaunching(_ aNotification: Notification) {
         // Since Helper must reside in Bundle/Contents/Library/LoginItems
         // remove unnessesary path elements
-        let appPath = (NSURL(fileURLWithPath: NSBundle.mainBundle().bundlePath)
-            .URLByDeletingLastPathComponent?.URLByDeletingLastPathComponent?
-            .URLByDeletingLastPathComponent?.URLByDeletingLastPathComponent!.path)!
-        let appBundle = NSBundle(path: appPath)
+        let appPath = ((((NSURL(fileURLWithPath: Bundle.main.bundlePath) as NSURL)
+            .deletingLastPathComponent as NSURL?)?.deletingLastPathComponent as NSURL?)?
+            .deletingLastPathComponent?.deletingLastPathComponent().path)!
+        let appBundle = Bundle(path: appPath)
         var isRunning = false
         
-        for app in NSWorkspace.sharedWorkspace().runningApplications {
+        for app in NSWorkspace.shared.runningApplications {
             if app.bundleIdentifier == appBundle?.bundleIdentifier {
                 isRunning = true
                 break
@@ -28,16 +29,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         if !isRunning {
-            NSWorkspace.sharedWorkspace().launchApplication(appPath)
+            NSWorkspace.shared.launchApplication(appPath)
         }
         
-        NSApplication.sharedApplication().terminate(nil)
+        NSApplication.shared.terminate(nil)
     }
 
-    func applicationWillTerminate(aNotification: NSNotification) {
+    func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
-
-
 }
-

@@ -1,12 +1,87 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11129.15" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11129.15"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13122.17"/>
     </dependencies>
     <scenes>
         <!--Application-->
         <scene sceneID="JPo-4y-FX3">
             <objects>
+                <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <menu id="57F-e1-8oq">
+                    <items>
+                        <menuItem title="Barista Off" enabled="NO" id="A81-OZ-lqX">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Activate Barista" id="LEH-5o-EpL">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="setMode:" target="3Zv-yd-aJX" id="uYG-dq-QyA"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="NS1-e9-6v1"/>
+                        <menuItem title="Preventing Sleep" hidden="YES" enabled="NO" id="3fV-VH-7G0">
+                            <attributedString key="attributedTitle"/>
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="System Services" image="NSSmartBadgeTemplate" hidden="YES" enabled="NO" id="4mv-ji-RN2">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" hidden="YES" id="snS-Ju-TtF"/>
+                        <menuItem title="Launch at Login" id="D8P-hQ-w91">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <binding destination="aU9-ww-G5R" name="value" keyPath="enabled" id="1hL-zj-2sx"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Activate on Launch" id="1ct-fp-fU9">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <binding destination="u6f-Ox-hdE" name="value" keyPath="values.shouldActivateOnLaunch" id="VDe-bM-ZdG"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Allow Display Sleep" id="WY5-Pe-3M4">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <binding destination="3Zv-yd-aJX" name="value" keyPath="assertion.allowDisplaySleep" id="s8X-4X-YJw"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="web-qz-Tjw"/>
+                        <menuItem title="About Barista" id="5kV-Vb-QxS">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Quit" id="4sb-4s-VLi">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                    <connections>
+                        <outlet property="delegate" destination="3Zv-yd-aJX" id="Vsg-rv-Gpo"/>
+                    </connections>
+                </menu>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Barista" customModuleProvider="target">
+                    <connections>
+                        <outlet property="loginItemController" destination="aU9-ww-G5R" id="ZnI-fR-KaE"/>
+                        <outlet property="menuController" destination="3Zv-yd-aJX" id="lQ9-ew-a2M"/>
+                    </connections>
+                </customObject>
+                <customObject id="3Zv-yd-aJX" customClass="MenuController" customModule="Barista" customModuleProvider="target">
+                    <connections>
+                        <outlet property="activateItem" destination="LEH-5o-EpL" id="KpD-HP-rua"/>
+                        <outlet property="appListItem" destination="3fV-VH-7G0" id="0VA-X7-tau"/>
+                        <outlet property="appListSeparator" destination="snS-Ju-TtF" id="OM1-Pd-wZC"/>
+                        <outlet property="appListSystem" destination="4mv-ji-RN2" id="mX2-vT-BQp"/>
+                        <outlet property="menu" destination="57F-e1-8oq" id="Ksd-Mv-IRz"/>
+                        <outlet property="stateItem" destination="A81-OZ-lqX" id="pIz-sg-rIv"/>
+                    </connections>
+                </customObject>
+                <customObject id="aU9-ww-G5R" customClass="LoginItemController" customModule="Barista" customModuleProvider="target"/>
+                <userDefaultsController representsSharedInstance="YES" id="u6f-Ox-hdE"/>
                 <application id="hnw-xV-0zn" sceneMemberID="viewController">
                     <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
                         <items>
@@ -630,86 +705,11 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Barista" customModuleProvider="target">
-                    <connections>
-                        <outlet property="activeItem" destination="A81-OZ-lqX" id="Fui-Sg-ZW2"/>
-                        <outlet property="displaySleepItem" destination="WY5-Pe-3M4" id="Vk9-nh-T0d"/>
-                        <outlet property="loginItem" destination="D8P-hQ-w91" id="8lU-Sa-Xbp"/>
-                        <outlet property="menu" destination="57F-e1-8oq" id="b9B-8q-ZvW"/>
-                        <outlet property="toggleItem" destination="LEH-5o-EpL" id="Nak-0a-5rc"/>
-                    </connections>
-                </customObject>
-                <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <menu id="57F-e1-8oq">
-                    <items>
-                        <menuItem title="Barista Off" enabled="NO" id="A81-OZ-lqX">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                        </menuItem>
-                        <menuItem title="Turn Barista On" id="LEH-5o-EpL">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                        </menuItem>
-                        <menuItem isSeparatorItem="YES" id="NS1-e9-6v1"/>
-                        <menuItem title="Launch on Login" id="D8P-hQ-w91">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                        </menuItem>
-                        <menuItem title="Activate on Startup" id="1ct-fp-fU9">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                            <connections>
-                                <binding destination="u6f-Ox-hdE" name="value" keyPath="values.activateOnLaunch" id="Pz5-V9-pcv"/>
-                            </connections>
-                        </menuItem>
-                        <menuItem title="Allow Display Sleep" id="WY5-Pe-3M4">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                        </menuItem>
-                        <menuItem isSeparatorItem="YES" id="web-qz-Tjw"/>
-                        <menuItem title="About Barista" id="5kV-Vb-QxS">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                            <connections>
-                                <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
-                            </connections>
-                        </menuItem>
-                        <menuItem title="Quit Barista" id="4sb-4s-VLi">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                            <connections>
-                                <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
-                            </connections>
-                        </menuItem>
-                    </items>
-                </menu>
-                <userDefaultsController representsSharedInstance="YES" id="u6f-Ox-hdE"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
-        <!--Window Controller-->
-        <scene sceneID="R2V-B0-nI4">
-            <objects>
-                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-                    </window>
-                    <connections>
-                        <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
-                    </connections>
-                </windowController>
-                <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="75" y="250"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="hIz-AP-VOD">
-            <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="Barista" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </view>
-                </viewController>
-                <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="75" y="655"/>
-        </scene>
     </scenes>
+    <resources>
+        <image name="NSSmartBadgeTemplate" width="14" height="14"/>
+    </resources>
 </document>
