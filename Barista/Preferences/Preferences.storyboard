@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Osj-oP-ZFM">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Osj-oP-ZFM">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13122.17"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
@@ -19,6 +19,9 @@
                         <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
                         <value key="minSize" type="size" width="480" height="320"/>
                         <value key="maxSize" type="size" width="480" height="500"/>
+                        <connections>
+                            <outlet property="delegate" destination="Osj-oP-ZFM" id="VGN-eR-7Kr"/>
+                        </connections>
                     </window>
                     <connections>
                         <segue destination="9z5-fK-87E" kind="relationship" relationship="window.shadowedContentViewController" id="pD0-1e-1Y4"/>
@@ -33,29 +36,46 @@
             <objects>
                 <viewController id="9z5-fK-87E" customClass="PreferencesViewController" customModule="Barista" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="dgK-UL-YRR">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="308"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="305"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <imageView translatesAutoresizingMaskIntoConstraints="NO" id="NjJ-he-Oo6">
+                                <rect key="frame" x="20" y="221" width="64" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="8HU-jW-OM2"/>
+                                    <constraint firstAttribute="width" secondItem="NjJ-he-Oo6" secondAttribute="height" multiplier="1:1" id="axk-fT-aNn"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="NSApplicationIcon" id="nWX-9r-r6x"/>
+                            </imageView>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BCs-6U-Fcn">
+                                <rect key="frame" x="92" y="221" width="370" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Barista is a small Application that lives in your Menu Bar and controlls if you Mac can go to sleep." id="INF-BJ-ltv">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <tabView horizontalHuggingPriority="1" verticalHuggingPriority="1" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="Y4u-uH-soO">
-                                <rect key="frame" x="13" y="10" width="454" height="199"/>
+                                <rect key="frame" x="13" y="10" width="454" height="196"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
                                     <tabViewItem label="General" identifier="1" id="NiL-Ir-eVw">
                                         <view key="view" id="8Dh-a7-a1h">
-                                            <rect key="frame" x="10" y="33" width="434" height="153"/>
+                                            <rect key="frame" x="10" y="33" width="434" height="98"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="1G3-kZ-S5b">
-                                                    <rect key="frame" x="9" y="73" width="416" height="5"/>
+                                                    <rect key="frame" x="9" y="18" width="416" height="5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="416" id="jjb-Dv-rCI"/>
                                                     </constraints>
                                                 </box>
-                                                <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ej1-3z-oYG">
-                                                    <rect key="frame" x="122" y="97" width="191" height="36"/>
+                                                <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="1000" verticalHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ej1-3z-oYG">
+                                                    <rect key="frame" x="122" y="42" width="191" height="36"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ff6-WF-Gjv">
-                                                            <rect key="frame" x="-2" y="19" width="53" height="17"/>
+                                                            <rect key="frame" x="-2" y="0.0" width="53" height="36"/>
                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Startup:" id="mbX-9u-6Dp">
                                                                 <font key="font" metaFont="system"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -118,6 +138,9 @@
                                                             </customSpacing>
                                                         </stackView>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="191" id="dxT-ZK-3Yk"/>
+                                                    </constraints>
                                                     <visibilityPriorities>
                                                         <integer value="1000"/>
                                                         <integer value="1000"/>
@@ -130,6 +153,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="ej1-3z-oYG" firstAttribute="top" secondItem="8Dh-a7-a1h" secondAttribute="top" constant="20" symbolic="YES" id="KDr-i0-dRt"/>
+                                                <constraint firstAttribute="bottom" secondItem="1G3-kZ-S5b" secondAttribute="bottom" constant="20" symbolic="YES" id="Rkf-SI-VGh"/>
                                                 <constraint firstItem="1G3-kZ-S5b" firstAttribute="centerX" secondItem="8Dh-a7-a1h" secondAttribute="centerX" id="T1x-0b-brl"/>
                                                 <constraint firstItem="1G3-kZ-S5b" firstAttribute="top" secondItem="ej1-3z-oYG" secondAttribute="bottom" constant="21" id="Tpe-r7-zwV"/>
                                                 <constraint firstItem="ej1-3z-oYG" firstAttribute="centerX" secondItem="8Dh-a7-a1h" secondAttribute="centerX" id="mYH-6W-sSG"/>
@@ -138,29 +162,95 @@
                                     </tabViewItem>
                                     <tabViewItem label="Duration" identifier="2" id="bCG-Gp-77L">
                                         <view key="view" id="iuD-IN-qIZ">
-                                            <rect key="frame" x="10" y="33" width="434" height="153"/>
+                                            <rect key="frame" x="10" y="33" width="434" height="150"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="sBa-F7-uvQ">
+                                                    <rect key="frame" x="40" y="40" width="354" height="65"/>
+                                                    <subviews>
+                                                        <slider translatesAutoresizingMaskIntoConstraints="NO" id="RkA-hE-iz0" customClass="TimeIntervalSlider" customModule="Barista" customModuleProvider="target">
+                                                            <rect key="frame" x="21" y="21" width="312" height="24"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="21" id="P0y-oq-LNA"/>
+                                                                <constraint firstAttribute="width" constant="308" id="PTc-oZ-t8Z"/>
+                                                            </constraints>
+                                                            <sliderCell key="cell" continuous="YES" alignment="left" maxValue="12" doubleValue="4" tickMarkPosition="below" numberOfTickMarks="13" sliderType="linear" id="cOw-Jz-2sO" customClass="TimeIntervalSliderCell" customModule="Barista" customModuleProvider="target"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="showLabels" value="YES"/>
+                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="showInfinity" value="YES"/>
+                                                            </userDefinedRuntimeAttributes>
+                                                            <connections>
+                                                                <action selector="durationSliderChanged:" target="9z5-fK-87E" id="HeO-3d-5YE"/>
+                                                            </connections>
+                                                        </slider>
+                                                        <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="120" translatesAutoresizingMaskIntoConstraints="NO" id="4Od-6K-7SH">
+                                                            <rect key="frame" x="175" y="49" width="158" height="14"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="14" id="ap4-m5-Pu2"/>
+                                                                <constraint firstAttribute="width" constant="154" id="gqI-VK-yiy"/>
+                                                            </constraints>
+                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="1 hour" placeholderString="" id="UqY-WE-8Qp">
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                        </textField>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="65" id="FrY-EL-7LR"/>
+                                                        <constraint firstItem="RkA-hE-iz0" firstAttribute="centerX" secondItem="sBa-F7-uvQ" secondAttribute="centerX" id="HGv-oS-R2h"/>
+                                                        <constraint firstItem="RkA-hE-iz0" firstAttribute="top" secondItem="4Od-6K-7SH" secondAttribute="bottom" constant="6" id="OTH-4j-860"/>
+                                                        <constraint firstItem="RkA-hE-iz0" firstAttribute="top" secondItem="sBa-F7-uvQ" secondAttribute="top" constant="22" id="YRX-D3-gDD"/>
+                                                        <constraint firstAttribute="width" constant="354" id="bnL-hZ-SbL"/>
+                                                        <constraint firstAttribute="height" constant="65" id="c2e-zl-RE7"/>
+                                                        <constraint firstItem="4Od-6K-7SH" firstAttribute="leading" secondItem="RkA-hE-iz0" secondAttribute="trailing" constant="-154" id="oAv-Hu-NiB"/>
+                                                        <constraint firstAttribute="bottom" secondItem="RkA-hE-iz0" secondAttribute="bottom" constant="22" id="yMT-hI-mVr"/>
+                                                    </constraints>
+                                                </customView>
+                                                <button verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sZr-a5-Ts1">
+                                                    <rect key="frame" x="31" y="88" width="106" height="18"/>
+                                                    <buttonCell key="cell" type="radio" title="Turn off after:" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="rTK-Rp-4JR">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="defaultDurationTypeSelected:" target="9z5-fK-87E" id="QrC-Yq-QHk"/>
+                                                    </connections>
+                                                </button>
+                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="FTz-xh-2c2">
+                                                    <rect key="frame" x="18" y="113" width="172" height="17"/>
+                                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Default duration for Barista:" id="sC4-7U-zf1">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <button translatesAutoresizingMaskIntoConstraints="NO" id="pcq-UA-9wn">
+                                                    <rect key="frame" x="31" y="19" width="200" height="18"/>
+                                                    <buttonCell key="cell" type="radio" title="Turn off at the end of the day" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="FlT-1W-ehe">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="defaultDurationTypeSelected:" target="9z5-fK-87E" id="cqt-xR-FYo"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="FTz-xh-2c2" firstAttribute="leading" secondItem="sZr-a5-Ts1" secondAttribute="trailing" constant="-115" id="0bf-iS-lX3"/>
+                                                <constraint firstItem="sBa-F7-uvQ" firstAttribute="centerX" secondItem="iuD-IN-qIZ" secondAttribute="centerX" id="0vh-WA-dTN"/>
+                                                <constraint firstAttribute="bottom" secondItem="pcq-UA-9wn" secondAttribute="bottom" constant="20" symbolic="YES" id="3Bk-RB-xrh"/>
+                                                <constraint firstItem="FTz-xh-2c2" firstAttribute="leading" secondItem="iuD-IN-qIZ" secondAttribute="leading" constant="20" symbolic="YES" id="7dL-cw-dx7"/>
+                                                <constraint firstItem="sBa-F7-uvQ" firstAttribute="top" secondItem="sZr-a5-Ts1" secondAttribute="bottom" constant="-16" id="UfY-Od-Hw4"/>
+                                                <constraint firstItem="FTz-xh-2c2" firstAttribute="top" secondItem="iuD-IN-qIZ" secondAttribute="top" constant="20" symbolic="YES" id="WAq-5E-kuH"/>
+                                                <constraint firstItem="pcq-UA-9wn" firstAttribute="leading" secondItem="sZr-a5-Ts1" secondAttribute="leading" id="ufM-Lf-StU"/>
+                                                <constraint firstItem="sZr-a5-Ts1" firstAttribute="top" secondItem="FTz-xh-2c2" secondAttribute="bottom" constant="8" symbolic="YES" id="uzu-QS-ojo"/>
+                                                <constraint firstItem="pcq-UA-9wn" firstAttribute="top" secondItem="sBa-F7-uvQ" secondAttribute="bottom" constant="4" id="xY0-gz-yjs"/>
+                                            </constraints>
                                         </view>
                                     </tabViewItem>
                                 </tabViewItems>
                             </tabView>
-                            <imageView translatesAutoresizingMaskIntoConstraints="NO" id="NjJ-he-Oo6">
-                                <rect key="frame" x="20" y="224" width="64" height="64"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="64" id="8HU-jW-OM2"/>
-                                    <constraint firstAttribute="width" secondItem="NjJ-he-Oo6" secondAttribute="height" multiplier="1:1" id="axk-fT-aNn"/>
-                                </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="NSApplicationIcon" id="nWX-9r-r6x"/>
-                            </imageView>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BCs-6U-Fcn">
-                                <rect key="frame" x="92" y="224" width="370" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Barista is a small Application that lives in your Menu Bar and controlls if you Mac can go to sleep." id="INF-BJ-ltv">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="Y4u-uH-soO" secondAttribute="bottom" constant="20" symbolic="YES" id="1X0-cb-irY"/>
@@ -172,14 +262,17 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonTurnOffAfter" destination="sZr-a5-Ts1" id="I0s-a3-luk"/>
+                        <outlet property="buttonTurnOffMorning" destination="pcq-UA-9wn" id="7Ow-XP-3Ph"/>
                         <outlet property="launchAtLoginButton" destination="BAF-w1-IbD" id="JP9-pd-pcA"/>
+                        <outlet property="selectedTimeField" destination="4Od-6K-7SH" id="FCj-TQ-uOp"/>
+                        <outlet property="slider" destination="RkA-hE-iz0" id="nfX-k2-6eu"/>
                     </connections>
                 </viewController>
                 <customObject id="ffG-2C-gSP" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <userDefaultsController id="rGu-IB-Ml0"/>
                 <userDefaultsController representsSharedInstance="YES" id="WgO-NO-EhQ"/>
             </objects>
-            <point key="canvasLocation" x="-175" y="427"/>
+            <point key="canvasLocation" x="-175" y="461.5"/>
         </scene>
     </scenes>
     <resources>
