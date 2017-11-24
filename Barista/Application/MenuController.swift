@@ -33,9 +33,11 @@ class MenuController: NSObject {
         // Configure Assertion
         let enabled = UserDefaults.standard.bool(forKey: Constants.shouldActivateOnLaunch)
         let allowDisplaySleep = UserDefaults.standard.bool(forKey: Constants.allowDisplaySleep)
-        let timeout = 0
-        
+        let timeout = UserDefaults.standard.integer(forKey: Constants.defaultTimeout)
+
         self.assertion = PowerAssertion(enabled: enabled, allowDisplaySleep: allowDisplaySleep, timeout: timeout)
+        
+        UserDefaults.standard.addObserver(self, forKeyPath: Constants.defaultTimeout, options: [.new], context: nil)
         
         UserDefaults.standard.bind(
             NSBindingName(rawValue: Constants.allowDisplaySleep),
@@ -111,6 +113,17 @@ class MenuController: NSObject {
     @IBAction func setMode(_ sender: NSMenuItem) {
         assertion.enabled = !assertion.enabled
         self.statusBarItem.button?.appearsDisabled = !assertion.enabled
+    }
+    
+    // MARK: - Observing
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        guard object as? UserDefaults == UserDefaults.standard else { return }
+        
+        if keyPath == Constants.defaultTimeout {
+            if !assertion.enabled {
+                assertion.timeout = Int(UserDefaults.standard.integer(forKey: keyPath!))
+            }
+        }
     }
 }
 

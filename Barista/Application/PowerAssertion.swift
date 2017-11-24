@@ -63,8 +63,8 @@ class PowerAssertion: NSObject {
             return getAssertionProperty(kIOPMAssertionTimeoutKey) as! Int
         }
         set(timeout) {
-            self.details = PowerAssertion.makeDetailsString(displaySleep: self.allowDisplaySleep, time: timeout)
             guard timeout >= 0 else { return }
+            self.details = PowerAssertion.makeDetailsString(displaySleep: self.allowDisplaySleep, time: timeout)
             setProperty(kIOPMAssertionTimeoutKey, value: timeout as CFNumber)
         }
     }
@@ -124,7 +124,7 @@ class PowerAssertion: NSObject {
     
     fileprivate class func makeDetailsString(displaySleep: Bool, time: Int) -> String {
         let formatter = DateComponentsFormatter()
-        formatter.unitsStyle = .abbreviated
+        formatter.unitsStyle = .short
         
         let s = displaySleep ? "Preventing sleep" : "Preventing display sleep"
         let t = (time == 0) ? "forever" : "for \(formatter.string(from: Double(time))!)"

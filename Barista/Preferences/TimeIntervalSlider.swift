@@ -40,6 +40,10 @@ class TimeIntervalSlider: NSSlider {
                 }
             }
             
+            if value == 0 && showInfinity {
+                self.doubleValue = self.closestTickMarkValue(toValue: self.maxValue)
+            }
+            
             // VALUE COULD NOT BE MAPPED
             // TODO: Error Handling
         }
@@ -58,7 +62,7 @@ class TimeIntervalSlider: NSSlider {
 
             // VALUE COULD NOT BE MAPPED
             // TODO: Error Handling
-            return Double.infinity
+            return 0
         }
     }
     
