@@ -4,8 +4,8 @@
 <dict>
 	<key>defaultTimeout</key>
 	<integer>900</integer>
-	<key>allowDisplaySleep</key>
-	<false/>
+	<key>preventDisplaySleep</key>
+	<true/>
 	<key>shouldLaunchAtLogin</key>
 	<true/>
 	<key>shouldActivateOnLaunch</key>

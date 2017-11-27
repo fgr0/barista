@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		811D15A61EE7548000B14631 /* PowerAssertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D15A51EE7548000B14631 /* PowerAssertion.swift */; };
+		81041F821FCB587A0029C9A7 /* AssertionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81041F811FCB587A0029C9A7 /* AssertionController.swift */; };
+		811D15A61EE7548000B14631 /* Assertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D15A51EE7548000B14631 /* Assertion.swift */; };
 		8129093C1EDC750900072FC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE472EF19FF9E4C0089B49F /* AppDelegate.swift */; };
 		819C75D01FA3841500A72238 /* TimeIntervalSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819C75CF1FA3841500A72238 /* TimeIntervalSliderCell.swift */; };
 		81A04B181FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A04B171FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift */; };
@@ -50,7 +51,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		811D15A51EE7548000B14631 /* PowerAssertion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PowerAssertion.swift; path = Barista/Application/PowerAssertion.swift; sourceTree = SOURCE_ROOT; };
+		81041F811FCB587A0029C9A7 /* AssertionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssertionController.swift; sourceTree = "<group>"; };
+		811D15A51EE7548000B14631 /* Assertion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Assertion.swift; path = Barista/Application/Assertion.swift; sourceTree = SOURCE_ROOT; };
 		819C75CF1FA3841500A72238 /* TimeIntervalSliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalSliderCell.swift; sourceTree = "<group>"; };
 		81A04B171FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+SimpleFormat.swift"; sourceTree = "<group>"; };
 		81A04B191FA24F5A00C1B87B /* TimeIntervalSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimeIntervalSlider.swift; path = Barista/Preferences/TimeIntervalSlider.swift; sourceTree = SOURCE_ROOT; };
@@ -104,9 +106,10 @@
 			isa = PBXGroup;
 			children = (
 				9DE472F519FF9E4C0089B49F /* Menu.storyboard */,
+				811D15A51EE7548000B14631 /* Assertion.swift */,
+				81041F811FCB587A0029C9A7 /* AssertionController.swift */,
 				81E76B761EDCCD0600610950 /* MenuController.swift */,
 				9EBFC6CF1A1CB30900D1B158 /* LoginItemController.swift */,
-				811D15A51EE7548000B14631 /* PowerAssertion.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -340,12 +343,13 @@
 			files = (
 				81E76B771EDCCD0600610950 /* MenuController.swift in Sources */,
 				8129093C1EDC750900072FC3 /* AppDelegate.swift in Sources */,
+				81041F821FCB587A0029C9A7 /* AssertionController.swift in Sources */,
 				81E06BA21EE828D5002D1651 /* PreferencesWindowController.swift in Sources */,
 				819C75D01FA3841500A72238 /* TimeIntervalSliderCell.swift in Sources */,
 				81A04B1A1FA24F5A00C1B87B /* TimeIntervalSlider.swift in Sources */,
 				9EBFC6D01A1CB30900D1B158 /* LoginItemController.swift in Sources */,
 				81A04B181FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift in Sources */,
-				811D15A61EE7548000B14631 /* PowerAssertion.swift in Sources */,
+				811D15A61EE7548000B14631 /* Assertion.swift in Sources */,
 				81CFBBEB1EFADC23008DFA81 /* PreferencesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

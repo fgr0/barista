@@ -12,7 +12,7 @@ import Cocoa
 struct Constants {
     static let shouldActivateOnLaunch = "shouldActivateOnLaunch"
     static let shouldLaunchAtLogin = "shouldLaunchAtLogin"
-    static let allowDisplaySleep = "allowDisplaySleep"
+    static let preventDisplaySleep = "preventDisplaySleep"
     static let defaultTimeout = "defaultTimeout"
 }
 

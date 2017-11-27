@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13122.17"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13529"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -29,8 +29,15 @@
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" hidden="YES" id="snS-Ju-TtF"/>
-                        <menuItem title="Allow Display Sleep" id="WY5-Pe-3M4">
+                        <menuItem title="Prevent Display Sleep" id="WY5-Pe-3M4">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <binding destination="zJc-jN-0c1" name="value" keyPath="preventDisplaySleep" id="5lN-4g-D1W">
+                                    <dictionary key="options">
+                                        <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                    </dictionary>
+                                </binding>
+                            </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="web-qz-Tjw"/>
                         <menuItem title="Preferences…" id="BOF-NM-1cW">
@@ -68,12 +75,13 @@
                         <outlet property="appListItem" destination="3fV-VH-7G0" id="0VA-X7-tau"/>
                         <outlet property="appListSeparator" destination="snS-Ju-TtF" id="OM1-Pd-wZC"/>
                         <outlet property="appListSystem" destination="4mv-ji-RN2" id="mX2-vT-BQp"/>
-                        <outlet property="displaySleepItem" destination="WY5-Pe-3M4" id="XV4-uq-lZu"/>
+                        <outlet property="assertionController" destination="zJc-jN-0c1" id="85H-Ro-pyX"/>
                         <outlet property="menu" destination="57F-e1-8oq" id="Ksd-Mv-IRz"/>
                         <outlet property="stateItem" destination="A81-OZ-lqX" id="pIz-sg-rIv"/>
                     </connections>
                 </customObject>
                 <customObject id="aU9-ww-G5R" customClass="LoginItemController" customModule="Barista" customModuleProvider="target"/>
+                <customObject id="zJc-jN-0c1" customClass="AssertionController" customModule="Barista" customModuleProvider="target"/>
                 <userDefaultsController representsSharedInstance="YES" id="u6f-Ox-hdE"/>
                 <application id="hnw-xV-0zn" sceneMemberID="viewController">
                     <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
