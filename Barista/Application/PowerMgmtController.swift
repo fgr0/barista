@@ -28,11 +28,15 @@ class PowerMgmtController: NSObject {
         }
     }
     
+    deinit {
+        self.timer?.invalidate()
+    }
+    
     
     // MARK: - Managing Assertion
     private var assertion: Assertion?
     
-    @objc var isRunning: Bool {
+    var isRunning: Bool {
         get {
             guard let a = self.assertion else { return false }
             return a.enabled
@@ -47,7 +51,7 @@ class PowerMgmtController: NSObject {
             self.assertion?.details = PowerMgmtController.makeDetailsString(
                 displaySleep: self.preventDisplaySleep, time: (self.assertion?.timeout)!)
             
-            self.notifyObservers()
+            self.notifyAssertionChanged()
         }
     }
     
@@ -65,7 +69,11 @@ class PowerMgmtController: NSObject {
         self.assertion = Assertion(preventDisplaySleep: self.preventDisplaySleep, timeout: timeout)
         self.assertion?.details = details
         
-        self.notifyObservers()
+        if timeout > 0 {
+            startTimer(withTimeout: timeout)
+        }
+        
+        self.notifyAssertionChanged()
     }
 
     func stopAssertion() {
@@ -74,7 +82,9 @@ class PowerMgmtController: NSObject {
         self.assertion?.enabled = false
         self.assertion = nil
         
-        self.notifyObservers()
+        self.stopTimer()
+        
+        self.notifyAssertionChanged()
     }
     
     @IBAction func toggleAssertion(_ sender: NSMenuItem) {
@@ -83,6 +93,29 @@ class PowerMgmtController: NSObject {
         } else {
             self.startAssertion()
         }
+    }
+    
+    
+    // MARK: - Timer
+    private var timer: Timer?
+    
+    private func startTimer(withTimeout timeout: UInt) {
+        // Invalidate any running timer
+        if let t = timer {
+            t.invalidate()
+        }
+
+        self.timer = Timer.scheduledTimer(withTimeInterval: TimeInterval(timeout-15), repeats: false) {_ in
+            // TODO: Error Handling
+            //guard !self.isRunning else { return }
+
+            self.stopAssertion()
+            self.notifyAssertionTimedOut(after: timeout)
+        }
+    }
+    
+    private func stopTimer() {
+        self.timer?.invalidate()
     }
     
     
@@ -97,9 +130,15 @@ class PowerMgmtController: NSObject {
         observers = observers.filter { $0 !== observer }
     }
     
-    private func notifyObservers() {
+    private func notifyAssertionChanged() {
         for o in observers {
             o.assertionChanged(isRunning: self.isRunning, preventDisplaySleep: self.preventDisplaySleep)
+        }
+    }
+    
+    private func notifyAssertionTimedOut(after: UInt) {
+        for o in observers {
+            o.assertionTimedOut(after: after)
         }
     }
     
@@ -120,4 +159,17 @@ class PowerMgmtController: NSObject {
 // MARK: - Observation
 protocol PowerMgmtObserver: class {
     func assertionChanged(isRunning: Bool, preventDisplaySleep: Bool)
+    func assertionTimedOut(after: UInt)
+}
+
+// MARK: Observer Default Implementation
+extension PowerMgmtObserver {
+    func assertionChanged(isRunning: Bool, preventDisplaySleep: Bool) {
+        return
+    }
+    
+    func assertionTimedOut(after: UInt) {
+        print("timeout")
+        return
+    }
 }

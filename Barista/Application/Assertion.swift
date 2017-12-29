@@ -54,6 +54,12 @@ class Assertion {
         }
     }
     
+    var timeLeft: UInt {
+        get {
+            return getAssertionProperty("AssertTimeoutTimeLeft") as! UInt
+        }
+    }
+    
     var preventDisplaySleep: Bool {
         get {
             return getAssertionProperty(kIOPMAssertionTypeKey) as! String == kIOPMAssertionTypePreventUserIdleSystemSleep
@@ -95,12 +101,12 @@ class Assertion {
     
     
     // MARK: - Helper
-    fileprivate func getAssertionProperty(_ property: String) -> CFTypeRef? {
+     func getAssertionProperty(_ property: String) -> CFTypeRef? {
         let props = IOPMAssertionCopyProperties(self.id).takeRetainedValue() as! Dictionary<String, CFTypeRef>
         return props[property]
     }
     
-    fileprivate func setProperty(_ property: String, value: CFTypeRef) {
+    private func setProperty(_ property: String, value: CFTypeRef) {
         // TODO: Error Handling (Exceptions?)
         IOPMAssertionSetProperty(self.id, property as CFString, value)
     }

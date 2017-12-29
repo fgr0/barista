@@ -47,16 +47,6 @@ class MenuController: NSObject {
 extension MenuController: PowerMgmtObserver {
     func assertionChanged(isRunning: Bool, preventDisplaySleep: Bool) {
         self.statusBarItem.button?.appearsDisabled = !isRunning
-        
-        let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName")!
-        
-        if isRunning {
-            stateItem.title = "\(appName): On"
-            activateItem.title = "Turn \(appName) Off"
-        } else {
-            stateItem.title = "\(appName): Off"
-            activateItem.title = "Turn \(appName) On"
-        }
     }
 }
 
@@ -65,6 +55,15 @@ extension MenuController: PowerMgmtObserver {
 extension MenuController: NSMenuDelegate {
     func menuNeedsUpdate(_ menu: NSMenu) {
         guard menu == self.menu else { return }
-        return
+        
+        let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName")!
+        
+        if powerMgmtController.isRunning {
+            stateItem.title = "\(appName): On"
+            activateItem.title = "Turn \(appName) Off"
+        } else {
+            stateItem.title = "\(appName): Off"
+            activateItem.title = "Turn \(appName) On"
+        }
     }
 }
