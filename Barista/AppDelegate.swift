@@ -16,27 +16,25 @@ struct Constants {
     static let defaultTimeout = "defaultTimeout"
 }
 
+
 // MARK: -
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-    @IBOutlet var menuController: MenuController!
+    var preferenceWindowController: PreferencesWindowController?
     @IBOutlet var loginItemController: LoginItemController!
     
-    var preferenceWindowController: PreferencesWindowController?
     
-    // MARK: - Initalization
+    // MARK: - Lifecycle
     override init() {
         super.init()
         
         registerDefaults()
     }
     
-    // MARK: - Launch
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
     }
     
-    // MARK: - Termination
     func applicationWillTerminate(_ aNotification: Notification) {
         
     }

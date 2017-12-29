@@ -23,7 +23,7 @@ class MenuController: NSObject {
     @IBOutlet weak var appListSystem: NSMenuItem!
     @IBOutlet weak var appListSeparator: NSMenuItem!
     
-    @IBOutlet weak var assertionController: AssertionController!
+    @IBOutlet weak var powerMgmtController: PowerMgmtController!
     
     // MARK: - Setup
     override func awakeFromNib() {
@@ -31,37 +31,40 @@ class MenuController: NSObject {
         
         // Setup Status Bar
         self.statusBarItem.button!.title = "zZ"
-        self.statusBarItem.button?.appearsDisabled = !assertionController.isRunning
+        self.statusBarItem.button?.appearsDisabled = !powerMgmtController.isRunning
         self.statusBarItem.menu = menu
+        
+        powerMgmtController.addObserver(self)
     }
     
-
-
-    // MARK: - IB Actions
-    @IBAction func setMode(_ sender: NSMenuItem) {
-        if assertionController.isRunning {
-            assertionController.stopAssertion()
-        } else {
-            assertionController.startAssertion()
-        }
-        
-        self.statusBarItem.button?.appearsDisabled = !assertionController.isRunning
+    deinit {
+        powerMgmtController.removeObserver(self)
     }
 }
+
+
+// MARK: - PowerMgmtObserver Protocol
+extension MenuController: PowerMgmtObserver {
+    func assertionChanged(isRunning: Bool, preventDisplaySleep: Bool) {
+        self.statusBarItem.button?.appearsDisabled = !isRunning
+        
+        let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName")!
+        
+        if isRunning {
+            stateItem.title = "\(appName): On"
+            activateItem.title = "Turn \(appName) Off"
+        } else {
+            stateItem.title = "\(appName): Off"
+            activateItem.title = "Turn \(appName) On"
+        }
+    }
+}
+
 
 // MARK: - NSMenuDelegate Protocol
 extension MenuController: NSMenuDelegate {
     func menuNeedsUpdate(_ menu: NSMenu) {
         guard menu == self.menu else { return }
         return
-//        if assertion.enabled {
-//            stateItem.title = "\(appName): On"
-//            activateItem.title = "Turn \(appName) Off"
-//            statusBarItem.button?.appearsDisabled = false
-//        } else {
-//            stateItem.title = "\(appName): Off"
-//            activateItem.title = "Turn \(appName) On"
-//            statusBarItem.button?.appearsDisabled = true
-//        }
     }
 }

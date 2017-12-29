@@ -8,7 +8,8 @@
 
 import Cocoa
 
-class AssertionController: NSObject {
+
+class PowerMgmtController: NSObject {
     
     // MARK: - Lifecycle
     override func awakeFromNib() {
@@ -25,7 +26,6 @@ class AssertionController: NSObject {
         if UserDefaults.standard.bool(forKey: Constants.shouldActivateOnLaunch) {
             self.startAssertion()
         }
-        
     }
     
     
@@ -44,8 +44,10 @@ class AssertionController: NSObject {
             guard self.assertion != nil else { return }
             
             self.assertion?.preventDisplaySleep = self.preventDisplaySleep
-            self.assertion?.details = AssertionController.makeDetailsString(
+            self.assertion?.details = PowerMgmtController.makeDetailsString(
                 displaySleep: self.preventDisplaySleep, time: (self.assertion?.timeout)!)
+            
+            self.notifyObservers()
         }
     }
     
@@ -58,10 +60,12 @@ class AssertionController: NSObject {
         stopAssertion()
         
         // Create new assertion
-        let details = AssertionController.makeDetailsString(displaySleep: true, time: timeout)
+        let details = PowerMgmtController.makeDetailsString(displaySleep: true, time: timeout)
         
         self.assertion = Assertion(preventDisplaySleep: self.preventDisplaySleep, timeout: timeout)
         self.assertion?.details = details
+        
+        self.notifyObservers()
     }
 
     func stopAssertion() {
@@ -69,6 +73,34 @@ class AssertionController: NSObject {
         
         self.assertion?.enabled = false
         self.assertion = nil
+        
+        self.notifyObservers()
+    }
+    
+    @IBAction func toggleAssertion(_ sender: NSMenuItem) {
+        if self.assertion != nil && (self.assertion?.enabled)! {
+            self.stopAssertion()
+        } else {
+            self.startAssertion()
+        }
+    }
+    
+    
+    // MARK: - Observation
+    private var observers = [PowerMgmtObserver]()
+    
+    func addObserver(_ observer: PowerMgmtObserver) {
+        observers.append(observer)
+    }
+    
+    func removeObserver(_ observer: PowerMgmtObserver) {
+        observers = observers.filter { $0 !== observer }
+    }
+    
+    private func notifyObservers() {
+        for o in observers {
+            o.assertionChanged(isRunning: self.isRunning, preventDisplaySleep: self.preventDisplaySleep)
+        }
     }
     
     
@@ -82,4 +114,10 @@ class AssertionController: NSObject {
         
         return "\(s) \(t)"
     }
+}
+
+
+// MARK: - Observation
+protocol PowerMgmtObserver: class {
+    func assertionChanged(isRunning: Bool, preventDisplaySleep: Bool)
 }
