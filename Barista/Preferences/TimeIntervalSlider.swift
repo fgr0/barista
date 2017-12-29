@@ -120,18 +120,8 @@ class TimeIntervalSlider: NSSlider {
         guard at < self.numberOfTickMarks else { return nil }
         
         var label: NSTextField
-        if #available(OSX 10.12, *) {
-            label = NSTextField(labelWithString: text)
-            label.font = NSFont.systemFont(ofSize: 10.0)
-        } else {
-            label = NSTextField()
-            label.stringValue = text
-            label.textColor = NSColor.labelColor
-            label.font = NSFont.systemFont(ofSize: 10.0)
-            label.backgroundColor = NSColor.controlColor
-            label.isEditable = false
-            label.isBordered = false
-        }
+        label = NSTextField(labelWithString: text)
+        label.font = NSFont.systemFont(ofSize: 10.0)
         label.alignment = alignment
         label.sizeToFit()
         
