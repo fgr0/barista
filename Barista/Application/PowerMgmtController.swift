@@ -55,6 +55,21 @@ class PowerMgmtController: NSObject {
         }
     }
     
+    var timeout: UInt {
+        get {
+            guard let a = self.assertion else { return 0 }
+            return a.timeout
+        }
+    }
+    
+    var timeLeft: UInt? {
+        get {
+            guard let a = self.assertion else { return nil }
+            return a.timeLeft
+        }
+    }
+    
+    
     func startAssertion() {
         self.startAssertion(withTimeout: UInt(UserDefaults.standard.integer(forKey: Constants.defaultTimeout)))
     }
@@ -105,12 +120,12 @@ class PowerMgmtController: NSObject {
             t.invalidate()
         }
 
-        self.timer = Timer.scheduledTimer(withTimeInterval: TimeInterval(timeout-15), repeats: false) {_ in
+        self.timer = Timer.scheduledTimer(withTimeInterval: TimeInterval(timeout+5), repeats: false) {_ in
             // TODO: Error Handling
-            //guard !self.isRunning else { return }
+            guard !self.isRunning else { return }
 
-            self.stopAssertion()
             self.notifyAssertionTimedOut(after: timeout)
+            self.stopAssertion()
         }
     }
     
@@ -169,7 +184,6 @@ extension PowerMgmtObserver {
     }
     
     func assertionTimedOut(after: UInt) {
-        print("timeout")
         return
     }
 }

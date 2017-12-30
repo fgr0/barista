@@ -14,6 +14,9 @@
                         <menuItem title="Barista Off" enabled="NO" id="A81-OZ-lqX">
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
+                        <menuItem title="Time Remaining" hidden="YES" enabled="NO" id="YAZ-Sa-q2w">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
                         <menuItem title="Activate Barista" id="LEH-5o-EpL">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
@@ -77,6 +80,7 @@
                         <outlet property="menu" destination="57F-e1-8oq" id="Ksd-Mv-IRz"/>
                         <outlet property="powerMgmtController" destination="zJc-jN-0c1" id="85H-Ro-pyX"/>
                         <outlet property="stateItem" destination="A81-OZ-lqX" id="pIz-sg-rIv"/>
+                        <outlet property="timeRemainingItem" destination="YAZ-Sa-q2w" id="Zro-PV-yte"/>
                     </connections>
                 </customObject>
                 <customObject id="aU9-ww-G5R" customClass="LoginItemController" customModule="Barista" customModuleProvider="target"/>

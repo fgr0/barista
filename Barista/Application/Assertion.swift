@@ -46,17 +46,12 @@ class Assertion {
     
     var enabled: Bool {
         get {
+            guard getAssertionProperty("AssertTimedOutWhen") == nil else { return false }
             return getAssertionProperty(kIOPMAssertionLevelKey) as! Int == kIOPMAssertionLevelOn
         }
         set(enabled) {
             let level = (enabled ? kIOPMAssertionLevelOn : kIOPMAssertionLevelOff) as CFNumber
             setProperty(kIOPMAssertionLevelKey, value: level)
-        }
-    }
-    
-    var timeLeft: UInt {
-        get {
-            return getAssertionProperty("AssertTimeoutTimeLeft") as! UInt
         }
     }
     
@@ -90,6 +85,22 @@ class Assertion {
         }
     }
     
+    var timeLeft: UInt? {
+        get {
+            guard self.timeout != 0 else { return nil }
+            
+            // Calculate timeLeft based on the value inside the assertion dict and the time that value was updated
+            let lastValue = getAssertionProperty("AssertTimeoutTimeLeft") as! Int
+            let timeUpdated = getAssertionProperty("AssertTimeoutUpdateTime") as! Date
+            let timeLeft = lastValue + Int(timeUpdated.timeIntervalSinceNow)
+            if timeLeft > 0 {
+                return UInt(timeLeft)
+            } else {
+                return 0
+            }
+        }
+    }
+    
     var details: String {
         get {
             return getAssertionProperty(kIOPMAssertionDetailsKey) as! String
@@ -101,7 +112,7 @@ class Assertion {
     
     
     // MARK: - Helper
-     func getAssertionProperty(_ property: String) -> CFTypeRef? {
+    private func getAssertionProperty(_ property: String) -> CFTypeRef? {
         let props = IOPMAssertionCopyProperties(self.id).takeRetainedValue() as! Dictionary<String, CFTypeRef>
         return props[property]
     }

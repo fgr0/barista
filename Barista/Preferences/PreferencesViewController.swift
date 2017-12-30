@@ -18,7 +18,7 @@ class PreferencesViewController: NSViewController {
     @IBOutlet weak var slider: TimeIntervalSlider!
     @IBOutlet weak var selectedTimeField: NSTextField!
     
-    @objc dynamic private var defaultTimeout: Double = 0
+    @objc dynamic private var defaultTimeout: Int = 0
     
     // MARK: - View Events
     override func viewDidLoad() {
@@ -28,14 +28,14 @@ class PreferencesViewController: NSViewController {
         slider.labelForTickMarks = [0, 3, 6, 9, 12]
         
         // Register Timeout with User Defaults
-        self.defaultTimeout = UserDefaults.standard.double(forKey: Constants.defaultTimeout)
+        self.defaultTimeout = UserDefaults.standard.integer(forKey: Constants.defaultTimeout)
         UserDefaults.standard.bind(
             NSBindingName(rawValue: Constants.defaultTimeout),
             to: self,
             withKeyPath: "defaultTimeout",
             options: nil)
         
-        slider.timeValue = self.defaultTimeout
+        slider.timeValue = Double(self.defaultTimeout)
 
         self.launchAtLoginButton.bind(
             NSBindingName("value"),
@@ -69,7 +69,7 @@ class PreferencesViewController: NSViewController {
         case .leftMouseDragged:
             selectedTimeField.stringValue =
                 sender.timeValue > 0 ? sender.timeValue.simpleFormat()! : sender.infinityLabel
-            self.defaultTimeout = sender.timeValue
+            self.defaultTimeout = Int(sender.timeValue/60) * 60
         case .leftMouseUp:
             selectedTimeField.isHidden = true
         default:
