@@ -52,6 +52,7 @@ class MenuController: NSObject {
         stateItem.title     = "\(appName): " + (powerMgmtController.isRunning ? "On" : "Off")
         self.updateTimeRemaining()
         activateItem.title  = "Turn \(appName) " + (powerMgmtController.isRunning ? "Off" : "On")
+        self.updateAppList()
     }
     
     func updateTimeRemaining() {
@@ -66,13 +67,42 @@ class MenuController: NSObject {
             guard self.timer == nil else { return }
 
             self.timer = Timer(timeInterval: 1.0, repeats: true) {_ in
-                self.updateTimeRemaining()
+                self.updateMenu()
             }
             RunLoop.current.add(self.timer!, forMode: RunLoopMode.eventTrackingRunLoopMode)
         } else {
             timeRemainingItem.isHidden = true
             self.timer?.invalidate()
             self.timer = nil
+        }
+    }
+    
+    func updateAppList() {
+        for item in menu.items {
+            if item.tag == 1 {
+                menu.removeItem(item)
+            }
+        }
+        
+        appListItem.isHidden = true
+        appListSeparator.isHidden = true
+        
+        guard let apps = powerMgmtController.checkAssertingApplications() else { return }
+        
+        appListItem.isHidden = false
+        appListSeparator.isHidden = false
+        
+        let index = menu.index(of: appListSeparator)
+        
+        for app in apps {
+            let appItem = NSMenuItem()
+            appItem.tag = 1
+            appItem.title = app.app.localizedName!
+            appItem.image = app.app.icon
+            appItem.image?.size = CGSize(width: 16, height: 16)
+            appItem.representedObject = app
+            
+            menu.insertItem(appItem, at: index)
         }
     }
 }

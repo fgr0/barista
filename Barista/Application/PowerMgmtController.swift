@@ -33,7 +33,7 @@ class PowerMgmtController: NSObject {
     }
     
     
-    // MARK: - Managing Assertion
+    // MARK: - Managing the Assertion
     private var assertion: Assertion?
     
     var isRunning: Bool {
@@ -111,6 +111,45 @@ class PowerMgmtController: NSObject {
     }
     
     
+    // MARK: - Assertioning Applications
+    var assertingApps: [AssertingApp]?
+    
+    func checkAssertingApplications() -> [AssertingApp]? {
+        guard let pids = Assertion.assertionsByProcess() else { return nil }
+        
+        var aP = Set<AssertingApp>()
+        
+        pids.forEach { (pid, assertions) in
+            guard let app = NSRunningApplication(processIdentifier: pid_t(pid)) else { return }
+            #if RELEASE
+            guard app != NSRunningApplication.current else { return }
+            #endif
+            
+            var prevDisplaySleep = false
+            var skip = false
+            
+            assertions.forEach { assertion in
+                guard let s = assertion["AssertionTrueType"] as? String else { return }
+                
+                switch s {
+                case "PreventUserIdleDisplaySleep":
+                    prevDisplaySleep = true
+                case "PreventUserIdleSystemSleep": break
+                default:
+                    // We don't care about other assertion types atm
+                    skip = true
+                }
+            }
+            
+            if !skip {
+                aP.update(with: AssertingApp(app: app, preventsDisplaySleep: prevDisplaySleep))
+            }
+        }
+        
+        return aP.isEmpty ? nil : Array(aP)
+    }
+    
+    
     // MARK: - Timer
     private var timer: Timer?
     
@@ -123,7 +162,7 @@ class PowerMgmtController: NSObject {
         self.timer = Timer.scheduledTimer(withTimeInterval: TimeInterval(timeout+5), repeats: false) {_ in
             // TODO: Error Handling
             guard !self.isRunning else { return }
-
+            
             self.notifyAssertionTimedOut(after: timeout)
             self.stopAssertion()
         }
@@ -167,6 +206,24 @@ class PowerMgmtController: NSObject {
         let t = (time == 0) ? "forever" : "for \(formatter.string(from: Double(time))!)"
         
         return "\(s) \(t)"
+    }
+}
+
+
+// MARK: - AssertingApp Struct
+struct AssertingApp {
+    let app: NSRunningApplication
+    let preventsDisplaySleep: Bool
+}
+
+// MARK: Equatable Implementation
+extension AssertingApp: Hashable {
+    var hashValue: Int {
+        return self.app.hashValue ^ self.preventsDisplaySleep.hashValue &* 16777619
+    }
+    static func ==(lhs: AssertingApp, rhs: AssertingApp) -> Bool {
+        return (lhs.app == rhs.app &&
+            lhs.preventsDisplaySleep == rhs.preventsDisplaySleep)
     }
 }
 

@@ -42,7 +42,7 @@ class Assertion {
     
     
     // MARK: - Assertion Properties
-    private(set) var id: IOPMAssertionID
+    private var id: IOPMAssertionID
     
     var enabled: Bool {
         get {
@@ -108,6 +108,18 @@ class Assertion {
         set(details) {
             setProperty(kIOPMAssertionDetailsKey, value: details as CFString)
         }
+    }
+    
+    
+    // MARK: - System Wide Assertions
+    class func assertionsByProcess() -> Dictionary<Int, Array<Dictionary<String, Any>>>? {
+        var assertionsByPID: Unmanaged<CFDictionary>?
+        
+        if IOPMCopyAssertionsByProcess(&assertionsByPID) != kIOReturnSuccess {
+            fatalError("o.o")
+        }
+        
+        return assertionsByPID?.takeRetainedValue() as? [Int: [[String: Any]]]
     }
     
     
