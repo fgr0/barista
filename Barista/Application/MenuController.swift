@@ -56,17 +56,10 @@ class MenuController: NSObject {
     
     func updateTimeRemaining() {
         if let tl = powerMgmtController.timeLeft, tl > 0 {
-            // Substract 0.5 'seconds' from the TimeInterval to ensure maxUnitCount of 2
-            let timeLeft = TimeInterval(Double(tl)-0.5)
-            
-            let formatter = DateComponentsFormatter()
-            formatter.allowedUnits = [.hour, .minute, .second]
-            formatter.unitsStyle = .short
-            formatter.includesTimeRemainingPhrase = true
-            formatter.maximumUnitCount = 2
-            //formatter.zeroFormattingBehavior = .pad
-            
-            timeRemainingItem.title = formatter.string(from: timeLeft)!
+            timeRemainingItem.title = TimeInterval(tl).simpleFormat(style: .short,
+                                                                    units: [.day, .hour, .minute, .second],
+                                                                    maxCount: 2,
+                                                                    timeRemaining: true)!
             timeRemainingItem.isHidden = false
             
             // While timeRemaining is shown, live-update its title

@@ -100,7 +100,7 @@ class TimeIntervalSlider: NSSlider {
         
         if showLabels {
             for m in self.labelForTickMarks {
-                let text = self.timeIntervals[m].simpleFormat(.short)!
+                let text = self.timeIntervals[m].simpleFormat(style: .short)!
                 let label = self.createLabelForTickMark(m, withString: text)!
                 labels.append(label)
                 self.superview?.addSubview(label)

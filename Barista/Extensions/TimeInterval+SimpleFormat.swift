@@ -10,16 +10,15 @@ import Foundation
 
 extension TimeInterval {
     /// Creates a simple human readable string for the time interval
-    func simpleFormat(_ style: DateComponentsFormatter.UnitsStyle = .full,
-                      allowedUnits: NSCalendar.Unit = [.day, .hour, .minute],
-                      maxUnitCount: Int = 3, padZeros: Bool = false) -> String? {
+    func simpleFormat(style: DateComponentsFormatter.UnitsStyle = .full,
+                      units: NSCalendar.Unit = [.day, .hour, .minute],
+                      maxCount: Int = 2,
+                      timeRemaining: Bool = false) -> String? {
         let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = allowedUnits
+        formatter.allowedUnits = units
         formatter.unitsStyle = style
-        formatter.maximumUnitCount = maxUnitCount
-        if padZeros {
-            formatter.zeroFormattingBehavior = .pad
-        }
+        formatter.maximumUnitCount = maxCount
+        formatter.includesTimeRemainingPhrase = timeRemaining
         
         return formatter.string(from: self)
     }
