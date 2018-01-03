@@ -152,9 +152,9 @@ class PowerMgmtController: NSObject {
     
     
     // MARK: - Information about Global Assertions
-    var assertingApps: [AssertingApp]?
+    var assertingApps: [(NSRunningApplication, [Assertion])]?
     
-    func assertionsByApp() -> [AssertingApp]? {
+    func assertionsByApp() -> [(NSRunningApplication, [Assertion])]? {
         var assertionsByProcess: Unmanaged<CFDictionary>?
         
         if IOPMCopyAssertionsByProcess(&assertionsByProcess) != kIOReturnSuccess {
@@ -163,7 +163,7 @@ class PowerMgmtController: NSObject {
         
         guard let pids = assertionsByProcess?.takeRetainedValue() as? [Int: [[String: Any]]] else { return nil }
         
-        var aP = Set<AssertingApp>()
+        var aP = [(NSRunningApplication, [Assertion])]()
         
         pids.forEach { (pid, assertions) in
             guard let app = NSRunningApplication(processIdentifier: pid_t(pid)) else { return }
@@ -171,28 +171,17 @@ class PowerMgmtController: NSObject {
             guard app != NSRunningApplication.current else { return }
             #endif
             
-            var prevDisplaySleep = false
-            var skip = false
+            var list = [Assertion]()
             
             assertions.forEach { assertion in
-                guard let s = assertion["AssertionTrueType"] as? String else { return }
-                
-                switch s {
-                case "PreventUserIdleDisplaySleep":
-                    prevDisplaySleep = true
-                case "PreventUserIdleSystemSleep": break
-                default:
-                    // We don't care about other assertion types atm
-                    skip = true
-                }
+                guard let a = Assertion(dict: assertion) else { return }
+                list.append(a)
             }
             
-            if !skip {
-                aP.update(with: AssertingApp(app: app, preventsDisplaySleep: prevDisplaySleep))
-            }
+            aP.append((app, list))
         }
         
-        return aP.isEmpty ? nil : Array(aP)
+        return aP
     }
     
     
@@ -268,20 +257,48 @@ class PowerMgmtController: NSObject {
 }
 
 
-// MARK: - AssertingApp Struct
-struct AssertingApp {
-    let app: NSRunningApplication
+// MARK: - Assertion Struct
+struct Assertion {
+    let aid: IOPMAssertionID
     let preventsDisplaySleep: Bool
+    let details: String?
+    let timeStarted: Date
+    let timeout: UInt
+    
+    var timeLeft: UInt? {
+        guard self.timeout > 0 else { return nil }
+        return UInt(-self.timeStarted.addingTimeInterval(TimeInterval(self.timeout)).timeIntervalSinceNow)
+    }
+    
+    init?(dict: [String: Any]) {
+        self.aid = dict["AssertionId"] as! IOPMAssertionID
+        self.details = dict[kIOPMAssertionDetailsKey] as? String
+        self.timeStarted = (dict["AssertStartWhen"] as? Date)!
+        self.timeout = UInt((dict[kIOPMAssertionTimeoutKey] as? Int) ?? 0)
+        
+        guard let s = dict["AssertionTrueType"] as? String else { return nil }
+        
+        var pds = false
+        switch s {
+        case "PreventUserIdleDisplaySleep":
+            pds = true
+        case "PreventUserIdleSystemSleep": break
+        default:
+            // We don't care about other assertion types atm
+            pds = false
+        }
+        
+        self.preventsDisplaySleep = pds
+    }
 }
 
 // MARK: Equatable Implementation
-extension AssertingApp: Hashable {
+extension Assertion: Hashable {
     var hashValue: Int {
-        return self.app.hashValue ^ self.preventsDisplaySleep.hashValue &* 16777619
+        return Int(self.aid)
     }
-    static func ==(lhs: AssertingApp, rhs: AssertingApp) -> Bool {
-        return (lhs.app == rhs.app &&
-            lhs.preventsDisplaySleep == rhs.preventsDisplaySleep)
+    static func ==(lhs: Assertion, rhs: Assertion) -> Bool {
+        return (lhs.aid == rhs.aid)
     }
 }
 

@@ -80,11 +80,11 @@ class MenuController: NSObject {
             
             let index = menu.index(of: appListSeparator)
             
-            for app in apps {
+            for (app, list) in apps {
                 let appItem = NSMenuItem()
                 appItem.tag = 1
-                appItem.title = app.app.localizedName!
-                appItem.image = app.app.icon
+                appItem.title = app.localizedName!
+                appItem.image = app.icon
                 appItem.image?.size = CGSize(width: 16, height: 16)
                 appItem.representedObject = app
                 appItem.target = self
@@ -97,12 +97,12 @@ class MenuController: NSObject {
 
     // MARK: - Actions
     @objc func applicationAction(_ sender: NSMenuItem) {
-        guard let app = sender.representedObject as? AssertingApp else { return }
+        guard let app = sender.representedObject as? NSRunningApplication else { return }
         
         if let cmdKey = NSApp.currentEvent?.modifierFlags.contains(.command), cmdKey {
-            app.app.terminate()
+            app.terminate()
         } else {
-            app.app.activate(options: [.activateIgnoringOtherApps])
+            app.activate(options: [.activateIgnoringOtherApps])
         }
     }
 }
