@@ -26,7 +26,8 @@ class MenuController: NSObject {
     
     @IBOutlet weak var powerMgmtController: PowerMgmtController!
     
-    // MARK: - Setup
+    
+    // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -40,6 +41,7 @@ class MenuController: NSObject {
     
     deinit {
         powerMgmtController.removeObserver(self)
+        timer?.invalidate()
     }
 
     
@@ -49,66 +51,52 @@ class MenuController: NSObject {
     func updateMenu() {
         let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName")!
         
+        // Set Standart Elements
         stateItem.title     = "\(appName): " + (powerMgmtController.isRunning ? "On" : "Off")
-        self.updateTimeRemaining()
+        timeRemainingItem.isHidden = true
         activateItem.title  = "Turn \(appName) " + (powerMgmtController.isRunning ? "Off" : "On")
-        self.updateAppList()
-    }
-    
-    func updateTimeRemaining() {
-        if let tl = powerMgmtController.timeLeft, tl > 0 {
-            timeRemainingItem.title = TimeInterval(tl).simpleFormat(style: .short,
-                                                                    units: [.day, .hour, .minute, .second],
-                                                                    maxCount: 2,
-                                                                    timeRemaining: true)!
-            timeRemainingItem.isHidden = false
-            
-            // While timeRemaining is shown, live-update its title
-            guard self.timer == nil else { return }
-
-            self.timer = Timer(timeInterval: 1.0, repeats: true) {_ in
-                self.updateMenu()
-            }
-            RunLoop.current.add(self.timer!, forMode: RunLoopMode.eventTrackingRunLoopMode)
-        } else {
-            timeRemainingItem.isHidden = true
-            self.timer?.invalidate()
-            self.timer = nil
-        }
-    }
-    
-    func updateAppList() {
+        
+        appListItem.isHidden = true
+        appListSeparator.isHidden = true
+        
         for item in menu.items {
             if item.tag == 1 {
                 menu.removeItem(item)
             }
         }
         
-        appListItem.isHidden = true
-        appListSeparator.isHidden = true
+        // Update Time Remaining
+        if let tl = powerMgmtController.timeLeft, tl > 0 {
+            let title = TimeInterval(tl).simpleFormat(style: .short, units: [.day, .hour, .minute, .second],
+                                                      maxCount: 2, timeRemaining: true)!
+            timeRemainingItem.title = title
+            timeRemainingItem.isHidden = false
+        }
         
-        guard let apps = powerMgmtController.checkAssertingApplications() else { return }
-        
-        appListItem.isHidden = false
-        appListSeparator.isHidden = false
-        
-        let index = menu.index(of: appListSeparator)
-        
-        for app in apps {
-            let appItem = NSMenuItem()
-            appItem.tag = 1
-            appItem.title = app.app.localizedName!
-            appItem.image = app.app.icon
-            appItem.image?.size = CGSize(width: 16, height: 16)
-            appItem.representedObject = app
-            appItem.target = self
-            appItem.action = #selector(applicationAction(sender:))
-            menu.insertItem(appItem, at: index)
+        // Update List of Apps
+        if let apps = powerMgmtController.checkAssertingApplications() {
+            appListItem.isHidden = false
+            appListSeparator.isHidden = false
+            
+            let index = menu.index(of: appListSeparator)
+            
+            for app in apps {
+                let appItem = NSMenuItem()
+                appItem.tag = 1
+                appItem.title = app.app.localizedName!
+                appItem.image = app.app.icon
+                appItem.image?.size = CGSize(width: 16, height: 16)
+                appItem.representedObject = app
+                appItem.target = self
+                appItem.action = #selector(applicationAction(_:))
+                menu.insertItem(appItem, at: index)
+            }
         }
     }
-    
+
+
     // MARK: - Actions
-    @objc func applicationAction(sender: NSMenuItem) {
+    @objc func applicationAction(_ sender: NSMenuItem) {
         guard let app = sender.representedObject as? AssertingApp else { return }
         
         if let cmdKey = NSApp.currentEvent?.modifierFlags.contains(.command), cmdKey {
@@ -132,7 +120,17 @@ extension MenuController: PowerMgmtObserver {
 extension MenuController: NSMenuDelegate {
     func menuNeedsUpdate(_ menu: NSMenu) {
         guard menu == self.menu else { return }
-        
         self.updateMenu()
+    }
+    
+    func menuWillOpen(_ menu: NSMenu) {
+        guard self.timer == nil else { return }
+        self.timer = Timer(timeInterval: 1.0, repeats: true) { _ in self.updateMenu() }
+        RunLoop.current.add(self.timer!, forMode: RunLoopMode.eventTrackingRunLoopMode)
+    }
+    
+    func menuDidClose(_ menu: NSMenu) {
+        self.timer?.invalidate()
+        self.timer = nil
     }
 }
