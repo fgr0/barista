@@ -101,8 +101,20 @@ class MenuController: NSObject {
             appItem.image = app.app.icon
             appItem.image?.size = CGSize(width: 16, height: 16)
             appItem.representedObject = app
-            
+            appItem.target = self
+            appItem.action = #selector(applicationAction(sender:))
             menu.insertItem(appItem, at: index)
+        }
+    }
+    
+    // MARK: - Actions
+    @objc func applicationAction(sender: NSMenuItem) {
+        guard let app = sender.representedObject as? AssertingApp else { return }
+        
+        if let cmdKey = NSApp.currentEvent?.modifierFlags.contains(.command), cmdKey {
+            app.app.terminate()
+        } else {
+            app.app.activate(options: [.activateIgnoringOtherApps])
         }
     }
 }
