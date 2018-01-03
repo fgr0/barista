@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import IOKit.pwr_mgt
 
 
 class PowerMgmtController: NSObject {
@@ -30,42 +31,70 @@ class PowerMgmtController: NSObject {
     
     deinit {
         self.timer?.invalidate()
+        guard let id = self.aid else { return }
+        IOPMAssertionRelease(id)
     }
     
     
     // MARK: - Managing the Assertion
-    private var assertion: Assertion?
+    private var aid: IOPMAssertionID?
     
-    var isRunning: Bool {
+    private(set) var enabled: Bool {
         get {
-            guard let a = self.assertion else { return false }
-            return a.enabled
+            guard getAssertionProperty("AssertTimedOutWhen") == nil else { return false }
+            guard let lvl = getAssertionProperty(kIOPMAssertionLevelKey) as? Int else { return false }
+            return lvl == kIOPMAssertionLevelOn
+        }
+        set(enabled) {
+            let level = (enabled ? kIOPMAssertionLevelOn : kIOPMAssertionLevelOff) as CFNumber
+            setProperty(kIOPMAssertionLevelKey, value: level)
         }
     }
     
     @objc dynamic var preventDisplaySleep: Bool = true {
         didSet {
-            guard self.assertion != nil else { return }
+            guard let aid = self.aid else { return }
             
-            self.assertion?.preventDisplaySleep = self.preventDisplaySleep
-            self.assertion?.details = PowerMgmtController.makeDetailsString(
-                displaySleep: self.preventDisplaySleep, time: (self.assertion?.timeout)!)
+            // Type cannot be changed by just setting the property (bug?)
+            // Workaround is to create a new Assertion with identical settings
+            var props = IOPMAssertionCopyProperties(aid).takeRetainedValue() as! Dictionary<String, CFTypeRef>
+            props[kIOPMAssertionTypeKey] = (preventDisplaySleep ?
+                kIOPMAssertionTypePreventUserIdleDisplaySleep : kIOPMAssertionTypePreventUserIdleSystemSleep) as CFString
+            props[kIOPMAssertionDetailsKey] = self.makeDetailsString(timeout) as CFString
+            
+            var newId = UInt32(kIOPMNullAssertionID)
+            if IOPMAssertionCreateWithProperties(props as CFDictionary, &newId) != kIOReturnSuccess {
+                fatalError("didn't expect this not to work")
+            }
+            
+            IOPMAssertionRelease(aid)
+            self.aid = newId
             
             self.notifyAssertionChanged()
         }
     }
     
-    var timeout: UInt {
+    private(set) var timeout: UInt {
         get {
-            guard let a = self.assertion else { return 0 }
-            return a.timeout
+            guard self.aid != nil else { return 0 }
+            return getAssertionProperty(kIOPMAssertionTimeoutKey) as! UInt
+        }
+        set(timeout) {
+            setProperty(kIOPMAssertionTimeoutKey, value: timeout as CFNumber)
         }
     }
     
     var timeLeft: UInt? {
         get {
-            guard let a = self.assertion else { return nil }
-            return a.timeLeft
+            guard self.aid != nil else { return nil }
+            guard self.timeout != 0 else { return nil }
+            
+            // Calculate timeLeft based on the value inside the assertion dict and the time that value was updated
+            let lastValue = getAssertionProperty("AssertTimeoutTimeLeft") as! Int
+            let timeUpdated = getAssertionProperty("AssertTimeoutUpdateTime") as! Date
+            let timeLeft = lastValue + Int(timeUpdated.timeIntervalSinceNow)
+            
+            return UInt(timeLeft)
         }
     }
     
@@ -79,10 +108,22 @@ class PowerMgmtController: NSObject {
         stopAssertion()
         
         // Create new assertion
-        let details = PowerMgmtController.makeDetailsString(displaySleep: true, time: timeout)
+        var id = UInt32(kIOPMNullAssertionID)
+        var props = Dictionary<String, CFTypeRef>()
         
-        self.assertion = Assertion(preventDisplaySleep: self.preventDisplaySleep, timeout: timeout)
-        self.assertion?.details = details
+        props[kIOPMAssertionNameKey]    = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as! CFString
+        props[kIOPMAssertionLevelKey]   = kIOPMAssertionLevelOn as CFNumber
+        props[kIOPMAssertionTypeKey]    = (preventDisplaySleep ?
+            kIOPMAssertionTypePreventUserIdleDisplaySleep : kIOPMAssertionTypePreventUserIdleSystemSleep) as CFString
+        props[kIOPMAssertionTimeoutActionKey]   = kIOPMAssertionTimeoutActionTurnOff as CFTypeRef
+        props[kIOPMAssertionTimeoutKey]         = timeout as CFNumber
+        props[kIOPMAssertionDetailsKey]         = self.makeDetailsString(timeout) as CFString
+
+        if IOPMAssertionCreateWithProperties(props as CFDictionary, &id) != kIOReturnSuccess {
+            fatalError("didn't expect this not to work")
+        }
+        
+        self.aid = id
         
         if timeout > 0 {
             startTimer(withTimeout: timeout)
@@ -92,18 +133,17 @@ class PowerMgmtController: NSObject {
     }
 
     func stopAssertion() {
-        guard self.assertion != nil else { return }
+        guard self.aid != nil else { return }
         
-        self.assertion?.enabled = false
-        self.assertion = nil
+        IOPMAssertionRelease(self.aid!)
+        self.aid = nil
         
         self.stopTimer()
-        
         self.notifyAssertionChanged()
     }
     
     @IBAction func toggleAssertion(_ sender: NSMenuItem) {
-        if self.assertion != nil && (self.assertion?.enabled)! {
+        if self.aid != nil && self.enabled {
             self.stopAssertion()
         } else {
             self.startAssertion()
@@ -111,11 +151,17 @@ class PowerMgmtController: NSObject {
     }
     
     
-    // MARK: - Assertioning Applications
+    // MARK: - Information about Global Assertions
     var assertingApps: [AssertingApp]?
     
-    func checkAssertingApplications() -> [AssertingApp]? {
-        guard let pids = Assertion.assertionsByProcess() else { return nil }
+    func assertionsByApp() -> [AssertingApp]? {
+        var assertionsByProcess: Unmanaged<CFDictionary>?
+        
+        if IOPMCopyAssertionsByProcess(&assertionsByProcess) != kIOReturnSuccess {
+            fatalError("o.o")
+        }
+        
+        guard let pids = assertionsByProcess?.takeRetainedValue() as? [Int: [[String: Any]]] else { return nil }
         
         var aP = Set<AssertingApp>()
         
@@ -161,7 +207,7 @@ class PowerMgmtController: NSObject {
 
         self.timer = Timer.scheduledTimer(withTimeInterval: TimeInterval(timeout+5), repeats: false) {_ in
             // TODO: Error Handling
-            guard !self.isRunning else { return }
+            guard !self.enabled else { return }
             
             self.notifyAssertionTimedOut(after: timeout)
             self.stopAssertion()
@@ -186,7 +232,7 @@ class PowerMgmtController: NSObject {
     
     private func notifyAssertionChanged() {
         for o in observers {
-            o.assertionChanged(isRunning: self.isRunning, preventDisplaySleep: self.preventDisplaySleep)
+            o.assertionChanged(isRunning: self.enabled, preventDisplaySleep: self.preventDisplaySleep)
         }
     }
     
@@ -198,14 +244,26 @@ class PowerMgmtController: NSObject {
     
     
     // MARK: - Helper
-    fileprivate class func makeDetailsString(displaySleep: Bool, time: UInt) -> String {
+    fileprivate func makeDetailsString(_ time: UInt) -> String {
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .short
         
-        let s = displaySleep ? "Preventing sleep" : "Preventing display sleep"
+        let s = self.preventDisplaySleep ? "Preventing display sleep" :"Preventing sleep"
         let t = (time == 0) ? "forever" : "for \(formatter.string(from: Double(time))!)"
         
         return "\(s) \(t)"
+    }
+    
+    private func getAssertionProperty(_ property: String) -> CFTypeRef? {
+        guard let id = self.aid else { return nil }
+        let props = IOPMAssertionCopyProperties(id).takeRetainedValue() as! Dictionary<String, CFTypeRef>
+        return props[property]
+    }
+    
+    private func setProperty(_ property: String, value: CFTypeRef) {
+        guard let id = self.aid else { return }
+        // TODO: Error Handling (Exceptions?)
+        IOPMAssertionSetProperty(id, property as CFString, value)
     }
 }
 

@@ -33,7 +33,7 @@ class MenuController: NSObject {
         
         // Setup Status Bar
         self.statusBarItem.button!.title = "zZ"
-        self.statusBarItem.button?.appearsDisabled = !powerMgmtController.isRunning
+        self.statusBarItem.button?.appearsDisabled = !powerMgmtController.enabled
         self.statusBarItem.menu = menu
         
         powerMgmtController.addObserver(self)
@@ -52,9 +52,9 @@ class MenuController: NSObject {
         let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName")!
         
         // Set Standart Elements
-        stateItem.title     = "\(appName): " + (powerMgmtController.isRunning ? "On" : "Off")
+        stateItem.title     = "\(appName): " + (powerMgmtController.enabled ? "On" : "Off")
         timeRemainingItem.isHidden = true
-        activateItem.title  = "Turn \(appName) " + (powerMgmtController.isRunning ? "Off" : "On")
+        activateItem.title  = "Turn \(appName) " + (powerMgmtController.enabled ? "Off" : "On")
         
         appListItem.isHidden = true
         appListSeparator.isHidden = true
@@ -74,7 +74,7 @@ class MenuController: NSObject {
         }
         
         // Update List of Apps
-        if let apps = powerMgmtController.checkAssertingApplications() {
+        if let apps = powerMgmtController.assertionsByApp() {
             appListItem.isHidden = false
             appListSeparator.isHidden = false
             
