@@ -47,8 +47,8 @@ class MenuController: NSObject {
     
     // MARK: - Update Menu Items
     private var timer: Timer?
-    
-    func updateMenu() {
+
+    func updateMenu(showApps: Bool = false, verbose: Bool = true) {
         let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName")!
         
         // Set Standart Elements
@@ -73,23 +73,46 @@ class MenuController: NSObject {
             timeRemainingItem.isHidden = false
         }
         
-        // Update List of Apps
-        if let apps = powerMgmtController.assertionsByApp() {
+        // Update List of Apps if wanted
+        if let apps = powerMgmtController.assertionsByApp(), showApps {
             appListItem.isHidden = false
             appListSeparator.isHidden = false
             
-            let index = menu.index(of: appListSeparator)
-            
             for (app, list) in apps {
+                let index = menu.index(of: appListSeparator)
+                let numString = String.localizedStringWithFormat(
+                    NSLocalizedString( "number_assertions", comment: ""), list.count)
+                let pdsString = "Prevents \(list.contains { $0.preventsDisplaySleep } ? "Display" : "Idle") Sleep"
+                
                 let appItem = NSMenuItem()
                 appItem.tag = 1
                 appItem.title = app.localizedName!
+                appItem.toolTip = numString + "; " + pdsString
                 appItem.image = app.icon
                 appItem.image?.size = CGSize(width: 16, height: 16)
                 appItem.representedObject = app
                 appItem.target = self
                 appItem.action = #selector(applicationAction(_:))
                 menu.insertItem(appItem, at: index)
+                
+                // Add Verbose Information if wanted
+                guard verbose else { continue }
+                
+                let startDate = list.reduce(Date.distantFuture) { min($0, $1.timeStarted) }
+                let startFormatter = DateFormatter()
+                startFormatter.dateStyle = .long
+                startFormatter.timeStyle = .short
+                startFormatter.doesRelativeDateFormatting = true
+
+                let timeRemaining = list.reduce(0) { max($0, $1.timeLeft ?? 0)}
+                let timeoutString = TimeInterval(timeRemaining).simpleFormat(
+                    style: .short, units: [.day, .hour, .minute, .second], maxCount: 2)!
+
+                menu.insertDescItem(pdsString, at: index+1)
+                menu.insertDescItem("Started: \(startFormatter.string(from: startDate))", at: index+2)
+                if timeRemaining > 0 {
+                    menu.insertDescItem("Timeout in: \(timeoutString)", at: index+3)
+                }
             }
         }
     }
@@ -104,6 +127,17 @@ class MenuController: NSObject {
         } else {
             app.activate(options: [.activateIgnoringOtherApps])
         }
+    }
+    
+    
+    // MARK: - Helper
+    fileprivate func insertDescItem(_ title: String, at index: Int) {
+        let numItem = NSMenuItem()
+        numItem.tag = 1
+        numItem.title = title
+        numItem.indentationLevel += 2
+        numItem.isEnabled = false
+        menu.insertItem(numItem, at: index)
     }
 }
 
@@ -120,12 +154,12 @@ extension MenuController: PowerMgmtObserver {
 extension MenuController: NSMenuDelegate {
     func menuNeedsUpdate(_ menu: NSMenu) {
         guard menu == self.menu else { return }
-        self.updateMenu()
+        self.updateMenu(showApps: (NSApp.currentEvent?.modifierFlags.contains(.option))!)
     }
     
     func menuWillOpen(_ menu: NSMenu) {
         guard self.timer == nil else { return }
-        self.timer = Timer(timeInterval: 1.0, repeats: true) { _ in self.updateMenu() }
+        self.timer = Timer(timeInterval: 1.0, repeats: true) { _ in self.updateMenu(showApps: (NSApp.currentEvent?.modifierFlags.contains(.option))!) }
         RunLoop.current.add(self.timer!, forMode: RunLoopMode.eventTrackingRunLoopMode)
     }
     

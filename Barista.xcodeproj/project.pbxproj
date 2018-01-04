@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8100C3F91FFEE1EB001ADA53 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 8100C3FB1FFEE1EB001ADA53 /* Localizable.stringsdict */; };
+		8100C4021FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8100C4011FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift */; };
 		81041F821FCB587A0029C9A7 /* PowerMgmtController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81041F811FCB587A0029C9A7 /* PowerMgmtController.swift */; };
 		8129093C1EDC750900072FC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE472EF19FF9E4C0089B49F /* AppDelegate.swift */; };
 		819C75D01FA3841500A72238 /* TimeIntervalSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819C75CF1FA3841500A72238 /* TimeIntervalSliderCell.swift */; };
@@ -50,6 +52,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8100C3FA1FFEE1EB001ADA53 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		8100C4011FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMenu+insertDescItem.swift"; sourceTree = "<group>"; };
 		81041F811FCB587A0029C9A7 /* PowerMgmtController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerMgmtController.swift; sourceTree = "<group>"; };
 		819C75CF1FA3841500A72238 /* TimeIntervalSliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalSliderCell.swift; sourceTree = "<group>"; };
 		81A04B171FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+SimpleFormat.swift"; sourceTree = "<group>"; };
@@ -96,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				81A04B171FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift */,
+				8100C4011FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -180,6 +185,7 @@
 				9DE4730C19FF9E5B0089B49F /* Barista.entitlements */,
 				9DE472EE19FF9E4C0089B49F /* Info.plist */,
 				81E06BA61EE82AF3002D1651 /* PreferenceDefaults.plist */,
+				8100C3FB1FFEE1EB001ADA53 /* Localizable.stringsdict */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -287,6 +293,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8100C3F91FFEE1EB001ADA53 /* Localizable.stringsdict in Resources */,
 				81E06BA51EE829C7002D1651 /* Preferences.storyboard in Resources */,
 				81E06BA71EE82AF3002D1651 /* PreferenceDefaults.plist in Resources */,
 				9DE472F419FF9E4C0089B49F /* Images.xcassets in Resources */,
@@ -338,6 +345,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8100C4021FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift in Sources */,
 				81E76B771EDCCD0600610950 /* MenuController.swift in Sources */,
 				8129093C1EDC750900072FC3 /* AppDelegate.swift in Sources */,
 				81041F821FCB587A0029C9A7 /* PowerMgmtController.swift in Sources */,
@@ -361,6 +369,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		8100C3FB1FFEE1EB001ADA53 /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8100C3FA1FFEE1EB001ADA53 /* en */,
+			);
+			name = Localizable.stringsdict;
+			sourceTree = "<group>";
+		};
 		9D1EA6A81A1B61540030C40F /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

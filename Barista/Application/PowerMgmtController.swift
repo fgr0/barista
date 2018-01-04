@@ -92,9 +92,7 @@ class PowerMgmtController: NSObject {
             // Calculate timeLeft based on the value inside the assertion dict and the time that value was updated
             let lastValue = getAssertionProperty("AssertTimeoutTimeLeft") as! Int
             let timeUpdated = getAssertionProperty("AssertTimeoutUpdateTime") as! Date
-            let timeLeft = lastValue + Int(timeUpdated.timeIntervalSinceNow)
-            
-            return UInt(timeLeft)
+            return UInt(lastValue + Int(timeUpdated.timeIntervalSinceNow))
         }
     }
     
@@ -181,7 +179,7 @@ class PowerMgmtController: NSObject {
             aP.append((app, list))
         }
         
-        return aP
+        return aP.isEmpty ? nil : aP.sorted { $0.0.localizedName! < $1.0.localizedName! }
     }
     
     
@@ -267,7 +265,7 @@ struct Assertion {
     
     var timeLeft: UInt? {
         guard self.timeout > 0 else { return nil }
-        return UInt(-self.timeStarted.addingTimeInterval(TimeInterval(self.timeout)).timeIntervalSinceNow)
+        return UInt(Int(self.timeout) + Int(self.timeStarted.timeIntervalSinceNow))
     }
     
     init?(dict: [String: Any]) {
@@ -291,6 +289,7 @@ struct Assertion {
         self.preventsDisplaySleep = pds
     }
 }
+
 
 // MARK: Equatable Implementation
 extension Assertion: Hashable {

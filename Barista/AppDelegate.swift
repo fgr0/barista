@@ -27,7 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: - Lifecycle
     override init() {
         super.init()
-        
+
         registerDefaults()
     }
     
