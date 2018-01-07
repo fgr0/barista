@@ -14,6 +14,7 @@ struct Constants {
     static let shouldLaunchAtLogin = "shouldLaunchAtLogin"
     static let preventDisplaySleep = "preventDisplaySleep"
     static let defaultTimeout = "defaultTimeout"
+    static let alwaysShowApps = "alwaysShowApps"
 }
 
 

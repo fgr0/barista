@@ -9,7 +9,7 @@
 import Cocoa
 
 extension NSMenu {
-    func insertDescItem(_ title: String, withIndentation indent: Int = 2, at index: Int) {
+    func insertDescItem(_ title: String, withIndentation indent: Int = 1, at index: Int) {
         let numItem = NSMenuItem()
         numItem.tag = 1
         numItem.title = title

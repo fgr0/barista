@@ -47,8 +47,9 @@ class MenuController: NSObject {
     
     // MARK: - Update Menu Items
     private var timer: Timer?
+    private var optionKeyUsed = false
 
-    func updateMenu(showApps: Bool = false, verbose: Bool = true) {
+    func updateMenu() {
         let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName")!
         
         // Set Standart Elements
@@ -74,7 +75,9 @@ class MenuController: NSObject {
         }
         
         // Update List of Apps if wanted
-        if let apps = powerMgmtController.assertionsByApp(), showApps {
+        guard optionKeyUsed || UserDefaults.standard.bool(forKey: Constants.alwaysShowApps) else { return }
+        
+        if let apps = powerMgmtController.assertionsByApp() {
             appListItem.isHidden = false
             appListSeparator.isHidden = false
             
@@ -96,7 +99,7 @@ class MenuController: NSObject {
                 menu.insertItem(appItem, at: index)
                 
                 // Add Verbose Information if wanted
-                guard verbose else { continue }
+                guard optionKeyUsed else { continue }
                 
                 let startDate = list.reduce(Date.distantFuture) { min($0, $1.timeStarted) }
                 let startFormatter = DateFormatter()
@@ -154,16 +157,19 @@ extension MenuController: PowerMgmtObserver {
 extension MenuController: NSMenuDelegate {
     func menuNeedsUpdate(_ menu: NSMenu) {
         guard menu == self.menu else { return }
-        self.updateMenu(showApps: (NSApp.currentEvent?.modifierFlags.contains(.option))!)
+        
+        self.optionKeyUsed = (NSApp.currentEvent?.modifierFlags.contains(.option))!
+        self.updateMenu()
     }
     
     func menuWillOpen(_ menu: NSMenu) {
         guard self.timer == nil else { return }
-        self.timer = Timer(timeInterval: 1.0, repeats: true) { _ in self.updateMenu(showApps: (NSApp.currentEvent?.modifierFlags.contains(.option))!) }
+        self.timer = Timer(timeInterval: 1.0, repeats: true) { _ in self.updateMenu() }
         RunLoop.current.add(self.timer!, forMode: RunLoopMode.eventTrackingRunLoopMode)
     }
     
     func menuDidClose(_ menu: NSMenu) {
+        self.optionKeyUsed = false
         self.timer?.invalidate()
         self.timer = nil
     }
