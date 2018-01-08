@@ -88,6 +88,7 @@ class PowerMgmtController: NSObject {
         get {
             guard self.aid != nil else { return nil }
             guard self.timeout != 0 else { return nil }
+            guard self.enabled else { return nil }
             
             // Calculate timeLeft based on the value inside the assertion dict and the time that value was updated
             let lastValue = getAssertionProperty("AssertTimeoutTimeLeft") as! Int
@@ -196,7 +197,7 @@ class PowerMgmtController: NSObject {
             // TODO: Error Handling
             guard !self.enabled else { return }
             
-            self.notifyAssertionTimedOut(after: timeout)
+            self.notifyAssertionTimedOut(after: TimeInterval(timeout))
             self.stopAssertion()
         }
     }
@@ -223,7 +224,7 @@ class PowerMgmtController: NSObject {
         }
     }
     
-    private func notifyAssertionTimedOut(after: UInt) {
+    private func notifyAssertionTimedOut(after: TimeInterval) {
         for o in observers {
             o.assertionTimedOut(after: after)
         }
@@ -305,7 +306,7 @@ extension Assertion: Hashable {
 // MARK: - Observation
 protocol PowerMgmtObserver: class {
     func assertionChanged(isRunning: Bool, preventDisplaySleep: Bool)
-    func assertionTimedOut(after: UInt)
+    func assertionTimedOut(after: TimeInterval)
 }
 
 // MARK: Observer Default Implementation
@@ -314,7 +315,7 @@ extension PowerMgmtObserver {
         return
     }
     
-    func assertionTimedOut(after: UInt) {
+    func assertionTimedOut(after: TimeInterval) {
         return
     }
 }

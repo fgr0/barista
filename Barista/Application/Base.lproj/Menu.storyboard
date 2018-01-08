@@ -69,6 +69,7 @@
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Barista" customModuleProvider="target">
                     <connections>
                         <outlet property="loginItemController" destination="aU9-ww-G5R" id="wdU-OZ-fbd"/>
+                        <outlet property="powerMgmtController" destination="zJc-jN-0c1" id="XYl-Uk-foe"/>
                     </connections>
                 </customObject>
                 <customObject id="3Zv-yd-aJX" customClass="MenuController" customModule="Barista" customModuleProvider="target">

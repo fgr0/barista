@@ -12,5 +12,7 @@
 	<true/>
 	<key>shouldActivateOnLaunch</key>
 	<true/>
+	<key>sendNotifications</key>
+	<false/>
 </dict>
 </plist>
