@@ -36,11 +36,11 @@
             <objects>
                 <viewController id="9z5-fK-87E" customClass="PreferencesViewController" customModule="Barista" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="dgK-UL-YRR">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="305"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="327"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <imageView translatesAutoresizingMaskIntoConstraints="NO" id="NjJ-he-Oo6">
-                                <rect key="frame" x="20" y="221" width="64" height="64"/>
+                                <rect key="frame" x="20" y="243" width="64" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="64" id="8HU-jW-OM2"/>
                                     <constraint firstAttribute="width" secondItem="NjJ-he-Oo6" secondAttribute="height" multiplier="1:1" id="axk-fT-aNn"/>
@@ -48,7 +48,7 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="NSApplicationIcon" id="nWX-9r-r6x"/>
                             </imageView>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BCs-6U-Fcn">
-                                <rect key="frame" x="92" y="221" width="370" height="64"/>
+                                <rect key="frame" x="92" y="243" width="370" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Barista is a small Application that lives in your Menu Bar and controlls if you Mac can go to sleep." id="INF-BJ-ltv">
                                     <font key="font" metaFont="system"/>
@@ -57,7 +57,7 @@
                                 </textFieldCell>
                             </textField>
                             <tabView horizontalHuggingPriority="1" verticalHuggingPriority="1" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="Y4u-uH-soO">
-                                <rect key="frame" x="13" y="10" width="454" height="196"/>
+                                <rect key="frame" x="13" y="10" width="454" height="218"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
                                     <tabViewItem label="General" identifier="1" id="NiL-Ir-eVw">
@@ -162,17 +162,16 @@
                                     </tabViewItem>
                                     <tabViewItem label="Duration" identifier="2" id="bCG-Gp-77L">
                                         <view key="view" id="iuD-IN-qIZ">
-                                            <rect key="frame" x="10" y="33" width="434" height="150"/>
+                                            <rect key="frame" x="10" y="33" width="434" height="172"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="sBa-F7-uvQ">
-                                                    <rect key="frame" x="40" y="40" width="354" height="65"/>
+                                                    <rect key="frame" x="40" y="62" width="354" height="65"/>
                                                     <subviews>
                                                         <slider translatesAutoresizingMaskIntoConstraints="NO" id="RkA-hE-iz0" customClass="TimeIntervalSlider" customModule="Barista" customModuleProvider="target">
-                                                            <rect key="frame" x="21" y="21" width="312" height="24"/>
+                                                            <rect key="frame" x="14" y="21" width="326" height="24"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="P0y-oq-LNA"/>
-                                                                <constraint firstAttribute="width" constant="308" id="PTc-oZ-t8Z"/>
                                                             </constraints>
                                                             <sliderCell key="cell" continuous="YES" alignment="left" maxValue="12" doubleValue="4" tickMarkPosition="below" numberOfTickMarks="13" sliderType="linear" id="cOw-Jz-2sO" customClass="TimeIntervalSliderCell" customModule="Barista" customModuleProvider="target"/>
                                                             <userDefinedRuntimeAttributes>
@@ -184,7 +183,7 @@
                                                             </connections>
                                                         </slider>
                                                         <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="120" translatesAutoresizingMaskIntoConstraints="NO" id="4Od-6K-7SH">
-                                                            <rect key="frame" x="175" y="49" width="158" height="14"/>
+                                                            <rect key="frame" x="182" y="49" width="158" height="14"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="14" id="ap4-m5-Pu2"/>
                                                                 <constraint firstAttribute="width" constant="154" id="gqI-VK-yiy"/>
@@ -199,6 +198,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="65" id="FrY-EL-7LR"/>
                                                         <constraint firstItem="RkA-hE-iz0" firstAttribute="centerX" secondItem="sBa-F7-uvQ" secondAttribute="centerX" id="HGv-oS-R2h"/>
+                                                        <constraint firstItem="RkA-hE-iz0" firstAttribute="width" secondItem="sBa-F7-uvQ" secondAttribute="width" constant="-32" id="Kcq-BA-6Xf"/>
                                                         <constraint firstItem="RkA-hE-iz0" firstAttribute="top" secondItem="4Od-6K-7SH" secondAttribute="bottom" constant="6" id="OTH-4j-860"/>
                                                         <constraint firstItem="RkA-hE-iz0" firstAttribute="top" secondItem="sBa-F7-uvQ" secondAttribute="top" constant="22" id="YRX-D3-gDD"/>
                                                         <constraint firstAttribute="width" constant="354" id="bnL-hZ-SbL"/>
@@ -207,45 +207,62 @@
                                                         <constraint firstAttribute="bottom" secondItem="RkA-hE-iz0" secondAttribute="bottom" constant="22" id="yMT-hI-mVr"/>
                                                     </constraints>
                                                 </customView>
-                                                <button verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sZr-a5-Ts1">
-                                                    <rect key="frame" x="31" y="88" width="106" height="18"/>
+                                                <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sZr-a5-Ts1">
+                                                    <rect key="frame" x="27" y="110" width="106" height="18"/>
                                                     <buttonCell key="cell" type="radio" title="Turn off after:" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="rTK-Rp-4JR">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <connections>
                                                         <action selector="defaultDurationTypeSelected:" target="9z5-fK-87E" id="QrC-Yq-QHk"/>
+                                                        <binding destination="WgO-NO-EhQ" name="value" keyPath="values.endOfDaySelected" id="Elb-IY-Omj">
+                                                            <dictionary key="options">
+                                                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                            </dictionary>
+                                                        </binding>
                                                     </connections>
                                                 </button>
                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="FTz-xh-2c2">
-                                                    <rect key="frame" x="18" y="113" width="172" height="17"/>
+                                                    <rect key="frame" x="18" y="135" width="172" height="17"/>
                                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Default duration for Barista:" id="sC4-7U-zf1">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                 </textField>
-                                                <button translatesAutoresizingMaskIntoConstraints="NO" id="pcq-UA-9wn">
-                                                    <rect key="frame" x="31" y="19" width="200" height="18"/>
+                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pcq-UA-9wn">
+                                                    <rect key="frame" x="27" y="39" width="200" height="18"/>
                                                     <buttonCell key="cell" type="radio" title="Turn off at the end of the day" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="FlT-1W-ehe">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <connections>
                                                         <action selector="defaultDurationTypeSelected:" target="9z5-fK-87E" id="cqt-xR-FYo"/>
+                                                        <binding destination="WgO-NO-EhQ" name="value" keyPath="values.endOfDaySelected" id="UUP-hD-LHF"/>
                                                     </connections>
                                                 </button>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="2Am-DS-5jg">
+                                                    <rect key="frame" x="46" y="20" width="342" height="14"/>
+                                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="When selected, Barista will run until 2 AM on the next day." id="eCC-vS-fPo">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="FTz-xh-2c2" firstAttribute="leading" secondItem="sZr-a5-Ts1" secondAttribute="trailing" constant="-115" id="0bf-iS-lX3"/>
                                                 <constraint firstItem="sBa-F7-uvQ" firstAttribute="centerX" secondItem="iuD-IN-qIZ" secondAttribute="centerX" id="0vh-WA-dTN"/>
-                                                <constraint firstAttribute="bottom" secondItem="pcq-UA-9wn" secondAttribute="bottom" constant="20" symbolic="YES" id="3Bk-RB-xrh"/>
                                                 <constraint firstItem="FTz-xh-2c2" firstAttribute="leading" secondItem="iuD-IN-qIZ" secondAttribute="leading" constant="20" symbolic="YES" id="7dL-cw-dx7"/>
+                                                <constraint firstItem="2Am-DS-5jg" firstAttribute="centerX" secondItem="iuD-IN-qIZ" secondAttribute="centerX" id="AZ7-09-1kr"/>
+                                                <constraint firstItem="2Am-DS-5jg" firstAttribute="leading" secondItem="pcq-UA-9wn" secondAttribute="leading" constant="20" id="ITt-3M-UMu"/>
+                                                <constraint firstAttribute="bottom" secondItem="2Am-DS-5jg" secondAttribute="bottom" constant="20" symbolic="YES" id="S7O-AC-Uco"/>
+                                                <constraint firstItem="sZr-a5-Ts1" firstAttribute="leading" secondItem="FTz-xh-2c2" secondAttribute="leading" constant="8" id="T3a-qs-Yne"/>
                                                 <constraint firstItem="sBa-F7-uvQ" firstAttribute="top" secondItem="sZr-a5-Ts1" secondAttribute="bottom" constant="-16" id="UfY-Od-Hw4"/>
                                                 <constraint firstItem="FTz-xh-2c2" firstAttribute="top" secondItem="iuD-IN-qIZ" secondAttribute="top" constant="20" symbolic="YES" id="WAq-5E-kuH"/>
+                                                <constraint firstItem="2Am-DS-5jg" firstAttribute="top" secondItem="pcq-UA-9wn" secondAttribute="bottom" constant="6" id="XEP-Vh-lzy"/>
                                                 <constraint firstItem="pcq-UA-9wn" firstAttribute="leading" secondItem="sZr-a5-Ts1" secondAttribute="leading" id="ufM-Lf-StU"/>
                                                 <constraint firstItem="sZr-a5-Ts1" firstAttribute="top" secondItem="FTz-xh-2c2" secondAttribute="bottom" constant="8" symbolic="YES" id="uzu-QS-ojo"/>
-                                                <constraint firstItem="pcq-UA-9wn" firstAttribute="top" secondItem="sBa-F7-uvQ" secondAttribute="bottom" constant="4" id="xY0-gz-yjs"/>
+                                                <constraint firstItem="pcq-UA-9wn" firstAttribute="top" secondItem="sBa-F7-uvQ" secondAttribute="bottom" constant="6" id="xY0-gz-yjs"/>
                                             </constraints>
                                         </view>
                                     </tabViewItem>

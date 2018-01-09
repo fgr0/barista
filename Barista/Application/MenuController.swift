@@ -163,7 +163,7 @@ class MenuController: NSObject {
     }
     
     @IBAction func activateEndOfDayAction(_ sender: NSMenuItem) {
-        return
+        powerMgmtController.startAssertionForRestOfDay()
     }
     
     

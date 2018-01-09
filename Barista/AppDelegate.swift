@@ -16,6 +16,7 @@ struct Constants {
     static let defaultTimeout = "defaultTimeout"
     static let alwaysShowApps = "alwaysShowApps"
     static let sendNotifications = "sendNotifications"
+    static let endOfDaySelected = "endOfDaySelected"
     
     static let notificationId = "barista.notification"
 }

@@ -14,5 +14,7 @@
 	<true/>
 	<key>sendNotifications</key>
 	<false/>
+	<key>endOfDaySelected</key>
+	<false/>
 </dict>
 </plist>

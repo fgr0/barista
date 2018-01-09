@@ -99,10 +99,26 @@ class PowerMgmtController: NSObject {
     
     
     func startAssertion() {
-        self.startAssertion(withTimeout: UInt(UserDefaults.standard.integer(forKey: Constants.defaultTimeout)))
+        if UserDefaults.standard.bool(forKey: Constants.endOfDaySelected) {
+            self.startAssertionForRestOfDay()
+        } else {
+            self.startAssertion(withTimeout:
+                UInt(UserDefaults.standard.integer(forKey: Constants.defaultTimeout)))
+        }
     }
     
-    func startAssertion(withTimeout timeout: UInt = 0) {
+    func startAssertionForRestOfDay() {
+        // Calculate Date for Tomorrow, 2AM local time
+        let c = Calendar(identifier: .gregorian)
+        var tomorrow = c.dateComponents([.day, .month, .year],
+                                        from: c.date(byAdding: DateComponents(day: 1),
+                                                     to: Date())!)
+        tomorrow.hour = 2
+        
+        self.startAssertion(withTimeout: UInt((c.date(from: tomorrow)?.timeIntervalSinceNow)!))
+    }
+
+    func startAssertion(withTimeout timeout: UInt) {
         // Stop any running assertion
         stopAssertion()
         
@@ -130,6 +146,7 @@ class PowerMgmtController: NSObject {
         
         self.notifyAssertionChanged()
     }
+
 
     func stopAssertion() {
         guard self.aid != nil else { return }
