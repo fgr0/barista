@@ -20,8 +20,9 @@ class MenuController: NSObject {
     @IBOutlet weak var timeRemainingItem: NSMenuItem!
     @IBOutlet weak var activateItem: NSMenuItem!
     
+    @IBOutlet weak var activateForItem: NSMenuItem!
+    
     @IBOutlet weak var appListItem: NSMenuItem!
-    @IBOutlet weak var appListSystem: NSMenuItem!
     @IBOutlet weak var appListSeparator: NSMenuItem!
     
     @IBOutlet weak var powerMgmtController: PowerMgmtController!
@@ -37,6 +38,17 @@ class MenuController: NSObject {
         self.statusBarItem.menu = menu
         
         powerMgmtController.addObserver(self)
+        
+        // Setup "Activate for" Submenu
+        for item in (activateForItem.submenu?.items)! {
+            if item.tag == 1 {
+                let ti = TimeInterval(item.title)!
+                item.representedObject = ti
+                item.title = ti.simpleFormat(maxCount: 1)!
+                item.target = self
+                item.action = #selector(activateForAction(_:))
+            }
+        }
     }
     
     deinit {
@@ -122,7 +134,7 @@ class MenuController: NSObject {
 
 
     // MARK: - Actions
-    @objc func applicationAction(_ sender: NSMenuItem) {
+    @IBAction func applicationAction(_ sender: NSMenuItem) {
         guard let app = sender.representedObject as? NSRunningApplication else { return }
         
         if let cmdKey = NSApp.currentEvent?.modifierFlags.contains(.command), cmdKey {
@@ -130,6 +142,28 @@ class MenuController: NSObject {
         } else {
             app.activate(options: [.activateIgnoringOtherApps])
         }
+    }
+    
+    @IBAction func toggleAssertionAction(_ sender: NSMenuItem) {
+        if powerMgmtController.enabled {
+            powerMgmtController.stopAssertion()
+        } else {
+            powerMgmtController.startAssertion()
+        }
+    }
+    
+    @IBAction func activateForAction(_ sender: NSMenuItem) {
+        guard let ti = sender.representedObject as? TimeInterval else { return }
+        
+        powerMgmtController.startAssertion(withTimeout: UInt(ti))
+    }
+    
+    @IBAction func activateIndefinitlyAction(_ sender: NSMenuItem) {
+        powerMgmtController.startAssertion(withTimeout: 0)
+    }
+    
+    @IBAction func activateEndOfDayAction(_ sender: NSMenuItem) {
+        return
     }
     
     

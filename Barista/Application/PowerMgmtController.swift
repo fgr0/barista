@@ -141,14 +141,6 @@ class PowerMgmtController: NSObject {
         self.notifyAssertionChanged()
     }
     
-    @IBAction func toggleAssertion(_ sender: NSMenuItem) {
-        if self.aid != nil && self.enabled {
-            self.stopAssertion()
-        } else {
-            self.startAssertion()
-        }
-    }
-    
     
     // MARK: - Information about Global Assertions
     var assertingApps: [(NSRunningApplication, [Assertion])]?
