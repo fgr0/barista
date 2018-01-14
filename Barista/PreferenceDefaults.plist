@@ -16,5 +16,7 @@
 	<false/>
 	<key>endOfDaySelected</key>
 	<false/>
+	<key>stopAtForcedSleep</key>
+	<false/>
 </dict>
 </plist>

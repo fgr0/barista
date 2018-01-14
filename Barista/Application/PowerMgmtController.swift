@@ -27,6 +27,15 @@ class PowerMgmtController: NSObject {
         if UserDefaults.standard.bool(forKey: Constants.shouldActivateOnLaunch) {
             self.startAssertion()
         }
+        
+        NSWorkspace.shared.notificationCenter.addObserver(
+        forName: NSWorkspace.didWakeNotification, object: nil, queue: nil) { _ in
+            guard UserDefaults.standard.bool(forKey: Constants.stopAtForcedSleep) else { return }
+            guard self.enabled else { return }
+            
+            self.notifyAssertionStoppedByWake()
+            self.stopAssertion()
+        }
     }
     
     deinit {
@@ -228,15 +237,15 @@ class PowerMgmtController: NSObject {
     }
     
     private func notifyAssertionChanged() {
-        for o in observers {
-            o.assertionChanged(isRunning: self.enabled, preventDisplaySleep: self.preventDisplaySleep)
-        }
+        observers.forEach { $0.assertionChanged(isRunning: self.enabled, preventDisplaySleep: self.preventDisplaySleep) }
     }
     
     private func notifyAssertionTimedOut(after: TimeInterval) {
-        for o in observers {
-            o.assertionTimedOut(after: after)
-        }
+        observers.forEach { $0.assertionTimedOut(after: after) }
+    }
+    
+    private func notifyAssertionStoppedByWake() {
+        observers.forEach { $0.assertionStoppedByWake() }
     }
     
     
@@ -316,6 +325,7 @@ extension Assertion: Hashable {
 protocol PowerMgmtObserver: class {
     func assertionChanged(isRunning: Bool, preventDisplaySleep: Bool)
     func assertionTimedOut(after: TimeInterval)
+    func assertionStoppedByWake()
 }
 
 // MARK: Observer Default Implementation
@@ -325,6 +335,10 @@ extension PowerMgmtObserver {
     }
     
     func assertionTimedOut(after: TimeInterval) {
+        return
+    }
+    
+    func assertionStoppedByWake() {
         return
     }
 }

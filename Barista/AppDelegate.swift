@@ -10,15 +10,17 @@ import Cocoa
 
 // Constants
 struct Constants {
-    static let shouldActivateOnLaunch = "shouldActivateOnLaunch"
-    static let shouldLaunchAtLogin = "shouldLaunchAtLogin"
-    static let preventDisplaySleep = "preventDisplaySleep"
-    static let defaultTimeout = "defaultTimeout"
-    static let alwaysShowApps = "alwaysShowApps"
-    static let sendNotifications = "sendNotifications"
-    static let endOfDaySelected = "endOfDaySelected"
+    static let shouldActivateOnLaunch   = "shouldActivateOnLaunch"
+    static let shouldLaunchAtLogin      = "shouldLaunchAtLogin"
+    static let preventDisplaySleep      = "preventDisplaySleep"
+    static let defaultTimeout           = "defaultTimeout"
+    static let alwaysShowApps           = "alwaysShowApps"
+    static let sendNotifications        = "sendNotifications"
+    static let endOfDaySelected         = "endOfDaySelected"
+    static let stopAtForcedSleep        = "stopAtForcedSleep"
     
-    static let notificationId = "barista.notification"
+    static let notificationTimeoutId    = "barista.notification.timeout"
+    static let notificationSleepId      = "barista.notification.sleep"
 }
 
 
@@ -36,12 +38,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         super.init()
         
         registerDefaults()
-        NSUserNotificationCenter.default.delegate = self
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        NSUserNotificationCenter.default.delegate = self
         powerMgmtController.addObserver(self)
     }
     
@@ -95,11 +97,35 @@ extension AppDelegate: NSWindowDelegate {
 extension AppDelegate: PowerMgmtObserver {
     func assertionTimedOut(after: TimeInterval) {
         guard UserDefaults.standard.bool(forKey: Constants.sendNotifications) else { return }
+        
+        NSUserNotificationCenter.default.deliveredNotifications.forEach {
+            if $0.identifier == Constants.notificationTimeoutId {
+                NSUserNotificationCenter.default.removeDeliveredNotification($0)
+            }
+        }
 
         let notification = NSUserNotification()
-        notification.identifier = Constants.notificationId
+        notification.identifier = Constants.notificationTimeoutId
         notification.title = "Barista turned off"
         notification.subtitle = "Prevented Sleep for " + after.simpleFormat()!
+        notification.soundName = NSUserNotificationDefaultSoundName
+        
+        NSUserNotificationCenter.default.deliver(notification)
+    }
+    
+    func assertionStoppedByWake() {
+        guard UserDefaults.standard.bool(forKey: Constants.sendNotifications) else { return }
+        
+        NSUserNotificationCenter.default.deliveredNotifications.forEach {
+            if $0.identifier == Constants.notificationSleepId {
+                NSUserNotificationCenter.default.removeDeliveredNotification($0)
+            }
+        }
+
+        let notification = NSUserNotification()
+        notification.identifier = Constants.notificationSleepId
+        notification.title = "Barista turned off"
+        notification.subtitle = "Turned off after system went to sleep"
         notification.soundName = NSUserNotificationDefaultSoundName
         
         NSUserNotificationCenter.default.deliver(notification)
@@ -114,14 +140,12 @@ extension AppDelegate: NSUserNotificationCenterDelegate {
     }
     
     func userNotificationCenter(_ center: NSUserNotificationCenter, didActivate notification: NSUserNotification) {
-        guard notification.identifier == Constants.notificationId else { return }
+        guard notification.identifier == Constants.notificationSleepId else { return }
         
         NSUserNotificationCenter.default.removeDeliveredNotification(notification)
     }
     
     func userNotificationCenter(_ center: NSUserNotificationCenter, shouldPresent notification: NSUserNotification) -> Bool {
-        guard notification.identifier == Constants.notificationId else { return false }
-
         return true
     }
 }
