@@ -15,6 +15,7 @@
 		81A04B181FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A04B171FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift */; };
 		81A04B1A1FA24F5A00C1B87B /* TimeIntervalSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A04B191FA24F5A00C1B87B /* TimeIntervalSlider.swift */; };
 		81BBEFA5200E3FED0049D094 /* UserDefaults+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BBEFA4200E3FED0049D094 /* UserDefaults+Keys.swift */; };
+		81BDE856200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BDE855200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift */; };
 		81CFBBEB1EFADC23008DFA81 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFBBEA1EFADC23008DFA81 /* PreferencesViewController.swift */; };
 		81E06BA21EE828D5002D1651 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E06BA01EE828D5002D1651 /* PreferencesWindowController.swift */; };
 		81E06BA51EE829C7002D1651 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81E06BA41EE829C7002D1651 /* Preferences.storyboard */; };
@@ -60,6 +61,7 @@
 		81A04B171FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+SimpleFormat.swift"; sourceTree = "<group>"; };
 		81A04B191FA24F5A00C1B87B /* TimeIntervalSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimeIntervalSlider.swift; path = Barista/Preferences/TimeIntervalSlider.swift; sourceTree = SOURCE_ROOT; };
 		81BBEFA4200E3FED0049D094 /* UserDefaults+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Keys.swift"; sourceTree = "<group>"; };
+		81BDE855200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSStatusBarButton+CustomMouseClick.swift"; sourceTree = "<group>"; };
 		81CFBBEA1EFADC23008DFA81 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		81E06BA01EE828D5002D1651 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PreferencesWindowController.swift; path = Barista/Preferences/PreferencesWindowController.swift; sourceTree = SOURCE_ROOT; };
 		81E06BA41EE829C7002D1651 /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
@@ -101,8 +103,9 @@
 		818A42181F0E807E0029527E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				81A04B171FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift */,
 				8100C4011FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift */,
+				81BDE855200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift */,
+				81A04B171FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift */,
 				81BBEFA4200E3FED0049D094 /* UserDefaults+Keys.swift */,
 			);
 			path = Extensions;
@@ -354,6 +357,7 @@
 				81041F821FCB587A0029C9A7 /* PowerMgmtController.swift in Sources */,
 				81E06BA21EE828D5002D1651 /* PreferencesWindowController.swift in Sources */,
 				819C75D01FA3841500A72238 /* TimeIntervalSliderCell.swift in Sources */,
+				81BDE856200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift in Sources */,
 				81A04B1A1FA24F5A00C1B87B /* TimeIntervalSlider.swift in Sources */,
 				9EBFC6D01A1CB30900D1B158 /* LoginItemController.swift in Sources */,
 				81A04B181FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift in Sources */,

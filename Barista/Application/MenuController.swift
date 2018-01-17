@@ -12,7 +12,7 @@ import Foundation
 class MenuController: NSObject {
     
     // MARK: - UI Outlets
-    let statusBarItem: NSStatusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+    let statusItem: NSStatusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     
     @IBOutlet var menu: NSMenu!
     
@@ -33,9 +33,12 @@ class MenuController: NSObject {
         super.awakeFromNib()
         
         // Setup Status Bar
-        self.statusBarItem.button!.title = "zZ"
-        self.statusBarItem.button?.appearsDisabled = !powerMgmtController.enabled
-        self.statusBarItem.menu = menu
+        self.statusItem.button!.title = "zZ"
+        self.statusItem.button?.appearsDisabled = !powerMgmtController.enabled
+        self.statusItem.button?.target = self
+        self.statusItem.button?.action = #selector(toggleAssertionAction(_:))
+        self.statusItem.menu = self.menu
+        self.statusItem.behavior = .terminationOnRemoval
         
         powerMgmtController.addObserver(self)
         
@@ -53,13 +56,13 @@ class MenuController: NSObject {
     
     deinit {
         powerMgmtController.removeObserver(self)
-        timer?.invalidate()
+        self.timer?.invalidate()
     }
 
     
     // MARK: - Update Menu Items
     private var timer: Timer?
-    private var optionKeyUsed = false
+    private var verbose = false
 
     func updateMenu() {
         let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName")!
@@ -144,7 +147,7 @@ class MenuController: NSObject {
         }
     }
     
-    @IBAction func toggleAssertionAction(_ sender: NSMenuItem) {
+    @IBAction func toggleAssertionAction(_ sender: NSObject) {
         if powerMgmtController.enabled {
             powerMgmtController.stopAssertion()
         } else {
@@ -165,24 +168,13 @@ class MenuController: NSObject {
     @IBAction func activateEndOfDayAction(_ sender: NSMenuItem) {
         powerMgmtController.startAssertionForRestOfDay()
     }
-    
-    
-    // MARK: - Helper
-    fileprivate func insertDescItem(_ title: String, at index: Int) {
-        let numItem = NSMenuItem()
-        numItem.tag = 1
-        numItem.title = title
-        numItem.indentationLevel += 2
-        numItem.isEnabled = false
-        menu.insertItem(numItem, at: index)
-    }
 }
 
 
 // MARK: - PowerMgmtObserver Protocol
 extension MenuController: PowerMgmtObserver {
     func assertionChanged(isRunning: Bool, preventDisplaySleep: Bool) {
-        self.statusBarItem.button?.appearsDisabled = !isRunning
+        self.statusItem.button?.appearsDisabled = !isRunning
     }
 }
 
@@ -204,6 +196,7 @@ extension MenuController: NSMenuDelegate {
     
     func menuDidClose(_ menu: NSMenu) {
         self.verbose = false
+        self.statusItem.button?.highlight(false)
         self.timer?.invalidate()
         self.timer = nil
     }

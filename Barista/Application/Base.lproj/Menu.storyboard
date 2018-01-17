@@ -66,7 +66,7 @@
                             </menu>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="NS1-e9-6v1"/>
-                        <menuItem title="Applications Preventing Sleep" hidden="YES" enabled="NO" id="3fV-VH-7G0">
+                        <menuItem title="Apps Preventing Sleep" hidden="YES" enabled="NO" id="3fV-VH-7G0">
                             <attributedString key="attributedTitle"/>
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
