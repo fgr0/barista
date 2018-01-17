@@ -24,10 +24,10 @@
 		9D1EA6A31A1B61540030C40F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1EA6A21A1B61540030C40F /* AppDelegate.swift */; };
 		9D1EA6A71A1B61540030C40F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D1EA6A61A1B61540030C40F /* Images.xcassets */; };
 		9D1EA6AA1A1B61540030C40F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D1EA6A81A1B61540030C40F /* Main.storyboard */; };
-		9D1EA6C01A1B62C80030C40F /* BaristaHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D1EA69E1A1B61540030C40F /* BaristaHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9D1EA6C01A1B62C80030C40F /* BaristaLaunchHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D1EA69E1A1B61540030C40F /* BaristaLaunchHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9DE472F419FF9E4C0089B49F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DE472F319FF9E4C0089B49F /* Images.xcassets */; };
 		9DE472F719FF9E4C0089B49F /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DE472F519FF9E4C0089B49F /* Menu.storyboard */; };
-		9EBFC6D01A1CB30900D1B158 /* LoginItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBFC6CF1A1CB30900D1B158 /* LoginItemController.swift */; };
+		9EBFC6D01A1CB30900D1B158 /* AppDelegate+LoginItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBFC6CF1A1CB30900D1B158 /* AppDelegate+LoginItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +47,7 @@
 			dstPath = Contents/Library/LoginItems;
 			dstSubfolderSpec = 1;
 			files = (
-				9D1EA6C01A1B62C80030C40F /* BaristaHelper.app in CopyFiles */,
+				9D1EA6C01A1B62C80030C40F /* BaristaLaunchHelper.app in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,19 +67,19 @@
 		81E06BA41EE829C7002D1651 /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
 		81E06BA61EE82AF3002D1651 /* PreferenceDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PreferenceDefaults.plist; sourceTree = "<group>"; };
 		81E76B761EDCCD0600610950 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
-		9D1EA69E1A1B61540030C40F /* BaristaHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaristaHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D1EA69E1A1B61540030C40F /* BaristaLaunchHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaristaLaunchHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D1EA6A11A1B61540030C40F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D1EA6A21A1B61540030C40F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9D1EA6A61A1B61540030C40F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9D1EA6A91A1B61540030C40F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		9D1EA6C11A1B63110030C40F /* BaristaHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BaristaHelper.entitlements; sourceTree = "<group>"; };
+		9D1EA6C11A1B63110030C40F /* BaristaLaunchHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BaristaLaunchHelper.entitlements; sourceTree = "<group>"; };
 		9DE472EA19FF9E4C0089B49F /* Barista.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Barista.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DE472EE19FF9E4C0089B49F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DE472EF19FF9E4C0089B49F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9DE472F319FF9E4C0089B49F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9DE472F619FF9E4C0089B49F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Menu.storyboard; sourceTree = "<group>"; };
 		9DE4730C19FF9E5B0089B49F /* Barista.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Barista.entitlements; sourceTree = "<group>"; };
-		9EBFC6CF1A1CB30900D1B158 /* LoginItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginItemController.swift; sourceTree = "<group>"; };
+		9EBFC6CF1A1CB30900D1B158 /* AppDelegate+LoginItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+LoginItem.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +103,7 @@
 		818A42181F0E807E0029527E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				9EBFC6CF1A1CB30900D1B158 /* AppDelegate+LoginItem.swift */,
 				8100C4011FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift */,
 				81BDE855200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift */,
 				81A04B171FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift */,
@@ -117,7 +118,6 @@
 				9DE472F519FF9E4C0089B49F /* Menu.storyboard */,
 				81E76B761EDCCD0600610950 /* MenuController.swift */,
 				81041F811FCB587A0029C9A7 /* PowerMgmtController.swift */,
-				9EBFC6CF1A1CB30900D1B158 /* LoginItemController.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -134,21 +134,21 @@
 			path = Preferences;
 			sourceTree = "<group>";
 		};
-		9D1EA69F1A1B61540030C40F /* BaristaHelper */ = {
+		9D1EA69F1A1B61540030C40F /* BaristaLaunchHelper */ = {
 			isa = PBXGroup;
 			children = (
 				9D1EA6A21A1B61540030C40F /* AppDelegate.swift */,
-				9D1EA6A61A1B61540030C40F /* Images.xcassets */,
 				9D1EA6A81A1B61540030C40F /* Main.storyboard */,
 				9D1EA6A01A1B61540030C40F /* Supporting Files */,
 			);
-			path = BaristaHelper;
+			path = BaristaLaunchHelper;
 			sourceTree = "<group>";
 		};
 		9D1EA6A01A1B61540030C40F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				9D1EA6C11A1B63110030C40F /* BaristaHelper.entitlements */,
+				9D1EA6A61A1B61540030C40F /* Images.xcassets */,
+				9D1EA6C11A1B63110030C40F /* BaristaLaunchHelper.entitlements */,
 				9D1EA6A11A1B61540030C40F /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -158,7 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				9DE472EC19FF9E4C0089B49F /* Barista */,
-				9D1EA69F1A1B61540030C40F /* BaristaHelper */,
+				9D1EA69F1A1B61540030C40F /* BaristaLaunchHelper */,
 				9DE472EB19FF9E4C0089B49F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -167,7 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				9DE472EA19FF9E4C0089B49F /* Barista.app */,
-				9D1EA69E1A1B61540030C40F /* BaristaHelper.app */,
+				9D1EA69E1A1B61540030C40F /* BaristaLaunchHelper.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -199,9 +199,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9D1EA69D1A1B61540030C40F /* BaristaHelper */ = {
+		9D1EA69D1A1B61540030C40F /* BaristaLaunchHelper */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9D1EA6BB1A1B61550030C40F /* Build configuration list for PBXNativeTarget "BaristaHelper" */;
+			buildConfigurationList = 9D1EA6BB1A1B61550030C40F /* Build configuration list for PBXNativeTarget "BaristaLaunchHelper" */;
 			buildPhases = (
 				9D1EA69A1A1B61540030C40F /* Sources */,
 				9D1EA69B1A1B61540030C40F /* Frameworks */,
@@ -212,9 +212,9 @@
 			);
 			dependencies = (
 			);
-			name = BaristaHelper;
+			name = BaristaLaunchHelper;
 			productName = BaristaHelper;
-			productReference = 9D1EA69E1A1B61540030C40F /* BaristaHelper.app */;
+			productReference = 9D1EA69E1A1B61540030C40F /* BaristaLaunchHelper.app */;
 			productType = "com.apple.product-type.application";
 		};
 		9DE472E919FF9E4C0089B49F /* Barista */ = {
@@ -280,7 +280,7 @@
 			projectRoot = "";
 			targets = (
 				9DE472E919FF9E4C0089B49F /* Barista */,
-				9D1EA69D1A1B61540030C40F /* BaristaHelper */,
+				9D1EA69D1A1B61540030C40F /* BaristaLaunchHelper */,
 			);
 		};
 /* End PBXProject section */
@@ -359,7 +359,7 @@
 				819C75D01FA3841500A72238 /* TimeIntervalSliderCell.swift in Sources */,
 				81BDE856200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift in Sources */,
 				81A04B1A1FA24F5A00C1B87B /* TimeIntervalSlider.swift in Sources */,
-				9EBFC6D01A1CB30900D1B158 /* LoginItemController.swift in Sources */,
+				9EBFC6D01A1CB30900D1B158 /* AppDelegate+LoginItem.swift in Sources */,
 				81A04B181FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift in Sources */,
 				81CFBBEB1EFADC23008DFA81 /* PreferencesViewController.swift in Sources */,
 				81BBEFA5200E3FED0049D094 /* UserDefaults+Keys.swift in Sources */,
@@ -371,7 +371,7 @@
 /* Begin PBXTargetDependency section */
 		9D1EA6BE1A1B62A80030C40F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9D1EA69D1A1B61540030C40F /* BaristaHelper */;
+			target = 9D1EA69D1A1B61540030C40F /* BaristaLaunchHelper */;
 			targetProxy = 9D1EA6BD1A1B62A80030C40F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -413,9 +413,9 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = BaristaHelper/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/BaristaLaunchHelper/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = de.sadmac.Barista.BaristaHelper;
+				PRODUCT_BUNDLE_IDENTIFIER = de.sadmac.Barista.LaunchHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -428,9 +428,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = BaristaHelper/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/BaristaLaunchHelper/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = de.sadmac.Barista.BaristaHelper;
+				PRODUCT_BUNDLE_IDENTIFIER = de.sadmac.Barista.LaunchHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -572,7 +572,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9D1EA6BB1A1B61550030C40F /* Build configuration list for PBXNativeTarget "BaristaHelper" */ = {
+		9D1EA6BB1A1B61550030C40F /* Build configuration list for PBXNativeTarget "BaristaLaunchHelper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9D1EA6B71A1B61550030C40F /* Debug */,

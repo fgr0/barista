@@ -107,7 +107,6 @@
                 </menu>
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Barista" customModuleProvider="target">
                     <connections>
-                        <outlet property="loginItemController" destination="aU9-ww-G5R" id="wdU-OZ-fbd"/>
                         <outlet property="powerMgmtController" destination="zJc-jN-0c1" id="XYl-Uk-foe"/>
                     </connections>
                 </customObject>
@@ -123,7 +122,6 @@
                         <outlet property="timeRemainingItem" destination="YAZ-Sa-q2w" id="Zro-PV-yte"/>
                     </connections>
                 </customObject>
-                <customObject id="aU9-ww-G5R" customClass="LoginItemController" customModule="Barista" customModuleProvider="target"/>
                 <customObject id="zJc-jN-0c1" customClass="PowerMgmtController" customModule="Barista" customModuleProvider="target"/>
                 <userDefaultsController representsSharedInstance="YES" id="u6f-Ox-hdE"/>
                 <application id="hnw-xV-0zn" sceneMemberID="viewController">

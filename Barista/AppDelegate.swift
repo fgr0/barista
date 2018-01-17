@@ -22,7 +22,6 @@ struct Constants {
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     var preferenceWindowController: PreferencesWindowController?
-    @IBOutlet weak var loginItemController: LoginItemController!
     @IBOutlet weak var powerMgmtController: PowerMgmtController!
     
     
@@ -35,13 +34,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
-        NSUserNotificationCenter.default.delegate = self
         powerMgmtController.addObserver(self)
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-
+        self.setupLaunchAtLogin()
+        NSUserNotificationCenter.default.delegate = self
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {

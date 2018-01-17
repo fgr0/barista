@@ -36,11 +36,11 @@
             <objects>
                 <viewController id="9z5-fK-87E" customClass="PreferencesViewController" customModule="Barista" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="dgK-UL-YRR">
-                        <rect key="frame" x="0.0" y="0.0" width="520" height="458"/>
+                        <rect key="frame" x="0.0" y="0.0" width="520" height="354"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <imageView translatesAutoresizingMaskIntoConstraints="NO" id="NjJ-he-Oo6">
-                                <rect key="frame" x="20" y="374" width="64" height="64"/>
+                                <rect key="frame" x="20" y="270" width="64" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="64" id="8HU-jW-OM2"/>
                                     <constraint firstAttribute="width" secondItem="NjJ-he-Oo6" secondAttribute="height" multiplier="1:1" id="axk-fT-aNn"/>
@@ -48,7 +48,7 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="NSApplicationIcon" id="nWX-9r-r6x"/>
                             </imageView>
                             <textField verticalHuggingPriority="500" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="BCs-6U-Fcn">
-                                <rect key="frame" x="103" y="404" width="399" height="34"/>
+                                <rect key="frame" x="103" y="300" width="399" height="34"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Barista is a small Application that lives in your Menu Bar and controlls if you Mac can go to sleep." id="INF-BJ-ltv">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -56,29 +56,29 @@
                                 </textFieldCell>
                             </textField>
                             <tabView horizontalHuggingPriority="1" verticalHuggingPriority="1" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="Y4u-uH-soO">
-                                <rect key="frame" x="13" y="10" width="494" height="349"/>
+                                <rect key="frame" x="13" y="10" width="494" height="245"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
                                     <tabViewItem label="General" identifier="1" id="NiL-Ir-eVw">
                                         <view key="view" id="8Dh-a7-a1h">
-                                            <rect key="frame" x="10" y="33" width="400" height="199"/>
+                                            <rect key="frame" x="10" y="33" width="474" height="199"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="1G3-kZ-S5b">
-                                                    <rect key="frame" x="9" y="117" width="382" height="5"/>
+                                                    <rect key="frame" x="9" y="117" width="456" height="5"/>
                                                 </box>
                                                 <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="1000" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ej1-3z-oYG">
-                                                    <rect key="frame" x="200" y="220" width="0.0" height="0.0"/>
+                                                    <rect key="frame" x="237" y="220" width="0.0" height="0.0"/>
                                                 </stackView>
                                                 <button horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="BAF-w1-IbD">
-                                                    <rect key="frame" x="116" y="161" width="119" height="18"/>
+                                                    <rect key="frame" x="153" y="161" width="119" height="18"/>
                                                     <buttonCell key="cell" type="check" title="Launch at Login" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="bW8-jC-jtF">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                 </button>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ff6-WF-Gjv">
-                                                    <rect key="frame" x="55" y="162" width="53" height="17"/>
+                                                    <rect key="frame" x="92" y="162" width="53" height="17"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Startup:" id="mbX-9u-6Dp">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -86,7 +86,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <button horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="UGy-D7-7Vd">
-                                                    <rect key="frame" x="116" y="139" width="138" height="18"/>
+                                                    <rect key="frame" x="153" y="139" width="138" height="18"/>
                                                     <buttonCell key="cell" type="check" title="Activate on Launch" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="kwI-DL-yhs">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -96,7 +96,7 @@
                                                     </connections>
                                                 </button>
                                                 <view horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="vO6-0X-VvQ">
-                                                    <rect key="frame" x="3" y="20" width="395" height="78"/>
+                                                    <rect key="frame" x="40" y="20" width="395" height="78"/>
                                                     <subviews>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q5c-WA-dQG">
                                                             <rect key="frame" x="113" y="60" width="220" height="18"/>

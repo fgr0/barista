@@ -40,7 +40,7 @@ class PreferencesViewController: NSViewController {
         self.launchAtLoginButton.bind(
             NSBindingName("value"),
             to: NSApp.delegate as! AppDelegate,
-            withKeyPath: "loginItemController.enabled",
+            withKeyPath: #keyPath(AppDelegate.launchAtLogin),
             options: [
                 NSBindingOption.raisesForNotApplicableKeys: true,
                 NSBindingOption.conditionallySetsEnabled: true
