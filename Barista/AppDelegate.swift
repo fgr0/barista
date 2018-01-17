@@ -10,14 +10,7 @@ import Cocoa
 
 // Constants
 struct Constants {
-    static let shouldActivateOnLaunch   = "shouldActivateOnLaunch"
-    static let shouldLaunchAtLogin      = "shouldLaunchAtLogin"
-    static let preventDisplaySleep      = "preventDisplaySleep"
-    static let defaultTimeout           = "defaultTimeout"
-    static let alwaysShowApps           = "alwaysShowApps"
-    static let sendNotifications        = "sendNotifications"
-    static let endOfDaySelected         = "endOfDaySelected"
-    static let stopAtForcedSleep        = "stopAtForcedSleep"
+
     
     static let notificationTimeoutId    = "barista.notification.timeout"
     static let notificationSleepId      = "barista.notification.sleep"
@@ -96,7 +89,7 @@ extension AppDelegate: NSWindowDelegate {
 // MARK: - PowerMgmtObserver
 extension AppDelegate: PowerMgmtObserver {
     func assertionTimedOut(after: TimeInterval) {
-        guard UserDefaults.standard.bool(forKey: Constants.sendNotifications) else { return }
+        guard UserDefaults.standard.sendNotifications else { return }
         
         NSUserNotificationCenter.default.deliveredNotifications.forEach {
             if $0.identifier == Constants.notificationTimeoutId {
@@ -107,14 +100,14 @@ extension AppDelegate: PowerMgmtObserver {
         let notification = NSUserNotification()
         notification.identifier = Constants.notificationTimeoutId
         notification.title = "Barista turned off"
-        notification.subtitle = "Prevented Sleep for " + after.simpleFormat()!
+        notification.informativeText = "Prevented Sleep for " + after.simpleFormat()!
         notification.soundName = NSUserNotificationDefaultSoundName
         
         NSUserNotificationCenter.default.deliver(notification)
     }
     
     func assertionStoppedByWake() {
-        guard UserDefaults.standard.bool(forKey: Constants.sendNotifications) else { return }
+        guard UserDefaults.standard.sendNotifications else { return }
         
         NSUserNotificationCenter.default.deliveredNotifications.forEach {
             if $0.identifier == Constants.notificationSleepId {
@@ -125,7 +118,7 @@ extension AppDelegate: PowerMgmtObserver {
         let notification = NSUserNotification()
         notification.identifier = Constants.notificationSleepId
         notification.title = "Barista turned off"
-        notification.subtitle = "Turned off after system went to sleep"
+        notification.informativeText = "Turned off after system went to sleep"
         notification.soundName = NSUserNotificationDefaultSoundName
         
         NSUserNotificationCenter.default.deliver(notification)
@@ -135,10 +128,6 @@ extension AppDelegate: PowerMgmtObserver {
 
 // MARK: - User Notifications
 extension AppDelegate: NSUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: NSUserNotificationCenter, didDeliver notification: NSUserNotification) {
-
-    }
-    
     func userNotificationCenter(_ center: NSUserNotificationCenter, didActivate notification: NSUserNotification) {
         guard notification.identifier == Constants.notificationSleepId else { return }
         

@@ -87,7 +87,7 @@ class MenuController: NSObject {
         }
         
         // Update List of Apps if wanted
-        guard optionKeyUsed || UserDefaults.standard.bool(forKey: Constants.alwaysShowApps) else { return }
+        guard verbose || UserDefaults.standard.alwaysShowApps else { return }
         
         if let apps = powerMgmtController.assertionsByApp() {
             appListItem.isHidden = false
@@ -111,7 +111,7 @@ class MenuController: NSObject {
                 menu.insertItem(appItem, at: index)
                 
                 // Add Verbose Information if wanted
-                guard optionKeyUsed else { continue }
+                guard verbose else { continue }
                 
                 let startDate = list.reduce(Date.distantFuture) { min($0, $1.timeStarted) }
                 let startFormatter = DateFormatter()
@@ -192,7 +192,7 @@ extension MenuController: NSMenuDelegate {
     func menuNeedsUpdate(_ menu: NSMenu) {
         guard menu == self.menu else { return }
         
-        self.optionKeyUsed = (NSApp.currentEvent?.modifierFlags.contains(.option))!
+        self.verbose = self.verbose || (NSApp.currentEvent?.modifierFlags.contains(.option))!
         self.updateMenu()
     }
     
@@ -203,7 +203,7 @@ extension MenuController: NSMenuDelegate {
     }
     
     func menuDidClose(_ menu: NSMenu) {
-        self.optionKeyUsed = false
+        self.verbose = false
         self.timer?.invalidate()
         self.timer = nil
     }

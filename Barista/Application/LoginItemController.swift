@@ -37,9 +37,9 @@ class LoginItemController: NSObject {
         
         // Check if app should start at login...
         // ...and bind UserDefaults to the loginItemController to monitor all changes
-        self.enabled = UserDefaults.standard.bool(forKey: Constants.shouldLaunchAtLogin)
+        self.enabled = UserDefaults.standard.shouldLaunchAtLogin
         UserDefaults.standard.bind(
-            NSBindingName(rawValue: Constants.shouldLaunchAtLogin),
+            NSBindingName(rawValue: UserDefaults.Keys.shouldLaunchAtLogin),
             to: self,
             withKeyPath: "enabled",
             options: nil)

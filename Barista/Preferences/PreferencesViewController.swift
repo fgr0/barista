@@ -28,9 +28,9 @@ class PreferencesViewController: NSViewController {
         slider.labelForTickMarks = [0, 3, 6, 9, 12]
         
         // Register Timeout with User Defaults
-        self.defaultTimeout = UserDefaults.standard.integer(forKey: Constants.defaultTimeout)
+        self.defaultTimeout = UserDefaults.standard.defaultTimeout
         UserDefaults.standard.bind(
-            NSBindingName(rawValue: Constants.defaultTimeout),
+            NSBindingName(rawValue: UserDefaults.Keys.defaultTimeout),
             to: self,
             withKeyPath: "defaultTimeout",
             options: nil)

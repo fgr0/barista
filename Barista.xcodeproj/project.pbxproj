@@ -14,6 +14,7 @@
 		819C75D01FA3841500A72238 /* TimeIntervalSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819C75CF1FA3841500A72238 /* TimeIntervalSliderCell.swift */; };
 		81A04B181FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A04B171FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift */; };
 		81A04B1A1FA24F5A00C1B87B /* TimeIntervalSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A04B191FA24F5A00C1B87B /* TimeIntervalSlider.swift */; };
+		81BBEFA5200E3FED0049D094 /* UserDefaults+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BBEFA4200E3FED0049D094 /* UserDefaults+Keys.swift */; };
 		81CFBBEB1EFADC23008DFA81 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFBBEA1EFADC23008DFA81 /* PreferencesViewController.swift */; };
 		81E06BA21EE828D5002D1651 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E06BA01EE828D5002D1651 /* PreferencesWindowController.swift */; };
 		81E06BA51EE829C7002D1651 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81E06BA41EE829C7002D1651 /* Preferences.storyboard */; };
@@ -58,6 +59,7 @@
 		819C75CF1FA3841500A72238 /* TimeIntervalSliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalSliderCell.swift; sourceTree = "<group>"; };
 		81A04B171FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+SimpleFormat.swift"; sourceTree = "<group>"; };
 		81A04B191FA24F5A00C1B87B /* TimeIntervalSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimeIntervalSlider.swift; path = Barista/Preferences/TimeIntervalSlider.swift; sourceTree = SOURCE_ROOT; };
+		81BBEFA4200E3FED0049D094 /* UserDefaults+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Keys.swift"; sourceTree = "<group>"; };
 		81CFBBEA1EFADC23008DFA81 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		81E06BA01EE828D5002D1651 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PreferencesWindowController.swift; path = Barista/Preferences/PreferencesWindowController.swift; sourceTree = SOURCE_ROOT; };
 		81E06BA41EE829C7002D1651 /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			children = (
 				81A04B171FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift */,
 				8100C4011FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift */,
+				81BBEFA4200E3FED0049D094 /* UserDefaults+Keys.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -173,7 +176,6 @@
 				81E06B9D1EE825C1002D1651 /* Application */,
 				81E06B9F1EE8288B002D1651 /* Preferences */,
 				818A42181F0E807E0029527E /* Extensions */,
-				9DE472F319FF9E4C0089B49F /* Images.xcassets */,
 				9DE472ED19FF9E4C0089B49F /* Supporting Files */,
 			);
 			path = Barista;
@@ -182,6 +184,7 @@
 		9DE472ED19FF9E4C0089B49F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9DE472F319FF9E4C0089B49F /* Images.xcassets */,
 				9DE4730C19FF9E5B0089B49F /* Barista.entitlements */,
 				9DE472EE19FF9E4C0089B49F /* Info.plist */,
 				81E06BA61EE82AF3002D1651 /* PreferenceDefaults.plist */,
@@ -355,6 +358,7 @@
 				9EBFC6D01A1CB30900D1B158 /* LoginItemController.swift in Sources */,
 				81A04B181FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift in Sources */,
 				81CFBBEB1EFADC23008DFA81 /* PreferencesViewController.swift in Sources */,
+				81BBEFA5200E3FED0049D094 /* UserDefaults+Keys.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,21 +16,21 @@ class PowerMgmtController: NSObject {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.preventDisplaySleep = UserDefaults.standard.bool(forKey: Constants.preventDisplaySleep)
+        self.preventDisplaySleep = UserDefaults.standard.preventDisplaySleep
         
         UserDefaults.standard.bind(
-            NSBindingName(rawValue: Constants.preventDisplaySleep),
+            NSBindingName(rawValue: UserDefaults.Keys.preventDisplaySleep),
             to: self,
             withKeyPath: "preventDisplaySleep",
             options: nil)
         
-        if UserDefaults.standard.bool(forKey: Constants.shouldActivateOnLaunch) {
+        if UserDefaults.standard.shouldActivateOnLaunch {
             self.startAssertion()
         }
         
         NSWorkspace.shared.notificationCenter.addObserver(
         forName: NSWorkspace.didWakeNotification, object: nil, queue: nil) { _ in
-            guard UserDefaults.standard.bool(forKey: Constants.stopAtForcedSleep) else { return }
+            guard UserDefaults.standard.stopAtForcedSleep else { return }
             guard self.enabled else { return }
             
             self.notifyAssertionStoppedByWake()
@@ -47,6 +47,7 @@ class PowerMgmtController: NSObject {
     
     // MARK: - Managing the Assertion
     private var aid: IOPMAssertionID?
+    private var timer: Timer?
     
     private(set) var enabled: Bool {
         get {
@@ -108,11 +109,10 @@ class PowerMgmtController: NSObject {
     
     
     func startAssertion() {
-        if UserDefaults.standard.bool(forKey: Constants.endOfDaySelected) {
+        if UserDefaults.standard.endOfDaySelected {
             self.startAssertionForRestOfDay()
         } else {
-            self.startAssertion(withTimeout:
-                UInt(UserDefaults.standard.integer(forKey: Constants.defaultTimeout)))
+            self.startAssertion(withTimeout: UInt(UserDefaults.standard.defaultTimeout))
         }
     }
     
@@ -150,7 +150,11 @@ class PowerMgmtController: NSObject {
         self.aid = id
         
         if timeout > 0 {
-            startTimer(withTimeout: timeout)
+            self.timer = Timer.scheduledTimer(withTimeInterval: TimeInterval(timeout+5), repeats: false) { _ in
+                guard !self.enabled else { return }
+                self.notifyAssertionTimedOut(after: TimeInterval(timeout))
+                self.stopAssertion()
+            }
         }
         
         self.notifyAssertionChanged()
@@ -163,7 +167,7 @@ class PowerMgmtController: NSObject {
         IOPMAssertionRelease(self.aid!)
         self.aid = nil
         
-        self.stopTimer()
+        self.timer?.invalidate()
         self.notifyAssertionChanged()
     }
     
@@ -200,30 +204,7 @@ class PowerMgmtController: NSObject {
         
         return aP.isEmpty ? nil : aP.sorted { $0.0.localizedName! < $1.0.localizedName! }
     }
-    
-    
-    // MARK: - Timer
-    private var timer: Timer?
-    
-    private func startTimer(withTimeout timeout: UInt) {
-        // Invalidate any running timer
-        if let t = timer {
-            t.invalidate()
-        }
 
-        self.timer = Timer.scheduledTimer(withTimeInterval: TimeInterval(timeout+5), repeats: false) {_ in
-            // TODO: Error Handling
-            guard !self.enabled else { return }
-            
-            self.notifyAssertionTimedOut(after: TimeInterval(timeout))
-            self.stopAssertion()
-        }
-    }
-    
-    private func stopTimer() {
-        self.timer?.invalidate()
-    }
-    
     
     // MARK: - Observation
     private var observers = [PowerMgmtObserver]()
@@ -306,17 +287,6 @@ struct Assertion {
         }
         
         self.preventsDisplaySleep = pds
-    }
-}
-
-
-// MARK: Equatable Implementation
-extension Assertion: Hashable {
-    var hashValue: Int {
-        return Int(self.aid)
-    }
-    static func ==(lhs: Assertion, rhs: Assertion) -> Bool {
-        return (lhs.aid == rhs.aid)
     }
 }
 
