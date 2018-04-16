@@ -9,19 +9,25 @@
 import Cocoa
 import IOKit.pwr_mgt
 
-
 class PowerMgmtController: NSObject {
-    
+
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         
         self.preventDisplaySleep = UserDefaults.standard.preventDisplaySleep
+        self.shouldMonitor = UserDefaults.standard.shouldMonitor
         
         UserDefaults.standard.bind(
             NSBindingName(rawValue: UserDefaults.Keys.preventDisplaySleep),
             to: self,
-            withKeyPath: "preventDisplaySleep",
+            withKeyPath: #keyPath(preventDisplaySleep),
+            options: nil)
+        
+        UserDefaults.standard.bind(
+            NSBindingName(rawValue: UserDefaults.Keys.shouldMonitor),
+            to: self,
+            withKeyPath: #keyPath(shouldMonitor),
             options: nil)
         
         if UserDefaults.standard.shouldActivateOnLaunch {
@@ -39,7 +45,8 @@ class PowerMgmtController: NSObject {
     }
     
     deinit {
-        self.timer?.invalidate()
+        self.timeoutTimer?.invalidate()
+        self.monitorTimer?.invalidate()
         guard let id = self.aid else { return }
         IOPMAssertionRelease(id)
     }
@@ -47,7 +54,7 @@ class PowerMgmtController: NSObject {
     
     // MARK: - Managing the Assertion
     private var aid: IOPMAssertionID?
-    private var timer: Timer?
+    private var timeoutTimer: Timer?
     
     private(set) var enabled: Bool {
         get {
@@ -150,7 +157,7 @@ class PowerMgmtController: NSObject {
         self.aid = id
         
         if timeout > 0 {
-            self.timer = Timer.scheduledTimer(withTimeInterval: TimeInterval(timeout+5), repeats: false) { _ in
+            self.timeoutTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(timeout+5), repeats: false) { _ in
                 guard !self.enabled else { return }
                 self.notifyAssertionTimedOut(after: TimeInterval(timeout))
                 self.stopAssertion()
@@ -167,15 +174,67 @@ class PowerMgmtController: NSObject {
         IOPMAssertionRelease(self.aid!)
         self.aid = nil
         
-        self.timer?.invalidate()
+        self.timeoutTimer?.invalidate()
         self.notifyAssertionChanged()
     }
     
     
-    // MARK: - Information about Global Assertions
-    var assertingApps: [(NSRunningApplication, [Assertion])]?
+    // MARK: - Information about System Assertions
+    @objc dynamic var shouldMonitor: Bool = false {
+        didSet {
+            if self.shouldMonitor {
+                self.monitorTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { _ in
+                    guard let current = PowerMgmtController.assertionsStatus() else { return }
+                    
+                    if let last = self.lastStatus, last != current {
+                        self.notifySystemAssertionsChanged(current.preventingIdleSleep, current.preventingDisplaySleep)
+                    }
+                    
+                    self.lastStatus = current
+                }
+            } else {
+                self.monitorTimer?.invalidate()
+                self.lastStatus = nil
+            }
+        }
+    }
+    private var monitorTimer: Timer?
+    private var lastStatus: (preventingIdleSleep: Bool, preventingDisplaySleep: Bool)? = nil
     
-    func assertionsByApp() -> [(NSRunningApplication, [Assertion])]? {
+    class func assertionsStatus() -> (preventingIdleSleep: Bool, preventingDisplaySleep: Bool)? {
+        var assertionsStatus: Unmanaged<CFDictionary>?
+        
+        if IOPMCopyAssertionsStatus(&assertionsStatus) != kIOReturnSuccess {
+            fatalError("o.o")
+        }
+        
+        guard let state = assertionsStatus?.takeRetainedValue() as? [String: Bool] else { return nil }
+
+        var prevIdleSleep = false
+        var prevDisplaySleep = false
+        
+        for (type, level) in state {
+            guard level else { continue }
+            
+            switch type {
+            // Preventing Display Sleep
+            case "PreventUserIdleDisplaySleep":
+                prevDisplaySleep = true
+            // Preventing Idle Sleep
+            case "ApplePushServiceTask",
+                 "AwakeOnReservePower",
+                 "PreventUserIdleSystemSleep":
+                prevIdleSleep = true
+            // Unknown/Ignored Assertions (some of which do prevent sleep, but are usually very short-lived)
+            default:
+                break
+            }
+        }
+        
+        return (prevIdleSleep, prevDisplaySleep)
+    }
+    
+    class func assertionsByApp() -> [(NSRunningApplication, [Assertion])]? {
         var assertionsByProcess: Unmanaged<CFDictionary>?
         
         if IOPMCopyAssertionsByProcess(&assertionsByProcess) != kIOReturnSuccess {
@@ -229,6 +288,10 @@ class PowerMgmtController: NSObject {
         observers.forEach { $0.assertionStoppedByWake() }
     }
     
+    private func notifySystemAssertionsChanged(_ prevIdleSleep: Bool, _ prevDisplaySleep: Bool) {
+        observers.forEach { $0.systemAssertionsChanged(preventsIdleSleep: prevIdleSleep, preventsDisplaySleep: prevDisplaySleep)}
+    }
+    
     
     // MARK: - Helper
     fileprivate func makeDetailsString(_ time: UInt) -> String {
@@ -251,64 +314,5 @@ class PowerMgmtController: NSObject {
         guard let id = self.aid else { return }
         // TODO: Error Handling (Exceptions?)
         IOPMAssertionSetProperty(id, property as CFString, value)
-    }
-}
-
-
-// MARK: - Assertion Struct
-struct Assertion {
-    let aid: IOPMAssertionID
-    let preventsDisplaySleep: Bool
-    let details: String?
-    let timeStarted: Date
-    let timeout: UInt
-    
-    var timeLeft: UInt? {
-        guard self.timeout > 0 else { return nil }
-        return UInt(Int(self.timeout) + Int(self.timeStarted.timeIntervalSinceNow))
-    }
-    
-    init?(dict: [String: Any]) {
-        self.aid = dict["AssertionId"] as! IOPMAssertionID
-        self.details = dict[kIOPMAssertionDetailsKey] as? String
-        self.timeStarted = (dict["AssertStartWhen"] as? Date)!
-        self.timeout = UInt((dict[kIOPMAssertionTimeoutKey] as? Int) ?? 0)
-        
-        guard let s = dict["AssertionTrueType"] as? String else { return nil }
-        
-        var pds = false
-        switch s {
-        case "PreventUserIdleDisplaySleep":
-            pds = true
-        case "PreventUserIdleSystemSleep": break
-        default:
-            // We don't care about other assertion types atm
-            pds = false
-        }
-        
-        self.preventsDisplaySleep = pds
-    }
-}
-
-
-// MARK: - Observation
-protocol PowerMgmtObserver: class {
-    func assertionChanged(isRunning: Bool, preventDisplaySleep: Bool)
-    func assertionTimedOut(after: TimeInterval)
-    func assertionStoppedByWake()
-}
-
-// MARK: Observer Default Implementation
-extension PowerMgmtObserver {
-    func assertionChanged(isRunning: Bool, preventDisplaySleep: Bool) {
-        return
-    }
-    
-    func assertionTimedOut(after: TimeInterval) {
-        return
-    }
-    
-    func assertionStoppedByWake() {
-        return
     }
 }

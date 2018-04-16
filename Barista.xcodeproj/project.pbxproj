@@ -7,20 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8100C3F91FFEE1EB001ADA53 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 8100C3FB1FFEE1EB001ADA53 /* Localizable.stringsdict */; };
 		8100C4021FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8100C4011FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift */; };
 		81041F821FCB587A0029C9A7 /* PowerMgmtController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81041F811FCB587A0029C9A7 /* PowerMgmtController.swift */; };
 		8129093C1EDC750900072FC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE472EF19FF9E4C0089B49F /* AppDelegate.swift */; };
 		819C75D01FA3841500A72238 /* TimeIntervalSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819C75CF1FA3841500A72238 /* TimeIntervalSliderCell.swift */; };
 		81A04B181FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A04B171FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift */; };
 		81A04B1A1FA24F5A00C1B87B /* TimeIntervalSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A04B191FA24F5A00C1B87B /* TimeIntervalSlider.swift */; };
+		81B5B87C201D5A7E00361C0D /* Assertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B5B87B201D5A7E00361C0D /* Assertion.swift */; };
 		81BBEFA5200E3FED0049D094 /* UserDefaults+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BBEFA4200E3FED0049D094 /* UserDefaults+Keys.swift */; };
 		81BDE856200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BDE855200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift */; };
 		81CFBBEB1EFADC23008DFA81 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFBBEA1EFADC23008DFA81 /* PreferencesViewController.swift */; };
 		81E06BA21EE828D5002D1651 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E06BA01EE828D5002D1651 /* PreferencesWindowController.swift */; };
-		81E06BA51EE829C7002D1651 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81E06BA41EE829C7002D1651 /* Preferences.storyboard */; };
 		81E06BA71EE82AF3002D1651 /* PreferenceDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 81E06BA61EE82AF3002D1651 /* PreferenceDefaults.plist */; };
+		81E38DD2201D425700DC0D0B /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81E38DD4201D425700DC0D0B /* Preferences.storyboard */; };
 		81E76B771EDCCD0600610950 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E76B761EDCCD0600610950 /* MenuController.swift */; };
+		81F20D06200F8E3500FF7C39 /* PowerMgmtObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F20D05200F8E3500FF7C39 /* PowerMgmtObserver.swift */; };
 		9D1EA6A31A1B61540030C40F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1EA6A21A1B61540030C40F /* AppDelegate.swift */; };
 		9D1EA6A71A1B61540030C40F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D1EA6A61A1B61540030C40F /* Images.xcassets */; };
 		9D1EA6AA1A1B61540030C40F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D1EA6A81A1B61540030C40F /* Main.storyboard */; };
@@ -54,19 +55,20 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8100C3FA1FFEE1EB001ADA53 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		8100C4011FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMenu+insertDescItem.swift"; sourceTree = "<group>"; };
 		81041F811FCB587A0029C9A7 /* PowerMgmtController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerMgmtController.swift; sourceTree = "<group>"; };
 		819C75CF1FA3841500A72238 /* TimeIntervalSliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalSliderCell.swift; sourceTree = "<group>"; };
 		81A04B171FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+SimpleFormat.swift"; sourceTree = "<group>"; };
-		81A04B191FA24F5A00C1B87B /* TimeIntervalSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimeIntervalSlider.swift; path = Barista/Preferences/TimeIntervalSlider.swift; sourceTree = SOURCE_ROOT; };
+		81A04B191FA24F5A00C1B87B /* TimeIntervalSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalSlider.swift; sourceTree = "<group>"; };
+		81B5B87B201D5A7E00361C0D /* Assertion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assertion.swift; sourceTree = "<group>"; };
 		81BBEFA4200E3FED0049D094 /* UserDefaults+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Keys.swift"; sourceTree = "<group>"; };
 		81BDE855200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSStatusBarButton+CustomMouseClick.swift"; sourceTree = "<group>"; };
 		81CFBBEA1EFADC23008DFA81 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
-		81E06BA01EE828D5002D1651 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PreferencesWindowController.swift; path = Barista/Preferences/PreferencesWindowController.swift; sourceTree = SOURCE_ROOT; };
-		81E06BA41EE829C7002D1651 /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
+		81E06BA01EE828D5002D1651 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		81E06BA61EE82AF3002D1651 /* PreferenceDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PreferenceDefaults.plist; sourceTree = "<group>"; };
+		81E38DD3201D425700DC0D0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Preferences.storyboard; sourceTree = "<group>"; };
 		81E76B761EDCCD0600610950 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
+		81F20D05200F8E3500FF7C39 /* PowerMgmtObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerMgmtObserver.swift; sourceTree = "<group>"; };
 		9D1EA69E1A1B61540030C40F /* BaristaLaunchHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaristaLaunchHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D1EA6A11A1B61540030C40F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D1EA6A21A1B61540030C40F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -115,23 +117,48 @@
 		81E06B9D1EE825C1002D1651 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				9DE472F519FF9E4C0089B49F /* Menu.storyboard */,
-				81E76B761EDCCD0600610950 /* MenuController.swift */,
-				81041F811FCB587A0029C9A7 /* PowerMgmtController.swift */,
+				81E38DD1201D422000DC0D0B /* Menu */,
+				81E38DD0201D420600DC0D0B /* Preferences */,
 			);
 			path = Application;
 			sourceTree = "<group>";
 		};
-		81E06B9F1EE8288B002D1651 /* Preferences */ = {
+		81E38DCE201D412E00DC0D0B /* PowerMgmt */ = {
 			isa = PBXGroup;
 			children = (
-				81E06BA41EE829C7002D1651 /* Preferences.storyboard */,
-				81E06BA01EE828D5002D1651 /* PreferencesWindowController.swift */,
-				81CFBBEA1EFADC23008DFA81 /* PreferencesViewController.swift */,
+				81B5B87B201D5A7E00361C0D /* Assertion.swift */,
+				81041F811FCB587A0029C9A7 /* PowerMgmtController.swift */,
+				81F20D05200F8E3500FF7C39 /* PowerMgmtObserver.swift */,
+			);
+			path = PowerMgmt;
+			sourceTree = "<group>";
+		};
+		81E38DCF201D415300DC0D0B /* TimeIntervalSlider */ = {
+			isa = PBXGroup;
+			children = (
 				81A04B191FA24F5A00C1B87B /* TimeIntervalSlider.swift */,
 				819C75CF1FA3841500A72238 /* TimeIntervalSliderCell.swift */,
 			);
-			path = Preferences;
+			path = TimeIntervalSlider;
+			sourceTree = "<group>";
+		};
+		81E38DD0201D420600DC0D0B /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				81E38DD4201D425700DC0D0B /* Preferences.storyboard */,
+				81CFBBEA1EFADC23008DFA81 /* PreferencesViewController.swift */,
+				81E06BA01EE828D5002D1651 /* PreferencesWindowController.swift */,
+			);
+			name = Preferences;
+			sourceTree = "<group>";
+		};
+		81E38DD1201D422000DC0D0B /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				9DE472F519FF9E4C0089B49F /* Menu.storyboard */,
+				81E76B761EDCCD0600610950 /* MenuController.swift */,
+			);
+			name = Menu;
 			sourceTree = "<group>";
 		};
 		9D1EA69F1A1B61540030C40F /* BaristaLaunchHelper */ = {
@@ -176,8 +203,9 @@
 			isa = PBXGroup;
 			children = (
 				9DE472EF19FF9E4C0089B49F /* AppDelegate.swift */,
+				81E38DCF201D415300DC0D0B /* TimeIntervalSlider */,
+				81E38DCE201D412E00DC0D0B /* PowerMgmt */,
 				81E06B9D1EE825C1002D1651 /* Application */,
-				81E06B9F1EE8288B002D1651 /* Preferences */,
 				818A42181F0E807E0029527E /* Extensions */,
 				9DE472ED19FF9E4C0089B49F /* Supporting Files */,
 			);
@@ -191,7 +219,6 @@
 				9DE4730C19FF9E5B0089B49F /* Barista.entitlements */,
 				9DE472EE19FF9E4C0089B49F /* Info.plist */,
 				81E06BA61EE82AF3002D1651 /* PreferenceDefaults.plist */,
-				8100C3FB1FFEE1EB001ADA53 /* Localizable.stringsdict */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -243,7 +270,7 @@
 		9DE472E219FF9E4C0089B49F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Franz Greiling";
 				TargetAttributes = {
 					9D1EA69D1A1B61540030C40F = {
@@ -299,8 +326,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8100C3F91FFEE1EB001ADA53 /* Localizable.stringsdict in Resources */,
-				81E06BA51EE829C7002D1651 /* Preferences.storyboard in Resources */,
+				81E38DD2201D425700DC0D0B /* Preferences.storyboard in Resources */,
 				81E06BA71EE82AF3002D1651 /* PreferenceDefaults.plist in Resources */,
 				9DE472F419FF9E4C0089B49F /* Images.xcassets in Resources */,
 				9DE472F719FF9E4C0089B49F /* Menu.storyboard in Resources */,
@@ -353,9 +379,11 @@
 			files = (
 				8100C4021FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift in Sources */,
 				81E76B771EDCCD0600610950 /* MenuController.swift in Sources */,
+				81B5B87C201D5A7E00361C0D /* Assertion.swift in Sources */,
 				8129093C1EDC750900072FC3 /* AppDelegate.swift in Sources */,
 				81041F821FCB587A0029C9A7 /* PowerMgmtController.swift in Sources */,
 				81E06BA21EE828D5002D1651 /* PreferencesWindowController.swift in Sources */,
+				81F20D06200F8E3500FF7C39 /* PowerMgmtObserver.swift in Sources */,
 				819C75D01FA3841500A72238 /* TimeIntervalSliderCell.swift in Sources */,
 				81BDE856200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift in Sources */,
 				81A04B1A1FA24F5A00C1B87B /* TimeIntervalSlider.swift in Sources */,
@@ -377,12 +405,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		8100C3FB1FFEE1EB001ADA53 /* Localizable.stringsdict */ = {
+		81E38DD4201D425700DC0D0B /* Preferences.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				8100C3FA1FFEE1EB001ADA53 /* en */,
+				81E38DD3201D425700DC0D0B /* Base */,
 			);
-			name = Localizable.stringsdict;
+			name = Preferences.storyboard;
 			sourceTree = "<group>";
 		};
 		9D1EA6A81A1B61540030C40F /* Main.storyboard */ = {
@@ -451,12 +479,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -504,12 +534,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

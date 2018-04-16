@@ -11,7 +11,6 @@ import Cocoa
 class PreferencesViewController: NSViewController {
     @IBOutlet weak var launchAtLoginButton: NSButton!
     
-    @IBOutlet weak var buttonIndefinitly: NSButton!
     @IBOutlet @objc weak var buttonTurnOffAfter: NSButton!
     @IBOutlet weak var buttonTurnOffMorning: NSButton!
     
@@ -32,10 +31,11 @@ class PreferencesViewController: NSViewController {
         UserDefaults.standard.bind(
             NSBindingName(rawValue: UserDefaults.Keys.defaultTimeout),
             to: self,
-            withKeyPath: "defaultTimeout",
+            withKeyPath: #keyPath(defaultTimeout),
             options: nil)
         
         slider.timeValue = Double(self.defaultTimeout)
+        slider.isEnabled = !UserDefaults.standard.endOfDaySelected
 
         self.launchAtLoginButton.bind(
             NSBindingName("value"),
@@ -50,15 +50,7 @@ class PreferencesViewController: NSViewController {
     
     // MARK: - Interface Actions
     @IBAction func defaultDurationTypeSelected(_ sender: NSButton) {
-        slider.isEnabled = false
-
-        switch sender {
-        case buttonTurnOffAfter:
-            slider.isEnabled = true
-        case buttonTurnOffMorning:
-            break
-        default: break
-        }
+        slider.isEnabled = sender == buttonTurnOffAfter
     }
     
     @IBAction func durationSliderChanged(_ sender: TimeIntervalSlider) {

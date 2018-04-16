@@ -20,5 +20,7 @@
 	<false/>
 	<key>quickActivation</key>
 	<false/>
+	<key>shouldMonitor</key>
+	<false/>
 </dict>
 </plist>

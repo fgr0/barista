@@ -10,8 +10,6 @@ import Cocoa
 
 // Constants
 struct Constants {
-
-    
     static let notificationTimeoutId    = "barista.notification.timeout"
     static let notificationSleepId      = "barista.notification.sleep"
 }
@@ -127,8 +125,6 @@ extension AppDelegate: PowerMgmtObserver {
 // MARK: - User Notifications
 extension AppDelegate: NSUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: NSUserNotificationCenter, didActivate notification: NSUserNotification) {
-        guard notification.identifier == Constants.notificationSleepId else { return }
-        
         NSUserNotificationCenter.default.removeDeliveredNotification(notification)
     }
     

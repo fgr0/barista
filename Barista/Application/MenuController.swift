@@ -83,7 +83,7 @@ class MenuController: NSObject {
         
         // Update Time Remaining
         if let tl = powerMgmtController.timeLeft, tl > 0 {
-            let title = TimeInterval(tl).simpleFormat(style: .short, units: [.day, .hour, .minute, .second],
+            let title = TimeInterval(tl).simpleFormat(style: .short, units: [.day, .hour, .minute],
                                                       maxCount: 2, timeRemaining: true)!
             timeRemainingItem.title = title
             timeRemainingItem.isHidden = false
@@ -92,7 +92,7 @@ class MenuController: NSObject {
         // Update List of Apps if wanted
         guard verbose || UserDefaults.standard.alwaysShowApps else { return }
         
-        if let apps = powerMgmtController.assertionsByApp() {
+        if let apps = PowerMgmtController.assertionsByApp() {
             appListItem.isHidden = false
             appListSeparator.isHidden = false
             
@@ -124,7 +124,7 @@ class MenuController: NSObject {
 
                 let timeRemaining = list.reduce(0) { max($0, $1.timeLeft ?? 0)}
                 let timeoutString = TimeInterval(timeRemaining).simpleFormat(
-                    style: .short, units: [.day, .hour, .minute, .second], maxCount: 2)!
+                    style: .short, units: [.day, .hour, .minute], maxCount: 2)!
 
                 menu.insertDescItem(pdsString, at: index+1)
                 menu.insertDescItem("Started: \(startFormatter.string(from: startDate))", at: index+2)
@@ -175,6 +175,10 @@ class MenuController: NSObject {
 extension MenuController: PowerMgmtObserver {
     func assertionChanged(isRunning: Bool, preventDisplaySleep: Bool) {
         self.statusItem.button?.appearsDisabled = !isRunning
+    }
+    
+    func systemAssertionsChanged(preventsIdleSleep: Bool, preventsDisplaySleep: Bool) {
+
     }
 }
 
