@@ -234,14 +234,14 @@ class PowerMgmtController: NSObject {
         return (prevIdleSleep, prevDisplaySleep)
     }
     
-    class func assertionsByApp() -> [(NSRunningApplication, [Assertion])]? {
+    class func assertionsByApp() -> [(NSRunningApplication, [Assertion])] {
         var assertionsByProcess: Unmanaged<CFDictionary>?
         
         if IOPMCopyAssertionsByProcess(&assertionsByProcess) != kIOReturnSuccess {
             fatalError("o.o")
         }
         
-        guard let pids = assertionsByProcess?.takeRetainedValue() as? [Int: [[String: Any]]] else { return nil }
+        guard let pids = assertionsByProcess?.takeRetainedValue() as? [Int: [[String: Any]]] else { return [] }
         
         var aP = [(NSRunningApplication, [Assertion])]()
         
@@ -261,7 +261,7 @@ class PowerMgmtController: NSObject {
             aP.append((app, list))
         }
         
-        return aP.isEmpty ? nil : aP.sorted { $0.0.localizedName! < $1.0.localizedName! }
+        return aP.isEmpty ? [] : aP.sorted { $0.0.localizedName! < $1.0.localizedName! }
     }
 
     

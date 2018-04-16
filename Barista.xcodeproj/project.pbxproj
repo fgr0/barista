@@ -17,6 +17,7 @@
 		81BBEFA5200E3FED0049D094 /* UserDefaults+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BBEFA4200E3FED0049D094 /* UserDefaults+Keys.swift */; };
 		81BDE856200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BDE855200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift */; };
 		81CFBBEB1EFADC23008DFA81 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFBBEA1EFADC23008DFA81 /* PreferencesViewController.swift */; };
+		81DF37282084ED30005910CF /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 81DF37262084ED30005910CF /* Localizable.stringsdict */; };
 		81E06BA21EE828D5002D1651 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E06BA01EE828D5002D1651 /* PreferencesWindowController.swift */; };
 		81E06BA71EE82AF3002D1651 /* PreferenceDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 81E06BA61EE82AF3002D1651 /* PreferenceDefaults.plist */; };
 		81E38DD2201D425700DC0D0B /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81E38DD4201D425700DC0D0B /* Preferences.storyboard */; };
@@ -64,6 +65,7 @@
 		81BBEFA4200E3FED0049D094 /* UserDefaults+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Keys.swift"; sourceTree = "<group>"; };
 		81BDE855200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSStatusBarButton+CustomMouseClick.swift"; sourceTree = "<group>"; };
 		81CFBBEA1EFADC23008DFA81 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		81DF37272084ED30005910CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = Base; path = Base.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		81E06BA01EE828D5002D1651 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		81E06BA61EE82AF3002D1651 /* PreferenceDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PreferenceDefaults.plist; sourceTree = "<group>"; };
 		81E38DD3201D425700DC0D0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Preferences.storyboard; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 		81E06B9D1EE825C1002D1651 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				81DF37262084ED30005910CF /* Localizable.stringsdict */,
 				81E38DD1201D422000DC0D0B /* Menu */,
 				81E38DD0201D420600DC0D0B /* Preferences */,
 			);
@@ -329,6 +332,7 @@
 				81E38DD2201D425700DC0D0B /* Preferences.storyboard in Resources */,
 				81E06BA71EE82AF3002D1651 /* PreferenceDefaults.plist in Resources */,
 				9DE472F419FF9E4C0089B49F /* Images.xcassets in Resources */,
+				81DF37282084ED30005910CF /* Localizable.stringsdict in Resources */,
 				9DE472F719FF9E4C0089B49F /* Menu.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,6 +409,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		81DF37262084ED30005910CF /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				81DF37272084ED30005910CF /* Base */,
+			);
+			name = Localizable.stringsdict;
+			sourceTree = "<group>";
+		};
 		81E38DD4201D425700DC0D0B /* Preferences.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

@@ -92,45 +92,48 @@ class MenuController: NSObject {
         // Update List of Apps if wanted
         guard verbose || UserDefaults.standard.alwaysShowApps else { return }
         
-        if let apps = PowerMgmtController.assertionsByApp() {
-            appListItem.isHidden = false
-            appListSeparator.isHidden = false
+        let apps = PowerMgmtController.assertionsByApp()
+        let numString = String.localizedStringWithFormat(
+            NSLocalizedString("number_apps", comment: ""), apps.count)
+        
+        appListItem.isHidden = false
+        appListSeparator.isHidden = false
+        appListItem.title = "\(numString) Preventing Sleep"
+        
+        for (app, list) in apps {
+            let index = menu.index(of: appListSeparator)
+            let numString = String.localizedStringWithFormat(
+                NSLocalizedString("number_assertions", comment: ""), list.count)
+            let pdsString = "Prevents \(list.contains { $0.preventsDisplaySleep } ? "Display" : "Idle") Sleep"
             
-            for (app, list) in apps {
-                let index = menu.index(of: appListSeparator)
-                let numString = String.localizedStringWithFormat(
-                    NSLocalizedString( "number_assertions", comment: ""), list.count)
-                let pdsString = "Prevents \(list.contains { $0.preventsDisplaySleep } ? "Display" : "Idle") Sleep"
-                
-                let appItem = NSMenuItem()
-                appItem.tag = 1
-                appItem.title = app.localizedName!
-                appItem.toolTip = numString + "; " + pdsString
-                appItem.image = app.icon
-                appItem.image?.size = CGSize(width: 16, height: 16)
-                appItem.representedObject = app
-                appItem.target = self
-                appItem.action = #selector(applicationAction(_:))
-                menu.insertItem(appItem, at: index)
-                
-                // Add Verbose Information if wanted
-                guard verbose else { continue }
-                
-                let startDate = list.reduce(Date.distantFuture) { min($0, $1.timeStarted) }
-                let startFormatter = DateFormatter()
-                startFormatter.dateStyle = .long
-                startFormatter.timeStyle = .short
-                startFormatter.doesRelativeDateFormatting = true
-
-                let timeRemaining = list.reduce(0) { max($0, $1.timeLeft ?? 0)}
-                let timeoutString = TimeInterval(timeRemaining).simpleFormat(
-                    style: .short, units: [.day, .hour, .minute], maxCount: 2)!
-
-                menu.insertDescItem(pdsString, at: index+1)
-                menu.insertDescItem("Started: \(startFormatter.string(from: startDate))", at: index+2)
-                if timeRemaining > 0 {
-                    menu.insertDescItem("Timeout in: \(timeoutString)", at: index+3)
-                }
+            let appItem = NSMenuItem()
+            appItem.tag = 1
+            appItem.title = app.localizedName!
+            appItem.toolTip = numString + "; " + pdsString
+            appItem.image = app.icon
+            appItem.image?.size = CGSize(width: 16, height: 16)
+            appItem.representedObject = app
+            appItem.target = self
+            appItem.action = #selector(applicationAction(_:))
+            menu.insertItem(appItem, at: index)
+            
+            // Add Verbose Information if wanted
+            guard verbose else { continue }
+            
+            let startDate = list.reduce(Date.distantFuture) { min($0, $1.timeStarted) }
+            let startFormatter = DateFormatter()
+            startFormatter.dateStyle = .long
+            startFormatter.timeStyle = .short
+            startFormatter.doesRelativeDateFormatting = true
+            
+            let timeRemaining = list.reduce(0) { max($0, $1.timeLeft ?? 0)}
+            let timeoutString = TimeInterval(timeRemaining).simpleFormat(
+                style: .short, units: [.day, .hour, .minute], maxCount: 2)!
+            
+            menu.insertDescItem(pdsString, at: index+1)
+            menu.insertDescItem("Started: \(startFormatter.string(from: startDate))", at: index+2)
+            if timeRemaining > 0 {
+                menu.insertDescItem("Timeout in: \(timeoutString)", at: index+3)
             }
         }
     }
