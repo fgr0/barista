@@ -36,11 +36,11 @@
             <objects>
                 <viewController id="9z5-fK-87E" customClass="PreferencesViewController" customModule="Barista" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="dgK-UL-YRR">
-                        <rect key="frame" x="0.0" y="0.0" width="520" height="354"/>
+                        <rect key="frame" x="0.0" y="0.0" width="520" height="315"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <imageView translatesAutoresizingMaskIntoConstraints="NO" id="NjJ-he-Oo6">
-                                <rect key="frame" x="20" y="270" width="64" height="64"/>
+                                <rect key="frame" x="20" y="231" width="64" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="64" id="8HU-jW-OM2"/>
                                     <constraint firstAttribute="width" secondItem="NjJ-he-Oo6" secondAttribute="height" multiplier="1:1" id="axk-fT-aNn"/>
@@ -48,7 +48,7 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="NSApplicationIcon" id="nWX-9r-r6x"/>
                             </imageView>
                             <textField verticalHuggingPriority="500" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="BCs-6U-Fcn">
-                                <rect key="frame" x="103" y="300" width="399" height="34"/>
+                                <rect key="frame" x="103" y="261" width="399" height="34"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Barista is a small Application that lives in your Menu Bar and controlls if you Mac can go to sleep." id="INF-BJ-ltv">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -56,7 +56,7 @@
                                 </textFieldCell>
                             </textField>
                             <tabView horizontalHuggingPriority="1" verticalHuggingPriority="1" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="Y4u-uH-soO">
-                                <rect key="frame" x="13" y="10" width="494" height="245"/>
+                                <rect key="frame" x="13" y="10" width="494" height="206"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
                                     <tabViewItem label="General" identifier="1" id="NiL-Ir-eVw">
@@ -337,6 +337,103 @@
                                             </constraints>
                                         </view>
                                     </tabViewItem>
+                                    <tabViewItem label="Advanced" identifier="3" id="u37-aS-xJX">
+                                        <view key="view" id="Zep-2J-x2c">
+                                            <rect key="frame" x="10" y="33" width="474" height="160"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xEL-7z-sHW">
+                                                    <rect key="frame" x="153" y="122" width="279" height="18"/>
+                                                    <buttonCell key="cell" type="check" title="Show information about other applications" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="NZq-Uy-pO2">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                        <connections>
+                                                            <binding destination="WgO-NO-EhQ" name="value" keyPath="values.showAdvancedInformation" id="7wu-Ve-ssa"/>
+                                                        </connections>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="showInformation:" target="9z5-fK-87E" id="AtQ-sl-Mtu"/>
+                                                    </connections>
+                                                </button>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8Xk-6t-YCZ">
+                                                    <rect key="frame" x="72" y="123" width="73" height="17"/>
+                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Monitoring:" id="WgW-9x-7kw">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="7Ht-wE-Z7a">
+                                                    <rect key="frame" x="173" y="88" width="274" height="28"/>
+                                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Hint: You can always get full information by Option-Clicking on the Menu Bar Icon" id="26B-DP-SWz">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="6" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jWL-JO-euk">
+                                                    <rect key="frame" x="175" y="20" width="183" height="60"/>
+                                                    <subviews>
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vd2-At-ZQ0">
+                                                            <rect key="frame" x="-1" y="43" width="117" height="18"/>
+                                                            <buttonCell key="cell" type="radio" title="Quick summary" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="1oS-jI-hTl">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="displayModeSelected:" target="9z5-fK-87E" id="wlH-Qe-HOL"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="oIq-0K-gvo">
+                                                            <rect key="frame" x="-1" y="21" width="177" height="18"/>
+                                                            <buttonCell key="cell" type="radio" title="Simple list of applications" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="izS-pS-CK3">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="displayModeSelected:" target="9z5-fK-87E" id="CQ7-U8-iGa"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="wHe-nf-tIL">
+                                                            <rect key="frame" x="-1" y="-1" width="186" height="18"/>
+                                                            <buttonCell key="cell" type="radio" title="Detailed list of applications" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="DZ9-SI-I1u">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="displayModeSelected:" target="9z5-fK-87E" id="K6i-47-O6O"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <visibilityPriorities>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                    </visibilityPriorities>
+                                                    <customSpacing>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                    </customSpacing>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="8Xk-6t-YCZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Zep-2J-x2c" secondAttribute="leading" constant="20" symbolic="YES" id="5k9-f0-e9a"/>
+                                                <constraint firstItem="xEL-7z-sHW" firstAttribute="leading" secondItem="8Xk-6t-YCZ" secondAttribute="trailing" constant="12" id="81v-CZ-Nsk"/>
+                                                <constraint firstItem="xEL-7z-sHW" firstAttribute="leading" secondItem="Zep-2J-x2c" secondAttribute="leading" constant="155" id="9ef-Zi-LgU"/>
+                                                <constraint firstItem="7Ht-wE-Z7a" firstAttribute="leading" secondItem="xEL-7z-sHW" secondAttribute="leading" constant="20" id="Aad-VW-zW3"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7Ht-wE-Z7a" secondAttribute="trailing" constant="20" symbolic="YES" id="CqS-7t-G4C"/>
+                                                <constraint firstItem="jWL-JO-euk" firstAttribute="top" secondItem="7Ht-wE-Z7a" secondAttribute="bottom" constant="8" symbolic="YES" id="Hei-Ou-urT"/>
+                                                <constraint firstItem="7Ht-wE-Z7a" firstAttribute="top" secondItem="xEL-7z-sHW" secondAttribute="bottom" constant="8" symbolic="YES" id="Ioe-Au-MTk"/>
+                                                <constraint firstItem="8Xk-6t-YCZ" firstAttribute="baseline" secondItem="xEL-7z-sHW" secondAttribute="baseline" id="J6u-8M-1wc"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jWL-JO-euk" secondAttribute="trailing" constant="20" symbolic="YES" id="MOb-03-yzw"/>
+                                                <constraint firstAttribute="bottom" secondItem="jWL-JO-euk" secondAttribute="bottom" constant="20" symbolic="YES" id="WER-Jx-T8N"/>
+                                                <constraint firstItem="8Xk-6t-YCZ" firstAttribute="top" secondItem="Zep-2J-x2c" secondAttribute="top" constant="20" symbolic="YES" id="XkR-r9-LWg"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xEL-7z-sHW" secondAttribute="trailing" constant="20" symbolic="YES" id="iAk-K9-1pT"/>
+                                                <constraint firstItem="oIq-0K-gvo" firstAttribute="leading" secondItem="7Ht-wE-Z7a" secondAttribute="leading" id="jDq-Zd-Gm2"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
                                 </tabViewItems>
                             </tabView>
                         </subviews>
@@ -356,6 +453,7 @@
                     <connections>
                         <outlet property="buttonTurnOffAfter" destination="sZr-a5-Ts1" id="I0s-a3-luk"/>
                         <outlet property="buttonTurnOffMorning" destination="pcq-UA-9wn" id="7Ow-XP-3Ph"/>
+                        <outlet property="displayModeStack" destination="jWL-JO-euk" id="cKC-zZ-61C"/>
                         <outlet property="launchAtLoginButton" destination="BAF-w1-IbD" id="JP9-pd-pcA"/>
                         <outlet property="selectedTimeField" destination="4Od-6K-7SH" id="FCj-TQ-uOp"/>
                         <outlet property="slider" destination="RkA-hE-iz0" id="nfX-k2-6eu"/>

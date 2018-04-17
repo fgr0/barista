@@ -15,12 +15,13 @@ extension UserDefaults {
         static let shouldLaunchAtLogin      = "shouldLaunchAtLogin"
         static let preventDisplaySleep      = "preventDisplaySleep"
         static let defaultTimeout           = "defaultTimeout"
-        static let alwaysShowApps           = "alwaysShowApps"
+        static let showAdvancedInformation  = "showAdvancedInformation"
         static let sendNotifications        = "sendNotifications"
         static let endOfDaySelected         = "endOfDaySelected"
         static let stopAtForcedSleep        = "stopAtForcedSleep"
         static let quickActivation          = "quickActivation"
-        static let shouldMonitor            = "shouldMonitor"
+        static let backgroundMonitoring     = "backgroundMonitoring"
+        static let verbosityLevel           = "verbosityLevel"
     }
     
     // MARK: - Convenience Accessors
@@ -44,9 +45,9 @@ extension UserDefaults {
         get { return integer(forKey: UserDefaults.Keys.defaultTimeout) }
     }
     
-    @objc dynamic var alwaysShowApps: Bool {
-        set(always) { set(always, forKey: UserDefaults.Keys.alwaysShowApps) }
-        get { return bool(forKey: UserDefaults.Keys.alwaysShowApps) }
+    @objc dynamic var showAdvancedInformation: Bool {
+        set(always) { set(always, forKey: UserDefaults.Keys.showAdvancedInformation) }
+        get { return bool(forKey: UserDefaults.Keys.showAdvancedInformation) }
     }
     
     @objc dynamic var sendNotifications: Bool {
@@ -70,8 +71,13 @@ extension UserDefaults {
     }
     
     
-    @objc dynamic var shouldMonitor: Bool {
-        set(should) { set(should, forKey: UserDefaults.Keys.shouldMonitor) }
-        get { return bool(forKey: UserDefaults.Keys.shouldMonitor) }
+    @objc dynamic var backgroundMonitoring: Bool {
+        set(should) { set(should, forKey: UserDefaults.Keys.backgroundMonitoring) }
+        get { return bool(forKey: UserDefaults.Keys.backgroundMonitoring) }
+    }
+    
+    @objc dynamic var verbosityLevel: Int {
+        set(level) { set(level, forKey: UserDefaults.Keys.verbosityLevel) }
+        get { return integer(forKey: UserDefaults.Keys.verbosityLevel) }
     }
 }

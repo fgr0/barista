@@ -17,6 +17,8 @@ class PreferencesViewController: NSViewController {
     @IBOutlet weak var slider: TimeIntervalSlider!
     @IBOutlet weak var selectedTimeField: NSTextField!
     
+    @IBOutlet weak var displayModeStack: NSStackView!
+  
     @objc dynamic private var defaultTimeout: Int = 0
     
     // MARK: - View Events
@@ -46,11 +48,33 @@ class PreferencesViewController: NSViewController {
                 NSBindingOption.conditionallySetsEnabled: true
             ]
         )
+        
+        
+        // Set correct mode
+        displayModeStack.views.forEach {view in
+            let rb = view as! NSButton
+            rb.state = rb.tag == UserDefaults.standard.verbosityLevel ? .on : .off
+        }
+        
+        displayModeStack.views.forEach {view in
+            let rb = view as! NSButton
+            rb.isEnabled = UserDefaults.standard.showAdvancedInformation
+        }
     }
     
     // MARK: - Interface Actions
     @IBAction func defaultDurationTypeSelected(_ sender: NSButton) {
         slider.isEnabled = sender == buttonTurnOffAfter
+    }
+    
+    @IBAction func showInformation(_ sender: NSButton) {
+        displayModeStack.views.forEach {rb in
+            (rb as? NSButton)?.isEnabled = sender.state == NSControl.StateValue.on
+        }
+    }
+    
+    @IBAction func displayModeSelected(_ sender: NSButton) {
+        UserDefaults.standard.verbosityLevel = sender.tag
     }
     
     @IBAction func durationSliderChanged(_ sender: TimeIntervalSlider) {

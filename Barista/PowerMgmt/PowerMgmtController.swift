@@ -16,7 +16,7 @@ class PowerMgmtController: NSObject {
         super.awakeFromNib()
         
         self.preventDisplaySleep = UserDefaults.standard.preventDisplaySleep
-        self.shouldMonitor = UserDefaults.standard.shouldMonitor
+        self.shouldMonitor = UserDefaults.standard.backgroundMonitoring
         
         UserDefaults.standard.bind(
             NSBindingName(rawValue: UserDefaults.Keys.preventDisplaySleep),
@@ -25,7 +25,7 @@ class PowerMgmtController: NSObject {
             options: nil)
         
         UserDefaults.standard.bind(
-            NSBindingName(rawValue: UserDefaults.Keys.shouldMonitor),
+            NSBindingName(rawValue: UserDefaults.Keys.backgroundMonitoring),
             to: self,
             withKeyPath: #keyPath(shouldMonitor),
             options: nil)
