@@ -11,6 +11,8 @@
 		81041F821FCB587A0029C9A7 /* PowerMgmtController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81041F811FCB587A0029C9A7 /* PowerMgmtController.swift */; };
 		8129093C1EDC750900072FC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE472EF19FF9E4C0089B49F /* AppDelegate.swift */; };
 		819C75D01FA3841500A72238 /* TimeIntervalSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819C75CF1FA3841500A72238 /* TimeIntervalSliderCell.swift */; };
+		819D93462088D7E500545789 /* About.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 819D93442088D7E500545789 /* About.rtf */; };
+		819D934C2088F2C200545789 /* ClickableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819D934B2088F2C200545789 /* ClickableTextField.swift */; };
 		81A04B181FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A04B171FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift */; };
 		81A04B1A1FA24F5A00C1B87B /* TimeIntervalSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A04B191FA24F5A00C1B87B /* TimeIntervalSlider.swift */; };
 		81B5B87C201D5A7E00361C0D /* Assertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B5B87B201D5A7E00361C0D /* Assertion.swift */; };
@@ -27,7 +29,6 @@
 		9D1EA6A71A1B61540030C40F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D1EA6A61A1B61540030C40F /* Images.xcassets */; };
 		9D1EA6AA1A1B61540030C40F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D1EA6A81A1B61540030C40F /* Main.storyboard */; };
 		9D1EA6C01A1B62C80030C40F /* BaristaLaunchHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D1EA69E1A1B61540030C40F /* BaristaLaunchHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		9DE472F419FF9E4C0089B49F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DE472F319FF9E4C0089B49F /* Images.xcassets */; };
 		9DE472F719FF9E4C0089B49F /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DE472F519FF9E4C0089B49F /* Menu.storyboard */; };
 		9EBFC6D01A1CB30900D1B158 /* AppDelegate+LoginItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBFC6CF1A1CB30900D1B158 /* AppDelegate+LoginItem.swift */; };
 /* End PBXBuildFile section */
@@ -59,6 +60,8 @@
 		8100C4011FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMenu+insertDescItem.swift"; sourceTree = "<group>"; };
 		81041F811FCB587A0029C9A7 /* PowerMgmtController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerMgmtController.swift; sourceTree = "<group>"; };
 		819C75CF1FA3841500A72238 /* TimeIntervalSliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalSliderCell.swift; sourceTree = "<group>"; };
+		819D93452088D7E500545789 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = Base; path = Base.lproj/About.rtf; sourceTree = "<group>"; };
+		819D934B2088F2C200545789 /* ClickableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickableTextField.swift; sourceTree = "<group>"; };
 		81A04B171FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+SimpleFormat.swift"; sourceTree = "<group>"; };
 		81A04B191FA24F5A00C1B87B /* TimeIntervalSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalSlider.swift; sourceTree = "<group>"; };
 		81B5B87B201D5A7E00361C0D /* Assertion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assertion.swift; sourceTree = "<group>"; };
@@ -80,7 +83,6 @@
 		9DE472EA19FF9E4C0089B49F /* Barista.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Barista.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DE472EE19FF9E4C0089B49F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DE472EF19FF9E4C0089B49F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9DE472F319FF9E4C0089B49F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9DE472F619FF9E4C0089B49F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Menu.storyboard; sourceTree = "<group>"; };
 		9DE4730C19FF9E5B0089B49F /* Barista.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Barista.entitlements; sourceTree = "<group>"; };
 		9EBFC6CF1A1CB30900D1B158 /* AppDelegate+LoginItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+LoginItem.swift"; sourceTree = "<group>"; };
@@ -116,33 +118,27 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		819D934D2088F54200545789 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				819D934B2088F2C200545789 /* ClickableTextField.swift */,
+				81A04B191FA24F5A00C1B87B /* TimeIntervalSlider.swift */,
+				819C75CF1FA3841500A72238 /* TimeIntervalSliderCell.swift */,
+				81B5B87B201D5A7E00361C0D /* Assertion.swift */,
+				81041F811FCB587A0029C9A7 /* PowerMgmtController.swift */,
+				81F20D05200F8E3500FF7C39 /* PowerMgmtObserver.swift */,
+				818A42181F0E807E0029527E /* Extensions */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		81E06B9D1EE825C1002D1651 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				81DF37262084ED30005910CF /* Localizable.stringsdict */,
 				81E38DD1201D422000DC0D0B /* Menu */,
 				81E38DD0201D420600DC0D0B /* Preferences */,
 			);
 			path = Application;
-			sourceTree = "<group>";
-		};
-		81E38DCE201D412E00DC0D0B /* PowerMgmt */ = {
-			isa = PBXGroup;
-			children = (
-				81B5B87B201D5A7E00361C0D /* Assertion.swift */,
-				81041F811FCB587A0029C9A7 /* PowerMgmtController.swift */,
-				81F20D05200F8E3500FF7C39 /* PowerMgmtObserver.swift */,
-			);
-			path = PowerMgmt;
-			sourceTree = "<group>";
-		};
-		81E38DCF201D415300DC0D0B /* TimeIntervalSlider */ = {
-			isa = PBXGroup;
-			children = (
-				81A04B191FA24F5A00C1B87B /* TimeIntervalSlider.swift */,
-				819C75CF1FA3841500A72238 /* TimeIntervalSliderCell.swift */,
-			);
-			path = TimeIntervalSlider;
 			sourceTree = "<group>";
 		};
 		81E38DD0201D420600DC0D0B /* Preferences */ = {
@@ -206,10 +202,8 @@
 			isa = PBXGroup;
 			children = (
 				9DE472EF19FF9E4C0089B49F /* AppDelegate.swift */,
-				81E38DCF201D415300DC0D0B /* TimeIntervalSlider */,
-				81E38DCE201D412E00DC0D0B /* PowerMgmt */,
+				819D934D2088F54200545789 /* Classes */,
 				81E06B9D1EE825C1002D1651 /* Application */,
-				818A42181F0E807E0029527E /* Extensions */,
 				9DE472ED19FF9E4C0089B49F /* Supporting Files */,
 			);
 			path = Barista;
@@ -218,7 +212,8 @@
 		9DE472ED19FF9E4C0089B49F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				9DE472F319FF9E4C0089B49F /* Images.xcassets */,
+				819D93442088D7E500545789 /* About.rtf */,
+				81DF37262084ED30005910CF /* Localizable.stringsdict */,
 				9DE4730C19FF9E5B0089B49F /* Barista.entitlements */,
 				9DE472EE19FF9E4C0089B49F /* Info.plist */,
 				81E06BA61EE82AF3002D1651 /* PreferenceDefaults.plist */,
@@ -329,9 +324,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				819D93462088D7E500545789 /* About.rtf in Resources */,
 				81E38DD2201D425700DC0D0B /* Preferences.storyboard in Resources */,
 				81E06BA71EE82AF3002D1651 /* PreferenceDefaults.plist in Resources */,
-				9DE472F419FF9E4C0089B49F /* Images.xcassets in Resources */,
 				81DF37282084ED30005910CF /* Localizable.stringsdict in Resources */,
 				9DE472F719FF9E4C0089B49F /* Menu.storyboard in Resources */,
 			);
@@ -389,6 +384,7 @@
 				81E06BA21EE828D5002D1651 /* PreferencesWindowController.swift in Sources */,
 				81F20D06200F8E3500FF7C39 /* PowerMgmtObserver.swift in Sources */,
 				819C75D01FA3841500A72238 /* TimeIntervalSliderCell.swift in Sources */,
+				819D934C2088F2C200545789 /* ClickableTextField.swift in Sources */,
 				81BDE856200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift in Sources */,
 				81A04B1A1FA24F5A00C1B87B /* TimeIntervalSlider.swift in Sources */,
 				9EBFC6D01A1CB30900D1B158 /* AppDelegate+LoginItem.swift in Sources */,
@@ -409,6 +405,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		819D93442088D7E500545789 /* About.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				819D93452088D7E500545789 /* Base */,
+			);
+			name = About.rtf;
+			sourceTree = "<group>";
+		};
 		81DF37262084ED30005910CF /* Localizable.stringsdict */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -423,6 +427,7 @@
 				81E38DD3201D425700DC0D0B /* Base */,
 			);
 			name = Preferences.storyboard;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		9D1EA6A81A1B61540030C40F /* Main.storyboard */ = {
@@ -439,6 +444,7 @@
 				9DE472F619FF9E4C0089B49F /* Base */,
 			);
 			name = Menu.storyboard;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
