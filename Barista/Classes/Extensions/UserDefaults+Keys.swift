@@ -22,6 +22,7 @@ extension UserDefaults {
         static let quickActivation          = "quickActivation"
         static let backgroundMonitoring     = "backgroundMonitoring"
         static let verbosityLevel           = "verbosityLevel"
+        static let hadFirstLaunch           = "hadFirstLaunch"
     }
     
     // MARK: - Convenience Accessors
@@ -79,5 +80,10 @@ extension UserDefaults {
     @objc dynamic var verbosityLevel: Int {
         set(level) { set(level, forKey: UserDefaults.Keys.verbosityLevel) }
         get { return integer(forKey: UserDefaults.Keys.verbosityLevel) }
+    }
+    
+    @objc dynamic var hadFirstLaunch: Bool {
+        set(first) { set(first, forKey: UserDefaults.Keys.hadFirstLaunch) }
+        get { return bool(forKey: UserDefaults.Keys.hadFirstLaunch)}
     }
 }

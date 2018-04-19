@@ -38,6 +38,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         self.setupLaunchAtLogin()
         NSUserNotificationCenter.default.delegate = self
+        
+        // Check for first launch
+        if !UserDefaults.standard.hadFirstLaunch {
+            UserDefaults.standard.hadFirstLaunch = true
+            self.showPreferencesWindow(self)
+        }
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -58,7 +64,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     
     // MARK: - Preference Window
-    @IBAction func showPreferencesWindow(_ sender: NSMenuItem) {
+    @IBAction func showPreferencesWindow(_ sender: NSObject) {
         if self.preferenceWindowController == nil {
             self.preferenceWindowController = PreferencesWindowController.defaultController()
         }
