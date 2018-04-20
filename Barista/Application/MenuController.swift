@@ -62,6 +62,7 @@ class MenuController: NSObject {
     
     // MARK: - Update Menu Items
     private var timer: Timer?
+    private var override: Bool = false
 
     func updateMenu() {
         let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName")!
@@ -90,8 +91,7 @@ class MenuController: NSObject {
         
         // Update List of Apps if wanted
         
-        let overrite = (NSApp.currentEvent?.modifierFlags.contains(.option))!
-        guard overrite || UserDefaults.standard.showAdvancedInformation else { return }
+        guard override || UserDefaults.standard.showAdvancedInformation else { return }
         
         let apps = PowerMgmtController.assertionsByApp()
         let numString = String.localizedStringWithFormat(
@@ -101,7 +101,7 @@ class MenuController: NSObject {
         appListSeparator.isHidden = false
         appListItem.title = "\(numString) Preventing Sleep"
         
-        guard overrite || UserDefaults.standard.verbosityLevel >= 1 else { return }
+        guard override || UserDefaults.standard.verbosityLevel >= 1 else { return }
         
         for (app, list) in apps {
             let index = menu.index(of: appListSeparator)
@@ -121,7 +121,7 @@ class MenuController: NSObject {
             menu.insertItem(appItem, at: index)
             
             // Add Verbose Information if wanted
-            guard overrite || UserDefaults.standard.verbosityLevel >= 2 else { continue }
+            guard override || UserDefaults.standard.verbosityLevel >= 2 else { continue }
             
             let startDate = list.reduce(Date.distantFuture) { min($0, $1.timeStarted) }
             let startFormatter = DateFormatter()
@@ -193,7 +193,8 @@ extension MenuController: PowerMgmtObserver {
 extension MenuController: NSMenuDelegate {
     func menuNeedsUpdate(_ menu: NSMenu) {
         guard menu == self.menu else { return }
-
+        
+        self.override = (NSApp.currentEvent?.modifierFlags.contains(.option))!
         self.updateMenu()
     }
     
@@ -204,6 +205,7 @@ extension MenuController: NSMenuDelegate {
     }
     
     func menuDidClose(_ menu: NSMenu) {
+        self.override = false
         self.statusItem.button?.highlight(false)
         self.timer?.invalidate()
         self.timer = nil

@@ -6,7 +6,6 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
-        <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Window Controller-->
@@ -37,11 +36,11 @@
             <objects>
                 <viewController id="9z5-fK-87E" customClass="PreferencesViewController" customModule="Barista" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="dgK-UL-YRR">
-                        <rect key="frame" x="0.0" y="0.0" width="519" height="354"/>
+                        <rect key="frame" x="0.0" y="0.0" width="519" height="439"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <imageView translatesAutoresizingMaskIntoConstraints="NO" id="NjJ-he-Oo6">
-                                <rect key="frame" x="20" y="270" width="64" height="64"/>
+                                <rect key="frame" x="20" y="355" width="64" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="64" id="8HU-jW-OM2"/>
                                     <constraint firstAttribute="width" secondItem="NjJ-he-Oo6" secondAttribute="height" multiplier="1:1" id="axk-fT-aNn"/>
@@ -49,15 +48,15 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="NSApplicationIcon" id="nWX-9r-r6x"/>
                             </imageView>
                             <textField verticalHuggingPriority="500" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="BCs-6U-Fcn">
-                                <rect key="frame" x="103" y="300" width="371" height="34"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Barista is a small Application that lives in your Menu Bar and controlls if you Mac can go to sleep." id="INF-BJ-ltv">
+                                <rect key="frame" x="103" y="385" width="371" height="34"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Barista is a small Application that lives in your Menu Bar and controls if you Mac can go to sleep." id="INF-BJ-ltv">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <tabView horizontalHuggingPriority="1" verticalHuggingPriority="1" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="Y4u-uH-soO">
-                                <rect key="frame" x="13" y="10" width="493" height="245"/>
+                                <rect key="frame" x="13" y="10" width="493" height="330"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
                                     <tabViewItem label="General" identifier="1" id="NiL-Ir-eVw">
@@ -344,7 +343,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xEL-7z-sHW">
-                                                    <rect key="frame" x="153" y="122" width="279" height="18"/>
+                                                    <rect key="frame" x="138" y="122" width="279" height="18"/>
                                                     <buttonCell key="cell" type="check" title="Show information about other applications" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="NZq-Uy-pO2">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -357,7 +356,7 @@
                                                     </connections>
                                                 </button>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8Xk-6t-YCZ">
-                                                    <rect key="frame" x="72" y="123" width="73" height="17"/>
+                                                    <rect key="frame" x="57" y="123" width="73" height="17"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Monitoring:" id="WgW-9x-7kw">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -365,7 +364,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="7Ht-wE-Z7a">
-                                                    <rect key="frame" x="173" y="88" width="274" height="28"/>
+                                                    <rect key="frame" x="158" y="88" width="297" height="28"/>
                                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Hint: You can always get full information by Option-Clicking on the Menu Bar Icon" id="26B-DP-SWz">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -373,7 +372,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="6" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jWL-JO-euk">
-                                                    <rect key="frame" x="175" y="20" width="183" height="60"/>
+                                                    <rect key="frame" x="160" y="20" width="183" height="60"/>
                                                     <subviews>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vd2-At-ZQ0">
                                                             <rect key="frame" x="-1" y="43" width="117" height="18"/>
@@ -421,9 +420,9 @@
                                             <constraints>
                                                 <constraint firstItem="8Xk-6t-YCZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Zep-2J-x2c" secondAttribute="leading" constant="20" symbolic="YES" id="5k9-f0-e9a"/>
                                                 <constraint firstItem="xEL-7z-sHW" firstAttribute="leading" secondItem="8Xk-6t-YCZ" secondAttribute="trailing" constant="12" id="81v-CZ-Nsk"/>
-                                                <constraint firstItem="xEL-7z-sHW" firstAttribute="leading" secondItem="Zep-2J-x2c" secondAttribute="leading" constant="155" id="9ef-Zi-LgU"/>
+                                                <constraint firstItem="xEL-7z-sHW" firstAttribute="leading" secondItem="Zep-2J-x2c" secondAttribute="leading" constant="140" id="9ef-Zi-LgU"/>
                                                 <constraint firstItem="7Ht-wE-Z7a" firstAttribute="leading" secondItem="xEL-7z-sHW" secondAttribute="leading" constant="20" id="Aad-VW-zW3"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7Ht-wE-Z7a" secondAttribute="trailing" constant="20" symbolic="YES" id="CqS-7t-G4C"/>
+                                                <constraint firstAttribute="trailing" secondItem="7Ht-wE-Z7a" secondAttribute="trailing" constant="20" symbolic="YES" id="CqS-7t-G4C"/>
                                                 <constraint firstItem="jWL-JO-euk" firstAttribute="top" secondItem="7Ht-wE-Z7a" secondAttribute="bottom" constant="8" symbolic="YES" id="Hei-Ou-urT"/>
                                                 <constraint firstItem="7Ht-wE-Z7a" firstAttribute="top" secondItem="xEL-7z-sHW" secondAttribute="bottom" constant="8" symbolic="YES" id="Ioe-Au-MTk"/>
                                                 <constraint firstItem="8Xk-6t-YCZ" firstAttribute="baseline" secondItem="xEL-7z-sHW" secondAttribute="baseline" id="J6u-8M-1wc"/>
@@ -457,16 +456,16 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <scrollView horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="9tC-ic-FCY">
-                                                    <rect key="frame" x="16" y="104" width="441" height="160"/>
+                                                    <rect key="frame" x="16" y="114" width="441" height="150"/>
                                                     <clipView key="contentView" autoresizesSubviews="NO" drawsBackground="NO" copiesOnScroll="NO" id="hD0-fY-YMh">
-                                                        <rect key="frame" x="0.0" y="0.0" width="441" height="160"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="441" height="150"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <textView editable="NO" drawsBackground="NO" importsGraphics="NO" verticallyResizable="YES" findStyle="panel" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="dkf-l1-LOV">
-                                                                <rect key="frame" x="0.0" y="0.0" width="431" height="160"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="431" height="150"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                <size key="minSize" width="441" height="160"/>
+                                                                <size key="minSize" width="431" height="150"/>
                                                                 <size key="maxSize" width="463" height="10000000"/>
                                                                 <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                             </textView>
@@ -483,23 +482,23 @@
                                                     </scroller>
                                                 </scrollView>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="agp-St-xLy">
-                                                    <rect key="frame" x="111" y="79" width="76" height="17"/>
+                                                    <rect key="frame" x="111" y="89" width="79" height="17"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Homepage:" id="1Dx-sh-4Zd">
-                                                        <font key="font" metaFont="systemMedium" size="13"/>
+                                                        <font key="font" metaFont="systemBold"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                 </textField>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IzJ-cp-4bA">
-                                                    <rect key="frame" x="135" y="54" width="52" height="17"/>
+                                                    <rect key="frame" x="134" y="64" width="56" height="17"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Twitter:" id="NFp-PQ-mzS">
-                                                        <font key="font" metaFont="systemMedium" size="13"/>
+                                                        <font key="font" metaFont="systemBold"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                 </textField>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FrA-We-Oac" customClass="ClickableTextField" customModule="Barista" customModuleProvider="target">
-                                                    <rect key="frame" x="191" y="79" width="172" height="17"/>
+                                                    <rect key="frame" x="194" y="89" width="172" height="17"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" title="github.com/laerador/barista" usesSingleLineMode="YES" id="Vau-Zg-orM">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="systemBlueColor" catalog="System" colorSpace="catalog"/>
@@ -510,7 +509,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </textField>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EHI-Wu-i1m" customClass="ClickableTextField" customModule="Barista" customModuleProvider="target">
-                                                    <rect key="frame" x="191" y="54" width="66" height="17"/>
+                                                    <rect key="frame" x="194" y="64" width="66" height="17"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="@laerador" id="uzh-cq-Mf6">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="systemBlueColor" catalog="System" colorSpace="catalog"/>
@@ -536,8 +535,8 @@
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FrA-We-Oac" secondAttribute="trailing" constant="20" symbolic="YES" id="PUn-z5-HGk"/>
                                                 <constraint firstItem="IzJ-cp-4bA" firstAttribute="top" secondItem="agp-St-xLy" secondAttribute="bottom" constant="8" id="bQX-nn-Vpn"/>
                                                 <constraint firstAttribute="bottom" secondItem="kTE-I9-mmF" secondAttribute="bottom" constant="20" symbolic="YES" id="bv6-xp-ZSD"/>
-                                                <constraint firstItem="6Nd-VH-NZq" firstAttribute="top" secondItem="IzJ-cp-4bA" secondAttribute="bottom" constant="20" id="dGg-Kf-1GR"/>
-                                                <constraint firstItem="6Nd-VH-NZq" firstAttribute="top" secondItem="9tC-ic-FCY" secondAttribute="bottom" constant="70" id="gEb-UN-Ob3"/>
+                                                <constraint firstItem="6Nd-VH-NZq" firstAttribute="top" secondItem="IzJ-cp-4bA" secondAttribute="bottom" constant="30" id="dGg-Kf-1GR"/>
+                                                <constraint firstItem="6Nd-VH-NZq" firstAttribute="top" secondItem="9tC-ic-FCY" secondAttribute="bottom" constant="80" id="gEb-UN-Ob3"/>
                                                 <constraint firstItem="agp-St-xLy" firstAttribute="leading" secondItem="nP1-Nw-qVB" secondAttribute="leading" constant="113" id="gb6-ob-ATi"/>
                                                 <constraint firstItem="FrA-We-Oac" firstAttribute="leading" secondItem="agp-St-xLy" secondAttribute="trailing" constant="8" symbolic="YES" id="jqq-OG-50S"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="EHI-Wu-i1m" secondAttribute="trailing" constant="20" symbolic="YES" id="kgk-4p-jAZ"/>
