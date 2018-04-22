@@ -30,22 +30,24 @@ class TimeIntervalSlider: NSSlider {
     
     var timeValue: TimeInterval {
         set(value) {
-            for i in 0 ..< (timeIntervals.count - 1) {
-                if (value >= timeIntervals[i] && value <= timeIntervals[i+1]) {
-                    self.doubleValue = TimeIntervalSlider.mapValue(
-                        value,
-                        from: (timeIntervals[i], timeIntervals[i + 1]),
-                        to: (Double(i), Double(i + 1))
-                    )!
+            switch value {
+            case 0 where showInfinity:
+                self.doubleValue = self.closestTickMarkValue(toValue: self.maxValue)
+            case let x where x < timeIntervals[0]:
+                self.doubleValue = 0
+            case let x where x > timeIntervals[timeIntervals.count - 1]:
+                self.doubleValue = Double(timeIntervals.count - 1)
+            default:
+                for i in 0 ..< (timeIntervals.count - 1) {
+                    if (value >= timeIntervals[i] && value <= timeIntervals[i+1]) {
+                        self.doubleValue = TimeIntervalSlider.mapValue(
+                            value,
+                            from: (timeIntervals[i], timeIntervals[i + 1]),
+                            to: (Double(i), Double(i + 1))
+                            )!
+                    }
                 }
             }
-            
-            if value == 0 && showInfinity {
-                self.doubleValue = self.closestTickMarkValue(toValue: self.maxValue)
-            }
-            
-            // VALUE COULD NOT BE MAPPED
-            // TODO: Error Handling
         }
         get {
             let value = self.doubleValue
@@ -60,8 +62,6 @@ class TimeIntervalSlider: NSSlider {
                 }
             }
 
-            // VALUE COULD NOT BE MAPPED
-            // TODO: Error Handling
             return 0
         }
     }

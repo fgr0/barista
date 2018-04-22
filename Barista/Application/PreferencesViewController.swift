@@ -49,6 +49,7 @@ class PreferencesViewController: NSViewController {
         
         
         // MARK: Duration
+        // TODO: Make customizable by hidden user defaults setting
         slider.timeIntervals = [60, 300, 600, 900, 1800, 2700, 3600, 5400, 7200, 10800, 14400, 18000, 21600]
         slider.labelForTickMarks = [0, 3, 6, 9, 12]
         

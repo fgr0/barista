@@ -80,8 +80,8 @@ class PowerMgmtController: NSObject {
             props[kIOPMAssertionDetailsKey] = self.makeDetailsString(timeout) as CFString
             
             var newId = UInt32(kIOPMNullAssertionID)
-            if IOPMAssertionCreateWithProperties(props as CFDictionary, &newId) != kIOReturnSuccess {
-                fatalError("didn't expect this not to work")
+            guard IOPMAssertionCreateWithProperties(props as CFDictionary, &newId) == kIOReturnSuccess  else {
+                return
             }
             
             IOPMAssertionRelease(aid)
@@ -129,6 +129,7 @@ class PowerMgmtController: NSObject {
         var tomorrow = c.dateComponents([.day, .month, .year],
                                         from: c.date(byAdding: DateComponents(day: 1),
                                                      to: Date())!)
+        // TODO: Make this a user setting (at least a hidden default)
         tomorrow.hour = 2
         
         self.startAssertion(withTimeout: UInt((c.date(from: tomorrow)?.timeIntervalSinceNow)!))
@@ -150,8 +151,8 @@ class PowerMgmtController: NSObject {
         props[kIOPMAssertionTimeoutKey]         = timeout as CFNumber
         props[kIOPMAssertionDetailsKey]         = self.makeDetailsString(timeout) as CFString
 
-        if IOPMAssertionCreateWithProperties(props as CFDictionary, &id) != kIOReturnSuccess {
-            fatalError("didn't expect this not to work")
+        guard IOPMAssertionCreateWithProperties(props as CFDictionary, &id) == kIOReturnSuccess else {
+            return
         }
         
         self.aid = id
@@ -205,7 +206,7 @@ class PowerMgmtController: NSObject {
         var assertionsStatus: Unmanaged<CFDictionary>?
         
         if IOPMCopyAssertionsStatus(&assertionsStatus) != kIOReturnSuccess {
-            fatalError("o.o")
+            return nil
         }
         
         guard let state = assertionsStatus?.takeRetainedValue() as? [String: Bool] else { return nil }

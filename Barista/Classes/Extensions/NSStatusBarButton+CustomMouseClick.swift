@@ -8,6 +8,7 @@
 
 import Cocoa
 
+// Fix highlighting issues and implement Quick Activation feature
 extension NSStatusBarButton {
     override open func mouseDown(with event: NSEvent) {
         if UserDefaults.standard.quickActivation &&

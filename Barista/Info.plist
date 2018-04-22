@@ -29,7 +29,7 @@
 	<key>LSUIElement</key>
 	<true/>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2014 Franz Greiling. All rights reserved.</string>
+	<string>Copyright © 2014-2018 Franz Greiling. All rights reserved.</string>
 	<key>NSMainStoryboardFile</key>
 	<string>Menu</string>
 	<key>NSPrincipalClass</key>
