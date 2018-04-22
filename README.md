@@ -39,6 +39,13 @@ in several situations, for example when you are downloading a big file or
 running a long backup where you want to ensure that your Mac stays online but
 you don't need your displays running.
 
+Additionally, Barista can deactivate itself when the system is forced to sleep,
+for example when you select "Sleep" from the Apple menu, when you
+close your MacBook without another monitor attached, or your battery gets low.
+Usually the app would start to prevent sleep again as soon as your Mac wakes up,
+but that might not always be desirable. You can find this setting in the
+Preferences.
+
 ### Monitoring
 
 The second major feature of Barista is the ability to show other applications
