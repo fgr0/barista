@@ -3,7 +3,7 @@
 //  Barista
 //
 //  Created by Franz Greiling on 27.10.17.
-//  Copyright © 2017 Franz Greiling. All rights reserved.
+//  Copyright © 2018 Franz Greiling. All rights reserved.
 //
 
 import Cocoa

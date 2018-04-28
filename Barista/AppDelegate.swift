@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  Barista
 //
-//  Created by Franz Greiling on 28/10/14.
-//  Copyright (c) 2014 Franz Greiling. All rights reserved.
+//  Created by Franz Greiling on 28.10.14.
+//  Copyright (c) 2018 Franz Greiling. All rights reserved.
 //
 
 import Cocoa

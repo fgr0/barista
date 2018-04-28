@@ -3,7 +3,7 @@
 //  BaristaHelper
 //
 //  Created by Franz Greiling on 18.11.2014.
-//  Copyright (c) 2014 Franz Greiling. All rights reserved.
+//  Copyright (c) 2018 Franz Greiling. All rights reserved.
 //
 
 import Cocoa
