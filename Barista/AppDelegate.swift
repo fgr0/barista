@@ -2,109 +2,139 @@
 //  AppDelegate.swift
 //  Barista
 //
-//  Created by Franz Greiling on 28/10/14.
-//  Copyright (c) 2014 Franz Greiling. All rights reserved.
+//  Created by Franz Greiling on 28.10.14.
+//  Copyright (c) 2018 Franz Greiling. All rights reserved.
 //
 
 import Cocoa
 
-let appName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleName") as! String
-
-enum Settings: String {
-    case activateOnLaunch = "activateOnLaunch"
-    case launchOnStart = "launchOnStart"
-    case allowDisplaySleep = "allowDisplaySleep"
+// Constants
+struct Constants {
+    static let notificationTimeoutId    = "barista.notification.timeout"
+    static let notificationSleepId      = "barista.notification.sleep"
 }
 
+
+// MARK: -
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-    @IBOutlet var menu: NSMenu!
-    @IBOutlet var displaySleepItem: NSMenuItem!
-    @IBOutlet var activeItem: NSMenuItem!
-    @IBOutlet var toggleItem: NSMenuItem!
-    @IBOutlet var loginItem: NSMenuItem!
     
-    let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-2)
-    var assertion: PowerAssertion?
+    var preferenceWindowController: PreferencesWindowController?
+    @IBOutlet weak var powerMgmtController: PowerMgmtController!
+    
+    
+    // MARK: - Lifecycle
+    override init() {
+        super.init()
+        
+        registerDefaults()
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        powerMgmtController.addObserver(self)
+    }
+    
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+        self.setupLaunchAtLogin()
+        NSUserNotificationCenter.default.delegate = self
+        
+        // Check for first launch
+        if !UserDefaults.standard.hadFirstLaunch {
+            UserDefaults.standard.hadFirstLaunch = true
+            self.showPreferencesWindow(self)
+        }
+    }
+    
+    func applicationWillTerminate(_ aNotification: Notification) {
+        
+    }
+    
+    
+    // MARK: - UserDefaults
+    /// Load preference defaults from disk and register them with UserDefaults
+    func registerDefaults() {
+        guard let plist = Bundle.main.url(forResource: "PreferenceDefaults", withExtension: "plist"),
+            let defaults = NSDictionary(contentsOf: plist) as? [String: AnyObject]
+            else { NSLog("Unable to load Preference Defaults from Disk!"); return}
+        
+        UserDefaults.standard.register(defaults: defaults)
+        UserDefaults.standard.synchronize()
+    }
+    
+    
+    // MARK: - Preference Window
+    @IBAction func showPreferencesWindow(_ sender: NSObject) {
+        if self.preferenceWindowController == nil {
+            self.preferenceWindowController = PreferencesWindowController.defaultController()
+        }
+        
+        guard let prefWindow = self.preferenceWindowController?.window else { return }
+        
+        prefWindow.delegate = self
+        prefWindow.center()
+        prefWindow.makeKeyAndOrderFront(sender)
+        NSApp.activate(ignoringOtherApps: true)
+    }
+}
 
-    
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
-        // register user defaults
-        let defaults: Dictionary<String,AnyObject> = [
-            Settings.activateOnLaunch.rawValue : NSNumber(bool: false),
-            Settings.launchOnStart.rawValue : NSNumber(bool: false),
-            Settings.allowDisplaySleep.rawValue : NSNumber(bool: true)
-        ]
-        NSUserDefaults.standardUserDefaults().registerDefaults(defaults)
-        
-        // Setup assertion
-        let starttype: PowerAssertionType = NSUserDefaults.standardUserDefaults()
-            .valueForKey(Settings.allowDisplaySleep.rawValue) as! Bool ?
-                .PreventUserIdleSystemSleep : .PreventUserIdleDisplaySleep
-        
-        assertion = PowerAssertion(name: NSBundle.mainBundle().bundleIdentifier!, type: starttype, level: .On)
-        if assertion == nil {
-            fatalError("Could not create assertion, abort!")
-        }
-        
-        // Setup StatusBar Item
-        statusItem.button?.title = "zZ"
-        statusItem.button?.appearsDisabled = true
-        statusItem.menu = menu
-        
-        // Setup Target-Actions
-        displaySleepItem.target = self
-        displaySleepItem.action = #selector(AppDelegate.toggleDisplaySleep(_:))
-        displaySleepItem.bind(
-            "value", toObject: NSUserDefaultsController.sharedUserDefaultsController(),
-            withKeyPath: "values.allowDisplaySleep", options: [ "NSContinuouslyUpdatesValue" : NSNumber(bool: true) ]
-        )
-        
-        toggleItem.target = self
-        toggleItem.action = #selector(AppDelegate.toggleMode(_:))
-        
-        loginItem.bind(
-            "value", toObject: LoginItemController.sharedController(),
-            withKeyPath: "enabled", options: [ "NSContinuouslyUpdatesValue" : NSNumber(bool: true) ]
-        )
-        
-        // TODO: Find a nicer way to controll the Titles for the MenuItems
-        // Maybe possible with Bindings/Transformations?
-        setMode(NSUserDefaults.standardUserDefaults().valueForKey("activateOnLaunch") as! Bool ? .On : .Off)
-    }
 
-    func applicationWillTerminate(aNotification: NSNotification) {
-        // Insert code here to tear down your application
+// MARK: - Window Delegate Protocol
+extension AppDelegate: NSWindowDelegate {
+    func windowWillClose(_ notification: Notification) {
+        guard notification.object as? NSWindow == preferenceWindowController?.window else { return }
+        self.preferenceWindowController = nil
     }
-    
-    func setMode(mode: PowerAssertionLevel) {
-        switch mode {
-        case .On:
-            assertion?.level = .On
-            activeItem.title = "\(appName): On"
-            toggleItem.title = "Turn \(appName) Off"
-            statusItem.button?.appearsDisabled = false
-        case .Off:
-            assertion?.level = .Off
-            activeItem.title = "\(appName): Off"
-            toggleItem.title = "Turn \(appName) On"
-            statusItem.button?.appearsDisabled = true
-        }
-    }
-    
-    func toggleMode(sender: AnyObject) {
-        if assertion?.level == PowerAssertionLevel.On {
-            setMode(.Off)
-        } else {
-            setMode(.On)
-        }
-    }
+}
 
-    func toggleDisplaySleep(sender: AnyObject) {
-        if assertion?.type == PowerAssertionType.PreventUserIdleSystemSleep {
-            assertion?.type = PowerAssertionType.PreventUserIdleDisplaySleep
-        } else {
-            assertion?.type = PowerAssertionType.PreventUserIdleSystemSleep
+
+// MARK: - PowerMgmtObserver
+extension AppDelegate: PowerMgmtObserver {
+    func assertionTimedOut(after: TimeInterval) {
+        guard UserDefaults.standard.sendNotifications else { return }
+        
+        NSUserNotificationCenter.default.deliveredNotifications.forEach {
+            if $0.identifier == Constants.notificationTimeoutId {
+                NSUserNotificationCenter.default.removeDeliveredNotification($0)
+            }
         }
+
+        let notification = NSUserNotification()
+        notification.identifier = Constants.notificationTimeoutId
+        notification.title = "Barista turned off"
+        notification.informativeText = "Prevented Sleep for " + after.simpleFormat()!
+        notification.soundName = NSUserNotificationDefaultSoundName
+        
+        NSUserNotificationCenter.default.deliver(notification)
+    }
+    
+    func assertionStoppedByWake() {
+        guard UserDefaults.standard.sendNotifications else { return }
+        
+        NSUserNotificationCenter.default.deliveredNotifications.forEach {
+            if $0.identifier == Constants.notificationSleepId {
+                NSUserNotificationCenter.default.removeDeliveredNotification($0)
+            }
+        }
+
+        let notification = NSUserNotification()
+        notification.identifier = Constants.notificationSleepId
+        notification.title = "Barista turned off"
+        notification.informativeText = "Turned off after system went to sleep"
+        notification.soundName = NSUserNotificationDefaultSoundName
+        
+        NSUserNotificationCenter.default.deliver(notification)
+    }
+}
+
+
+// MARK: - User Notifications
+extension AppDelegate: NSUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: NSUserNotificationCenter, didActivate notification: NSUserNotification) {
+        NSUserNotificationCenter.default.removeDeliveredNotification(notification)
+    }
+    
+    func userNotificationCenter(_ center: NSUserNotificationCenter, shouldPresent notification: NSUserNotification) -> Bool {
+        return true
     }
 }
