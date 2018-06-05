@@ -72,7 +72,11 @@ it. Any help is greatly appreciated.
 
 ## Changelog
 
-- *[Version 1.0.0](../../releases/tag/v1.0.0)* (April 2018):
+- [Version 1.1.0 Beta](../../tree/version-1.1.0) (in development)
+  - [ ] Show Sleep-/Waketime and Uptime in Verbose Mode List certain System
+  - [ ] Show Applications that use Background Assertions (e.g. Time Machine)
+
+- **[Version 1.0.0 Beta](../../releases/tag/v1.0.0)** (April 2018):
   * Complete rewrite
   * Added Preference window
   * Added *Monitoring* feature
