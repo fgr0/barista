@@ -26,7 +26,7 @@ is welcome.
 ### Preventing sleep
 
 Barista's main function is to prevent your Mac from sleeping. You can choose if
-it will run forever, a set time, or until the next day (2am). Per default it
+it will run forever, a set time, or until the next morning (3am). Per default it
 will run until you manually disable it, but you can change the default in the
 Preferences. The menu also has an 'Activate for...' option, where you can choose
 how long to run for only this activation.
@@ -74,7 +74,9 @@ it. Any help is greatly appreciated.
 
 - [Version 1.1.0 Beta](../../tree/version-1.1.0) (in development)
   - [ ] Show Sleep-/Waketime and Uptime in Verbose Mode List certain System
-  - [ ] Show Applications that use Background Assertions (e.g. Time Machine)
+  - [x] Show Applications that use Background Assertions (e.g. Time Machine)
+  - [x] Adjusted "End-of-Day" behavior to use the next 3AM time slot instead of
+    always using 2AM the next day.
 
 - **[Version 1.0.0 Beta](../../releases/tag/v1.0.0)** (April 2018):
   * Complete rewrite

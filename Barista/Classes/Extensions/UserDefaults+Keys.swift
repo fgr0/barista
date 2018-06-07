@@ -23,6 +23,7 @@ extension UserDefaults {
         static let backgroundMonitoring     = "backgroundMonitoring"
         static let verbosityLevel           = "verbosityLevel"
         static let hadFirstLaunch           = "hadFirstLaunch"
+        static let endOfDayTime             = "endOfDayTime"
     }
     
     // MARK: - Convenience Accessors
@@ -85,5 +86,10 @@ extension UserDefaults {
     @objc dynamic var hadFirstLaunch: Bool {
         set(first) { set(first, forKey: UserDefaults.Keys.hadFirstLaunch) }
         get { return bool(forKey: UserDefaults.Keys.hadFirstLaunch)}
+    }
+    
+    @objc dynamic var endOfDayTime: Int {
+        set(time) { set(time, forKey: UserDefaults.Keys.endOfDayTime) }
+        get { return integer(forKey: UserDefaults.Keys.endOfDayTime) }
     }
 }

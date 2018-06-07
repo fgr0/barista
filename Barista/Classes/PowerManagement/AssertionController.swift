@@ -124,15 +124,19 @@ class AssertionController: NSObject {
     }
     
     func startAssertionForRestOfDay() {
-        // Calculate Date for Tomorrow, 2AM local time
-        let c = Calendar(identifier: .gregorian)
-        var tomorrow = c.dateComponents([.day, .month, .year],
-                                        from: c.date(byAdding: DateComponents(day: 1),
-                                                     to: Date())!)
-        // TODO: Make this a user setting (at least a hidden default)
-        tomorrow.hour = 2
+        // Find the next 3:00am date that's more than 30 minutes in the future
+        var nextDate: Date = Date()
+
+        let hour = min(max(UserDefaults.standard.endOfDayTime, 0), 23)
         
-        self.startAssertion(withTimeout: UInt((c.date(from: tomorrow)?.timeIntervalSinceNow)!))
+        repeat {
+            nextDate = Calendar.current.nextDate(
+                after: nextDate,
+                matching: DateComponents(hour: hour, minute: 0, second: 0),
+                matchingPolicy: .nextTime)!
+        } while nextDate.timeIntervalSinceNow < 1800
+
+        self.startAssertion(withTimeout: UInt((nextDate.timeIntervalSinceNow)))
     }
 
     func startAssertion(withTimeout timeout: UInt) {

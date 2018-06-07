@@ -26,5 +26,7 @@
 	<false/>
 	<key>backgroundMonitoring</key>
 	<false/>
+	<key>endOfDayTime</key>
+	<integer>3</integer>
 </dict>
 </plist>
