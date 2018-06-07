@@ -1,5 +1,5 @@
 //
-//  PowerMgmtObserver.swift
+//  AssertionObserver.swift
 //  Barista
 //
 //  Created by Franz Greiling on 17.01.18.
@@ -9,7 +9,7 @@
 import Cocoa
 
 // MARK: - Observation
-protocol PowerMgmtObserver: class {
+protocol AssertionObserver: class {
     func assertionChanged(isRunning: Bool, preventDisplaySleep: Bool)
     func systemAssertionsChanged(preventsIdleSleep: Bool, preventsDisplaySleep: Bool)
     func assertionTimedOut(after: TimeInterval)
@@ -17,7 +17,7 @@ protocol PowerMgmtObserver: class {
 }
 
 // MARK: Observer Default Implementation
-extension PowerMgmtObserver {
+extension AssertionObserver {
     func assertionChanged(isRunning: Bool, preventDisplaySleep: Bool) {
         return
     }

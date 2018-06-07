@@ -9,7 +9,7 @@
 import Cocoa
 import IOKit.pwr_mgt
 
-class PowerMgmtController: NSObject {
+class AssertionController: NSObject {
 
     // MARK: - Lifecycle
     override func awakeFromNib() {
@@ -185,12 +185,12 @@ class PowerMgmtController: NSObject {
         didSet {
             if self.shouldMonitor {
                 self.monitorTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { _ in
-                    guard let current = PowerMgmtController.assertionsStatus() else { return }
-                    
+                    guard let current = AssertionInfo.systemStatus() else { return }
+
                     if let last = self.lastStatus, last != current {
                         self.notifySystemAssertionsChanged(current.preventingIdleSleep, current.preventingDisplaySleep)
                     }
-                    
+
                     self.lastStatus = current
                 }
             } else {
@@ -202,78 +202,15 @@ class PowerMgmtController: NSObject {
     private var monitorTimer: Timer?
     private var lastStatus: (preventingIdleSleep: Bool, preventingDisplaySleep: Bool)? = nil
     
-    class func assertionsStatus() -> (preventingIdleSleep: Bool, preventingDisplaySleep: Bool)? {
-        var assertionsStatus: Unmanaged<CFDictionary>?
-        
-        if IOPMCopyAssertionsStatus(&assertionsStatus) != kIOReturnSuccess {
-            return nil
-        }
-        
-        guard let state = assertionsStatus?.takeRetainedValue() as? [String: Bool] else { return nil }
-
-        var prevIdleSleep = false
-        var prevDisplaySleep = false
-        
-        for (type, level) in state {
-            guard level else { continue }
-            
-            switch type {
-            // Preventing Display Sleep
-            case "PreventUserIdleDisplaySleep":
-                prevDisplaySleep = true
-            // Preventing Idle Sleep
-            case "ApplePushServiceTask",
-                 "AwakeOnReservePower",
-                 "PreventUserIdleSystemSleep":
-                prevIdleSleep = true
-            // Unknown/Ignored Assertions (some of which do prevent sleep, but are usually very short-lived)
-            default:
-                break
-            }
-        }
-        
-        return (prevIdleSleep, prevDisplaySleep)
-    }
-    
-    class func assertionsByApp() -> [(NSRunningApplication, [Assertion])] {
-        var assertionsByProcess: Unmanaged<CFDictionary>?
-        
-        if IOPMCopyAssertionsByProcess(&assertionsByProcess) != kIOReturnSuccess {
-            fatalError("o.o")
-        }
-        
-        guard let pids = assertionsByProcess?.takeRetainedValue() as? [Int: [[String: Any]]] else { return [] }
-        
-        var aP = [(NSRunningApplication, [Assertion])]()
-        
-        pids.forEach { (pid, assertions) in
-            guard let app = NSRunningApplication(processIdentifier: pid_t(pid)) else { return }
-            #if RELEASE
-            guard app != NSRunningApplication.current else { return }
-            #endif
-            
-            var list = [Assertion]()
-            
-            assertions.forEach { assertion in
-                guard let a = Assertion(dict: assertion) else { return }
-                list.append(a)
-            }
-            
-            aP.append((app, list))
-        }
-        
-        return aP.isEmpty ? [] : aP.sorted { $0.0.localizedName! < $1.0.localizedName! }
-    }
-
     
     // MARK: - Observation
-    private var observers = [PowerMgmtObserver]()
+    private var observers = [AssertionObserver]()
     
-    func addObserver(_ observer: PowerMgmtObserver) {
+    func addObserver(_ observer: AssertionObserver) {
         observers.append(observer)
     }
     
-    func removeObserver(_ observer: PowerMgmtObserver) {
+    func removeObserver(_ observer: AssertionObserver) {
         observers = observers.filter { $0 !== observer }
     }
     

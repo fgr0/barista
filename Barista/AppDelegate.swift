@@ -20,7 +20,7 @@ struct Constants {
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     var preferenceWindowController: PreferencesWindowController?
-    @IBOutlet weak var powerMgmtController: PowerMgmtController!
+    @IBOutlet weak var assertionController: AssertionController!
     
     
     // MARK: - Lifecycle
@@ -32,7 +32,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        powerMgmtController.addObserver(self)
+        assertionController.addObserver(self)
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -88,8 +88,8 @@ extension AppDelegate: NSWindowDelegate {
 }
 
 
-// MARK: - PowerMgmtObserver
-extension AppDelegate: PowerMgmtObserver {
+// MARK: - AssertionObserver
+extension AppDelegate: AssertionObserver {
     func assertionTimedOut(after: TimeInterval) {
         guard UserDefaults.standard.sendNotifications else { return }
         
