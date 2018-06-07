@@ -17,7 +17,7 @@ Since this application is mostly a personal experiment and not under regular
 development, I suggest checking out Marcel Dierkes' [KeepingYouAwake][]. I can't
 provide support for this application or provide any guarantees about its safety.
 **Use at your own risk**. Regardless, if you find any issues or have
-suggestions, feel free to open an issue or create a pull-request--any feedback
+suggestions, feel free to open an issue or create a pull-request—any feedback
 is welcome.
 
 
