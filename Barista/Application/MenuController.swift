@@ -22,6 +22,12 @@ class MenuController: NSObject {
     
     @IBOutlet weak var activateForItem: NSMenuItem!
     
+    @IBOutlet weak var uptimeItem: NSMenuItem!
+    @IBOutlet weak var boottimeItem: NSMenuItem!
+    @IBOutlet weak var sleeptimeItem: NSMenuItem!
+    @IBOutlet weak var waketimeItem: NSMenuItem!
+    @IBOutlet weak var infoSeparator: NSMenuItem!
+    
     @IBOutlet weak var appListItem: NSMenuItem!
     @IBOutlet weak var appListSeparator: NSMenuItem!
     
@@ -72,6 +78,12 @@ class MenuController: NSObject {
         timeRemainingItem.isHidden = true
         activateItem.title  = "Turn \(appName) " + (assertionController.enabled ? "Off" : "On")
         
+        uptimeItem.isHidden = true
+        boottimeItem.isHidden = true
+        sleeptimeItem.isHidden = true
+        waketimeItem.isHidden = true
+        infoSeparator.isHidden = true
+        
         appListItem.isHidden = true
         appListSeparator.isHidden = true
         
@@ -96,6 +108,10 @@ class MenuController: NSObject {
         let infos = AssertionInfo.byProcess()
         let numString = String.localizedStringWithFormat(
             NSLocalizedString("number_apps", comment: ""), infos.count)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .short
+        dateFormatter.doesRelativeDateFormatting = true
         
         appListItem.isHidden = false
         appListSeparator.isHidden = false
@@ -124,21 +140,29 @@ class MenuController: NSObject {
             guard override || UserDefaults.standard.verbosityLevel >= 2 else { continue }
             
             let startDate = info.timeStarted
-            let startFormatter = DateFormatter()
-            startFormatter.dateStyle = .long
-            startFormatter.timeStyle = .short
-            startFormatter.doesRelativeDateFormatting = true
             
             let timeRemaining = info.timeLeft ?? 0
             let timeoutString = TimeInterval(timeRemaining).simpleFormat(
                 style: .short, units: [.day, .hour, .minute], maxCount: 2)!
             
             menu.insertDescItem(pdsString, at: index+1)
-            menu.insertDescItem("Started: \(startFormatter.string(from: startDate))", at: index+2)
+            menu.insertDescItem("Started: \(dateFormatter.string(from: startDate))", at: index+2)
             if timeRemaining > 0 {
                 menu.insertDescItem("Timeout in: \(timeoutString)", at: index+3)
             }
         }
+        
+        guard override else { return }
+        
+        uptimeItem.isHidden = false
+        uptimeItem.title = "Uptime: \(SystemTime.systemUptime.simpleFormat(style: .short, units: [.day, .hour, .minute, .second], maxCount: 3)!)"
+        boottimeItem.isHidden = false
+        boottimeItem.title = "Booted: \(dateFormatter.string(from: SystemTime.boot!))"
+        sleeptimeItem.isHidden = false
+        sleeptimeItem.title = "Last Sleep: \(dateFormatter.string(from: SystemTime.lastSleep!))"
+        waketimeItem.isHidden = false
+        waketimeItem.title = "Last Wake: \(dateFormatter.string(from: SystemTime.lastWake!))"
+        infoSeparator.isHidden = false
     }
 
 

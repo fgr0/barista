@@ -66,6 +66,19 @@
                             </menu>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="NS1-e9-6v1"/>
+                        <menuItem title="Uptime" hidden="YES" enabled="NO" id="9TM-yP-aqq">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Boot Time" hidden="YES" enabled="NO" id="sz3-Zj-cnx" userLabel="Boot Time">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Sleep Time" hidden="YES" enabled="NO" id="L36-UE-Xzb" userLabel="Sleep Time">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Wake Time" hidden="YES" enabled="NO" id="7qS-X8-GqQ" userLabel="Wake Time">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" hidden="YES" id="9F2-DD-KUg" userLabel="Info Separator"/>
                         <menuItem title="Apps Preventing Sleep" hidden="YES" enabled="NO" id="3fV-VH-7G0">
                             <attributedString key="attributedTitle"/>
                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -111,9 +124,14 @@
                         <outlet property="appListItem" destination="3fV-VH-7G0" id="0VA-X7-tau"/>
                         <outlet property="appListSeparator" destination="snS-Ju-TtF" id="OM1-Pd-wZC"/>
                         <outlet property="assertionController" destination="zJc-jN-0c1" id="85H-Ro-pyX"/>
+                        <outlet property="boottimeItem" destination="sz3-Zj-cnx" id="npr-ce-dwg"/>
+                        <outlet property="infoSeparator" destination="9F2-DD-KUg" id="jUX-4t-8Hc"/>
                         <outlet property="menu" destination="57F-e1-8oq" id="Ksd-Mv-IRz"/>
+                        <outlet property="sleeptimeItem" destination="L36-UE-Xzb" id="GDi-3n-cTy"/>
                         <outlet property="stateItem" destination="A81-OZ-lqX" id="pIz-sg-rIv"/>
                         <outlet property="timeRemainingItem" destination="YAZ-Sa-q2w" id="Zro-PV-yte"/>
+                        <outlet property="uptimeItem" destination="9TM-yP-aqq" id="lVx-Kg-YlK"/>
+                        <outlet property="waketimeItem" destination="7qS-X8-GqQ" id="NL5-VI-q4s"/>
                     </connections>
                 </customObject>
                 <customObject id="zJc-jN-0c1" customClass="AssertionController" customModule="Barista" customModuleProvider="target"/>
