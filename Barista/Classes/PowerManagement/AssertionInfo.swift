@@ -32,7 +32,7 @@ struct AssertionInfo {
     let timeStarted: Date
     let timeEnding: Date?
     var timeLeft: UInt? {
-        guard let te = self.timeEnding else { return nil }
+        guard let te = self.timeEnding, te.timeIntervalSinceNow > 0 else { return nil }
         return UInt(te.timeIntervalSinceNow)
     }
 }
@@ -123,7 +123,7 @@ extension AssertionInfo {
 
                 return (ids, pds, ts, te)
             }
-
+            
             assertionInfos.append(AssertionInfo(
                 pid: pid_t(pid), name: name, icon: icon,
                 ids: reduced.0, preventsDisplaySleep: reduced.1,

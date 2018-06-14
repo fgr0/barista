@@ -9,6 +9,12 @@
 import Cocoa
 import Foundation
 
+private enum MenuItemTag: Int {
+    case hidden = 1
+    case temporary = 2
+    case interval = 3
+}
+
 class MenuController: NSObject {
     
     // MARK: - UI Outlets
@@ -23,9 +29,7 @@ class MenuController: NSObject {
     @IBOutlet weak var activateForItem: NSMenuItem!
     
     @IBOutlet weak var uptimeItem: NSMenuItem!
-    @IBOutlet weak var boottimeItem: NSMenuItem!
-    @IBOutlet weak var sleeptimeItem: NSMenuItem!
-    @IBOutlet weak var waketimeItem: NSMenuItem!
+    @IBOutlet weak var awakeForItem: NSMenuItem!
     @IBOutlet weak var infoSeparator: NSMenuItem!
     
     @IBOutlet weak var appListItem: NSMenuItem!
@@ -50,7 +54,7 @@ class MenuController: NSObject {
         
         // Setup "Activate for" Submenu
         for item in (activateForItem.submenu?.items)! {
-            if item.tag == 1 {
+            if item.tag == MenuItemTag.interval.rawValue {
                 let ti = TimeInterval(item.title)!
                 item.representedObject = ti
                 item.title = ti.simpleFormat(maxCount: 1)!
@@ -78,18 +82,16 @@ class MenuController: NSObject {
         timeRemainingItem.isHidden = true
         activateItem.title  = "Turn \(appName) " + (assertionController.enabled ? "Off" : "On")
         
-        uptimeItem.isHidden = true
-        boottimeItem.isHidden = true
-        sleeptimeItem.isHidden = true
-        waketimeItem.isHidden = true
-        infoSeparator.isHidden = true
-        
-        appListItem.isHidden = true
-        appListSeparator.isHidden = true
-        
+        // Reset Item
         for item in menu.items {
-            if item.tag == 1 {
-                menu.removeItem(item)
+            if let tag = MenuItemTag(rawValue: item.tag) {
+                switch tag {
+                case .hidden:
+                    item.isHidden = true
+                case .temporary:
+                    menu.removeItem(item)
+                default: break
+                }
             }
         }
         
@@ -102,9 +104,38 @@ class MenuController: NSObject {
         }
         
         // Update List of Apps if wanted
+        menuShowApps(override: self.override)
+        menuShowInfo(override: self.override)
+    }
+    
+    private func menuShowInfo(override: Bool) {
+        guard override else { return }
         
-        guard override || UserDefaults.standard.showAdvancedInformation else { return }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
         
+        let uptime = SystemTime.systemUptime.simpleFormat(style: .short, units: [.day, .hour, .minute, .second], maxCount: 3)!
+        
+        uptimeItem.isHidden = false
+        uptimeItem.title = "Uptime: \(uptime)"
+        uptimeItem.toolTip = "Booted at \(dateFormatter.string(from: SystemTime.boot!))"
+        
+        let awakeSince: String
+        if let lastWake = SystemTime.lastWake {
+            let ti = Date().timeIntervalSince(lastWake)
+            awakeSince = ti.simpleFormat(style: .short, units: [.day, .hour, .minute, .second], maxCount: 3)!
+        } else {
+            awakeSince = uptime
+        }
+        
+        awakeForItem.isHidden = false
+        awakeForItem.title = "Awake For: \(awakeSince)"
+        
+        infoSeparator.isHidden = false
+    }
+    
+    private func menuShowApps(override: Bool) {
         let infos = AssertionInfo.byProcess()
         let numString = String.localizedStringWithFormat(
             NSLocalizedString("number_apps", comment: ""), infos.count)
@@ -126,7 +157,7 @@ class MenuController: NSObject {
             let pdsString = "Prevents \(info.preventsDisplaySleep ? "Display" : "Idle") Sleep"
             
             let appItem = NSMenuItem()
-            appItem.tag = 1
+            appItem.tag = MenuItemTag.temporary.rawValue
             appItem.title = info.name
             appItem.toolTip = numString + "; " + pdsString
             appItem.image = info.icon
@@ -151,18 +182,6 @@ class MenuController: NSObject {
                 menu.insertDescItem("Timeout in: \(timeoutString)", at: index+3)
             }
         }
-        
-        guard override else { return }
-        
-        uptimeItem.isHidden = false
-        uptimeItem.title = "Uptime: \(SystemTime.systemUptime.simpleFormat(style: .short, units: [.day, .hour, .minute, .second], maxCount: 3)!)"
-        boottimeItem.isHidden = false
-        boottimeItem.title = "Booted: \(dateFormatter.string(from: SystemTime.boot!))"
-        sleeptimeItem.isHidden = false
-        sleeptimeItem.title = "Last Sleep: \(dateFormatter.string(from: SystemTime.lastSleep!))"
-        waketimeItem.isHidden = false
-        waketimeItem.title = "Last Wake: \(dateFormatter.string(from: SystemTime.lastWake!))"
-        infoSeparator.isHidden = false
     }
 
 
