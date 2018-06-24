@@ -35,7 +35,7 @@ class MenuController: NSObject {
     @IBOutlet weak var appListItem: NSMenuItem!
     @IBOutlet weak var appListSeparator: NSMenuItem!
     
-    @IBOutlet weak var assertionController: AssertionController!
+    @IBOutlet weak var powerMgmtController: PowerMgmtController!
     
     
     // MARK: - Lifecycle
@@ -44,13 +44,13 @@ class MenuController: NSObject {
         
         // Setup Status Bar
         self.statusItem.button!.title = "zZ"
-        self.statusItem.button?.appearsDisabled = !assertionController.enabled
+        self.statusItem.button?.appearsDisabled = !powerMgmtController.isPreventingSleep
         self.statusItem.button?.target = self
         self.statusItem.button?.action = #selector(toggleAssertionAction(_:))
         self.statusItem.menu = self.menu
         self.statusItem.behavior = .terminationOnRemoval
         
-        assertionController.addObserver(self)
+        powerMgmtController.addObserver(self)
         
         // Setup "Activate for" Submenu
         for item in (activateForItem.submenu?.items)! {
@@ -65,7 +65,7 @@ class MenuController: NSObject {
     }
     
     deinit {
-        assertionController.removeObserver(self)
+        powerMgmtController.removeObserver(self)
         self.timer?.invalidate()
     }
 
@@ -78,9 +78,9 @@ class MenuController: NSObject {
         let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName")!
         
         // Set Standart Elements
-        stateItem.title     = "\(appName): " + (assertionController.enabled ? "On" : "Off")
+        stateItem.title     = "\(appName): " + (powerMgmtController.isPreventingSleep ? "On" : "Off")
         timeRemainingItem.isHidden = true
-        activateItem.title  = "Turn \(appName) " + (assertionController.enabled ? "Off" : "On")
+        activateItem.title  = "Turn \(appName) " + (powerMgmtController.isPreventingSleep ? "Off" : "On")
         
         // Reset Item
         for item in menu.items {
@@ -96,7 +96,7 @@ class MenuController: NSObject {
         }
         
         // Update Time Remaining
-        if let tl = assertionController.timeLeft, tl > 0 {
+        if let tl = powerMgmtController.timeLeft, tl > 0 {
             let title = TimeInterval(tl).simpleFormat(style: .short, units: [.day, .hour, .minute],
                                                       maxCount: 2, timeRemaining: true)!
             timeRemainingItem.title = title
@@ -187,47 +187,49 @@ class MenuController: NSObject {
 
     // MARK: - Actions
     @IBAction func applicationAction(_ sender: NSMenuItem) {
-        guard let app = sender.representedObject as? NSRunningApplication else { return }
+        guard let pid = (sender.representedObject as? AssertionInfo)?.pid,
+            let app = NSRunningApplication(processIdentifier: pid)
+            else { return }
         
         if let cmdKey = NSApp.currentEvent?.modifierFlags.contains(.command), cmdKey {
-            app.terminate()
+            app.terminate() // Doesn't Work
         } else {
             app.activate(options: [.activateIgnoringOtherApps])
         }
     }
     
     @IBAction func toggleAssertionAction(_ sender: NSObject) {
-        if assertionController.enabled {
-            assertionController.stopAssertion()
+        if powerMgmtController.isPreventingSleep {
+            powerMgmtController.stopPreventingSleep()
         } else {
-            assertionController.startAssertion()
+            powerMgmtController.preventSleep()
         }
     }
     
     @IBAction func activateForAction(_ sender: NSMenuItem) {
         guard let ti = sender.representedObject as? TimeInterval else { return }
         
-        assertionController.startAssertion(withTimeout: UInt(ti))
+        powerMgmtController.preventSleep(withTimeout: UInt(ti))
     }
     
     @IBAction func activateIndefinitlyAction(_ sender: NSMenuItem) {
-        assertionController.startAssertion(withTimeout: 0)
+        powerMgmtController.preventSleep(withTimeout: 0)
     }
     
     @IBAction func activateEndOfDayAction(_ sender: NSMenuItem) {
-        assertionController.startAssertionForRestOfDay()
+        powerMgmtController.preventSleepUntilEndOfDay()
     }
 }
 
 
 // MARK: - AssertionObserver Protocol
-extension MenuController: AssertionObserver {
-    func assertionChanged(isRunning: Bool, preventDisplaySleep: Bool) {
-        self.statusItem.button?.appearsDisabled = !isRunning
+extension MenuController: PowerMgmtObserver {
+    func startedPreventingSleep(for: TimeInterval) {
+        self.statusItem.button?.appearsDisabled = false
     }
     
-    func systemAssertionsChanged(preventsIdleSleep: Bool, preventsDisplaySleep: Bool) {
-
+    func stoppedPreventingSleep(after: TimeInterval, because reason: StoppedPreventingSleepReason) {
+        self.statusItem.button?.appearsDisabled = true
     }
 }
 
