@@ -120,16 +120,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		819D934D2088F54200545789 /* Classes */ = {
+		819D934D2088F54200545789 /* UI Classes */ = {
 			isa = PBXGroup;
 			children = (
 				819D934B2088F2C200545789 /* ClickableTextField.swift */,
 				81A04B191FA24F5A00C1B87B /* TimeIntervalSlider.swift */,
 				819C75CF1FA3841500A72238 /* TimeIntervalSliderCell.swift */,
-				81F2A1A420C7E2960079F2EF /* PowerManagement */,
-				818A42181F0E807E0029527E /* Extensions */,
 			);
-			path = Classes;
+			path = "UI Classes";
 			sourceTree = "<group>";
 		};
 		81E06B9D1EE825C1002D1651 /* Application */ = {
@@ -213,8 +211,10 @@
 			isa = PBXGroup;
 			children = (
 				9DE472EF19FF9E4C0089B49F /* AppDelegate.swift */,
-				819D934D2088F54200545789 /* Classes */,
 				81E06B9D1EE825C1002D1651 /* Application */,
+				81F2A1A420C7E2960079F2EF /* PowerManagement */,
+				819D934D2088F54200545789 /* UI Classes */,
+				818A42181F0E807E0029527E /* Extensions */,
 				9DE472ED19FF9E4C0089B49F /* Supporting Files */,
 			);
 			path = Barista;
