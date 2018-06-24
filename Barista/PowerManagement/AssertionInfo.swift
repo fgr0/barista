@@ -106,10 +106,14 @@ extension AssertionInfo {
             
             let initial: ([IOPMAssertionID], Bool, Date, Date?) = ([], false, Date.distantFuture, nil)
             let reduced = assertions.reduce(initial) { (previous, assertion) in
+                guard let type = assertion["AssertionTrueType"] as? String,
+                    type == "PreventUserIdleDisplaySleep" || type == "PreventUserIdleSystemSleep"
+                    else { return previous }
+                
                 var ids = previous.0
                 ids.append(assertion["AssertionId"] as! IOPMAssertionID)
                 
-                let pds = previous.1 || assertion["AssertionTrueType"] as! String == "PreventUserIdleDisplaySleep"
+                let pds = previous.1 || type == "PreventUserIdleDisplaySleep"
                 let ts = min(previous.2, assertion["AssertStartWhen"] as! Date)
                 var te: Date? = previous.3
                 
@@ -124,14 +128,15 @@ extension AssertionInfo {
                 return (ids, pds, ts, te)
             }
             
-            assertionInfos.append(AssertionInfo(
-                pid: pid_t(pid), name: name, icon: icon,
-                ids: reduced.0, preventsDisplaySleep: reduced.1,
-                details: nil, timeStarted: reduced.2, timeEnding: reduced.3
-            ))
+            if reduced.0.count > 0 {
+                assertionInfos.append(AssertionInfo(
+                    pid: pid_t(pid), name: name, icon: icon,
+                    ids: reduced.0, preventsDisplaySleep: reduced.1,
+                    details: nil, timeStarted: reduced.2, timeEnding: reduced.3
+                ))
+            }
         }
         
-        // TODO: Sort `.isEmpty ? [] : assertionInfos.sorted { $0.0.localizedName! < $1.0.localizedName! }`
         return assertionInfos.sorted { $0.name < $1.name }
     }
 }

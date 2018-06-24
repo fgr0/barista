@@ -13,11 +13,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>zero</key>
-			<string>No Apps are</string>
+			<string>No Apps Are</string>
 			<key>one</key>
-			<string>%d App is</string>
+			<string>%d App Is</string>
 			<key>other</key>
-			<string>%d Apps are</string>
+			<string>%d Apps Are</string>
 		</dict>
 	</dict>
 	<key>number_assertions</key>
