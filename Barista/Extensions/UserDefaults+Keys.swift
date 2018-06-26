@@ -15,13 +15,14 @@ extension UserDefaults {
         static let shouldLaunchAtLogin      = "shouldLaunchAtLogin"
         static let preventDisplaySleep      = "preventDisplaySleep"
         static let defaultTimeout           = "defaultTimeout"
-        static let showAdvancedInformation  = "showAdvancedInformation"
+        static let showAppList              = "showAppList"
+        static let showUptime               = "showUptime"
         static let sendNotifications        = "sendNotifications"
         static let endOfDaySelected         = "endOfDaySelected"
         static let stopAtForcedSleep        = "stopAtForcedSleep"
         static let quickActivation          = "quickActivation"
         static let backgroundMonitoring     = "backgroundMonitoring"
-        static let verbosityLevel           = "verbosityLevel"
+        static let appListDetail            = "appListDetail"
         static let hadFirstLaunch           = "hadFirstLaunch"
         static let endOfDayTime             = "endOfDayTime"
     }
@@ -47,9 +48,14 @@ extension UserDefaults {
         get { return integer(forKey: UserDefaults.Keys.defaultTimeout) }
     }
     
-    @objc dynamic var showAdvancedInformation: Bool {
-        set(always) { set(always, forKey: UserDefaults.Keys.showAdvancedInformation) }
-        get { return bool(forKey: UserDefaults.Keys.showAdvancedInformation) }
+    @objc dynamic var showAppList: Bool {
+        set(always) { set(always, forKey: UserDefaults.Keys.showAppList) }
+        get { return bool(forKey: UserDefaults.Keys.showAppList) }
+    }
+    
+    @objc dynamic var showUptime: Bool {
+        set(always) { set(always, forKey: UserDefaults.Keys.showUptime) }
+        get { return bool(forKey: UserDefaults.Keys.showUptime) }
     }
     
     @objc dynamic var sendNotifications: Bool {
@@ -78,9 +84,9 @@ extension UserDefaults {
         get { return bool(forKey: UserDefaults.Keys.backgroundMonitoring) }
     }
     
-    @objc dynamic var verbosityLevel: Int {
-        set(level) { set(level, forKey: UserDefaults.Keys.verbosityLevel) }
-        get { return integer(forKey: UserDefaults.Keys.verbosityLevel) }
+    @objc dynamic var appListDetail: Int {
+        set(level) { set(level, forKey: UserDefaults.Keys.appListDetail) }
+        get { return integer(forKey: UserDefaults.Keys.appListDetail) }
     }
     
     @objc dynamic var hadFirstLaunch: Bool {

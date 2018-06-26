@@ -68,12 +68,12 @@ class PreferencesViewController: NSViewController {
         // MARK: Advanced
         displayModeStack.views.forEach {view in
             let rb = view as! NSButton
-            rb.state = rb.tag == UserDefaults.standard.verbosityLevel ? .on : .off
+            rb.state = rb.tag == UserDefaults.standard.appListDetail ? .on : .off
         }
         
         displayModeStack.views.forEach {view in
             let rb = view as! NSButton
-            rb.isEnabled = UserDefaults.standard.showAdvancedInformation
+            rb.isEnabled = UserDefaults.standard.showAppList
         }
         
         
@@ -113,13 +113,13 @@ class PreferencesViewController: NSViewController {
     }
     
     // MARK: Advanced
-    @IBAction func showInformation(_ sender: NSButton) {
+    @IBAction func showAppList(_ sender: NSButton) {
         displayModeStack.views.forEach {rb in
             (rb as? NSButton)?.isEnabled = sender.state == NSControl.StateValue.on
         }
     }
     
     @IBAction func displayModeSelected(_ sender: NSButton) {
-        UserDefaults.standard.verbosityLevel = sender.tag
+        UserDefaults.standard.appListDetail = sender.tag
     }
 }

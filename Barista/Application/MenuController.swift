@@ -109,7 +109,7 @@ class MenuController: NSObject {
     }
     
     private func menuShowInfo(override: Bool) {
-        guard override else { return }
+        guard override || UserDefaults.standard.showUptime else { return }
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
@@ -136,6 +136,8 @@ class MenuController: NSObject {
     }
     
     private func menuShowApps(override: Bool) {
+        guard override || UserDefaults.standard.showAppList else { return }
+        
         let infos = AssertionInfo.byProcess()
         let numString = String.localizedStringWithFormat(
             NSLocalizedString("number_apps", comment: ""), infos.count)
@@ -148,7 +150,8 @@ class MenuController: NSObject {
         appListSeparator.isHidden = false
         appListItem.title = "\(numString) Preventing Sleep"
         
-        guard override || UserDefaults.standard.verbosityLevel >= 1 else { return }
+        guard override || (UserDefaults.standard.showAppList && UserDefaults.standard.appListDetail >= 1)
+            else { return }
         
         for info in infos {
             let index = menu.index(of: appListSeparator)
@@ -168,7 +171,7 @@ class MenuController: NSObject {
             menu.insertItem(appItem, at: index)
             
             // Add Verbose Information if wanted
-            guard override || UserDefaults.standard.verbosityLevel >= 2 else { continue }
+            guard override || UserDefaults.standard.appListDetail >= 2 else { continue }
             
             let startDate = info.timeStarted
             

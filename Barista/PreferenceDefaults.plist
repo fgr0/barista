@@ -2,11 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>verbosityLevel</key>
+	<key>appListDetail</key>
 	<integer>1</integer>
 	<key>hadFirstLaunch</key>
 	<false/>
-	<key>showAdvancedInformation</key>
+	<key>showAppList</key>
+	<false/>
+	<key>showUptime</key>
 	<false/>
 	<key>defaultTimeout</key>
 	<integer>0</integer>
