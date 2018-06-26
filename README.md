@@ -26,7 +26,7 @@ is welcome.
 ### Preventing sleep
 
 Barista's main function is to prevent your Mac from sleeping. You can choose if
-it will run forever, a set time, or until the next day (2am). Per default it
+it will run forever, a set time, or until the next morning (3am). Per default it
 will run until you manually disable it, but you can change the default in the
 Preferences. The menu also has an 'Activate for...' option, where you can choose
 how long to run for only this activation.
@@ -72,7 +72,12 @@ it. Any help is greatly appreciated.
 
 ## Changelog
 
-- *[Version 1.0.0](../../releases/tag/v1.0.0)* (April 2018):
+- **[Version 1.1.0 Beta](../../releases/tag/v1.1.0-beta)** (June 2018):
+  * Show more sleep-preventing Applications (Time Machine)
+  * Ability to show System Uptime and time since last wake.
+  * Bugfixes and Project Cleanup
+
+- **[Version 1.0.0 Beta](../../releases/tag/v1.0.0-beta)** (April 2018):
   * Complete rewrite
   * Added Preference window
   * Added *Monitoring* feature

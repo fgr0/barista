@@ -88,39 +88,26 @@ extension AppDelegate: NSWindowDelegate {
 }
 
 
-// MARK: - PowerMgmtObserver
+// MARK: - AssertionObserver
 extension AppDelegate: PowerMgmtObserver {
-    func assertionTimedOut(after: TimeInterval) {
-        guard UserDefaults.standard.sendNotifications else { return }
-        
-        NSUserNotificationCenter.default.deliveredNotifications.forEach {
-            if $0.identifier == Constants.notificationTimeoutId {
-                NSUserNotificationCenter.default.removeDeliveredNotification($0)
-            }
-        }
+    func stoppedPreventingSleep(after: TimeInterval, because reason: StoppedPreventingSleepReason) {
+        guard UserDefaults.standard.sendNotifications && reason != .Deactivated else { return }
 
-        let notification = NSUserNotification()
-        notification.identifier = Constants.notificationTimeoutId
-        notification.title = "Barista turned off"
-        notification.informativeText = "Prevented Sleep for " + after.simpleFormat()!
-        notification.soundName = NSUserNotificationDefaultSoundName
-        
-        NSUserNotificationCenter.default.deliver(notification)
-    }
-    
-    func assertionStoppedByWake() {
-        guard UserDefaults.standard.sendNotifications else { return }
-        
         NSUserNotificationCenter.default.deliveredNotifications.forEach {
             if $0.identifier == Constants.notificationSleepId {
                 NSUserNotificationCenter.default.removeDeliveredNotification($0)
             }
         }
-
+        
         let notification = NSUserNotification()
         notification.identifier = Constants.notificationSleepId
         notification.title = "Barista turned off"
-        notification.informativeText = "Turned off after system went to sleep"
+        switch reason {
+        case .SystemWake:
+            notification.informativeText = "Turned off after system went to sleep"
+        default:
+            notification.informativeText = "Prevented Sleep for " + after.simpleFormat()!
+        }
         notification.soundName = NSUserNotificationDefaultSoundName
         
         NSUserNotificationCenter.default.deliver(notification)

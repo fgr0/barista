@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -14,7 +14,7 @@
                         <menuItem title="Barista Off" enabled="NO" id="A81-OZ-lqX">
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
-                        <menuItem title="Time Remaining" hidden="YES" enabled="NO" id="YAZ-Sa-q2w">
+                        <menuItem title="Time Remaining" tag="1" hidden="YES" enabled="NO" id="YAZ-Sa-q2w">
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
                         <menuItem title="Turn Barista On" id="LEH-5o-EpL">
@@ -28,35 +28,35 @@
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <menu key="submenu" title="Activate for..." id="rBD-Bo-bZM">
                                 <items>
-                                    <menuItem title="300" tag="1" id="6s6-8P-dHh">
+                                    <menuItem title="300" tag="3" id="6s6-8P-dHh">
                                         <modifierMask key="keyEquivalentModifierMask"/>
                                     </menuItem>
-                                    <menuItem title="600" tag="1" id="Lbc-zX-3In">
+                                    <menuItem title="600" tag="3" id="Lbc-zX-3In">
                                         <modifierMask key="keyEquivalentModifierMask"/>
                                     </menuItem>
-                                    <menuItem title="900" tag="1" id="k3d-mp-fj8">
+                                    <menuItem title="900" tag="3" id="k3d-mp-fj8">
                                         <modifierMask key="keyEquivalentModifierMask"/>
                                     </menuItem>
-                                    <menuItem title="1800" tag="1" id="x7U-1t-qHr">
+                                    <menuItem title="1800" tag="3" id="x7U-1t-qHr">
                                         <modifierMask key="keyEquivalentModifierMask"/>
                                     </menuItem>
-                                    <menuItem title="3600" tag="1" id="bcD-aR-EpA">
+                                    <menuItem title="3600" tag="3" id="bcD-aR-EpA">
                                         <modifierMask key="keyEquivalentModifierMask"/>
                                     </menuItem>
-                                    <menuItem title="7200" tag="1" id="BKZ-oS-RO6">
+                                    <menuItem title="7200" tag="3" id="BKZ-oS-RO6">
                                         <modifierMask key="keyEquivalentModifierMask"/>
                                     </menuItem>
-                                    <menuItem title="18000" tag="1" id="KiQ-j9-ZlC">
+                                    <menuItem title="18000" tag="3" id="KiQ-j9-ZlC">
                                         <modifierMask key="keyEquivalentModifierMask"/>
                                     </menuItem>
                                     <menuItem isSeparatorItem="YES" id="OLk-AU-N0G"/>
-                                    <menuItem title="Indefinitely" tag="2" id="LCS-RU-9cK">
+                                    <menuItem title="Indefinitely" id="LCS-RU-9cK">
                                         <modifierMask key="keyEquivalentModifierMask"/>
                                         <connections>
                                             <action selector="activateIndefinitlyAction:" target="3Zv-yd-aJX" id="zst-JZ-aPv"/>
                                         </connections>
                                     </menuItem>
-                                    <menuItem title="For the Rest of the Day" tag="3" id="rn0-kr-32K">
+                                    <menuItem title="For the Rest of the Day" id="rn0-kr-32K">
                                         <modifierMask key="keyEquivalentModifierMask"/>
                                         <connections>
                                             <action selector="activateEndOfDayAction:" target="3Zv-yd-aJX" id="RVq-Gt-MVq"/>
@@ -66,11 +66,18 @@
                             </menu>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="NS1-e9-6v1"/>
-                        <menuItem title="Apps Preventing Sleep" hidden="YES" enabled="NO" id="3fV-VH-7G0">
+                        <menuItem title="Uptime:" tag="1" hidden="YES" enabled="NO" id="9TM-yP-aqq">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Awake:" tag="1" hidden="YES" enabled="NO" id="sz3-Zj-cnx" userLabel="Awake For Item">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" tag="1" hidden="YES" id="9F2-DD-KUg" userLabel="Info Separator"/>
+                        <menuItem title="Apps Preventing Sleep" tag="1" hidden="YES" enabled="NO" id="3fV-VH-7G0">
                             <attributedString key="attributedTitle"/>
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
-                        <menuItem isSeparatorItem="YES" hidden="YES" id="snS-Ju-TtF"/>
+                        <menuItem isSeparatorItem="YES" tag="1" hidden="YES" id="snS-Ju-TtF"/>
                         <menuItem title="Prevent Display Sleep" id="WY5-Pe-3M4">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
@@ -110,10 +117,13 @@
                         <outlet property="activateItem" destination="LEH-5o-EpL" id="KpD-HP-rua"/>
                         <outlet property="appListItem" destination="3fV-VH-7G0" id="0VA-X7-tau"/>
                         <outlet property="appListSeparator" destination="snS-Ju-TtF" id="OM1-Pd-wZC"/>
+                        <outlet property="awakeForItem" destination="sz3-Zj-cnx" id="z9d-uu-qj0"/>
+                        <outlet property="infoSeparator" destination="9F2-DD-KUg" id="jUX-4t-8Hc"/>
                         <outlet property="menu" destination="57F-e1-8oq" id="Ksd-Mv-IRz"/>
                         <outlet property="powerMgmtController" destination="zJc-jN-0c1" id="85H-Ro-pyX"/>
                         <outlet property="stateItem" destination="A81-OZ-lqX" id="pIz-sg-rIv"/>
                         <outlet property="timeRemainingItem" destination="YAZ-Sa-q2w" id="Zro-PV-yte"/>
+                        <outlet property="uptimeItem" destination="9TM-yP-aqq" id="lVx-Kg-YlK"/>
                     </connections>
                 </customObject>
                 <customObject id="zJc-jN-0c1" customClass="PowerMgmtController" customModule="Barista" customModuleProvider="target"/>

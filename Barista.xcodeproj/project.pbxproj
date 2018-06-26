@@ -8,14 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		8100C4021FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8100C4011FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift */; };
-		81041F821FCB587A0029C9A7 /* PowerMgmtController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81041F811FCB587A0029C9A7 /* PowerMgmtController.swift */; };
+		81041F821FCB587A0029C9A7 /* UserAssertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81041F811FCB587A0029C9A7 /* UserAssertion.swift */; };
+		8120117220CEBE5500EDEDAE /* SystemTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8120117120CEBE5500EDEDAE /* SystemTime.swift */; };
 		8129093C1EDC750900072FC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE472EF19FF9E4C0089B49F /* AppDelegate.swift */; };
+		813CAC9F20DFC2BD007EAB4B /* PowerMgmtController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813CAC9E20DFC2BD007EAB4B /* PowerMgmtController.swift */; };
 		819C75D01FA3841500A72238 /* TimeIntervalSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819C75CF1FA3841500A72238 /* TimeIntervalSliderCell.swift */; };
 		819D93462088D7E500545789 /* About.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 819D93442088D7E500545789 /* About.rtf */; };
 		819D934C2088F2C200545789 /* ClickableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819D934B2088F2C200545789 /* ClickableTextField.swift */; };
 		81A04B181FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A04B171FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift */; };
 		81A04B1A1FA24F5A00C1B87B /* TimeIntervalSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A04B191FA24F5A00C1B87B /* TimeIntervalSlider.swift */; };
-		81B5B87C201D5A7E00361C0D /* Assertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B5B87B201D5A7E00361C0D /* Assertion.swift */; };
+		81B5B87C201D5A7E00361C0D /* AssertionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B5B87B201D5A7E00361C0D /* AssertionInfo.swift */; };
 		81BBEFA5200E3FED0049D094 /* UserDefaults+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BBEFA4200E3FED0049D094 /* UserDefaults+Keys.swift */; };
 		81BDE856200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BDE855200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift */; };
 		81CFBBEB1EFADC23008DFA81 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFBBEA1EFADC23008DFA81 /* PreferencesViewController.swift */; };
@@ -58,13 +60,15 @@
 
 /* Begin PBXFileReference section */
 		8100C4011FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMenu+insertDescItem.swift"; sourceTree = "<group>"; };
-		81041F811FCB587A0029C9A7 /* PowerMgmtController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerMgmtController.swift; sourceTree = "<group>"; };
+		81041F811FCB587A0029C9A7 /* UserAssertion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAssertion.swift; sourceTree = "<group>"; };
+		8120117120CEBE5500EDEDAE /* SystemTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemTime.swift; sourceTree = "<group>"; };
+		813CAC9E20DFC2BD007EAB4B /* PowerMgmtController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerMgmtController.swift; sourceTree = "<group>"; };
 		819C75CF1FA3841500A72238 /* TimeIntervalSliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalSliderCell.swift; sourceTree = "<group>"; };
 		819D93452088D7E500545789 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = Base; path = Base.lproj/About.rtf; sourceTree = "<group>"; };
 		819D934B2088F2C200545789 /* ClickableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickableTextField.swift; sourceTree = "<group>"; };
 		81A04B171FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+SimpleFormat.swift"; sourceTree = "<group>"; };
 		81A04B191FA24F5A00C1B87B /* TimeIntervalSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalSlider.swift; sourceTree = "<group>"; };
-		81B5B87B201D5A7E00361C0D /* Assertion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assertion.swift; sourceTree = "<group>"; };
+		81B5B87B201D5A7E00361C0D /* AssertionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssertionInfo.swift; sourceTree = "<group>"; };
 		81BBEFA4200E3FED0049D094 /* UserDefaults+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Keys.swift"; sourceTree = "<group>"; };
 		81BDE855200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSStatusBarButton+CustomMouseClick.swift"; sourceTree = "<group>"; };
 		81CFBBEA1EFADC23008DFA81 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
@@ -118,18 +122,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		819D934D2088F54200545789 /* Classes */ = {
+		819D934D2088F54200545789 /* UI Classes */ = {
 			isa = PBXGroup;
 			children = (
 				819D934B2088F2C200545789 /* ClickableTextField.swift */,
 				81A04B191FA24F5A00C1B87B /* TimeIntervalSlider.swift */,
 				819C75CF1FA3841500A72238 /* TimeIntervalSliderCell.swift */,
-				81B5B87B201D5A7E00361C0D /* Assertion.swift */,
-				81041F811FCB587A0029C9A7 /* PowerMgmtController.swift */,
-				81F20D05200F8E3500FF7C39 /* PowerMgmtObserver.swift */,
-				818A42181F0E807E0029527E /* Extensions */,
 			);
-			path = Classes;
+			path = "UI Classes";
 			sourceTree = "<group>";
 		};
 		81E06B9D1EE825C1002D1651 /* Application */ = {
@@ -158,6 +158,18 @@
 				81E76B761EDCCD0600610950 /* MenuController.swift */,
 			);
 			name = Menu;
+			sourceTree = "<group>";
+		};
+		81F2A1A420C7E2960079F2EF /* PowerManagement */ = {
+			isa = PBXGroup;
+			children = (
+				81B5B87B201D5A7E00361C0D /* AssertionInfo.swift */,
+				813CAC9E20DFC2BD007EAB4B /* PowerMgmtController.swift */,
+				81F20D05200F8E3500FF7C39 /* PowerMgmtObserver.swift */,
+				8120117120CEBE5500EDEDAE /* SystemTime.swift */,
+				81041F811FCB587A0029C9A7 /* UserAssertion.swift */,
+			);
+			path = PowerManagement;
 			sourceTree = "<group>";
 		};
 		9D1EA69F1A1B61540030C40F /* BaristaLaunchHelper */ = {
@@ -202,8 +214,10 @@
 			isa = PBXGroup;
 			children = (
 				9DE472EF19FF9E4C0089B49F /* AppDelegate.swift */,
-				819D934D2088F54200545789 /* Classes */,
 				81E06B9D1EE825C1002D1651 /* Application */,
+				81F2A1A420C7E2960079F2EF /* PowerManagement */,
+				819D934D2088F54200545789 /* UI Classes */,
+				818A42181F0E807E0029527E /* Extensions */,
 				9DE472ED19FF9E4C0089B49F /* Supporting Files */,
 			);
 			path = Barista;
@@ -346,7 +360,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh -e\n\n# This script automatically sets the version and short version string of\n# an Xcode project from the Git repository containing the project.\n#\n# To use this script in Xcode, add the script's path to a \"Run Script\" build\n# phase for your application target.\n\nGIT_COMMITS_BRANCH=$(git rev-list HEAD | wc -l | tr -d ' ')\nGIT_TAG_MASTER=$(git describe master --tags | sed 's/.*\\([0-9][0-9]*\\.[0-9][0-9]*\\.[0-9][0-9]*\\).*/\\1/')\nGIT_SIMPLE_BRANCH_NAME=`git rev-parse --abbrev-ref HEAD`\nINFO_PLIST=\"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n\n# For Non-Release Builds add current branch to Build Number\nif [ ${CONFIGURATION} != \"Release\" ]; then\n    GIT_COMMITS_BRANCH+=\"-$GIT_SIMPLE_BRANCH_NAME\"\n\n    # Check if Working Copy is clean\n    if [[ -n $(git status --porcelain) ]]; then\n        GIT_COMMITS_BRANCH+=\"-DIRTY\"\n    fi\nfi\n\n# Add Version Information to Build\n#/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString $GIT_TAG_MASTER\" \"$INFO_PLIST\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $GIT_COMMITS_BRANCH\" \"$INFO_PLIST\"";
+			shellScript = "#!/bin/sh -e\n\n# This script automatically sets the version and short version string of\n# an Xcode project from the Git repository containing the project.\n#\n# To use this script in Xcode, add the script's path to a \"Run Script\" build\n# phase for your application target.\n\nGIT_COMMITS_BRANCH=$(git rev-list HEAD | wc -l | tr -d ' ')\nGIT_TAG_MASTER=$(git describe master --tags | sed 's/.*\\([0-9][0-9]*\\.[0-9][0-9]*\\.[0-9][0-9]*\\).*/\\1/')\nGIT_SIMPLE_BRANCH_NAME=`git rev-parse --abbrev-ref HEAD`\nINFO_PLIST=\"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n\n# For Non-Release Builds add current branch to Build Number\nif [ ${CONFIGURATION} != \"Release\" ] || [ ${GIT_SIMPLE_BRANCH_NAME} != \"master\" ]; then\n    GIT_COMMITS_BRANCH+=\"-$GIT_SIMPLE_BRANCH_NAME\"\nfi\n\n# Check if Working Copy is clean\nif [[ -n $(git status --porcelain) ]]; then\n    GIT_COMMITS_BRANCH+=\"-DIRTY\"\nfi\n\n# Add Version Information to Build\n#/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString $GIT_TAG_MASTER\" \"$INFO_PLIST\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $GIT_COMMITS_BRANCH\" \"$INFO_PLIST\"";
 		};
 		9EF1BAA91A1F5BDA00EF14CC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -378,15 +392,17 @@
 			files = (
 				8100C4021FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift in Sources */,
 				81E76B771EDCCD0600610950 /* MenuController.swift in Sources */,
-				81B5B87C201D5A7E00361C0D /* Assertion.swift in Sources */,
+				81B5B87C201D5A7E00361C0D /* AssertionInfo.swift in Sources */,
 				8129093C1EDC750900072FC3 /* AppDelegate.swift in Sources */,
-				81041F821FCB587A0029C9A7 /* PowerMgmtController.swift in Sources */,
+				81041F821FCB587A0029C9A7 /* UserAssertion.swift in Sources */,
 				81E06BA21EE828D5002D1651 /* PreferencesWindowController.swift in Sources */,
 				81F20D06200F8E3500FF7C39 /* PowerMgmtObserver.swift in Sources */,
 				819C75D01FA3841500A72238 /* TimeIntervalSliderCell.swift in Sources */,
+				813CAC9F20DFC2BD007EAB4B /* PowerMgmtController.swift in Sources */,
 				819D934C2088F2C200545789 /* ClickableTextField.swift in Sources */,
 				81BDE856200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift in Sources */,
 				81A04B1A1FA24F5A00C1B87B /* TimeIntervalSlider.swift in Sources */,
+				8120117220CEBE5500EDEDAE /* SystemTime.swift in Sources */,
 				9EBFC6D01A1CB30900D1B158 /* AppDelegate+LoginItem.swift in Sources */,
 				81A04B181FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift in Sources */,
 				81CFBBEB1EFADC23008DFA81 /* PreferencesViewController.swift in Sources */,

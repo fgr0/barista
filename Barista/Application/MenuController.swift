@@ -9,6 +9,12 @@
 import Cocoa
 import Foundation
 
+private enum MenuItemTag: Int {
+    case hidden = 1
+    case temporary = 2
+    case interval = 3
+}
+
 class MenuController: NSObject {
     
     // MARK: - UI Outlets
@@ -22,6 +28,10 @@ class MenuController: NSObject {
     
     @IBOutlet weak var activateForItem: NSMenuItem!
     
+    @IBOutlet weak var uptimeItem: NSMenuItem!
+    @IBOutlet weak var awakeForItem: NSMenuItem!
+    @IBOutlet weak var infoSeparator: NSMenuItem!
+    
     @IBOutlet weak var appListItem: NSMenuItem!
     @IBOutlet weak var appListSeparator: NSMenuItem!
     
@@ -34,7 +44,7 @@ class MenuController: NSObject {
         
         // Setup Status Bar
         self.statusItem.button!.title = "zZ"
-        self.statusItem.button?.appearsDisabled = !powerMgmtController.enabled
+        self.statusItem.button?.appearsDisabled = !powerMgmtController.isPreventingSleep
         self.statusItem.button?.target = self
         self.statusItem.button?.action = #selector(toggleAssertionAction(_:))
         self.statusItem.menu = self.menu
@@ -44,7 +54,7 @@ class MenuController: NSObject {
         
         // Setup "Activate for" Submenu
         for item in (activateForItem.submenu?.items)! {
-            if item.tag == 1 {
+            if item.tag == MenuItemTag.interval.rawValue {
                 let ti = TimeInterval(item.title)!
                 item.representedObject = ti
                 item.title = ti.simpleFormat(maxCount: 1)!
@@ -68,16 +78,20 @@ class MenuController: NSObject {
         let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName")!
         
         // Set Standart Elements
-        stateItem.title     = "\(appName): " + (powerMgmtController.enabled ? "On" : "Off")
+        stateItem.title     = "\(appName): " + (powerMgmtController.isPreventingSleep ? "On" : "Off")
         timeRemainingItem.isHidden = true
-        activateItem.title  = "Turn \(appName) " + (powerMgmtController.enabled ? "Off" : "On")
+        activateItem.title  = "Turn \(appName) " + (powerMgmtController.isPreventingSleep ? "Off" : "On")
         
-        appListItem.isHidden = true
-        appListSeparator.isHidden = true
-        
+        // Reset Item
         for item in menu.items {
-            if item.tag == 1 {
-                menu.removeItem(item)
+            if let tag = MenuItemTag(rawValue: item.tag) {
+                switch tag {
+                case .hidden:
+                    item.isHidden = true
+                case .temporary:
+                    menu.removeItem(item)
+                default: break
+                }
             }
         }
         
@@ -90,51 +104,83 @@ class MenuController: NSObject {
         }
         
         // Update List of Apps if wanted
+        menuShowApps(override: self.override)
+        menuShowInfo(override: self.override)
+    }
+    
+    private func menuShowInfo(override: Bool) {
+        guard override || UserDefaults.standard.showUptime else { return }
         
-        guard override || UserDefaults.standard.showAdvancedInformation else { return }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
         
-        let apps = PowerMgmtController.assertionsByApp()
+        let uptime = SystemTime.systemUptime.simpleFormat(style: .short, units: [.day, .hour, .minute, .second], maxCount: 3)!
+        
+        uptimeItem.isHidden = false
+        uptimeItem.title = "Uptime: \(uptime)"
+        uptimeItem.toolTip = "Booted at \(dateFormatter.string(from: SystemTime.boot!))"
+        
+        let awakeSince: String
+        if let lastWake = SystemTime.lastWake {
+            let ti = Date().timeIntervalSince(lastWake)
+            awakeSince = ti.simpleFormat(style: .short, units: [.day, .hour, .minute, .second], maxCount: 3)!
+        } else {
+            awakeSince = uptime
+        }
+        
+        awakeForItem.isHidden = false
+        awakeForItem.title = "Awake For: \(awakeSince)"
+        
+        infoSeparator.isHidden = false
+    }
+    
+    private func menuShowApps(override: Bool) {
+        guard override || UserDefaults.standard.showAppList else { return }
+        
+        let infos = AssertionInfo.byProcess()
         let numString = String.localizedStringWithFormat(
-            NSLocalizedString("number_apps", comment: ""), apps.count)
+            NSLocalizedString("number_apps", comment: ""), infos.count)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .short
+        dateFormatter.doesRelativeDateFormatting = true
         
         appListItem.isHidden = false
         appListSeparator.isHidden = false
         appListItem.title = "\(numString) Preventing Sleep"
         
-        guard override || UserDefaults.standard.verbosityLevel >= 1 else { return }
+        guard override || (UserDefaults.standard.showAppList && UserDefaults.standard.appListDetail >= 1)
+            else { return }
         
-        for (app, list) in apps {
+        for info in infos {
             let index = menu.index(of: appListSeparator)
             let numString = String.localizedStringWithFormat(
-                NSLocalizedString("number_assertions", comment: ""), list.count)
-            let pdsString = "Prevents \(list.contains { $0.preventsDisplaySleep } ? "Display" : "Idle") Sleep"
+                NSLocalizedString("number_assertions", comment: ""), info.ids.count)
+            let pdsString = "Prevents \(info.preventsDisplaySleep ? "Display" : "Idle") Sleep"
             
             let appItem = NSMenuItem()
-            appItem.tag = 1
-            appItem.title = app.localizedName!
+            appItem.tag = MenuItemTag.temporary.rawValue
+            appItem.title = info.name
             appItem.toolTip = numString + "; " + pdsString
-            appItem.image = app.icon
+            appItem.image = info.icon
             appItem.image?.size = CGSize(width: 16, height: 16)
-            appItem.representedObject = app
+            appItem.representedObject = info
             appItem.target = self
             appItem.action = #selector(applicationAction(_:))
             menu.insertItem(appItem, at: index)
             
             // Add Verbose Information if wanted
-            guard override || UserDefaults.standard.verbosityLevel >= 2 else { continue }
+            guard override || UserDefaults.standard.appListDetail >= 2 else { continue }
             
-            let startDate = list.reduce(Date.distantFuture) { min($0, $1.timeStarted) }
-            let startFormatter = DateFormatter()
-            startFormatter.dateStyle = .long
-            startFormatter.timeStyle = .short
-            startFormatter.doesRelativeDateFormatting = true
+            let startDate = info.timeStarted
             
-            let timeRemaining = list.reduce(0) { max($0, $1.timeLeft ?? 0)}
+            let timeRemaining = info.timeLeft ?? 0
             let timeoutString = TimeInterval(timeRemaining).simpleFormat(
                 style: .short, units: [.day, .hour, .minute], maxCount: 2)!
             
             menu.insertDescItem(pdsString, at: index+1)
-            menu.insertDescItem("Started: \(startFormatter.string(from: startDate))", at: index+2)
+            menu.insertDescItem("Started: \(dateFormatter.string(from: startDate))", at: index+2)
             if timeRemaining > 0 {
                 menu.insertDescItem("Timeout in: \(timeoutString)", at: index+3)
             }
@@ -144,47 +190,49 @@ class MenuController: NSObject {
 
     // MARK: - Actions
     @IBAction func applicationAction(_ sender: NSMenuItem) {
-        guard let app = sender.representedObject as? NSRunningApplication else { return }
+        guard let pid = (sender.representedObject as? AssertionInfo)?.pid,
+            let app = NSRunningApplication(processIdentifier: pid)
+            else { return }
         
         if let cmdKey = NSApp.currentEvent?.modifierFlags.contains(.command), cmdKey {
-            app.terminate()
+            app.terminate() // Doesn't Work
         } else {
             app.activate(options: [.activateIgnoringOtherApps])
         }
     }
     
     @IBAction func toggleAssertionAction(_ sender: NSObject) {
-        if powerMgmtController.enabled {
-            powerMgmtController.stopAssertion()
+        if powerMgmtController.isPreventingSleep {
+            powerMgmtController.stopPreventingSleep()
         } else {
-            powerMgmtController.startAssertion()
+            powerMgmtController.preventSleep()
         }
     }
     
     @IBAction func activateForAction(_ sender: NSMenuItem) {
         guard let ti = sender.representedObject as? TimeInterval else { return }
         
-        powerMgmtController.startAssertion(withTimeout: UInt(ti))
+        powerMgmtController.preventSleep(withTimeout: UInt(ti))
     }
     
     @IBAction func activateIndefinitlyAction(_ sender: NSMenuItem) {
-        powerMgmtController.startAssertion(withTimeout: 0)
+        powerMgmtController.preventSleep(withTimeout: 0)
     }
     
     @IBAction func activateEndOfDayAction(_ sender: NSMenuItem) {
-        powerMgmtController.startAssertionForRestOfDay()
+        powerMgmtController.preventSleepUntilEndOfDay()
     }
 }
 
 
-// MARK: - PowerMgmtObserver Protocol
+// MARK: - AssertionObserver Protocol
 extension MenuController: PowerMgmtObserver {
-    func assertionChanged(isRunning: Bool, preventDisplaySleep: Bool) {
-        self.statusItem.button?.appearsDisabled = !isRunning
+    func startedPreventingSleep(for: TimeInterval) {
+        self.statusItem.button?.appearsDisabled = false
     }
     
-    func systemAssertionsChanged(preventsIdleSleep: Bool, preventsDisplaySleep: Bool) {
-
+    func stoppedPreventingSleep(after: TimeInterval, because reason: StoppedPreventingSleepReason) {
+        self.statusItem.button?.appearsDisabled = true
     }
 }
 
