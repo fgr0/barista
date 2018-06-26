@@ -72,12 +72,12 @@ it. Any help is greatly appreciated.
 
 ## Changelog
 
-- [Version 1.1.0 Beta](../../tree/version-1.1.0) (in development)
-  - [x] Show Sleep-/Waketime and Uptime in Verbose Mode List
-  - [x] Show Applications that use Background Assertions (e.g. Time Machine)
-  - [ ] Add Preferences for End-of-Day Time and Verbose Mode
+- **[Version 1.1.0 Beta](../../releases/tag/v1.1.0-beta)** (June 2018):
+  * Show more sleep-preventing Applications (Time Machine)
+  * Ability to show System Uptime and time since last wake.
+  * Bugfixes and Project Cleanup
 
-- **[Version 1.0.0 Beta](../../releases/tag/v1.0.0)** (April 2018):
+- **[Version 1.0.0 Beta](../../releases/tag/v1.0.0-beta)** (April 2018):
   * Complete rewrite
   * Added Preference window
   * Added *Monitoring* feature
