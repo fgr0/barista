@@ -137,7 +137,7 @@ class PowerMgmtController: NSObject {
     }
     
     func removeObserver(_ observer: PowerMgmtObserver) {
-        observers = observers.filter { $0 !== observer }
+        observers.removeAll { $0 === observer }
     }
     
     

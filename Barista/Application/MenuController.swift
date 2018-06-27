@@ -249,7 +249,7 @@ extension MenuController: NSMenuDelegate {
     func menuWillOpen(_ menu: NSMenu) {
         guard self.timer == nil else { return }
         self.timer = Timer(timeInterval: 1.0, repeats: true) { _ in self.updateMenu() }
-        RunLoop.current.add(self.timer!, forMode: RunLoopMode.eventTrackingRunLoopMode)
+        RunLoop.current.add(self.timer!, forMode: RunLoop.Mode.eventTracking)
     }
     
     func menuDidClose(_ menu: NSMenu) {

@@ -72,12 +72,18 @@ it. Any help is greatly appreciated.
 
 ## Changelog
 
+- [Version 1.2.0 Beta](../../tree/version-1.2.0) (*in development*):
+  - [x] Switch Development to Xcode 10/Swift 4.2
+  - [ ] Automatic Activation/Deactivation when switching from/to Battery Power
+  - [ ] More useful Notifications
+  - [ ] Global Keyboard Shortcut
+
 - **[Version 1.1.0 Beta](../../releases/tag/v1.1.0-beta)** (June 2018):
   * Show more sleep-preventing Applications (Time Machine)
   * Ability to show System Uptime and time since last wake.
   * Bugfixes and Project Cleanup
 
-- **[Version 1.0.0 Beta](../../releases/tag/v1.0.0-beta)** (April 2018):
+- [Version 1.0.0 Beta](../../releases/tag/v1.0.0-beta) (April 2018):
   * Complete rewrite
   * Added Preference window
   * Added *Monitoring* feature
