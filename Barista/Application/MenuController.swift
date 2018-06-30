@@ -44,7 +44,7 @@ class MenuController: NSObject {
         
         // Setup Status Bar
         self.statusItem.button!.title = "zZ"
-        self.statusItem.button?.appearsDisabled = !powerMgmtController.isPreventingSleep
+        self.statusItem.button?.appearsDisabled = !(powerMgmtController.assertion?.enabled ?? false)
         self.statusItem.button?.target = self
         self.statusItem.button?.action = #selector(toggleAssertionAction(_:))
         self.statusItem.menu = self.menu
@@ -78,9 +78,9 @@ class MenuController: NSObject {
         let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName")!
         
         // Set Standart Elements
-        stateItem.title     = "\(appName): " + (powerMgmtController.isPreventingSleep ? "On" : "Off")
+        stateItem.title     = "\(appName): " + (powerMgmtController.assertion?.enabled ?? false ? "On" : "Off")
         timeRemainingItem.isHidden = true
-        activateItem.title  = "Turn \(appName) " + (powerMgmtController.isPreventingSleep ? "Off" : "On")
+        activateItem.title  = "Turn \(appName) " + (powerMgmtController.assertion?.enabled ?? false ? "Off" : "On")
         
         // Reset Item
         for item in menu.items {
@@ -96,7 +96,7 @@ class MenuController: NSObject {
         }
         
         // Update Time Remaining
-        if let tl = powerMgmtController.timeLeft, tl > 0 {
+        if let tl = powerMgmtController.assertion?.timeLeft, tl > 0 {
             let title = TimeInterval(tl).simpleFormat(style: .short, units: [.day, .hour, .minute],
                                                       maxCount: 2, timeRemaining: true)!
             timeRemainingItem.title = title
@@ -202,11 +202,16 @@ class MenuController: NSObject {
     }
     
     @IBAction func toggleAssertionAction(_ sender: NSObject) {
-        if powerMgmtController.isPreventingSleep {
+        if let isEnabled = powerMgmtController.assertion?.enabled, isEnabled {
             powerMgmtController.stopPreventingSleep()
         } else {
             powerMgmtController.preventSleep()
         }
+    }
+    
+    @IBAction func togglePreventDisplaySleep(_ sender: NSMenuItem){
+        guard let assertion = powerMgmtController.assertion else { return }
+        assertion.preventsDisplaySleep = !(sender.state == .on)
     }
     
     @IBAction func activateForAction(_ sender: NSMenuItem) {

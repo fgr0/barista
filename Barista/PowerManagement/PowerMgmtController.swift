@@ -18,13 +18,7 @@ class PowerMgmtController: NSObject {
             self.preventSleep()
         }
         
-        self.preventDisplaySleep = UserDefaults.standard.preventDisplaySleep
-        UserDefaults.standard.bind(
-            NSBindingName(rawValue: UserDefaults.Keys.preventDisplaySleep),
-            to: self,
-            withKeyPath: #keyPath(preventDisplaySleep),
-            options: nil)
-        
+        // Register for `Wake` Notifications
         NSWorkspace.shared.notificationCenter.addObserver(
         forName: NSWorkspace.didWakeNotification, object: nil, queue: nil) { _ in
             guard UserDefaults.standard.stopAtForcedSleep else { return }
@@ -41,28 +35,8 @@ class PowerMgmtController: NSObject {
     
     
     // MARK: - Managing System Sleep
-    private var assertion: UserAssertion?
+    private(set) var assertion: UserAssertion?
     private var timeoutTimer: Timer?
-    
-    var isPreventingSleep: Bool {
-        get {
-            guard let assertion = self.assertion else { return false }
-            return assertion.enabled
-        }
-    }
-    
-    @objc dynamic var preventDisplaySleep: Bool = true {
-        didSet {
-            guard let assertion = self.assertion else { return }
-            assertion.preventsDisplaySleep = self.preventDisplaySleep
-        }
-    }
-    
-    var timeLeft: UInt? {
-        get {
-            return assertion?.timeLeft
-        }
-    }
     
     func preventSleep() {
         if UserDefaults.standard.endOfDaySelected {

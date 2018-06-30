@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14269.14" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14269.14"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -81,7 +81,8 @@
                         <menuItem title="Prevent Display Sleep" id="WY5-Pe-3M4">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <binding destination="zJc-jN-0c1" name="value" keyPath="preventDisplaySleep" id="5lN-4g-D1W">
+                                <action selector="togglePreventDisplaySleep:" target="3Zv-yd-aJX" id="N57-bg-HEi"/>
+                                <binding destination="u6f-Ox-hdE" name="value" keyPath="values.preventDisplaySleep" id="av4-ZQ-ptP">
                                     <dictionary key="options">
                                         <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                                     </dictionary>
