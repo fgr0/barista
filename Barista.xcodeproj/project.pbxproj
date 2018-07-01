@@ -10,6 +10,7 @@
 		8100C4021FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8100C4011FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift */; };
 		81041F821FCB587A0029C9A7 /* UserAssertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81041F811FCB587A0029C9A7 /* UserAssertion.swift */; };
 		8120117220CEBE5500EDEDAE /* SystemTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8120117120CEBE5500EDEDAE /* SystemTime.swift */; };
+		8126FE5120E7A53A00B6B065 /* PowerSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8126FE5020E7A53A00B6B065 /* PowerSource.swift */; };
 		8129093C1EDC750900072FC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE472EF19FF9E4C0089B49F /* AppDelegate.swift */; };
 		813CAC9F20DFC2BD007EAB4B /* PowerMgmtController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813CAC9E20DFC2BD007EAB4B /* PowerMgmtController.swift */; };
 		819C75D01FA3841500A72238 /* TimeIntervalSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819C75CF1FA3841500A72238 /* TimeIntervalSliderCell.swift */; };
@@ -62,6 +63,7 @@
 		8100C4011FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMenu+insertDescItem.swift"; sourceTree = "<group>"; };
 		81041F811FCB587A0029C9A7 /* UserAssertion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAssertion.swift; sourceTree = "<group>"; };
 		8120117120CEBE5500EDEDAE /* SystemTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemTime.swift; sourceTree = "<group>"; };
+		8126FE5020E7A53A00B6B065 /* PowerSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerSource.swift; sourceTree = "<group>"; };
 		813CAC9E20DFC2BD007EAB4B /* PowerMgmtController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerMgmtController.swift; sourceTree = "<group>"; };
 		819C75CF1FA3841500A72238 /* TimeIntervalSliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalSliderCell.swift; sourceTree = "<group>"; };
 		819D93452088D7E500545789 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = Base; path = Base.lproj/About.rtf; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				81B5B87B201D5A7E00361C0D /* AssertionInfo.swift */,
 				813CAC9E20DFC2BD007EAB4B /* PowerMgmtController.swift */,
 				81F20D05200F8E3500FF7C39 /* PowerMgmtObserver.swift */,
+				8126FE5020E7A53A00B6B065 /* PowerSource.swift */,
 				8120117120CEBE5500EDEDAE /* SystemTime.swift */,
 				81041F811FCB587A0029C9A7 /* UserAssertion.swift */,
 			);
@@ -402,6 +405,7 @@
 				819D934C2088F2C200545789 /* ClickableTextField.swift in Sources */,
 				81BDE856200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift in Sources */,
 				81A04B1A1FA24F5A00C1B87B /* TimeIntervalSlider.swift in Sources */,
+				8126FE5120E7A53A00B6B065 /* PowerSource.swift in Sources */,
 				8120117220CEBE5500EDEDAE /* SystemTime.swift in Sources */,
 				9EBFC6D01A1CB30900D1B158 /* AppDelegate+LoginItem.swift in Sources */,
 				81A04B181FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift in Sources */,

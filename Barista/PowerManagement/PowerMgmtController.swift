@@ -8,8 +8,9 @@
 
 import Cocoa
 
-class PowerMgmtController: NSObject {
-    
+
+class PowerMgmtController: NSObject, PowerSourceDelegate {
+
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,6 +27,8 @@ class PowerMgmtController: NSObject {
             
             self.stopPreventingSleep(reason: .SystemWake)
         }
+        
+        self.powerSource.delegate = self
     }
     
     deinit {
@@ -100,6 +103,26 @@ class PowerMgmtController: NSObject {
         self.timeoutTimer?.invalidate()
         self.notifyStoppedPreventingSleep(after: Date().timeIntervalSince(assertion.timeStarted), because: reason)
         self.assertion = nil
+    }
+    
+    
+    // MARK: - Power Source Information
+    private(set) var powerSource = PowerSource()
+    
+    func powerSourceNotification() {
+        guard let assertion = self.assertion, assertion.enabled else { return }
+        guard let ps = self.powerSource.current, ps == .Battery else { return }
+        
+        self.stopPreventingSleep(reason: .NoACPower)
+    }
+    
+    func batteryLevelNotification() {
+        guard let assertion = self.assertion, assertion.enabled else { return }
+        guard let battery = self.powerSource.batteryLevel else { return }
+        
+        if battery <= 0.10 {
+            self.stopPreventingSleep(reason: .LowBattery)
+        }
     }
     
     
