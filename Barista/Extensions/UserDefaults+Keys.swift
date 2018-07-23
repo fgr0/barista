@@ -89,9 +89,9 @@ extension UserDefaults {
         get { return integer(forKey: UserDefaults.Keys.durationType) }
     }
     
-    @objc dynamic var durationEndAtTime: Int {
+    @objc dynamic var durationEndAtTime: String {
         set(level) { set(level, forKey: UserDefaults.Keys.durationEndAtTime) }
-        get { return integer(forKey: UserDefaults.Keys.durationEndAtTime) }
+        get { return string(forKey: UserDefaults.Keys.durationEndAtTime)! }
     }
     
     @objc dynamic var durationTimeout: Int {

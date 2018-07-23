@@ -83,14 +83,15 @@ class PowerMgmtController: NSObject, PowerSourceDelegate {
         // Find the next 3:00am date that's more than 30 minutes in the future
         var nextDate: Date = Date()
         
-        let hour = min(max(UserDefaults.standard.durationEndAtTime, 0), 23)
+        let date = DateFormatter.date(from: UserDefaults.standard.durationEndAtTime, withFormat: "HH:mm")!
+        let time = Calendar.current.dateComponents([.hour, .minute], from: date)
         
         repeat {
             nextDate = Calendar.current.nextDate(
                 after: nextDate,
-                matching: DateComponents(hour: hour, minute: 0, second: 0),
+                matching: time,
                 matchingPolicy: .nextTime)!
-        } while nextDate.timeIntervalSinceNow < 1800
+        } while nextDate.timeIntervalSinceNow < 60
         
         self.preventSleep(until: nextDate)
     }

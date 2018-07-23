@@ -10,7 +10,7 @@ import Cocoa
 
 class DurationPreferencesView: NSView {
     @objc dynamic private var defaultTimeout: Int = 0
-
+    
     
     // MARK: - Outlets
     @IBOutlet weak var radioDurationTypeIndefinitly: NSButton!
@@ -19,6 +19,8 @@ class DurationPreferencesView: NSView {
     
     @IBOutlet weak var slider: TimeIntervalSlider!
     @IBOutlet weak var selectedTimeField: NSTextField!
+    
+    @IBOutlet weak var durationTimePicker: NSDatePicker!
     
     
     // MARK: - Lifecycle
@@ -44,6 +46,10 @@ class DurationPreferencesView: NSView {
         slider.labelForTickMarks = [0, 3, 6, 9, 12]
         slider.timeValue = Double(self.defaultTimeout)
         slider.isEnabled = radioDurationTypeTimeout.tag == UserDefaults.standard.durationType
+        
+        // Setup Date Picker
+        durationTimePicker.dateValue = DateFormatter.date(
+            from: UserDefaults.standard.durationEndAtTime, withFormat:  "HH:mm")!
     }
     
     
@@ -52,6 +58,7 @@ class DurationPreferencesView: NSView {
         UserDefaults.standard.durationType = sender.tag
         
         slider.isEnabled = sender == radioDurationTypeTimeout
+        durationTimePicker.isEnabled = sender == radioDurationTypeHour
     }
     
     @IBAction func durationSliderChanged(_ sender: TimeIntervalSlider) {
@@ -70,4 +77,7 @@ class DurationPreferencesView: NSView {
         }
     }
     
+    @IBAction func durationTimePickerChanged(_ sender: NSDatePicker) {
+        UserDefaults.standard.durationEndAtTime = DateFormatter.string(from: sender.dateValue, withFormat: "HH:mm")!
+    }
 }

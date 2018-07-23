@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8100C4021FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8100C4011FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift */; };
 		81041F821FCB587A0029C9A7 /* UserAssertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81041F811FCB587A0029C9A7 /* UserAssertion.swift */; };
+		811DDA3B210663B700995350 /* DateFormatter+StringConverstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811DDA3A210663B700995350 /* DateFormatter+StringConverstion.swift */; };
 		8120117220CEBE5500EDEDAE /* SystemTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8120117120CEBE5500EDEDAE /* SystemTime.swift */; };
 		8126FE5120E7A53A00B6B065 /* PowerSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8126FE5020E7A53A00B6B065 /* PowerSource.swift */; };
 		8129093C1EDC750900072FC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE472EF19FF9E4C0089B49F /* AppDelegate.swift */; };
@@ -65,6 +66,7 @@
 /* Begin PBXFileReference section */
 		8100C4011FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMenu+insertDescItem.swift"; sourceTree = "<group>"; };
 		81041F811FCB587A0029C9A7 /* UserAssertion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAssertion.swift; sourceTree = "<group>"; };
+		811DDA3A210663B700995350 /* DateFormatter+StringConverstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+StringConverstion.swift"; sourceTree = "<group>"; };
 		8120117120CEBE5500EDEDAE /* SystemTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemTime.swift; sourceTree = "<group>"; };
 		8126FE5020E7A53A00B6B065 /* PowerSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerSource.swift; sourceTree = "<group>"; };
 		813CAC9E20DFC2BD007EAB4B /* PowerMgmtController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerMgmtController.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				81BDE855200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift */,
 				81A04B171FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift */,
 				81BBEFA4200E3FED0049D094 /* UserDefaults+Keys.swift */,
+				811DDA3A210663B700995350 /* DateFormatter+StringConverstion.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				8120117220CEBE5500EDEDAE /* SystemTime.swift in Sources */,
 				9EBFC6D01A1CB30900D1B158 /* AppDelegate+LoginItem.swift in Sources */,
 				81A04B181FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift in Sources */,
+				811DDA3B210663B700995350 /* DateFormatter+StringConverstion.swift in Sources */,
 				81DD9B3F210649A10079D9D4 /* GeneralPreferencesView.swift in Sources */,
 				81BBEFA5200E3FED0049D094 /* UserDefaults+Keys.swift in Sources */,
 				81DD9B4121064AC40079D9D4 /* DurationPreferencesView.swift in Sources */,

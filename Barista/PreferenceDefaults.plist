@@ -29,6 +29,6 @@
 	<key>backgroundMonitoring</key>
 	<false/>
 	<key>durationEndAtTime</key>
-	<integer>3</integer>
+	<string>20:00</string>
 </dict>
 </plist>
