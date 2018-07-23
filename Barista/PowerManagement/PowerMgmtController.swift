@@ -42,10 +42,12 @@ class PowerMgmtController: NSObject, PowerSourceDelegate {
     private var timeoutTimer: Timer?
     
     func preventSleep() {
-        if UserDefaults.standard.endOfDaySelected {
-            self.preventSleepUntilEndOfDay()
+        if UserDefaults.standard.durationType == 0 {
+            self.preventSleep(withTimeout: 0)
+        } else if UserDefaults.standard.durationType == 1 {
+            self.preventSleep(withTimeout: UInt(UserDefaults.standard.durationTimeout))
         } else {
-            self.preventSleep(withTimeout: UInt(UserDefaults.standard.defaultTimeout))
+            self.preventSleepUntilEndOfDay()
         }
     }
     
@@ -81,7 +83,7 @@ class PowerMgmtController: NSObject, PowerSourceDelegate {
         // Find the next 3:00am date that's more than 30 minutes in the future
         var nextDate: Date = Date()
         
-        let hour = min(max(UserDefaults.standard.endOfDayTime, 0), 23)
+        let hour = min(max(UserDefaults.standard.durationEndAtTime, 0), 23)
         
         repeat {
             nextDate = Calendar.current.nextDate(

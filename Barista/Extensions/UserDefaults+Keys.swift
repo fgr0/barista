@@ -14,17 +14,17 @@ extension UserDefaults {
         static let shouldActivateOnLaunch   = "shouldActivateOnLaunch"
         static let shouldLaunchAtLogin      = "shouldLaunchAtLogin"
         static let preventDisplaySleep      = "preventDisplaySleep"
-        static let defaultTimeout           = "defaultTimeout"
         static let showAppList              = "showAppList"
         static let showUptime               = "showUptime"
         static let sendNotifications        = "sendNotifications"
-        static let endOfDaySelected         = "endOfDaySelected"
         static let stopAtForcedSleep        = "stopAtForcedSleep"
         static let quickActivation          = "quickActivation"
         static let backgroundMonitoring     = "backgroundMonitoring"
         static let appListDetail            = "appListDetail"
         static let hadFirstLaunch           = "hadFirstLaunch"
-        static let endOfDayTime             = "endOfDayTime"
+        static let durationType             = "durationType"
+        static let durationEndAtTime        = "durationEndAtTime"
+        static let durationTimeout          = "durationTimeout"
     }
     
     // MARK: - Convenience Accessors
@@ -42,12 +42,7 @@ extension UserDefaults {
         set(should) { set(should, forKey: UserDefaults.Keys.preventDisplaySleep) }
         get { return bool(forKey: UserDefaults.Keys.preventDisplaySleep) }
     }
-    
-    @objc dynamic var defaultTimeout: Int {
-        set(timeout) { set(timeout, forKey: UserDefaults.Keys.defaultTimeout) }
-        get { return integer(forKey: UserDefaults.Keys.defaultTimeout) }
-    }
-    
+
     @objc dynamic var showAppList: Bool {
         set(always) { set(always, forKey: UserDefaults.Keys.showAppList) }
         get { return bool(forKey: UserDefaults.Keys.showAppList) }
@@ -62,12 +57,7 @@ extension UserDefaults {
         set(should) { set(should, forKey: UserDefaults.Keys.sendNotifications) }
         get { return bool(forKey: UserDefaults.Keys.sendNotifications) }
     }
-    
-    @objc dynamic var endOfDaySelected: Bool {
-        set(end) { set(end, forKey: UserDefaults.Keys.endOfDaySelected) }
-        get { return bool(forKey: UserDefaults.Keys.endOfDaySelected) }
-    }
-    
+
     @objc dynamic var stopAtForcedSleep: Bool {
         set(stop) { set(stop, forKey: UserDefaults.Keys.stopAtForcedSleep) }
         get { return bool(forKey: UserDefaults.Keys.stopAtForcedSleep) }
@@ -94,8 +84,19 @@ extension UserDefaults {
         get { return bool(forKey: UserDefaults.Keys.hadFirstLaunch)}
     }
     
-    @objc dynamic var endOfDayTime: Int {
-        set(time) { set(time, forKey: UserDefaults.Keys.endOfDayTime) }
-        get { return integer(forKey: UserDefaults.Keys.endOfDayTime) }
+    @objc dynamic var durationType: Int {
+        set(time) { set(time, forKey: UserDefaults.Keys.durationType) }
+        get { return integer(forKey: UserDefaults.Keys.durationType) }
     }
+    
+    @objc dynamic var durationEndAtTime: Int {
+        set(level) { set(level, forKey: UserDefaults.Keys.durationEndAtTime) }
+        get { return integer(forKey: UserDefaults.Keys.durationEndAtTime) }
+    }
+    
+    @objc dynamic var durationTimeout: Int {
+        set(timeout) { set(timeout, forKey: UserDefaults.Keys.durationTimeout) }
+        get { return integer(forKey: UserDefaults.Keys.durationTimeout) }
+    }
+    
 }

@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>durationType</key>
+	<integer>0</integer>
 	<key>appListDetail</key>
 	<integer>1</integer>
 	<key>hadFirstLaunch</key>
@@ -10,8 +12,8 @@
 	<false/>
 	<key>showUptime</key>
 	<false/>
-	<key>defaultTimeout</key>
-	<integer>0</integer>
+	<key>durationTimeout</key>
+	<integer>3600</integer>
 	<key>preventDisplaySleep</key>
 	<true/>
 	<key>shouldLaunchAtLogin</key>
@@ -20,15 +22,13 @@
 	<true/>
 	<key>sendNotifications</key>
 	<false/>
-	<key>endOfDaySelected</key>
-	<false/>
 	<key>stopAtForcedSleep</key>
 	<false/>
 	<key>quickActivation</key>
 	<false/>
 	<key>backgroundMonitoring</key>
 	<false/>
-	<key>endOfDayTime</key>
+	<key>durationEndAtTime</key>
 	<integer>3</integer>
 </dict>
 </plist>

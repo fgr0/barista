@@ -21,7 +21,10 @@
 		81B5B87C201D5A7E00361C0D /* AssertionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B5B87B201D5A7E00361C0D /* AssertionInfo.swift */; };
 		81BBEFA5200E3FED0049D094 /* UserDefaults+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BBEFA4200E3FED0049D094 /* UserDefaults+Keys.swift */; };
 		81BDE856200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BDE855200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift */; };
-		81CFBBEB1EFADC23008DFA81 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFBBEA1EFADC23008DFA81 /* PreferencesViewController.swift */; };
+		81DD9B3F210649A10079D9D4 /* GeneralPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DD9B3E210649A10079D9D4 /* GeneralPreferencesView.swift */; };
+		81DD9B4121064AC40079D9D4 /* DurationPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DD9B4021064AC40079D9D4 /* DurationPreferencesView.swift */; };
+		81DD9B4321064CF30079D9D4 /* AboutPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DD9B4221064CF30079D9D4 /* AboutPreferencesView.swift */; };
+		81DD9B4521064DFC0079D9D4 /* AdvancedPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DD9B4421064DFC0079D9D4 /* AdvancedPreferencesView.swift */; };
 		81DF37282084ED30005910CF /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 81DF37262084ED30005910CF /* Localizable.stringsdict */; };
 		81E06BA21EE828D5002D1651 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E06BA01EE828D5002D1651 /* PreferencesWindowController.swift */; };
 		81E06BA71EE82AF3002D1651 /* PreferenceDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 81E06BA61EE82AF3002D1651 /* PreferenceDefaults.plist */; };
@@ -73,7 +76,10 @@
 		81B5B87B201D5A7E00361C0D /* AssertionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssertionInfo.swift; sourceTree = "<group>"; };
 		81BBEFA4200E3FED0049D094 /* UserDefaults+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Keys.swift"; sourceTree = "<group>"; };
 		81BDE855200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSStatusBarButton+CustomMouseClick.swift"; sourceTree = "<group>"; };
-		81CFBBEA1EFADC23008DFA81 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		81DD9B3E210649A10079D9D4 /* GeneralPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPreferencesView.swift; sourceTree = "<group>"; };
+		81DD9B4021064AC40079D9D4 /* DurationPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPreferencesView.swift; sourceTree = "<group>"; };
+		81DD9B4221064CF30079D9D4 /* AboutPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutPreferencesView.swift; sourceTree = "<group>"; };
+		81DD9B4421064DFC0079D9D4 /* AdvancedPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedPreferencesView.swift; sourceTree = "<group>"; };
 		81DF37272084ED30005910CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = Base; path = Base.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		81E06BA01EE828D5002D1651 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		81E06BA61EE82AF3002D1651 /* PreferenceDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PreferenceDefaults.plist; sourceTree = "<group>"; };
@@ -147,8 +153,11 @@
 			isa = PBXGroup;
 			children = (
 				81E38DD4201D425700DC0D0B /* Preferences.storyboard */,
-				81CFBBEA1EFADC23008DFA81 /* PreferencesViewController.swift */,
 				81E06BA01EE828D5002D1651 /* PreferencesWindowController.swift */,
+				81DD9B3E210649A10079D9D4 /* GeneralPreferencesView.swift */,
+				81DD9B4021064AC40079D9D4 /* DurationPreferencesView.swift */,
+				81DD9B4421064DFC0079D9D4 /* AdvancedPreferencesView.swift */,
+				81DD9B4221064CF30079D9D4 /* AboutPreferencesView.swift */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
@@ -363,7 +372,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh -e\n\n# This script automatically sets the version and short version string of\n# an Xcode project from the Git repository containing the project.\n#\n# To use this script in Xcode, add the script's path to a \"Run Script\" build\n# phase for your application target.\n\nGIT_COMMITS_BRANCH=$(git rev-list HEAD | wc -l | tr -d ' ')\nGIT_TAG_MASTER=$(git describe master --tags | sed 's/.*\\([0-9][0-9]*\\.[0-9][0-9]*\\.[0-9][0-9]*\\).*/\\1/')\nGIT_SIMPLE_BRANCH_NAME=`git rev-parse --abbrev-ref HEAD`\nINFO_PLIST=\"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n\n# For Non-Release Builds add current branch to Build Number\nif [ ${CONFIGURATION} != \"Release\" ] || [ ${GIT_SIMPLE_BRANCH_NAME} != \"master\" ]; then\n    GIT_COMMITS_BRANCH+=\"-$GIT_SIMPLE_BRANCH_NAME\"\nfi\n\n# Check if Working Copy is clean\nif [[ -n $(git status --porcelain) ]]; then\n    GIT_COMMITS_BRANCH+=\"-DIRTY\"\nfi\n\n# Add Version Information to Build\n#/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString $GIT_TAG_MASTER\" \"$INFO_PLIST\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $GIT_COMMITS_BRANCH\" \"$INFO_PLIST\"";
+			shellScript = "#!/bin/sh -e\n\n# This script automatically sets the version and short version string of\n# an Xcode project from the Git repository containing the project.\n\nGIT_COMMITS_BRANCH=$(git rev-list HEAD | wc -l | tr -d ' ')\nGIT_TAG_MASTER=$(git describe master --tags | sed 's/.*\\([0-9][0-9]*\\.[0-9][0-9]*\\.[0-9][0-9]*\\).*/\\1/')\nGIT_SIMPLE_BRANCH_NAME=`git rev-parse --abbrev-ref HEAD`\nINFO_PLIST=\"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n\n# For Non-Release Builds add current branch to Build Number\necho \"Building Version String for *${CONFIGURATION}* build at ${GIT_SIMPLE_BRANCH_NAME}\"\nif [ \"${CONFIGURATION}\" != \"Release\" ] || [ \"${GIT_SIMPLE_BRANCH_NAME}\" != \"master\" ]; then\nGIT_COMMITS_BRANCH+=\"-$GIT_SIMPLE_BRANCH_NAME\"\nfi\n\n# Check if Working Copy is clean\nif [[ -n $(git status --porcelain) ]]; then\nGIT_COMMITS_BRANCH+=\"-DIRTY\"\nfi\n\necho \"Version String: ${GIT_COMMITS_BRANCH}\"\n\n# Add Version Information to Build\n#/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString $GIT_TAG_MASTER\" \"$INFO_PLIST\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $GIT_COMMITS_BRANCH\" \"$INFO_PLIST\"\n";
+			showEnvVarsInLog = 0;
 		};
 		9EF1BAA91A1F5BDA00EF14CC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -400,17 +410,20 @@
 				81041F821FCB587A0029C9A7 /* UserAssertion.swift in Sources */,
 				81E06BA21EE828D5002D1651 /* PreferencesWindowController.swift in Sources */,
 				81F20D06200F8E3500FF7C39 /* PowerMgmtObserver.swift in Sources */,
+				81DD9B4521064DFC0079D9D4 /* AdvancedPreferencesView.swift in Sources */,
 				819C75D01FA3841500A72238 /* TimeIntervalSliderCell.swift in Sources */,
 				813CAC9F20DFC2BD007EAB4B /* PowerMgmtController.swift in Sources */,
 				819D934C2088F2C200545789 /* ClickableTextField.swift in Sources */,
 				81BDE856200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift in Sources */,
 				81A04B1A1FA24F5A00C1B87B /* TimeIntervalSlider.swift in Sources */,
+				81DD9B4321064CF30079D9D4 /* AboutPreferencesView.swift in Sources */,
 				8126FE5120E7A53A00B6B065 /* PowerSource.swift in Sources */,
 				8120117220CEBE5500EDEDAE /* SystemTime.swift in Sources */,
 				9EBFC6D01A1CB30900D1B158 /* AppDelegate+LoginItem.swift in Sources */,
 				81A04B181FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift in Sources */,
-				81CFBBEB1EFADC23008DFA81 /* PreferencesViewController.swift in Sources */,
+				81DD9B3F210649A10079D9D4 /* GeneralPreferencesView.swift in Sources */,
 				81BBEFA5200E3FED0049D094 /* UserDefaults+Keys.swift in Sources */,
+				81DD9B4121064AC40079D9D4 /* DurationPreferencesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
