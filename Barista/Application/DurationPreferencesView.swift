@@ -17,10 +17,14 @@ class DurationPreferencesView: NSView {
     @IBOutlet weak var radioDurationTypeTimeout: NSButton!
     @IBOutlet weak var radioDurationTypeHour: NSButton!
     
-    @IBOutlet weak var slider: TimeIntervalSlider!
+    @IBOutlet weak var durationSlider: TimeIntervalSlider!
     @IBOutlet weak var selectedTimeField: NSTextField!
     
     @IBOutlet weak var durationTimePicker: NSDatePicker!
+    
+    @IBOutlet weak var checkTurnOffOnBattery: NSButton!
+    @IBOutlet weak var checkDeactivateOnThreshold: NSView!
+    @IBOutlet weak var thresholdSlider: NSSlider!
     
     
     // MARK: - Lifecycle
@@ -42,14 +46,29 @@ class DurationPreferencesView: NSView {
             options: nil)
         
         // Setup Slider
-        slider.timeIntervals = [60, 300, 600, 900, 1800, 2700, 3600, 5400, 7200, 10800, 14400, 18000, 21600]
-        slider.labelForTickMarks = [0, 3, 6, 9, 12]
-        slider.timeValue = Double(self.defaultTimeout)
-        slider.isEnabled = radioDurationTypeTimeout.tag == UserDefaults.standard.durationType
+        durationSlider.timeIntervals = [60, 300, 600, 900, 1800, 2700, 3600, 5400, 7200, 10800, 14400, 18000, 21600]
+        durationSlider.labelForTickMarks = [0, 3, 6, 9, 12]
+        durationSlider.timeValue = Double(self.defaultTimeout)
+        durationSlider.isEnabled = radioDurationTypeTimeout.tag == UserDefaults.standard.durationType
         
         // Setup Date Picker
         durationTimePicker.dateValue = DateFormatter.date(
             from: UserDefaults.standard.durationEndAtTime, withFormat:  "HH:mm")!
+        
+        // Conditionally Hide Battery-related Options
+        checkTurnOffOnBattery.isHidden = !PowerSource.hasBattery
+        checkDeactivateOnThreshold.isHidden = !PowerSource.hasBattery
+        
+        let pcntFormatter = NumberFormatter()
+        pcntFormatter.numberStyle = .percent
+        pcntFormatter.multiplier = 100
+        pcntFormatter.maximumFractionDigits = 0
+        
+        for i in [0, 4, 8] {
+            let v = thresholdSlider.tickMarkValue(at: i)
+            let label = thresholdSlider.createLabelForTickMark(i, withString: pcntFormatter.string(from: NSNumber(value: v))!)
+            thresholdSlider.superview?.addSubview(label!)
+        }
     }
     
     
@@ -57,7 +76,7 @@ class DurationPreferencesView: NSView {
     @IBAction func defaultDurationTypeSelected(_ sender: NSButton) {
         UserDefaults.standard.durationType = sender.tag
         
-        slider.isEnabled = sender == radioDurationTypeTimeout
+        durationSlider.isEnabled = sender == radioDurationTypeTimeout
         durationTimePicker.isEnabled = sender == radioDurationTypeHour
     }
     

@@ -28,7 +28,9 @@ class PowerMgmtController: NSObject, PowerSourceDelegate {
             self.stopPreventingSleep(reason: .SystemWake)
         }
         
-        self.powerSource.delegate = self
+        if PowerSource.hasBattery {
+            self.powerSource.delegate = self
+        }
     }
     
     deinit {
@@ -115,6 +117,7 @@ class PowerMgmtController: NSObject, PowerSourceDelegate {
     func powerSourceNotification() {
         guard let assertion = self.assertion, assertion.enabled else { return }
         guard let ps = self.powerSource.current, ps == .Battery else { return }
+        guard UserDefaults.standard.batteryTurnOffOnSwitch else { return }
         
         self.stopPreventingSleep(reason: .NoACPower)
     }
@@ -122,8 +125,9 @@ class PowerMgmtController: NSObject, PowerSourceDelegate {
     func batteryLevelNotification() {
         guard let assertion = self.assertion, assertion.enabled else { return }
         guard let battery = self.powerSource.batteryLevel else { return }
+        guard UserDefaults.standard.batteryDeactivateOnThreshold else { return }
         
-        if battery <= 0.10 {
+        if Double(battery) <= UserDefaults.standard.batteryThreshold {
             self.stopPreventingSleep(reason: .LowBattery)
         }
     }

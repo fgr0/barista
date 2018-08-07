@@ -22,6 +22,11 @@ enum PowerSourceType: String {
 class PowerSource {
     
     // MARK: - Properties
+    static var hasBattery: Bool  {
+        let desc = PowerSource.powerSourceDescription()
+        return desc?[kIOPSTypeKey] as? String == kIOPSInternalBatteryType
+    }
+
     private(set) var current: PowerSourceType? {
         didSet {
             guard oldValue != self.current else { return }
@@ -67,8 +72,8 @@ class PowerSource {
         self.current = PowerSource.providingPowerSource()
         
         let desc = PowerSource.powerSourceDescription()
-        self.currentCapacity = desc?[kIOPSCurrentCapacityKey] as? Int
-        self.maxCapacity = desc?[kIOPSMaxCapacityKey] as? Int
+        self.currentCapacity =  desc?[kIOPSCurrentCapacityKey] as? Int
+        self.maxCapacity =      desc?[kIOPSMaxCapacityKey] as? Int
     }
     
     private static func powerSourceDescription() -> Dictionary<String,CFTypeRef>? {
