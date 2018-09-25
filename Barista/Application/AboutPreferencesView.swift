@@ -20,7 +20,13 @@ class AboutPreferencesView: NSView {
         versionLabel.stringValue = "Version \(version) (\(buildnr))"
         
         aboutTextView.readRTFD(fromFile: Bundle.main.path(forResource: "About", ofType: "rtf")!)
+        
         aboutTextView.font = NSFont.systemFont(ofSize: NSFont.systemFontSize)
+        aboutTextView.textColor = NSColor.labelColor
+        
+        if #available(OSX 10.14, *) {
+            aboutTextView.linkTextAttributes?[.foregroundColor] = NSColor.controlAccentColor
+        }
     }
     
 }

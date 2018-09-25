@@ -74,8 +74,9 @@ it. Any help is greatly appreciated.
 
 - [Version 1.2.0 Beta](../../tree/version-1.2.0) (*in development*):
   - [x] Switch Development to Xcode 10/Swift 4.2
+  - [x] Support macOS 10.14 Dark Mode
   - [x] Automatic Activation/Deactivation when switching from/to Battery Power
-  - [ ] More useful Notifications
+  - [ ] Simplify Preferences
 
 
 - **[Version 1.1.0 Beta](../../releases/tag/v1.1.0-beta)** (June 2018):
