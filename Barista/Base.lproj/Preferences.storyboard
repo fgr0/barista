@@ -35,11 +35,11 @@
             <objects>
                 <viewController id="9z5-fK-87E" sceneMemberID="viewController">
                     <view key="view" id="dgK-UL-YRR">
-                        <rect key="frame" x="0.0" y="0.0" width="520" height="326"/>
+                        <rect key="frame" x="0.0" y="0.0" width="520" height="428"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <imageView translatesAutoresizingMaskIntoConstraints="NO" id="NjJ-he-Oo6">
-                                <rect key="frame" x="20" y="242" width="64" height="64"/>
+                                <rect key="frame" x="20" y="344" width="64" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="64" id="8HU-jW-OM2"/>
                                     <constraint firstAttribute="width" secondItem="NjJ-he-Oo6" secondAttribute="height" multiplier="1:1" id="axk-fT-aNn"/>
@@ -47,7 +47,7 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="NSApplicationIcon" id="nWX-9r-r6x"/>
                             </imageView>
                             <textField verticalHuggingPriority="500" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="BCs-6U-Fcn">
-                                <rect key="frame" x="103" y="272" width="399" height="34"/>
+                                <rect key="frame" x="103" y="374" width="399" height="34"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Barista is a small Application that lives in your Menu Bar and controls if you Mac can go to sleep." id="INF-BJ-ltv">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -55,7 +55,7 @@
                                 </textFieldCell>
                             </textField>
                             <tabView horizontalHuggingPriority="1" verticalHuggingPriority="1" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="Y4u-uH-soO">
-                                <rect key="frame" x="13" y="10" width="494" height="217"/>
+                                <rect key="frame" x="13" y="10" width="494" height="319"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="480" id="aN5-Ll-eaB"/>
                                 </constraints>
@@ -202,61 +202,61 @@
                                     </tabViewItem>
                                     <tabViewItem label="Duration" identifier="2" id="bCG-Gp-77L">
                                         <view key="view" id="iuD-IN-qIZ" customClass="DurationPreferencesView" customModule="Barista" customModuleProvider="target">
-                                            <rect key="frame" x="10" y="33" width="474" height="332"/>
+                                            <rect key="frame" x="10" y="33" width="474" height="273"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="lLO-8V-Tqn">
-                                                    <rect key="frame" x="20" y="191" width="434" height="121"/>
+                                                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="33" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8N7-pn-Wu4">
+                                                    <rect key="frame" x="20" y="20" width="434" height="233"/>
                                                     <subviews>
-                                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FTz-xh-2c2">
-                                                            <rect key="frame" x="-2" y="104" width="124" height="17"/>
-                                                            <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Default duration:" id="sC4-7U-zf1">
-                                                                <font key="font" metaFont="system"/>
-                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                            </textFieldCell>
-                                                        </textField>
-                                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CgM-z2-mB1">
-                                                            <rect key="frame" x="131" y="103" width="82" height="18"/>
-                                                            <buttonCell key="cell" type="radio" title="Indefinitly" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="dcw-uu-ad0">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="system"/>
-                                                            </buttonCell>
-                                                            <connections>
-                                                                <action selector="defaultDurationTypeSelected:" target="iuD-IN-qIZ" id="UOh-8Z-vKu"/>
-                                                            </connections>
-                                                        </button>
-                                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="sZr-a5-Ts1">
-                                                            <rect key="frame" x="131" y="81" width="129" height="18"/>
-                                                            <buttonCell key="cell" type="radio" title="Prevent sleep for:" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="rTK-Rp-4JR">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="system"/>
-                                                            </buttonCell>
-                                                            <connections>
-                                                                <action selector="defaultDurationTypeSelected:" target="iuD-IN-qIZ" id="keV-Zb-Qng"/>
-                                                                <binding destination="WgO-NO-EhQ" name="value" keyPath="values.endOfDaySelected" id="Elb-IY-Omj">
-                                                                    <dictionary key="options">
-                                                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                                                    </dictionary>
-                                                                </binding>
-                                                            </connections>
-                                                        </button>
-                                                        <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="pcq-UA-9wn">
-                                                            <rect key="frame" x="131" y="2" width="134" height="18"/>
-                                                            <buttonCell key="cell" type="radio" title="Prevent sleep until" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="FlT-1W-ehe">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="system"/>
-                                                            </buttonCell>
-                                                            <connections>
-                                                                <action selector="defaultDurationTypeSelected:" target="iuD-IN-qIZ" id="INa-dn-Jig"/>
-                                                                <binding destination="WgO-NO-EhQ" name="value" keyPath="values.endOfDaySelected" id="UUP-hD-LHF"/>
-                                                            </connections>
-                                                        </button>
-                                                        <customView horizontalHuggingPriority="1" verticalHuggingPriority="1" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="sBa-F7-uvQ">
-                                                            <rect key="frame" x="137" y="31" width="297" height="65"/>
+                                                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="lLO-8V-Tqn">
+                                                            <rect key="frame" x="0.0" y="118" width="434" height="115"/>
                                                             <subviews>
+                                                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FTz-xh-2c2">
+                                                                    <rect key="frame" x="-2" y="98" width="106" height="17"/>
+                                                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Default duration:" id="sC4-7U-zf1">
+                                                                        <font key="font" metaFont="system"/>
+                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                    </textFieldCell>
+                                                                </textField>
+                                                                <button horizontalHuggingPriority="750" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="CgM-z2-mB1">
+                                                                    <rect key="frame" x="113" y="97" width="82" height="18"/>
+                                                                    <buttonCell key="cell" type="radio" title="Indefinitly" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="dcw-uu-ad0">
+                                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                    </buttonCell>
+                                                                    <connections>
+                                                                        <action selector="defaultDurationTypeSelected:" target="iuD-IN-qIZ" id="UOh-8Z-vKu"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <button horizontalHuggingPriority="750" verticalHuggingPriority="1000" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="sZr-a5-Ts1">
+                                                                    <rect key="frame" x="113" y="75" width="129" height="18"/>
+                                                                    <buttonCell key="cell" type="radio" title="Prevent sleep for:" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="rTK-Rp-4JR">
+                                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                    </buttonCell>
+                                                                    <connections>
+                                                                        <action selector="defaultDurationTypeSelected:" target="iuD-IN-qIZ" id="keV-Zb-Qng"/>
+                                                                        <binding destination="WgO-NO-EhQ" name="value" keyPath="values.endOfDaySelected" id="Elb-IY-Omj">
+                                                                            <dictionary key="options">
+                                                                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                                            </dictionary>
+                                                                        </binding>
+                                                                    </connections>
+                                                                </button>
+                                                                <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="pcq-UA-9wn">
+                                                                    <rect key="frame" x="113" y="2" width="134" height="18"/>
+                                                                    <buttonCell key="cell" type="radio" title="Prevent sleep until" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="FlT-1W-ehe">
+                                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                    </buttonCell>
+                                                                    <connections>
+                                                                        <action selector="defaultDurationTypeSelected:" target="iuD-IN-qIZ" id="INa-dn-Jig"/>
+                                                                        <binding destination="WgO-NO-EhQ" name="value" keyPath="values.endOfDaySelected" id="UUP-hD-LHF"/>
+                                                                    </connections>
+                                                                </button>
                                                                 <slider translatesAutoresizingMaskIntoConstraints="NO" id="RkA-hE-iz0" customClass="TimeIntervalSlider" customModule="Barista" customModuleProvider="target">
-                                                                    <rect key="frame" x="13" y="21" width="271" height="24"/>
+                                                                    <rect key="frame" x="132" y="48" width="294" height="24"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="21" id="P0y-oq-LNA"/>
                                                                     </constraints>
@@ -269,8 +269,23 @@
                                                                         <action selector="durationSliderChanged:" target="iuD-IN-qIZ" id="iIg-rU-G6i"/>
                                                                     </connections>
                                                                 </slider>
+                                                                <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AVR-UR-Qf6">
+                                                                    <rect key="frame" x="253" y="0.0" width="62" height="27"/>
+                                                                    <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="fhi-yY-ujr">
+                                                                        <font key="font" metaFont="system"/>
+                                                                        <date key="date" timeIntervalSinceReferenceDate="-595929600">
+                                                                            <!--1982-02-12 16:00:00 +0000-->
+                                                                        </date>
+                                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                        <datePickerElements key="datePickerElements" hour="YES" minute="YES"/>
+                                                                    </datePickerCell>
+                                                                    <connections>
+                                                                        <action selector="durationTimePickerChanged:" target="iuD-IN-qIZ" id="244-cq-Ftl"/>
+                                                                    </connections>
+                                                                </datePicker>
                                                                 <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="120" translatesAutoresizingMaskIntoConstraints="NO" id="4Od-6K-7SH">
-                                                                    <rect key="frame" x="247" y="49" width="37" height="14"/>
+                                                                    <rect key="frame" x="389" y="76" width="37" height="14"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="14" id="ap4-m5-Pu2"/>
                                                                     </constraints>
@@ -282,113 +297,45 @@
                                                                 </textField>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="RkA-hE-iz0" firstAttribute="centerX" secondItem="sBa-F7-uvQ" secondAttribute="centerX" id="HGv-oS-R2h"/>
-                                                                <constraint firstItem="RkA-hE-iz0" firstAttribute="width" secondItem="sBa-F7-uvQ" secondAttribute="width" priority="750" constant="-31" id="Kcq-BA-6Xf"/>
-                                                                <constraint firstItem="RkA-hE-iz0" firstAttribute="top" secondItem="4Od-6K-7SH" secondAttribute="bottom" constant="6" id="OTH-4j-860"/>
-                                                                <constraint firstItem="4Od-6K-7SH" firstAttribute="trailing" secondItem="RkA-hE-iz0" secondAttribute="trailing" id="TIx-u9-x3A"/>
-                                                                <constraint firstItem="RkA-hE-iz0" firstAttribute="top" secondItem="sBa-F7-uvQ" secondAttribute="top" constant="22" id="YRX-D3-gDD"/>
-                                                                <constraint firstAttribute="height" constant="65" id="c2e-zl-RE7"/>
-                                                                <constraint firstAttribute="bottom" secondItem="RkA-hE-iz0" secondAttribute="bottom" constant="22" id="yMT-hI-mVr"/>
+                                                                <constraint firstItem="AVR-UR-Qf6" firstAttribute="firstBaseline" secondItem="pcq-UA-9wn" secondAttribute="firstBaseline" id="58P-Q9-40N"/>
+                                                                <constraint firstItem="RkA-hE-iz0" firstAttribute="leading" secondItem="sZr-a5-Ts1" secondAttribute="leading" constant="20" id="5T5-3H-UUZ"/>
+                                                                <constraint firstItem="AVR-UR-Qf6" firstAttribute="leading" secondItem="pcq-UA-9wn" secondAttribute="trailing" constant="8" id="5y7-PL-YLO"/>
+                                                                <constraint firstItem="pcq-UA-9wn" firstAttribute="leading" secondItem="sZr-a5-Ts1" secondAttribute="leading" id="AS7-Tb-EAZ"/>
+                                                                <constraint firstItem="FTz-xh-2c2" firstAttribute="top" secondItem="lLO-8V-Tqn" secondAttribute="top" id="CAJ-gp-qsf"/>
+                                                                <constraint firstItem="4Od-6K-7SH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sZr-a5-Ts1" secondAttribute="trailing" constant="6" id="DmD-Sk-b0b"/>
+                                                                <constraint firstItem="RkA-hE-iz0" firstAttribute="top" secondItem="sZr-a5-Ts1" secondAttribute="bottom" constant="6" id="EKy-fT-VdK"/>
+                                                                <constraint firstItem="FTz-xh-2c2" firstAttribute="leading" secondItem="lLO-8V-Tqn" secondAttribute="leading" id="GJ8-Gf-r93"/>
+                                                                <constraint firstAttribute="bottom" secondItem="pcq-UA-9wn" secondAttribute="bottom" constant="3" id="PJR-lP-1c4"/>
+                                                                <constraint firstItem="FTz-xh-2c2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="lLO-8V-Tqn" secondAttribute="leading" id="Sy4-CV-ffV"/>
+                                                                <constraint firstItem="AVR-UR-Qf6" firstAttribute="top" secondItem="RkA-hE-iz0" secondAttribute="bottom" constant="26" id="UQV-I9-APs"/>
+                                                                <constraint firstAttribute="trailing" secondItem="RkA-hE-iz0" secondAttribute="trailing" constant="10" id="X50-yA-cjV"/>
+                                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pcq-UA-9wn" secondAttribute="trailing" constant="20" symbolic="YES" id="Zyk-P1-lbH"/>
+                                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FTz-xh-2c2" secondAttribute="trailing" constant="20" symbolic="YES" id="dUY-Zp-u1R"/>
+                                                                <constraint firstItem="sZr-a5-Ts1" firstAttribute="leading" secondItem="CgM-z2-mB1" secondAttribute="leading" id="eYY-d9-Q7j"/>
+                                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="AVR-UR-Qf6" secondAttribute="trailing" id="i6q-EO-6wf"/>
+                                                                <constraint firstItem="CgM-z2-mB1" firstAttribute="leading" secondItem="FTz-xh-2c2" secondAttribute="trailing" constant="12" id="j6O-VA-dNd"/>
+                                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="sZr-a5-Ts1" secondAttribute="trailing" constant="20" symbolic="YES" id="lQs-Gz-Ulw"/>
+                                                                <constraint firstItem="RkA-hE-iz0" firstAttribute="top" secondItem="4Od-6K-7SH" secondAttribute="bottom" constant="6" id="lxh-xu-BRp"/>
+                                                                <constraint firstItem="CgM-z2-mB1" firstAttribute="firstBaseline" secondItem="FTz-xh-2c2" secondAttribute="firstBaseline" id="x5n-J3-hAj"/>
+                                                                <constraint firstItem="sZr-a5-Ts1" firstAttribute="top" secondItem="CgM-z2-mB1" secondAttribute="bottom" constant="6" id="xLM-Ys-RSm"/>
+                                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="CgM-z2-mB1" secondAttribute="trailing" constant="221" id="yBi-rs-fbR"/>
+                                                                <constraint firstItem="4Od-6K-7SH" firstAttribute="trailing" secondItem="RkA-hE-iz0" secondAttribute="trailing" id="yr2-hA-dMK"/>
+                                                                <constraint firstAttribute="bottom" secondItem="AVR-UR-Qf6" secondAttribute="bottom" id="zrQ-Ol-VoP"/>
                                                             </constraints>
                                                         </customView>
-                                                        <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AVR-UR-Qf6">
-                                                            <rect key="frame" x="271" y="0.0" width="62" height="27"/>
-                                                            <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="fhi-yY-ujr">
-                                                                <font key="font" metaFont="system"/>
-                                                                <date key="date" timeIntervalSinceReferenceDate="-595929600">
-                                                                    <!--1982-02-12 16:00:00 +0000-->
-                                                                </date>
-                                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                <datePickerElements key="datePickerElements" hour="YES" minute="YES"/>
-                                                            </datePickerCell>
-                                                            <connections>
-                                                                <action selector="durationTimePickerChanged:" target="iuD-IN-qIZ" id="244-cq-Ftl"/>
-                                                            </connections>
-                                                        </datePicker>
-                                                    </subviews>
-                                                    <constraints>
-                                                        <constraint firstItem="pcq-UA-9wn" firstAttribute="top" secondItem="sBa-F7-uvQ" secondAttribute="bottom" constant="12" id="1xM-wi-Peg"/>
-                                                        <constraint firstItem="AVR-UR-Qf6" firstAttribute="firstBaseline" secondItem="pcq-UA-9wn" secondAttribute="firstBaseline" id="58P-Q9-40N"/>
-                                                        <constraint firstItem="AVR-UR-Qf6" firstAttribute="leading" secondItem="pcq-UA-9wn" secondAttribute="trailing" constant="8" id="5y7-PL-YLO"/>
-                                                        <constraint firstItem="AVR-UR-Qf6" firstAttribute="top" secondItem="sBa-F7-uvQ" secondAttribute="bottom" constant="8" id="8rQ-bw-0bZ"/>
-                                                        <constraint firstItem="pcq-UA-9wn" firstAttribute="leading" secondItem="sZr-a5-Ts1" secondAttribute="leading" id="AS7-Tb-EAZ"/>
-                                                        <constraint firstItem="FTz-xh-2c2" firstAttribute="top" secondItem="lLO-8V-Tqn" secondAttribute="top" id="CAJ-gp-qsf"/>
-                                                        <constraint firstItem="FTz-xh-2c2" firstAttribute="leading" secondItem="lLO-8V-Tqn" secondAttribute="leading" id="GJ8-Gf-r93"/>
-                                                        <constraint firstItem="4Od-6K-7SH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sZr-a5-Ts1" secondAttribute="trailing" constant="20" id="O1f-Ud-WIq"/>
-                                                        <constraint firstAttribute="bottom" secondItem="pcq-UA-9wn" secondAttribute="bottom" constant="3" id="PJR-lP-1c4"/>
-                                                        <constraint firstItem="RkA-hE-iz0" firstAttribute="leading" secondItem="sZr-a5-Ts1" secondAttribute="leading" constant="20" id="PSY-pT-MYL"/>
-                                                        <constraint firstItem="FTz-xh-2c2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="lLO-8V-Tqn" secondAttribute="leading" id="Sy4-CV-ffV"/>
-                                                        <constraint firstItem="sBa-F7-uvQ" firstAttribute="top" secondItem="sZr-a5-Ts1" secondAttribute="top" constant="2" id="Vi0-mN-aiH"/>
-                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pcq-UA-9wn" secondAttribute="trailing" constant="20" symbolic="YES" id="Zyk-P1-lbH"/>
-                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FTz-xh-2c2" secondAttribute="trailing" constant="20" symbolic="YES" id="dUY-Zp-u1R"/>
-                                                        <constraint firstItem="sZr-a5-Ts1" firstAttribute="leading" secondItem="CgM-z2-mB1" secondAttribute="leading" id="eYY-d9-Q7j"/>
-                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="AVR-UR-Qf6" secondAttribute="trailing" id="i6q-EO-6wf"/>
-                                                        <constraint firstItem="CgM-z2-mB1" firstAttribute="leading" secondItem="FTz-xh-2c2" secondAttribute="trailing" constant="12" id="j6O-VA-dNd"/>
-                                                        <constraint firstAttribute="trailing" secondItem="sBa-F7-uvQ" secondAttribute="trailing" id="kI0-Rx-L36"/>
-                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="sZr-a5-Ts1" secondAttribute="trailing" constant="20" symbolic="YES" id="lQs-Gz-Ulw"/>
-                                                        <constraint firstItem="CgM-z2-mB1" firstAttribute="firstBaseline" secondItem="FTz-xh-2c2" secondAttribute="firstBaseline" id="x5n-J3-hAj"/>
-                                                        <constraint firstItem="sZr-a5-Ts1" firstAttribute="top" secondItem="CgM-z2-mB1" secondAttribute="bottom" constant="6" id="xLM-Ys-RSm"/>
-                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="CgM-z2-mB1" secondAttribute="trailing" constant="221" id="yBi-rs-fbR"/>
-                                                        <constraint firstAttribute="bottom" secondItem="AVR-UR-Qf6" secondAttribute="bottom" id="zrQ-Ol-VoP"/>
-                                                    </constraints>
-                                                </customView>
-                                                <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Lbp-0r-i8u">
-                                                    <rect key="frame" x="9" y="172" width="456" height="5"/>
-                                                </box>
-                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="LNb-aX-Ebn">
-                                                    <rect key="frame" x="20" y="12" width="434" height="146"/>
-                                                    <subviews>
-                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zC3-al-7dK">
-                                                            <rect key="frame" x="-2" y="129" width="124" height="17"/>
-                                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Smart Deactivation:" id="Dme-l9-tmi">
-                                                                <font key="font" metaFont="system"/>
-                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                            </textFieldCell>
-                                                        </textField>
-                                                        <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8EC-P5-c0L">
-                                                            <rect key="frame" x="132" y="0.0" width="302" height="144"/>
+                                                        <customView horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LNb-aX-Ebn">
+                                                            <rect key="frame" x="0.0" y="0.0" width="434" height="85"/>
                                                             <subviews>
-                                                                <customView horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="E3S-aA-RYp">
-                                                                    <rect key="frame" x="0.0" y="92" width="302" height="52"/>
-                                                                    <subviews>
-                                                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FOn-9k-FcJ">
-                                                                            <rect key="frame" x="-2" y="36" width="254" height="18"/>
-                                                                            <buttonCell key="cell" type="check" title="Turn off when sytem is forced to sleep" bezelStyle="regularSquare" imagePosition="left" inset="2" id="aPk-gz-NMO">
-                                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                                <font key="font" metaFont="system"/>
-                                                                                <connections>
-                                                                                    <binding destination="WgO-NO-EhQ" name="value" keyPath="values.stopAtForcedSleep" id="bTg-BN-VKa">
-                                                                                        <dictionary key="options">
-                                                                                            <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                                                                        </dictionary>
-                                                                                    </binding>
-                                                                                </connections>
-                                                                            </buttonCell>
-                                                                        </button>
-                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Cxy-iI-Flt">
-                                                                            <rect key="frame" x="18" y="4" width="286" height="28"/>
-                                                                            <textFieldCell key="cell" selectable="YES" title="The system will always go to sleep when the battery is very low or the user activates sleep manually." id="QDL-tx-Snb">
-                                                                                <font key="font" metaFont="smallSystem"/>
-                                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                            </textFieldCell>
-                                                                        </textField>
-                                                                    </subviews>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FOn-9k-FcJ" secondAttribute="trailing" id="2Or-RR-wko"/>
-                                                                        <constraint firstItem="Cxy-iI-Flt" firstAttribute="top" secondItem="FOn-9k-FcJ" secondAttribute="bottom" constant="6" id="HbK-oF-i8X"/>
-                                                                        <constraint firstItem="Cxy-iI-Flt" firstAttribute="leading" secondItem="E3S-aA-RYp" secondAttribute="leading" constant="20" id="Hnp-ph-3fP"/>
-                                                                        <constraint firstItem="FOn-9k-FcJ" firstAttribute="leading" secondItem="E3S-aA-RYp" secondAttribute="leading" id="OLE-bo-UaX"/>
-                                                                        <constraint firstItem="FOn-9k-FcJ" firstAttribute="top" secondItem="E3S-aA-RYp" secondAttribute="top" id="S8H-FI-OZY"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="Cxy-iI-Flt" secondAttribute="trailing" id="Xk0-eq-pOv"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="Cxy-iI-Flt" secondAttribute="bottom" constant="4" id="adR-uy-3Ja"/>
-                                                                        <constraint firstItem="Cxy-iI-Flt" firstAttribute="leading" secondItem="FOn-9k-FcJ" secondAttribute="leading" constant="20" id="pZL-he-lAI"/>
-                                                                    </constraints>
-                                                                </customView>
-                                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JMj-ys-Yfz">
-                                                                    <rect key="frame" x="-2" y="68" width="271" height="18"/>
+                                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="zC3-al-7dK">
+                                                                    <rect key="frame" x="52" y="68" width="52" height="17"/>
+                                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Battery:" id="Dme-l9-tmi">
+                                                                        <font key="font" metaFont="system"/>
+                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                    </textFieldCell>
+                                                                </textField>
+                                                                <button verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="JMj-ys-Yfz">
+                                                                    <rect key="frame" x="112" y="67" width="271" height="18"/>
                                                                     <buttonCell key="cell" type="check" title="Turn off when switching to battery power" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="JJS-A0-qFr">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -397,94 +344,86 @@
                                                                         <binding destination="WgO-NO-EhQ" name="value" keyPath="values.batteryTurnOffOnSwitch" id="q5i-kU-cqU"/>
                                                                     </connections>
                                                                 </button>
-                                                                <customView verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rYb-0r-vPC">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="302" height="62"/>
-                                                                    <subviews>
-                                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dTN-ZP-en0">
-                                                                            <rect key="frame" x="-2" y="46" width="285" height="18"/>
-                                                                            <buttonCell key="cell" type="check" title="Deactivate when falling below battery level:" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="vQ3-Ma-226">
-                                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                                <font key="font" metaFont="system"/>
-                                                                            </buttonCell>
-                                                                            <connections>
-                                                                                <binding destination="WgO-NO-EhQ" name="value" keyPath="values.batteryDeactivateOnThreshold" id="qZy-Od-LC6"/>
-                                                                            </connections>
-                                                                        </button>
-                                                                        <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8ef-zt-dN3">
-                                                                            <rect key="frame" x="18" y="17" width="271" height="24"/>
-                                                                            <sliderCell key="cell" state="on" alignment="left" minValue="0.10000000000000001" maxValue="0.90000000000000002" doubleValue="0.5" tickMarkPosition="below" numberOfTickMarks="9" sliderType="linear" id="wQd-nv-3CI"/>
-                                                                            <connections>
-                                                                                <binding destination="WgO-NO-EhQ" name="enabled" keyPath="values.batteryDeactivateOnThreshold" id="BqG-zu-yeU">
-                                                                                    <dictionary key="options">
-                                                                                        <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
-                                                                                    </dictionary>
-                                                                                </binding>
-                                                                                <binding destination="WgO-NO-EhQ" name="value" keyPath="values.batteryThreshold" id="iU2-Kj-a6e">
-                                                                                    <dictionary key="options">
-                                                                                        <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                                        <bool key="NSConditionallySetsEnabled" value="NO"/>
-                                                                                    </dictionary>
-                                                                                </binding>
-                                                                            </connections>
-                                                                        </slider>
-                                                                    </subviews>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="bottom" secondItem="8ef-zt-dN3" secondAttribute="bottom" constant="18" id="6EX-LS-TqV"/>
-                                                                        <constraint firstItem="dTN-ZP-en0" firstAttribute="leading" secondItem="rYb-0r-vPC" secondAttribute="leading" id="6sa-lu-7R4"/>
-                                                                        <constraint firstItem="dTN-ZP-en0" firstAttribute="top" secondItem="rYb-0r-vPC" secondAttribute="top" id="LoQ-ct-Oqb"/>
-                                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dTN-ZP-en0" secondAttribute="trailing" id="c6w-IQ-4zR"/>
-                                                                        <constraint firstItem="8ef-zt-dN3" firstAttribute="top" secondItem="dTN-ZP-en0" secondAttribute="bottom" constant="9" id="wpV-Ou-ygn"/>
-                                                                    </constraints>
-                                                                </customView>
+                                                                <button verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="dTN-ZP-en0">
+                                                                    <rect key="frame" x="112" y="45" width="285" height="18"/>
+                                                                    <buttonCell key="cell" type="check" title="Deactivate when falling below battery level:" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="vQ3-Ma-226">
+                                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                    </buttonCell>
+                                                                    <connections>
+                                                                        <binding destination="WgO-NO-EhQ" name="value" keyPath="values.batteryDeactivateOnThreshold" id="qZy-Od-LC6"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8ef-zt-dN3">
+                                                                    <rect key="frame" x="132" y="19" width="294" height="24"/>
+                                                                    <sliderCell key="cell" state="on" alignment="left" minValue="0.10000000000000001" maxValue="0.90000000000000002" doubleValue="0.5" tickMarkPosition="below" numberOfTickMarks="9" sliderType="linear" id="wQd-nv-3CI"/>
+                                                                    <connections>
+                                                                        <binding destination="WgO-NO-EhQ" name="enabled" keyPath="values.batteryDeactivateOnThreshold" id="BqG-zu-yeU">
+                                                                            <dictionary key="options">
+                                                                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                                            </dictionary>
+                                                                        </binding>
+                                                                        <binding destination="WgO-NO-EhQ" name="value" keyPath="values.batteryThreshold" id="iU2-Kj-a6e">
+                                                                            <dictionary key="options">
+                                                                                <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                                <bool key="NSConditionallySetsEnabled" value="NO"/>
+                                                                            </dictionary>
+                                                                        </binding>
+                                                                    </connections>
+                                                                </slider>
                                                             </subviews>
-                                                            <visibilityPriorities>
-                                                                <integer value="1000"/>
-                                                                <integer value="1000"/>
-                                                                <integer value="1000"/>
-                                                            </visibilityPriorities>
-                                                            <customSpacing>
-                                                                <real value="3.4028234663852886e+38"/>
-                                                                <real value="3.4028234663852886e+38"/>
-                                                                <real value="3.4028234663852886e+38"/>
-                                                            </customSpacing>
-                                                        </stackView>
+                                                            <constraints>
+                                                                <constraint firstItem="dTN-ZP-en0" firstAttribute="leading" secondItem="JMj-ys-Yfz" secondAttribute="leading" id="DuT-yT-goy"/>
+                                                                <constraint firstAttribute="bottom" secondItem="8ef-zt-dN3" secondAttribute="bottom" constant="20" id="PZD-7b-RH4"/>
+                                                                <constraint firstItem="JMj-ys-Yfz" firstAttribute="firstBaseline" secondItem="zC3-al-7dK" secondAttribute="firstBaseline" id="aCd-dx-y8H"/>
+                                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dTN-ZP-en0" secondAttribute="trailing" id="gI4-VN-Fsx"/>
+                                                                <constraint firstItem="zC3-al-7dK" firstAttribute="top" secondItem="LNb-aX-Ebn" secondAttribute="top" id="jaE-o0-Pfn"/>
+                                                                <constraint firstItem="dTN-ZP-en0" firstAttribute="top" secondItem="JMj-ys-Yfz" secondAttribute="bottom" constant="8" id="lLV-MZ-5ZX"/>
+                                                                <constraint firstItem="zC3-al-7dK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="LNb-aX-Ebn" secondAttribute="leading" id="lfI-eW-1wJ"/>
+                                                                <constraint firstItem="JMj-ys-Yfz" firstAttribute="leading" secondItem="zC3-al-7dK" secondAttribute="trailing" constant="12" id="nJ2-vm-gSd"/>
+                                                                <constraint firstItem="8ef-zt-dN3" firstAttribute="top" secondItem="dTN-ZP-en0" secondAttribute="bottom" constant="6" id="vQ4-UT-bV3"/>
+                                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JMj-ys-Yfz" secondAttribute="trailing" id="zbi-0a-QP3"/>
+                                                            </constraints>
+                                                        </customView>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="8EC-P5-c0L" firstAttribute="leading" secondItem="zC3-al-7dK" secondAttribute="trailing" constant="12" id="BEg-Tk-DIo"/>
-                                                        <constraint firstAttribute="trailing" secondItem="8EC-P5-c0L" secondAttribute="trailing" id="JzZ-gx-x30"/>
-                                                        <constraint firstItem="FOn-9k-FcJ" firstAttribute="firstBaseline" secondItem="zC3-al-7dK" secondAttribute="firstBaseline" id="KGd-CI-3EY"/>
-                                                        <constraint firstItem="zC3-al-7dK" firstAttribute="top" secondItem="LNb-aX-Ebn" secondAttribute="top" id="dyn-kt-1vz"/>
-                                                        <constraint firstItem="zC3-al-7dK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="LNb-aX-Ebn" secondAttribute="leading" id="fpZ-18-GXm"/>
-                                                        <constraint firstAttribute="bottom" secondItem="8EC-P5-c0L" secondAttribute="bottom" id="yZK-dQ-lKH"/>
+                                                        <constraint firstItem="JMj-ys-Yfz" firstAttribute="leading" secondItem="pcq-UA-9wn" secondAttribute="leading" id="R6L-GJ-OmR"/>
+                                                        <constraint firstItem="8ef-zt-dN3" firstAttribute="width" secondItem="RkA-hE-iz0" secondAttribute="width" id="abf-Ez-uL2"/>
+                                                        <constraint firstItem="8ef-zt-dN3" firstAttribute="leading" secondItem="RkA-hE-iz0" secondAttribute="leading" id="sgy-0V-h3R"/>
                                                     </constraints>
-                                                </customView>
+                                                    <visibilityPriorities>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                    </visibilityPriorities>
+                                                    <customSpacing>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                    </customSpacing>
+                                                </stackView>
+                                                <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Lbp-0r-i8u">
+                                                    <rect key="frame" x="9" y="119" width="456" height="5"/>
+                                                </box>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="Lbp-0r-i8u" firstAttribute="top" secondItem="lLO-8V-Tqn" secondAttribute="bottom" constant="16" id="1fG-r4-Jcv"/>
                                                 <constraint firstItem="Lbp-0r-i8u" firstAttribute="leading" secondItem="iuD-IN-qIZ" secondAttribute="leading" constant="9" id="8Dd-Y3-IfH"/>
-                                                <constraint firstItem="lLO-8V-Tqn" firstAttribute="centerX" secondItem="iuD-IN-qIZ" secondAttribute="centerX" id="DKn-Se-pG9"/>
-                                                <constraint firstItem="8EC-P5-c0L" firstAttribute="leading" secondItem="pcq-UA-9wn" secondAttribute="leading" id="LSJ-Yu-3he"/>
+                                                <constraint firstAttribute="bottom" secondItem="8N7-pn-Wu4" secondAttribute="bottom" constant="20" symbolic="YES" id="9HB-Xs-yEU"/>
+                                                <constraint firstAttribute="trailing" secondItem="8N7-pn-Wu4" secondAttribute="trailing" constant="20" id="HaS-Gw-plK"/>
                                                 <constraint firstAttribute="trailing" secondItem="Lbp-0r-i8u" secondAttribute="trailing" constant="9" id="TFy-rA-Lq6"/>
-                                                <constraint firstItem="Lbp-0r-i8u" firstAttribute="top" secondItem="lLO-8V-Tqn" secondAttribute="bottom" constant="16" id="Ttd-go-ZFi"/>
-                                                <constraint firstItem="LNb-aX-Ebn" firstAttribute="top" secondItem="Lbp-0r-i8u" secondAttribute="bottom" constant="16" id="Uhc-qp-Rhi"/>
-                                                <constraint firstItem="lLO-8V-Tqn" firstAttribute="leading" secondItem="iuD-IN-qIZ" secondAttribute="leading" constant="20" id="aEh-hE-uYf"/>
-                                                <constraint firstItem="8ef-zt-dN3" firstAttribute="leading" secondItem="RkA-hE-iz0" secondAttribute="leading" id="b1b-25-kOX"/>
-                                                <constraint firstItem="LNb-aX-Ebn" firstAttribute="centerX" secondItem="iuD-IN-qIZ" secondAttribute="centerX" id="cKm-hN-STb"/>
-                                                <constraint firstItem="LNb-aX-Ebn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iuD-IN-qIZ" secondAttribute="leading" constant="20" id="kyu-eK-8Yx"/>
-                                                <constraint firstAttribute="trailing" secondItem="lLO-8V-Tqn" secondAttribute="trailing" constant="20" id="lgY-Fc-gNH"/>
-                                                <constraint firstItem="lLO-8V-Tqn" firstAttribute="top" secondItem="iuD-IN-qIZ" secondAttribute="top" constant="20" id="nBE-7q-H0w"/>
-                                                <constraint firstItem="8ef-zt-dN3" firstAttribute="width" secondItem="RkA-hE-iz0" secondAttribute="width" id="vVg-Ra-xFB"/>
-                                                <constraint firstAttribute="bottom" secondItem="LNb-aX-Ebn" secondAttribute="bottom" constant="12" id="zaf-Hv-ILd"/>
+                                                <constraint firstItem="8N7-pn-Wu4" firstAttribute="top" secondItem="iuD-IN-qIZ" secondAttribute="top" constant="20" id="deR-vt-mcc"/>
+                                                <constraint firstItem="8N7-pn-Wu4" firstAttribute="leading" secondItem="iuD-IN-qIZ" secondAttribute="leading" constant="20" id="elU-m9-dQY"/>
                                             </constraints>
                                             <connections>
-                                                <outlet property="checkDeactivateOnThreshold" destination="rYb-0r-vPC" id="pwg-1J-Sdk"/>
-                                                <outlet property="checkTurnOffOnBattery" destination="JMj-ys-Yfz" id="9Va-yh-AMQ"/>
+                                                <outlet property="batterySection" destination="LNb-aX-Ebn" id="vXF-8F-j8O"/>
+                                                <outlet property="batteryThresholdSlider" destination="8ef-zt-dN3" id="3x6-dA-MOK"/>
+                                                <outlet property="durationSection" destination="lLO-8V-Tqn" id="sXy-0z-pM4"/>
                                                 <outlet property="durationSlider" destination="RkA-hE-iz0" id="2nN-nD-Cb5"/>
                                                 <outlet property="durationTimePicker" destination="AVR-UR-Qf6" id="1nc-Uc-Brq"/>
+                                                <outlet property="line" destination="Lbp-0r-i8u" id="Ucf-gg-NdV"/>
                                                 <outlet property="radioDurationTypeHour" destination="pcq-UA-9wn" id="PwZ-Tc-1Jc"/>
                                                 <outlet property="radioDurationTypeIndefinitly" destination="CgM-z2-mB1" id="1PN-KU-aCu"/>
                                                 <outlet property="radioDurationTypeTimeout" destination="sZr-a5-Ts1" id="vwZ-8o-tIh"/>
                                                 <outlet property="selectedTimeField" destination="4Od-6K-7SH" id="Lyb-Jo-UZx"/>
-                                                <outlet property="thresholdSlider" destination="8ef-zt-dN3" id="3x6-dA-MOK"/>
                                             </connections>
                                         </view>
                                     </tabViewItem>

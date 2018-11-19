@@ -13,18 +13,18 @@ class DurationPreferencesView: NSView {
     
     
     // MARK: - Outlets
-    @IBOutlet weak var radioDurationTypeIndefinitly: NSButton!
-    @IBOutlet weak var radioDurationTypeTimeout: NSButton!
-    @IBOutlet weak var radioDurationTypeHour: NSButton!
+    @IBOutlet weak var durationSection: NSView!
+      @IBOutlet weak var radioDurationTypeIndefinitly: NSButton!
+      @IBOutlet weak var radioDurationTypeTimeout: NSButton!
+      @IBOutlet weak var radioDurationTypeHour: NSButton!
+      @IBOutlet weak var durationSlider: TimeIntervalSlider!
+      @IBOutlet weak var selectedTimeField: NSTextField!
+      @IBOutlet weak var durationTimePicker: NSDatePicker!
     
-    @IBOutlet weak var durationSlider: TimeIntervalSlider!
-    @IBOutlet weak var selectedTimeField: NSTextField!
+    @IBOutlet weak var line: NSBox!
     
-    @IBOutlet weak var durationTimePicker: NSDatePicker!
-    
-    @IBOutlet weak var checkTurnOffOnBattery: NSButton!
-    @IBOutlet weak var checkDeactivateOnThreshold: NSView!
-    @IBOutlet weak var thresholdSlider: NSSlider!
+    @IBOutlet weak var batterySection: NSView!
+      @IBOutlet weak var batteryThresholdSlider: NSSlider!
     
     
     // MARK: - Lifecycle
@@ -45,7 +45,7 @@ class DurationPreferencesView: NSView {
             withKeyPath: #keyPath(defaultTimeout),
             options: nil)
         
-        // Setup Slider
+        // Setup Duration Slider
         durationSlider.timeIntervals = [60, 300, 600, 900, 1800, 2700, 3600, 5400, 7200, 10800, 14400, 18000, 21600]
         durationSlider.labelForTickMarks = [0, 3, 6, 9, 12]
         durationSlider.timeValue = Double(self.defaultTimeout)
@@ -55,19 +55,23 @@ class DurationPreferencesView: NSView {
         durationTimePicker.dateValue = DateFormatter.date(
             from: UserDefaults.standard.durationEndAtTime, withFormat:  "HH:mm")!
         
-        // Conditionally Hide Battery-related Options
-        checkTurnOffOnBattery.isHidden = !PowerSource.hasBattery
-        checkDeactivateOnThreshold.isHidden = !PowerSource.hasBattery
         
+        // Setup Battery Slider
         let pcntFormatter = NumberFormatter()
         pcntFormatter.numberStyle = .percent
         pcntFormatter.multiplier = 100
         pcntFormatter.maximumFractionDigits = 0
         
         for i in [0, 4, 8] {
-            let v = thresholdSlider.tickMarkValue(at: i)
-            let label = thresholdSlider.createLabelForTickMark(i, withString: pcntFormatter.string(from: NSNumber(value: v))!)
-            thresholdSlider.superview?.addSubview(label!)
+            let v = batteryThresholdSlider.tickMarkValue(at: i)
+            let label = batteryThresholdSlider.createLabelForTickMark(i, withString: pcntFormatter.string(from: NSNumber(value: v))!)
+            batteryThresholdSlider.superview?.addSubview(label!)
+        }
+        
+        // Hide Battery-related Preferences if there is no battery
+        if !PowerSource.hasBattery {
+            line.isHidden = true
+            batterySection.isHidden = true
         }
     }
     
