@@ -16,6 +16,8 @@ class AdvancedPreferencesView: NSView {
     
     // MARK: - Lifecycle
     override func awakeFromNib() {
+        super.awakeFromNib()
+
         displayModeStack.views.forEach {view in
             let rb = view as! NSButton
             rb.state = rb.tag == UserDefaults.standard.appListDetail ? .on : .off

@@ -14,6 +14,8 @@ class AboutPreferencesView: NSView {
     @IBOutlet weak var aboutTextView: NSTextView!
     
     override func awakeFromNib() {
+        super.awakeFromNib()
+
         let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
         let buildnr = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
         

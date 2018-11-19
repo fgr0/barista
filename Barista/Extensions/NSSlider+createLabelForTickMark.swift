@@ -17,7 +17,8 @@ extension NSSlider {
         
         var label: NSTextField
         label = NSTextField(labelWithString: text)
-        label.font = NSFont.systemFont(ofSize: 10.0)
+        label.controlSize = .mini
+        label.font = NSFont.systemFont(ofSize: NSFont.systemFontSize(for: .mini))
         label.alignment = alignment
         label.sizeToFit()
         
@@ -41,6 +42,8 @@ extension NSSlider {
         }
         
         label.frame.origin = point
+        label.frame.origin.x.round(.toNearestOrEven)
+        label.frame.origin.y.round(.toNearestOrEven)
         
         return label
     }
