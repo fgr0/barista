@@ -27,6 +27,7 @@ class MenuController: NSObject {
     @IBOutlet weak var activateItem: NSMenuItem!
     
     @IBOutlet weak var activateForItem: NSMenuItem!
+    @IBOutlet weak var indefinitlyItem: NSMenuItem!
     
     @IBOutlet weak var uptimeItem: NSMenuItem!
     @IBOutlet weak var awakeForItem: NSMenuItem!
@@ -81,6 +82,9 @@ class MenuController: NSObject {
         stateItem.title     = "\(appName): " + (powerMgmtController.assertion?.enabled ?? false ? "On" : "Off")
         timeRemainingItem.isHidden = true
         activateItem.title  = "Turn \(appName) " + (powerMgmtController.assertion?.enabled ?? false ? "Off" : "On")
+        activateForItem.title = powerMgmtController.assertion?.enabled ?? false ? "Turn Off in..." : "Activate for..."
+        indefinitlyItem.title = powerMgmtController.assertion?.enabled ?? false ? "Never" : "Indefinitely"
+        
         
         // Reset Item
         for item in menu.items {
@@ -173,16 +177,29 @@ class MenuController: NSObject {
             // Add Verbose Information if wanted
             guard override || UserDefaults.standard.appListDetail >= 2 else { continue }
             
-            let startDate = info.timeStarted
+            let desc1Item = NSMenuItem()
+            desc1Item.tag = MenuItemTag.temporary.rawValue
+            desc1Item.title = pdsString
+            desc1Item.indentationLevel = 1
+            desc1Item.isEnabled = false
+            menu.insertItem(desc1Item, at: index+1)
             
-            let timeRemaining = info.timeLeft ?? 0
-            let timeoutString = TimeInterval(timeRemaining).simpleFormat(
-                style: .short, units: [.day, .hour, .minute], maxCount: 2)!
+            let desc2Item = NSMenuItem()
+            desc2Item.tag = MenuItemTag.temporary.rawValue
+            desc2Item.title = "Started: \(dateFormatter.string(from: info.timeStarted))"
+            desc2Item.indentationLevel = 1
+            desc2Item.isEnabled = false
+            menu.insertItem(desc2Item, at: index+2)
             
-            menu.insertDescItem(pdsString, at: index+1)
-            menu.insertDescItem("Started: \(dateFormatter.string(from: startDate))", at: index+2)
-            if timeRemaining > 0 {
-                menu.insertDescItem("Timeout in: \(timeoutString)", at: index+3)
+            if let timeRemaining = info.timeLeft, timeRemaining > 0 {
+                let timeoutString = TimeInterval(timeRemaining).simpleFormat(
+                    style: .short, units: [.day, .hour, .minute], maxCount: 2)!
+                let desc3Item = NSMenuItem()
+                desc3Item.tag = MenuItemTag.temporary.rawValue
+                desc3Item.title = "Timeout in: \(timeoutString)"
+                desc3Item.indentationLevel = 1
+                desc3Item.isEnabled = false
+                menu.insertItem(desc3Item, at: index+3)
             }
         }
     }

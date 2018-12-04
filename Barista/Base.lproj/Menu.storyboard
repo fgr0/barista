@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14269.14" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14269.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -54,12 +54,6 @@
                                         <modifierMask key="keyEquivalentModifierMask"/>
                                         <connections>
                                             <action selector="activateIndefinitlyAction:" target="3Zv-yd-aJX" id="zst-JZ-aPv"/>
-                                        </connections>
-                                    </menuItem>
-                                    <menuItem title="For the Rest of the Day" id="rn0-kr-32K">
-                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                        <connections>
-                                            <action selector="activateEndOfDayAction:" target="3Zv-yd-aJX" id="RVq-Gt-MVq"/>
                                         </connections>
                                     </menuItem>
                                 </items>
@@ -119,6 +113,7 @@
                         <outlet property="appListItem" destination="3fV-VH-7G0" id="0VA-X7-tau"/>
                         <outlet property="appListSeparator" destination="snS-Ju-TtF" id="OM1-Pd-wZC"/>
                         <outlet property="awakeForItem" destination="sz3-Zj-cnx" id="z9d-uu-qj0"/>
+                        <outlet property="indefinitlyItem" destination="LCS-RU-9cK" id="uHE-xn-5c8"/>
                         <outlet property="infoSeparator" destination="9F2-DD-KUg" id="jUX-4t-8Hc"/>
                         <outlet property="menu" destination="57F-e1-8oq" id="Ksd-Mv-IRz"/>
                         <outlet property="powerMgmtController" destination="zJc-jN-0c1" id="85H-Ro-pyX"/>
