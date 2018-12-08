@@ -105,6 +105,8 @@ extension AppDelegate: PowerMgmtObserver {
         switch reason {
         case .SystemWake:
             notification.informativeText = "Turned off after system went to sleep"
+        case .NoACPower:
+            notification.informativeText = "Turned off because system switched to battery power"
         default:
             notification.informativeText = "Prevented Sleep for " + after.simpleFormat()!
         }

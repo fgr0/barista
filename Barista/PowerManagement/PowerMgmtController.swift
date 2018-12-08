@@ -8,8 +8,9 @@
 
 import Cocoa
 
-class PowerMgmtController: NSObject {
-    
+
+class PowerMgmtController: NSObject, PowerSourceDelegate {
+
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -18,19 +19,17 @@ class PowerMgmtController: NSObject {
             self.preventSleep()
         }
         
-        self.preventDisplaySleep = UserDefaults.standard.preventDisplaySleep
-        UserDefaults.standard.bind(
-            NSBindingName(rawValue: UserDefaults.Keys.preventDisplaySleep),
-            to: self,
-            withKeyPath: #keyPath(preventDisplaySleep),
-            options: nil)
-        
+        // Register for `Wake` Notifications
         NSWorkspace.shared.notificationCenter.addObserver(
         forName: NSWorkspace.didWakeNotification, object: nil, queue: nil) { _ in
             guard UserDefaults.standard.stopAtForcedSleep else { return }
             guard let assertion = self.assertion, assertion.enabled else { return }
             
             self.stopPreventingSleep(reason: .SystemWake)
+        }
+        
+        if PowerSource.hasBattery {
+            self.powerSource.delegate = self
         }
     }
     
@@ -41,34 +40,16 @@ class PowerMgmtController: NSObject {
     
     
     // MARK: - Managing System Sleep
-    private var assertion: UserAssertion?
+    private(set) var assertion: UserAssertion?
     private var timeoutTimer: Timer?
     
-    var isPreventingSleep: Bool {
-        get {
-            guard let assertion = self.assertion else { return false }
-            return assertion.enabled
-        }
-    }
-    
-    @objc dynamic var preventDisplaySleep: Bool = true {
-        didSet {
-            guard let assertion = self.assertion else { return }
-            assertion.preventsDisplaySleep = self.preventDisplaySleep
-        }
-    }
-    
-    var timeLeft: UInt? {
-        get {
-            return assertion?.timeLeft
-        }
-    }
-    
     func preventSleep() {
-        if UserDefaults.standard.endOfDaySelected {
-            self.preventSleepUntilEndOfDay()
+        if UserDefaults.standard.durationType == 0 {
+            self.preventSleep(withTimeout: 0)
+        } else if UserDefaults.standard.durationType == 1 {
+            self.preventSleep(withTimeout: UInt(UserDefaults.standard.durationTimeout))
         } else {
-            self.preventSleep(withTimeout: UInt(UserDefaults.standard.defaultTimeout))
+            self.preventSleepUntilEndOfDay()
         }
     }
     
@@ -104,14 +85,15 @@ class PowerMgmtController: NSObject {
         // Find the next 3:00am date that's more than 30 minutes in the future
         var nextDate: Date = Date()
         
-        let hour = min(max(UserDefaults.standard.endOfDayTime, 0), 23)
+        let date = DateFormatter.date(from: UserDefaults.standard.durationEndAtTime, withFormat: "HH:mm")!
+        let time = Calendar.current.dateComponents([.hour, .minute], from: date)
         
         repeat {
             nextDate = Calendar.current.nextDate(
                 after: nextDate,
-                matching: DateComponents(hour: hour, minute: 0, second: 0),
+                matching: time,
                 matchingPolicy: .nextTime)!
-        } while nextDate.timeIntervalSinceNow < 1800
+        } while nextDate.timeIntervalSinceNow < 60
         
         self.preventSleep(until: nextDate)
     }
@@ -129,6 +111,28 @@ class PowerMgmtController: NSObject {
     }
     
     
+    // MARK: - Power Source Information
+    private(set) var powerSource = PowerSource()
+    
+    func powerSourceNotification() {
+        guard let assertion = self.assertion, assertion.enabled else { return }
+        guard let ps = self.powerSource.current, ps == .Battery else { return }
+        guard UserDefaults.standard.batteryTurnOffOnSwitch else { return }
+        
+        self.stopPreventingSleep(reason: .NoACPower)
+    }
+    
+    func batteryLevelNotification() {
+        guard let assertion = self.assertion, assertion.enabled else { return }
+        guard let battery = self.powerSource.batteryLevel else { return }
+        guard UserDefaults.standard.batteryDeactivateOnThreshold else { return }
+        
+        if Double(battery) <= UserDefaults.standard.batteryThreshold {
+            self.stopPreventingSleep(reason: .LowBattery)
+        }
+    }
+    
+    
     // MARK: - Obervation
     private var observers = [PowerMgmtObserver]()
     
@@ -137,7 +141,7 @@ class PowerMgmtController: NSObject {
     }
     
     func removeObserver(_ observer: PowerMgmtObserver) {
-        observers = observers.filter { $0 !== observer }
+        observers.removeAll { $0 === observer }
     }
     
     

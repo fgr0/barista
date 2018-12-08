@@ -27,6 +27,7 @@ class MenuController: NSObject {
     @IBOutlet weak var activateItem: NSMenuItem!
     
     @IBOutlet weak var activateForItem: NSMenuItem!
+    @IBOutlet weak var indefinitlyItem: NSMenuItem!
     
     @IBOutlet weak var uptimeItem: NSMenuItem!
     @IBOutlet weak var awakeForItem: NSMenuItem!
@@ -44,7 +45,7 @@ class MenuController: NSObject {
         
         // Setup Status Bar
         self.statusItem.button!.title = "zZ"
-        self.statusItem.button?.appearsDisabled = !powerMgmtController.isPreventingSleep
+        self.statusItem.button?.appearsDisabled = !(powerMgmtController.assertion?.enabled ?? false)
         self.statusItem.button?.target = self
         self.statusItem.button?.action = #selector(toggleAssertionAction(_:))
         self.statusItem.menu = self.menu
@@ -78,9 +79,12 @@ class MenuController: NSObject {
         let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName")!
         
         // Set Standart Elements
-        stateItem.title     = "\(appName): " + (powerMgmtController.isPreventingSleep ? "On" : "Off")
+        stateItem.title     = "\(appName): " + (powerMgmtController.assertion?.enabled ?? false ? "On" : "Off")
         timeRemainingItem.isHidden = true
-        activateItem.title  = "Turn \(appName) " + (powerMgmtController.isPreventingSleep ? "Off" : "On")
+        activateItem.title  = "Turn \(appName) " + (powerMgmtController.assertion?.enabled ?? false ? "Off" : "On")
+        activateForItem.title = powerMgmtController.assertion?.enabled ?? false ? "Turn Off in..." : "Activate for..."
+        indefinitlyItem.title = powerMgmtController.assertion?.enabled ?? false ? "Never" : "Indefinitely"
+        
         
         // Reset Item
         for item in menu.items {
@@ -96,7 +100,7 @@ class MenuController: NSObject {
         }
         
         // Update Time Remaining
-        if let tl = powerMgmtController.timeLeft, tl > 0 {
+        if let tl = powerMgmtController.assertion?.timeLeft, tl > 0 {
             let title = TimeInterval(tl).simpleFormat(style: .short, units: [.day, .hour, .minute],
                                                       maxCount: 2, timeRemaining: true)!
             timeRemainingItem.title = title
@@ -173,16 +177,29 @@ class MenuController: NSObject {
             // Add Verbose Information if wanted
             guard override || UserDefaults.standard.appListDetail >= 2 else { continue }
             
-            let startDate = info.timeStarted
+            let desc1Item = NSMenuItem()
+            desc1Item.tag = MenuItemTag.temporary.rawValue
+            desc1Item.title = pdsString
+            desc1Item.indentationLevel = 1
+            desc1Item.isEnabled = false
+            menu.insertItem(desc1Item, at: index+1)
             
-            let timeRemaining = info.timeLeft ?? 0
-            let timeoutString = TimeInterval(timeRemaining).simpleFormat(
-                style: .short, units: [.day, .hour, .minute], maxCount: 2)!
+            let desc2Item = NSMenuItem()
+            desc2Item.tag = MenuItemTag.temporary.rawValue
+            desc2Item.title = "Started: \(dateFormatter.string(from: info.timeStarted))"
+            desc2Item.indentationLevel = 1
+            desc2Item.isEnabled = false
+            menu.insertItem(desc2Item, at: index+2)
             
-            menu.insertDescItem(pdsString, at: index+1)
-            menu.insertDescItem("Started: \(dateFormatter.string(from: startDate))", at: index+2)
-            if timeRemaining > 0 {
-                menu.insertDescItem("Timeout in: \(timeoutString)", at: index+3)
+            if let timeRemaining = info.timeLeft, timeRemaining > 0 {
+                let timeoutString = TimeInterval(timeRemaining).simpleFormat(
+                    style: .short, units: [.day, .hour, .minute], maxCount: 2)!
+                let desc3Item = NSMenuItem()
+                desc3Item.tag = MenuItemTag.temporary.rawValue
+                desc3Item.title = "Timeout in: \(timeoutString)"
+                desc3Item.indentationLevel = 1
+                desc3Item.isEnabled = false
+                menu.insertItem(desc3Item, at: index+3)
             }
         }
     }
@@ -202,11 +219,16 @@ class MenuController: NSObject {
     }
     
     @IBAction func toggleAssertionAction(_ sender: NSObject) {
-        if powerMgmtController.isPreventingSleep {
+        if let isEnabled = powerMgmtController.assertion?.enabled, isEnabled {
             powerMgmtController.stopPreventingSleep()
         } else {
             powerMgmtController.preventSleep()
         }
+    }
+    
+    @IBAction func togglePreventDisplaySleep(_ sender: NSMenuItem){
+        guard let assertion = powerMgmtController.assertion else { return }
+        assertion.preventsDisplaySleep = !(sender.state == .on)
     }
     
     @IBAction func activateForAction(_ sender: NSMenuItem) {
@@ -249,7 +271,7 @@ extension MenuController: NSMenuDelegate {
     func menuWillOpen(_ menu: NSMenu) {
         guard self.timer == nil else { return }
         self.timer = Timer(timeInterval: 1.0, repeats: true) { _ in self.updateMenu() }
-        RunLoop.current.add(self.timer!, forMode: RunLoopMode.eventTrackingRunLoopMode)
+        RunLoop.current.add(self.timer!, forMode: RunLoop.Mode.eventTracking)
     }
     
     func menuDidClose(_ menu: NSMenu) {

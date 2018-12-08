@@ -13,6 +13,8 @@ enum StoppedPreventingSleepReason {
     case Deactivated
     case Timeout
     case SystemWake
+    case LowBattery
+    case NoACPower
 }
 
 
@@ -23,6 +25,7 @@ protocol PowerMgmtObserver: class {
     func startedPreventingSleep(for: TimeInterval)
     func stoppedPreventingSleep(after: TimeInterval, because reason: StoppedPreventingSleepReason)
 }
+
 
 // MARK: Observer Default Implementation
 extension PowerMgmtObserver {

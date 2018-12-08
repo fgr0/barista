@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8100C4021FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8100C4011FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift */; };
 		81041F821FCB587A0029C9A7 /* UserAssertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81041F811FCB587A0029C9A7 /* UserAssertion.swift */; };
+		811DDA3B210663B700995350 /* DateFormatter+StringConverstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811DDA3A210663B700995350 /* DateFormatter+StringConverstion.swift */; };
 		8120117220CEBE5500EDEDAE /* SystemTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8120117120CEBE5500EDEDAE /* SystemTime.swift */; };
+		8126FE5120E7A53A00B6B065 /* PowerSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8126FE5020E7A53A00B6B065 /* PowerSource.swift */; };
 		8129093C1EDC750900072FC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE472EF19FF9E4C0089B49F /* AppDelegate.swift */; };
+		813AEC4A211A051B00B572EE /* NSSlider+createLabelForTickMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813AEC49211A051B00B572EE /* NSSlider+createLabelForTickMark.swift */; };
 		813CAC9F20DFC2BD007EAB4B /* PowerMgmtController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813CAC9E20DFC2BD007EAB4B /* PowerMgmtController.swift */; };
 		819C75D01FA3841500A72238 /* TimeIntervalSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819C75CF1FA3841500A72238 /* TimeIntervalSliderCell.swift */; };
 		819D93462088D7E500545789 /* About.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 819D93442088D7E500545789 /* About.rtf */; };
@@ -20,7 +22,10 @@
 		81B5B87C201D5A7E00361C0D /* AssertionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B5B87B201D5A7E00361C0D /* AssertionInfo.swift */; };
 		81BBEFA5200E3FED0049D094 /* UserDefaults+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BBEFA4200E3FED0049D094 /* UserDefaults+Keys.swift */; };
 		81BDE856200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BDE855200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift */; };
-		81CFBBEB1EFADC23008DFA81 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFBBEA1EFADC23008DFA81 /* PreferencesViewController.swift */; };
+		81DD9B3F210649A10079D9D4 /* GeneralPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DD9B3E210649A10079D9D4 /* GeneralPreferencesView.swift */; };
+		81DD9B4121064AC40079D9D4 /* DurationPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DD9B4021064AC40079D9D4 /* DurationPreferencesView.swift */; };
+		81DD9B4321064CF30079D9D4 /* AboutPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DD9B4221064CF30079D9D4 /* AboutPreferencesView.swift */; };
+		81DD9B4521064DFC0079D9D4 /* AdvancedPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DD9B4421064DFC0079D9D4 /* AdvancedPreferencesView.swift */; };
 		81DF37282084ED30005910CF /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 81DF37262084ED30005910CF /* Localizable.stringsdict */; };
 		81E06BA21EE828D5002D1651 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E06BA01EE828D5002D1651 /* PreferencesWindowController.swift */; };
 		81E06BA71EE82AF3002D1651 /* PreferenceDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 81E06BA61EE82AF3002D1651 /* PreferenceDefaults.plist */; };
@@ -59,9 +64,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8100C4011FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMenu+insertDescItem.swift"; sourceTree = "<group>"; };
 		81041F811FCB587A0029C9A7 /* UserAssertion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAssertion.swift; sourceTree = "<group>"; };
+		811DDA3A210663B700995350 /* DateFormatter+StringConverstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+StringConverstion.swift"; sourceTree = "<group>"; };
 		8120117120CEBE5500EDEDAE /* SystemTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemTime.swift; sourceTree = "<group>"; };
+		8126FE5020E7A53A00B6B065 /* PowerSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerSource.swift; sourceTree = "<group>"; };
+		813AEC49211A051B00B572EE /* NSSlider+createLabelForTickMark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSSlider+createLabelForTickMark.swift"; path = "Barista/Extensions/NSSlider+createLabelForTickMark.swift"; sourceTree = SOURCE_ROOT; };
 		813CAC9E20DFC2BD007EAB4B /* PowerMgmtController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerMgmtController.swift; sourceTree = "<group>"; };
 		819C75CF1FA3841500A72238 /* TimeIntervalSliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalSliderCell.swift; sourceTree = "<group>"; };
 		819D93452088D7E500545789 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = Base; path = Base.lproj/About.rtf; sourceTree = "<group>"; };
@@ -71,7 +78,10 @@
 		81B5B87B201D5A7E00361C0D /* AssertionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssertionInfo.swift; sourceTree = "<group>"; };
 		81BBEFA4200E3FED0049D094 /* UserDefaults+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Keys.swift"; sourceTree = "<group>"; };
 		81BDE855200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSStatusBarButton+CustomMouseClick.swift"; sourceTree = "<group>"; };
-		81CFBBEA1EFADC23008DFA81 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		81DD9B3E210649A10079D9D4 /* GeneralPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPreferencesView.swift; sourceTree = "<group>"; };
+		81DD9B4021064AC40079D9D4 /* DurationPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPreferencesView.swift; sourceTree = "<group>"; };
+		81DD9B4221064CF30079D9D4 /* AboutPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutPreferencesView.swift; sourceTree = "<group>"; };
+		81DD9B4421064DFC0079D9D4 /* AdvancedPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedPreferencesView.swift; sourceTree = "<group>"; };
 		81DF37272084ED30005910CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = Base; path = Base.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		81E06BA01EE828D5002D1651 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		81E06BA61EE82AF3002D1651 /* PreferenceDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PreferenceDefaults.plist; sourceTree = "<group>"; };
@@ -114,7 +124,8 @@
 			isa = PBXGroup;
 			children = (
 				9EBFC6CF1A1CB30900D1B158 /* AppDelegate+LoginItem.swift */,
-				8100C4011FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift */,
+				811DDA3A210663B700995350 /* DateFormatter+StringConverstion.swift */,
+				813AEC49211A051B00B572EE /* NSSlider+createLabelForTickMark.swift */,
 				81BDE855200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift */,
 				81A04B171FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift */,
 				81BBEFA4200E3FED0049D094 /* UserDefaults+Keys.swift */,
@@ -145,8 +156,11 @@
 			isa = PBXGroup;
 			children = (
 				81E38DD4201D425700DC0D0B /* Preferences.storyboard */,
-				81CFBBEA1EFADC23008DFA81 /* PreferencesViewController.swift */,
 				81E06BA01EE828D5002D1651 /* PreferencesWindowController.swift */,
+				81DD9B3E210649A10079D9D4 /* GeneralPreferencesView.swift */,
+				81DD9B4021064AC40079D9D4 /* DurationPreferencesView.swift */,
+				81DD9B4421064DFC0079D9D4 /* AdvancedPreferencesView.swift */,
+				81DD9B4221064CF30079D9D4 /* AboutPreferencesView.swift */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
@@ -166,6 +180,7 @@
 				81B5B87B201D5A7E00361C0D /* AssertionInfo.swift */,
 				813CAC9E20DFC2BD007EAB4B /* PowerMgmtController.swift */,
 				81F20D05200F8E3500FF7C39 /* PowerMgmtObserver.swift */,
+				8126FE5020E7A53A00B6B065 /* PowerSource.swift */,
 				8120117120CEBE5500EDEDAE /* SystemTime.swift */,
 				81041F811FCB587A0029C9A7 /* UserAssertion.swift */,
 			);
@@ -282,12 +297,12 @@
 		9DE472E219FF9E4C0089B49F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Franz Greiling";
 				TargetAttributes = {
 					9D1EA69D1A1B61540030C40F = {
 						CreatedOnToolsVersion = 6.1;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 1;
@@ -296,7 +311,7 @@
 					};
 					9DE472E919FF9E4C0089B49F = {
 						CreatedOnToolsVersion = 6.1;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 1;
@@ -360,7 +375,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh -e\n\n# This script automatically sets the version and short version string of\n# an Xcode project from the Git repository containing the project.\n#\n# To use this script in Xcode, add the script's path to a \"Run Script\" build\n# phase for your application target.\n\nGIT_COMMITS_BRANCH=$(git rev-list HEAD | wc -l | tr -d ' ')\nGIT_TAG_MASTER=$(git describe master --tags | sed 's/.*\\([0-9][0-9]*\\.[0-9][0-9]*\\.[0-9][0-9]*\\).*/\\1/')\nGIT_SIMPLE_BRANCH_NAME=`git rev-parse --abbrev-ref HEAD`\nINFO_PLIST=\"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n\n# For Non-Release Builds add current branch to Build Number\nif [ ${CONFIGURATION} != \"Release\" ] || [ ${GIT_SIMPLE_BRANCH_NAME} != \"master\" ]; then\n    GIT_COMMITS_BRANCH+=\"-$GIT_SIMPLE_BRANCH_NAME\"\nfi\n\n# Check if Working Copy is clean\nif [[ -n $(git status --porcelain) ]]; then\n    GIT_COMMITS_BRANCH+=\"-DIRTY\"\nfi\n\n# Add Version Information to Build\n#/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString $GIT_TAG_MASTER\" \"$INFO_PLIST\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $GIT_COMMITS_BRANCH\" \"$INFO_PLIST\"";
+			shellScript = "#!/bin/sh -e\n\n# This script automatically sets the version and short version string of\n# an Xcode project from the Git repository containing the project.\n\nGIT_COMMITS_BRANCH=$(git rev-list HEAD | wc -l | tr -d ' ')\nGIT_TAG_MASTER=$(git describe master --tags | sed 's/.*\\([0-9][0-9]*\\.[0-9][0-9]*\\.[0-9][0-9]*\\).*/\\1/')\nGIT_SIMPLE_BRANCH_NAME=`git rev-parse --abbrev-ref HEAD`\nINFO_PLIST=\"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n\n# For Non-Release Builds add current branch to Build Number\necho \"Building Version String for *${CONFIGURATION}* build at ${GIT_SIMPLE_BRANCH_NAME}\"\nif [ \"${CONFIGURATION}\" != \"Release\" ] || [ \"${GIT_SIMPLE_BRANCH_NAME}\" != \"master\" ]; then\nGIT_COMMITS_BRANCH+=\"-$GIT_SIMPLE_BRANCH_NAME\"\nfi\n\n# Check if Working Copy is clean\nif [[ -n $(git status --porcelain) ]]; then\nGIT_COMMITS_BRANCH+=\"-DIRTY\"\nfi\n\necho \"Version String: ${GIT_COMMITS_BRANCH}\"\n\n# Add Version Information to Build\n#/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString $GIT_TAG_MASTER\" \"$INFO_PLIST\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $GIT_COMMITS_BRANCH\" \"$INFO_PLIST\"\n";
+			showEnvVarsInLog = 0;
 		};
 		9EF1BAA91A1F5BDA00EF14CC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -390,23 +406,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8100C4021FFEEEF5001ADA53 /* NSMenu+insertDescItem.swift in Sources */,
 				81E76B771EDCCD0600610950 /* MenuController.swift in Sources */,
 				81B5B87C201D5A7E00361C0D /* AssertionInfo.swift in Sources */,
 				8129093C1EDC750900072FC3 /* AppDelegate.swift in Sources */,
 				81041F821FCB587A0029C9A7 /* UserAssertion.swift in Sources */,
+				813AEC4A211A051B00B572EE /* NSSlider+createLabelForTickMark.swift in Sources */,
 				81E06BA21EE828D5002D1651 /* PreferencesWindowController.swift in Sources */,
 				81F20D06200F8E3500FF7C39 /* PowerMgmtObserver.swift in Sources */,
+				81DD9B4521064DFC0079D9D4 /* AdvancedPreferencesView.swift in Sources */,
 				819C75D01FA3841500A72238 /* TimeIntervalSliderCell.swift in Sources */,
 				813CAC9F20DFC2BD007EAB4B /* PowerMgmtController.swift in Sources */,
 				819D934C2088F2C200545789 /* ClickableTextField.swift in Sources */,
 				81BDE856200EDFE6009C3B74 /* NSStatusBarButton+CustomMouseClick.swift in Sources */,
 				81A04B1A1FA24F5A00C1B87B /* TimeIntervalSlider.swift in Sources */,
+				81DD9B4321064CF30079D9D4 /* AboutPreferencesView.swift in Sources */,
+				8126FE5120E7A53A00B6B065 /* PowerSource.swift in Sources */,
 				8120117220CEBE5500EDEDAE /* SystemTime.swift in Sources */,
 				9EBFC6D01A1CB30900D1B158 /* AppDelegate+LoginItem.swift in Sources */,
 				81A04B181FA13BB500C1B87B /* TimeInterval+SimpleFormat.swift in Sources */,
-				81CFBBEB1EFADC23008DFA81 /* PreferencesViewController.swift in Sources */,
+				811DDA3B210663B700995350 /* DateFormatter+StringConverstion.swift in Sources */,
+				81DD9B3F210649A10079D9D4 /* GeneralPreferencesView.swift in Sources */,
 				81BBEFA5200E3FED0049D094 /* UserDefaults+Keys.swift in Sources */,
+				81DD9B4121064AC40079D9D4 /* DurationPreferencesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,8 +502,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.sadmac.Barista.LaunchHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -497,9 +516,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.sadmac.Barista.LaunchHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -549,12 +565,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -598,10 +615,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-Osize";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -613,11 +633,8 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Barista/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = de.sadmac.Barista;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -630,12 +647,8 @@
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = Barista/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = de.sadmac.Barista;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

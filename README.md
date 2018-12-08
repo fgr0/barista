@@ -39,12 +39,9 @@ in several situations, for example when you are downloading a big file or
 running a long backup where you want to ensure that your Mac stays online but
 you don't need your displays running.
 
-Additionally, Barista can deactivate itself when the system is forced to sleep,
-for example when you select "Sleep" from the Apple menu, when you
-close your MacBook without another monitor attached, or your battery gets low.
-Usually the app would start to prevent sleep again as soon as your Mac wakes up,
-but that might not always be desirable. You can find this setting in the
-Preferences.
+On MacBooks, Barista can deactivate itself when the system switches from being
+plugged in to battery or when the battery falls below a certain threshold. You
+can control these settings and customize the threshold in the preferences. 
 
 ### Monitoring
 
@@ -72,12 +69,20 @@ it. Any help is greatly appreciated.
 
 ## Changelog
 
-- **[Version 1.1.0 Beta](../../releases/tag/v1.1.0-beta)** (June 2018):
+- **[Version 1.2.0 Beta](../../releases/tag/v1.2.0-beta)** (December 2018):
+  * Switch Development to Xcode 10/Swift 4.2
+  * Support macOS 10.14 Dark Mode
+  * New Battery-related preferences: 
+    * Automatic deactivation when switching to battery power
+    * Deactivate when falling below a user-chosen battery level
+
+
+- [Version 1.1.0 Beta](../../releases/tag/v1.1.0-beta) (June 2018):
   * Show more sleep-preventing Applications (Time Machine)
   * Ability to show System Uptime and time since last wake.
   * Bugfixes and Project Cleanup
 
-- **[Version 1.0.0 Beta](../../releases/tag/v1.0.0-beta)** (April 2018):
+- [Version 1.0.0 Beta](../../releases/tag/v1.0.0-beta) (April 2018):
   * Complete rewrite
   * Added Preference window
   * Added *Monitoring* feature
