@@ -41,7 +41,7 @@ you don't need your displays running.
 
 On MacBooks, Barista can deactivate itself when the system switches from being
 plugged in to battery or when the battery falls below a certain threshold. You
-can control these settings and customize the threshold in the preferences. 
+can control these settings and customize the threshold in the preferences.
 
 ### Monitoring
 
@@ -69,13 +69,17 @@ it. Any help is greatly appreciated.
 
 ## Changelog
 
+- [Version 1.3.0 Beta](../../tree/version-1.3.0) (*in development*):
+  * [ ] Setup Project for Localization
+  * [ ] Create German Translation
+
+
 - **[Version 1.2.0 Beta](../../releases/tag/v1.2.0-beta)** (December 2018):
   * Switch Development to Xcode 10/Swift 4.2
   * Support macOS 10.14 Dark Mode
-  * New Battery-related preferences: 
+  * New Battery-related preferences:
     * Automatic deactivation when switching to battery power
     * Deactivate when falling below a user-chosen battery level
-
 
 - [Version 1.1.0 Beta](../../releases/tag/v1.1.0-beta) (June 2018):
   * Show more sleep-preventing Applications (Time Machine)
